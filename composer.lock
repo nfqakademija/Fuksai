@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "b4b40229d24cfd17fba6738a61e4e685",
     "content-hash": "1cd74733282c9ebde0ca6a68c0759cd7",
+=======
+    "hash": "dd3c5f2a3ca61701fc762dcf1c3073d9",
+    "content-hash": "0451dcbda1d0ccde1afddb468f2f4e98",
+>>>>>>> 12eddecc540a8d96ddb47d7d66ae68900002ba7a
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -877,6 +882,7 @@
             "time": "2014-01-12 16:20:24"
         },
         {
+<<<<<<< HEAD
             "name": "kriswallsmith/assetic",
             "version": "v1.3.2",
             "source": {
@@ -954,6 +960,8 @@
             "time": "2015-11-12 13:51:40"
         },
         {
+=======
+>>>>>>> 12eddecc540a8d96ddb47d7d66ae68900002ba7a
             "name": "monolog/monolog",
             "version": "1.21.0",
             "source": {
@@ -1384,6 +1392,7 @@
             "time": "2016-07-08 11:51:25"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/assetic-bundle",
             "version": "v2.8.0",
             "source": {
@@ -1454,6 +1463,8 @@
             "time": "2015-12-28 13:12:39"
         },
         {
+=======
+>>>>>>> 12eddecc540a8d96ddb47d7d66ae68900002ba7a
             "name": "symfony/monolog-bundle",
             "version": "2.11.1",
             "source": {
