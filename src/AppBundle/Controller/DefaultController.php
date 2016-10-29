@@ -11,11 +11,20 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        return $this->render('default/index.html.twig');
+    }
+    /**
+     * @Route("/list")
+     */
+    public function planetsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+
+        return $this->render('list.html.twig', [
+            'planets' => $planets
         ]);
     }
 }
