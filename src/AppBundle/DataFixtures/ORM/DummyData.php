@@ -7,7 +7,7 @@ namespace AppBundle\DataFixtures\ORM;
  * Time: 2:26 PM
  */
 
-use AppBundle\Entity\Planets;
+use AppBundle\Entity\Planet;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nelmio\Alice\Fixtures;

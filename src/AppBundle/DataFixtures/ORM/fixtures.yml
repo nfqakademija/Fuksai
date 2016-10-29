@@ -1,4 +1,4 @@
-AppBundle\Entity\Planets:
+AppBundle\Entity\Planet:
       planets_{1..10}:
         name: <name()>
         title: <text(15)>

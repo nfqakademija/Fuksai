@@ -21,7 +21,7 @@ class DefaultController extends Controller
     public function planetsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em->getRepository('AppBundle:Planets')->findAll();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
 
         return $this->render('list.html.twig', [
             'planets' => $planets

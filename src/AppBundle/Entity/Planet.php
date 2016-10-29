@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="planets")
+ * @ORM\Table(name="planet")
  */
-class Planets
+class Planet
 {
     /**
      * @ORM\Id
