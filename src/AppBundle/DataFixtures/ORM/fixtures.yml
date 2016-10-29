@@ -1,0 +1,5 @@
+AppBundle\Entity\Planets:
+      planets_{1..10}:
+        name: <name()>
+        title: <text(15)>
+        description: <text(255)>
