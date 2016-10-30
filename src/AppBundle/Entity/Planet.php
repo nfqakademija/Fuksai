@@ -25,9 +25,9 @@ class Planet
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    private $title;
+    private $position;
 
     /**
      * @ORM\Column(type="text")
@@ -40,24 +40,151 @@ class Planet
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $discovery;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $namedAs;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $diameter;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $orbit;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $day;
+
+
+    /**
      * @return mixed
      */
-    public function getTitle()
+    public function getDiscovery()
     {
-        return $this->title;
+        return $this->discovery;
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $discovery
      */
-    public function setTitle($title)
+    public function setDiscovery($discovery)
     {
-        $this->title = $title;
+        $this->discovery = $discovery;
     }
 
     /**
      * @return mixed
      */
+    public function getDiameter()
+    {
+        return $this->diameter;
+    }
+
+    /**
+     * @param mixed $diameter
+     */
+    public function setDiameter($diameter)
+    {
+        $this->diameter = $diameter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrbit()
+    {
+        return $this->orbit;
+    }
+
+    /**
+     * @param mixed $orbit
+     */
+    public function setOrbit($orbit)
+    {
+        $this->orbit = $orbit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * @param mixed $day
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+
     public function getDescription()
     {
         return $this->description;
@@ -69,6 +196,22 @@ class Planet
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNamedAs()
+    {
+        return $this->namedAs;
+    }
+
+    /**
+     * @param mixed $namedAs
+     */
+    public function setNamedAs($namedAs)
+    {
+        $this->namedAs = $namedAs;
     }
 
     /**
