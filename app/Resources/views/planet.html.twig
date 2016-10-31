@@ -15,7 +15,6 @@
         </tr>
         </thead>
         <tbody>
-        {% for planet in planets %}
             <tr>
                 <td>{{ planet.id }}</td>
                 <td>{{ planet.name }}</td>
@@ -27,7 +26,6 @@
                 <td>{{ planet.day }}</td>
                 <td>{{ planet.image }}</td>
             </tr>
-        {% endfor %}
         </tbody>
     </table>
 {% endblock %}
