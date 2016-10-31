@@ -47,4 +47,14 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/news")
+     */
+    public function showNews()
+    {
+        return $this->render('test.html.twig', [
+            'text' => 'ololo'
+        ]);
+    }
+
 }
