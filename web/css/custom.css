@@ -2,6 +2,10 @@
     margin-bottom: -50px;
 }
 
+h3 {
+    font-family: 'Corben', Georgia, Times, serif;
+    font-size: 27px;
+}
 
 #home-header {
     margin-bottom: 200px;
@@ -12,10 +16,14 @@
 }
 
 .section-heading{
-
     font-family: 'Bevan', cursive;
     text-shadow: 4px 4px 4px #aaa;
-    font-size: 48px;
+    font-size: 60px;
+}
+
+#container_services {
+    background-color: #e0e0d1
+;
 }
 
 

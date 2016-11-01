@@ -20,7 +20,7 @@
                         <a class="page-scroll" href="#news">NEWS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#features">SERVICES</a>
+                        <a class="page-scroll" href="#features">FEATURES</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#planets">PLANETS</a>
@@ -66,16 +66,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
+                    <h2 class="section-heading">Features</h2>
                     <hr class="primary">
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
+        <div class="container" id="container_services">
+            <div class="row" >
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('upcoming_events') }}">
                             <i class="fa fa-4x fa-adjust text-primary sr-icons"></i>
                         </a>
                         <h3>Upcoming astronomical events</h3>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('astronomical_videos') }}">
                             <i class="fa fa-4x fa-youtube-play text-primary sr-icons"></i>
                         </a>
                         <h3>Astronomical videos</h3>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('astronomical_articles') }}">
                             <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
                         </a>
                         <h3>Interesting articles</h3>
@@ -102,8 +102,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
-                            <i class="fa fa-4x fa-paw text-primary sr-icons"></i>
+                        <a href="{{ path('astronomy_picture') }}">
+                            <i class="fa fa-4x fa-picture-o text-primary sr-icons"></i>
                         </a>
                         <h3>Astronomy picture of the day</h3>
                         <p class="text-muted">See a new high quality picture along with a brief explanation of that!</p>
@@ -114,7 +114,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('solar_system_display') }}">
                             <i class="fa fa-4x fa-sun-o text-primary sr-icons"></i>
                         </a>
                         <h3>Solar system display</h3>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('constellation_display') }}">
                             <i class="fa fa-4x fa-star text-primary sr-icons"></i>
                         </a>
                         <h3>Constellation display</h3>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('constellation_position_calculator') }}">
                             <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
                         </a>
                         <h3>Constellation position calculator</h3>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('homepage') }}">
+                        <a href="{{ path('planet_position_calculator') }}">
                             <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
                         </a>
                         <h3>Planet position calculator</h3>
@@ -153,7 +153,7 @@
 
     </section>
 
-    <div class="container">
+    <div class="container" id="planets">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Our solar system</h2>
@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    <section class="no-padding" id="planets">
+    <section class="no-padding" >
         <div class="container-fluid">
             <div class="row no-gutter">
                 {% for planet in planets %}
