@@ -48,17 +48,19 @@
     </header>
 
     <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
-                    <hr class="light">
-                    <p class="text-faded">We can help you learn, something something and more moms spaghetti.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
-                </div>
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                {% for article in articles %}
+                    <div class="col-lg-4 col-sm-6">
+                        <a href="{{ path('show_article', {'articleID': article.id}) }}">
+                        <img src={{ article.url }} class="img-responsive" alt="">
+                        </a>
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -129,7 +131,7 @@
                     </a>
                 </div>
                 {% endfor %}
-               </div>
+            </div>
         </div>
     </section>
 

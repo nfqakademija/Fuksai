@@ -11,11 +11,15 @@ namespace AppBundle\Controller;
 
 class NasaAPI
 {
-    var $api_key = "Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s";
-
-    public function getNewsArray()
+    public function getNews()
     {
+        $news = $this->getData('https://api.nasa.gov/planetary/apod?api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
 
+        //$data['1'] = $news['date'];
+        //$data['2'] = $news['explanation'];
+        //$data['3'] = $news['url'];
+
+        return $news;
     }
 
     public function getData($request)

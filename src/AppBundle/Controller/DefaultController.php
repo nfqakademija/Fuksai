@@ -15,9 +15,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
 
         return $this->render('default/index.html.twig', [
-            'planets' => $planets
+            'planets' => $planets,
+            'articles' => $articles,
         ]);
     }
     /**
@@ -29,7 +31,7 @@ class DefaultController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
 
         return $this->render('list.html.twig', [
-            'planets' => $planets
+            'planets' => $planets,
         ]);
     }
     /**
@@ -48,12 +50,30 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/news/{articleID}", name="show_article")
+     */
+    public function showArticle($articleID)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('AppBundle:Planet')->findOneBy(['id' => $articleID]);
+        if(!$article){
+            throw $this->createNotFoundException('Ups! No planet found!');
+        }
+        return $this->render('news.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
      * @Route("/news")
      */
     public function showNews()
     {
-        return $this->render('test.html.twig', [
-            'text' => 'ololo'
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
+
+        return $this->render('news.html.twig',[
+            'articles' => $articles,
         ]);
     }
 
