@@ -6,6 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -20,6 +25,7 @@ class DefaultController extends Controller
             'planets' => $planets
         ]);
     }
+
     /**
      * @Route("/list")
      */
@@ -32,6 +38,7 @@ class DefaultController extends Controller
             'planets' => $planets
         ]);
     }
+
     /**
      * @Route("/planets/{planetName}", name="show_planet")
      */

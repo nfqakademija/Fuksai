@@ -7,7 +7,15 @@
     margin-bottom: 200px;
     text-transform: none;
     font-size: 100px;
-    font-family: "Courier New", Courier, monospace;
+    font-family: 'Corben', Georgia, Times, serif;
+    text-shadow: 4px 4px 4px #aaa;
+}
+
+.section-heading{
+
+    font-family: 'Bevan', cursive;
+    text-shadow: 4px 4px 4px #aaa;
+    font-size: 48px;
 }
 
 
