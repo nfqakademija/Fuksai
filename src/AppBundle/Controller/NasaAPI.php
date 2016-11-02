@@ -15,11 +15,11 @@ class NasaAPI
     {
         $news = $this->getData('https://api.nasa.gov/planetary/apod?api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
 
-        //$data['1'] = $news['date'];
-        //$data['2'] = $news['explanation'];
-        //$data['3'] = $news['url'];
+        $data['1'] = $news["date"];
+        $data['2'] = $news["explanation"];
+        $data['3'] = $news["url"];
 
-        return $news;
+        return $data;
     }
 
     public function getData($request)
@@ -27,6 +27,6 @@ class NasaAPI
         $data_json = file_get_contents($request);
         $data_array = json_decode($data_json, true);
 
-        return $data_json;
+        return $data_array;
     }
 }

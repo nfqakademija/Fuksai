@@ -77,4 +77,19 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/test")
+     */
+    public function showTest()
+    {
+        $nasa_api = new NasaAPI();
+        $text = $nasa_api->getNews();
+
+        return $this->render('test.html.twig',[
+            'date' => $text['1'],
+            'text' => $text['2'],
+            'url' => $text['3'],
+        ]);
+    }
+
 }
