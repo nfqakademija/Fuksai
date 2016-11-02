@@ -55,9 +55,9 @@ class DefaultController extends Controller
     public function showArticle($articleID)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('AppBundle:Planet')->findOneBy(['id' => $articleID]);
+        $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
         if(!$article){
-            throw $this->createNotFoundException('Ups! No planet found!');
+            throw $this->createNotFoundException('Ups! No article found!');
         }
         return $this->render('news.html.twig', [
             'article' => $article,

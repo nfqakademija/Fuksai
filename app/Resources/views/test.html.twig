@@ -1,3 +1,5 @@
-{{ date }} <br>
-{{ text }} <br>
-{{ url }} <br>
+{% for article in articles %}
+    {{ article.id }} <br>
+    {{ article.description }} <br>
+    {{ article.url }} <br>
+{% endfor %}
