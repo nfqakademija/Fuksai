@@ -17,16 +17,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#about">Feature</a>
+                        <a class="page-scroll" href="#news">NEWS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Feature</a>
+                        <a class="page-scroll" href="#features">FEATURES</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Feature</a>
+                        <a class="page-scroll" href="#planets">PLANETS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Feature</a>
+                        <a class="page-scroll" href="#contacts">CONTACT US</a>
                     </li>
                 </ul>
             </div>
@@ -38,13 +38,17 @@
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1 id="homeHeading">Website for hardcore astronomers</h1>
-                <hr>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-                <p></p>
-                <p> Explore the universe with us!</p>
+                <h1 id="home-header">Sky above us</h1>
+            </div>
+
+
+            <div class="btn-space">
+                <h2>Astronomy for everyone!</h2>
+                <a href="#news" class="btn btn-primary btn-xl page-scroll">Explore the universe with us!</a>
             </div>
         </div>
+
+
     </header>
 
     <section class="bg-primary" id="about">
@@ -65,59 +69,113 @@
         </div>
     </section>
 
-    <section id="services">
+    <section id="features">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
+                    <h2 class="section-heading">Features</h2>
                     <hr class="primary">
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container" id="container_services">
+            <div class="row" >
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{{ path('upcoming_events') }}">
+                            <i class="fa fa-4x fa-adjust text-primary sr-icons"></i>
+                        </a>
+                        <h3>Upcoming astronomical events</h3>
+                        <p class="text-muted">Be aware of the eclipses, meteor showers, meteor falls, solstice and much more!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{{ path('astronomical_videos') }}">
+                            <i class="fa fa-4x fa-youtube-play text-primary sr-icons"></i>
+                        </a>
+                        <h3>Astronomical videos</h3>
+                        <p class="text-muted">To expand your knowledge watch various videos about the universe!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{{ path('astronomical_articles') }}">
+                            <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        </a>
+                        <h3>Interesting articles</h3>
+                        <p class="text-muted">Find astronomical articles that you haven't read before!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{{ path('astronomy_picture') }}">
+                            <i class="fa fa-4x fa-picture-o text-primary sr-icons"></i>
+                        </a>
+                        <h3>Astronomy picture of the day</h3>
+                        <p class="text-muted">See a new high quality picture along with a brief explanation of that!</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                        <h3>Awesome articles!</h3>
-                        <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+                        <a href="{{ path('solar_system_display') }}">
+                            <i class="fa fa-4x fa-sun-o text-primary sr-icons"></i>
+                        </a>
+                        <h3>Solar system display</h3>
+                        <p class="text-muted">See the general view of our solar system displayed dynamically!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Videos you like!</h3>
-                        <p class="text-muted">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit</p>
+                        <a href="{{ path('constellation_display') }}">
+                            <i class="fa fa-4x fa-star text-primary sr-icons"></i>
+                        </a>
+                        <h3>Constellation display</h3>
+                        <p class="text-muted">See how constellations look in the sky or how they will look after some time!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                        <h3>Latest news!</h3>
-                        <p class="text-muted">Aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                        <a href="{{ path('constellation_position_calculator') }}">
+                            <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
+                        </a>
+                        <h3>Constellation position calculator</h3>
+                        <p class="text-muted">Find out when the certain constellation will appear in the sky above you!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-paw text-primary sr-icons"></i>
-                        <h3>Doge is watching you!</h3>
-                        <p class="text-muted">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
+                        <a href="{{ path('planet_position_calculator') }}">
+                            <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
+                        </a>
+                        <h3>Planet position calculator</h3>
+                        <p class="text-muted">Find out when the certain planet will appear in the sky above certain place!</p>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
 
-    <section class="no-padding" id="portfolio">
+    <div class="container" id="planets">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our solar system</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+
+    <section class="no-padding" >
         <div class="container-fluid">
-            {% for planet in planets %}
-            <a href="{{ path('show_planet', {'planetName': planet.name})}}">{{ planet.name }}</a>
-                {% endfor %}
-            <div class="row no-gutter popup-gallery">
+            <div class="row no-gutter">
                 {% for planet in planets %}
                 <div class="col-lg-4 col-sm-6">
-                    <a href="{{ planet.image }}" class="portfolio-box">
-                        <img src={{ planet.image }} class="img-responsive" alt="">
+                    <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
+                        <img src="{{ planet.image }}" class="img-responsive" alt="" >
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -135,16 +193,7 @@
         </div>
     </section>
 
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                <h2>You can start learning right now!</h2>
-                <a href="#" class="btn btn-default btn-xl sr-button">Join us now!</a>
-            </div>
-        </div>
-    </aside>
-
-    <section id="contact">
+    <section id="contacts">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">

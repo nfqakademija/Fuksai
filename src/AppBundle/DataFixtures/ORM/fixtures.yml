@@ -33,7 +33,7 @@ AppBundle\Entity\Planet:
           name: Mars
           position: 4
           description: "The fourth planet from the sun, is a cold, dusty place. The dust, an iron oxide, gives the planet its reddish cast. Mars shares similarities with Earth: It is rocky, has mountains and valleys, and storm systems ranging from localized tornado-like dust devils to planet-engulfing dust storms. It snows on Mars. And Mars harbors water ice. Scientists think it was once wet and warm, though today it’s cold and desert-like. Mars atmosphere is too thin for liquid water to exist on the surface for any length of time. Scientists think ancient Mars would have had the conditions to support life, and there is hope that signs of past life — possibly even present biology — may exist on the Red Planet."
-          image: http://wallpaperstock.net/mars-telescope-view-wallpapers_36003_1920x1080.jpg
+          image: https://wallpaperscraft.com/image/mars_planet_space_image_61028_1920x1080.jpg
           discovery: Known to the ancients and visible to the naked eye
           namedAs: Roman god of war
           diameter: 4,217 miles (6,787 km)
@@ -63,7 +63,7 @@ AppBundle\Entity\Planet:
           name: Uranus
           position: 7
           description: The seventh planet from the sun, Uranus is an oddball. It’s the only giant planet whose equator is nearly at right angles to its orbit — it basically orbits on its side. Astronomers think the planet collided with some other planet-size object long ago, causing the tilt. The tilt causes extreme seasons that last 20-plus years, and the sun beats down on one pole or the other for 84 Earth-years. Uranus is about the same size as Neptune. Methane in the atmosphere gives Uranus its blue-green tint. It has numerous moons and faint rings.
-          image: https://userscontent2.emaze.com/images/19bdcc4f-31bf-4825-9f69-a4ceacd6ddb8/c58e8c768da6040d986f4a04c766fd33.jpeg
+          image: http://i.ytimg.com/vi/fekk8qSSoZI/maxresdefault.jpg
           discovery: 1781 by William Herschel (was thought previously to be a star)
           namedAs: Personification of heaven in ancient myth
           diameter: 31,763 miles (51,120 km)
