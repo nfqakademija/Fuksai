@@ -20,9 +20,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
 
         return $this->render('default/index.html.twig', [
-            'planets' => $planets
+            'planets' => $planets,
+            'articles' => $articles,
         ]);
     }
 
@@ -33,6 +35,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+
 
         return $this->render(
             'planet/planets_list.html.twig', [
@@ -53,6 +56,52 @@ class DefaultController extends Controller
         return $this->render('planet/planet.html.twig', [
             'planet' => $planet
         ]);
+    }
+
+    /**
+     * @Route("/news/{articleID}", name="show_article")
+     */
+    public function showArticle($articleID)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
+        if(!$article){
+            throw $this->createNotFoundException('Ups! No article found!');
+        }
+        return $this->render('news.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/news")
+     */
+    public function showNews()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
+
+        return $this->render('news.html.twig',[
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * @Route("/test")
+     */
+    public function showTest()
+    {
+        $nasa_api = new NasaAPI();
+        $text = $nasa_api->getNews();
+
+        return $this->render(
+            'test.html.twig',
+            [
+                'date' => $text['1'],
+                'text' => $text['2'],
+                'url' => $text['3'],
+            ]
+        );
     }
 
     /**
