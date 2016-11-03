@@ -63,7 +63,7 @@ AppBundle\Entity\Planet:
           name: Uranus
           position: 7
           description: The seventh planet from the sun, Uranus is an oddball. It’s the only giant planet whose equator is nearly at right angles to its orbit — it basically orbits on its side. Astronomers think the planet collided with some other planet-size object long ago, causing the tilt. The tilt causes extreme seasons that last 20-plus years, and the sun beats down on one pole or the other for 84 Earth-years. Uranus is about the same size as Neptune. Methane in the atmosphere gives Uranus its blue-green tint. It has numerous moons and faint rings.
-          image: https://userscontent2.emaze.com/images/19bdcc4f-31bf-4825-9f69-a4ceacd6ddb8/c58e8c768da6040d986f4a04c766fd33.jpeg
+          image: http://i.ytimg.com/vi/fekk8qSSoZI/maxresdefault.jpg
           discovery: 1781 by William Herschel (was thought previously to be a star)
           namedAs: Personification of heaven in ancient myth
           diameter: 31,763 miles (51,120 km)
