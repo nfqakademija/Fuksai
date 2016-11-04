@@ -68,7 +68,7 @@ class DefaultController extends Controller
         if(!$article){
             throw $this->createNotFoundException('Ups! No article found!');
         }
-        return $this->render('news.html.twig', [
+        return $this->render('newsFeed/article.html.twig', [
             'article' => $article,
         ]);
     }
@@ -81,7 +81,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('news.html.twig',[
+        return $this->render('newsFeed/news.html.twig',[
             'articles' => $articles,
         ]);
     }
@@ -95,11 +95,9 @@ class DefaultController extends Controller
         $text = $nasa_api->getNews();
 
         return $this->render(
-            'test.html.twig',
+            'nasaApi/test.html.twig',
             [
-                'date' => $text['1'],
-                'text' => $text['2'],
-                'url' => $text['3'],
+                'text' => $text,
             ]
         );
     }

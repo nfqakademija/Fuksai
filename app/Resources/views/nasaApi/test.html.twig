@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Explanation</th>
+            <th>URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ text[1] }}</td>
+            <td>{{ text[2] }}</td>
+            <td>{{ text[3] }} </td>
+        </tbody>
+    </table>
+{% endblock %}
+
