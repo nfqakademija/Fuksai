@@ -51,18 +51,14 @@
 
     </header>
 
-    <section class="bg-primary" id="about">
+    <section class="bg-primary" id="news">
         <div class="container-fluid">
-            <div class="row no-gutter popup-gallery">
+            <div class="row no-gutter">
                 {% for article in articles %}
                     <div class="col-lg-4 col-sm-6">
                         <a href="{{ path('show_article', {'articleID': article.id}) }}">
-                        <img src={{ article.url }} class="img-responsive" alt="">
+                            <img src={{ article.url }} class="img-responsive" alt="">
                         </a>
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                            </div>
-                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -176,16 +172,6 @@
                 <div class="col-lg-4 col-sm-6">
                     <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
                         <img src="{{ planet.image }}" class="img-responsive" alt="" >
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    {{ planet.namedAs }}
-                                </div>
-                                <div class="project-name">
-                                    {{ planet.name }}
-                                </div>
-                            </div>
-                        </div>
                     </a>
                 </div>
                 {% endfor %}
