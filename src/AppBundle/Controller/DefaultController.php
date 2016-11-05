@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultController
@@ -48,13 +49,17 @@ class DefaultController extends Controller
      */
     public function showPlanet($planetName)
     {
+        dump($planetName);
         $em = $this->getDoctrine()->getManager();
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
         if(!$planet){
             throw $this->createNotFoundException('Ups! No planet found!');
         }
+        $youtube = new Youtube_videos();
+        $video = $youtube->getVideoByKey($planetName);
         return $this->render('planet/planet.html.twig', [
-            'planet' => $planet
+            'planet' => $planet,
+            'video' => $video
         ]);
     }
 
@@ -107,7 +112,6 @@ class DefaultController extends Controller
      */
     public function upcomingEventsAction()
     {
-
         return $this->render('services/upcoming_events.html.twig');
     }
 
@@ -116,9 +120,9 @@ class DefaultController extends Controller
      */
     public function astronomicalVideosAction()
     {
-
         return $this->render('services/videos.html.twig');
     }
+
 
     /**
      * @Route("/articles", name="astronomical_articles")
