@@ -18,11 +18,13 @@ class Youtube_videos
     {
         $url =$this-> getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
         if (empty($url['items'])){
-            $video = "https://www.youtube.com/watch?v=d9TpRfDdyU0";
+            $video = "https://www.youtube.com/embed/d9TpRfDdyU0";
+            return $video;
         }
         else {
             $videoid = $url['items'][0]['id']['videoId'];
             $video = "https://www.youtube.com/embed/" . $videoid;
+            return $video;
         }
         return $video;
     }

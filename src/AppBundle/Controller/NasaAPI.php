@@ -15,9 +15,19 @@ class NasaAPI
     {
         $news = $this->getData('https://api.nasa.gov/planetary/apod?api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
 
-        $data['1'] = $news["date"];
-        $data['2'] = $news["explanation"];
-        $data['3'] = $news["url"];
+        $data['date'] = $news["date"];
+        $data['explanation'] = $news["explanation"];
+        $data['url'] = $news["url"];
+        $data['title'] = $news["title"];
+        $data['type'] = $news["media_type"];
+        if ($data['type'] = "video"){
+            $data['url'] = "<iframe width='560' height='315' src='".$data['url']."' frameborder='0' allowfullscreen></iframe>";
+            return $data;
+        }
+        else {
+            $data['ulr'] = "<img class='img-responsive' src=".$data['url']." alt=''>";
+            return $data;
+        }
 
         return $data;
     }

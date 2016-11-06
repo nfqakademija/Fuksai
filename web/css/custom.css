@@ -26,8 +26,19 @@ h3 {
 ;
 }
 
-
-
+.feature-page {
+    margin-top: 100px;
+}
+.sideSearch {
+    margin-top: 80px;
+}
+.news-img {
+    height:150px !important;
+    width:auto;
+}
+#news-bar {
+    margin:0 10% 0 10%;
+}
 
 
 
