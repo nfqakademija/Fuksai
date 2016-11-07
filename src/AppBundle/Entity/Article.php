@@ -13,20 +13,30 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $description;
+    private $title;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $explanation;
+
+    /**
+     * @ORM\Column(type="string")
+     */private $date;
 
     /**
      * @var string
@@ -35,40 +45,6 @@ class Article
      */
     private $url;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Article
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Set url
@@ -93,5 +69,72 @@ class Article
     {
         return $this->url;
     }
+    /**
+ * @return mixed
+ */
+public function getTitle()
+{
+    return $this->title;
+}/**
+ * @param mixed $title
+ */
+public function setTitle($title)
+{
+    $this->title = $title;
+}/**
+ * @return mixed
+ */
+public function getType()
+{
+    return $this->type;
+}/**
+ * @param mixed $type
+ */
+public function setType($type)
+{
+    $this->type = $type;
+}/**
+ * @return mixed
+ */
+public function getExplanation()
+{
+    return $this->explanation;
+}/**
+ * @param mixed $explanation
+ */
+public function setExplanation($explanation)
+{
+    $this->explanation = $explanation;
+}/**
+ * @return mixed
+ */
+public function getDate()
+{
+    return $this->date;
+}/**
+ * @param mixed $date
+ */
+public function setDate($date)
+{
+    $this->date = $date;
+}
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
 }
 

@@ -10,13 +10,14 @@ namespace AppBundle\Controller;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class Youtube_videos
+class Youtube_videos extends Controller
 {
 
     public function getVideoByKey($planetName)
     {
-        $url =$this-> getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
+        $url = $this-> getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
         if (empty($url['items'])){
             $video = "https://www.youtube.com/embed/d9TpRfDdyU0";
             return $video;
