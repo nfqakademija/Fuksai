@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-
 class NasaAPI
 {
     public function getNews()
