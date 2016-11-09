@@ -94,4 +94,3 @@ class Article
         return $this->url;
     }
 }
-

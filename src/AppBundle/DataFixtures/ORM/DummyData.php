@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\DataFixtures\ORM;
+
 /**
  * Created by PhpStorm.
  * User: artur
