@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=feature%2Ftravis-ci)](https://travis-ci.org/nfqakademija/Fuksai)
+
 #  NFQ ACADEMY TEAM 4 PROJECT
 ### Dream team:
 * Artur Litvinavicius  
