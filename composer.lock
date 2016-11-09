@@ -1214,16 +1214,16 @@
         },
         {
             "name": "ocramius/proxy-manager",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/ProxyManager.git",
-                "reference": "51c7fdd99dba53808aaab21b34f7a55b302c160c"
+                "reference": "a55d08229f4f614bf335759ed0cf63378feeb2e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/51c7fdd99dba53808aaab21b34f7a55b302c160c",
-                "reference": "51c7fdd99dba53808aaab21b34f7a55b302c160c",
+                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/a55d08229f4f614bf335759ed0cf63378feeb2e6",
+                "reference": "a55d08229f4f614bf335759ed0cf63378feeb2e6",
                 "shasum": ""
             },
             "require": {
@@ -1234,7 +1234,8 @@
             "require-dev": {
                 "couscous/couscous": "^1.4.0",
                 "ext-phar": "*",
-                "phpunit/phpunit": "^5.3.4",
+                "phpbench/phpbench": "^0.11.2",
+                "phpunit/phpunit": "^5.4.6",
                 "squizlabs/php_codesniffer": "^2.6.0"
             },
             "suggest": {
@@ -1274,20 +1275,20 @@
                 "proxy pattern",
                 "service proxies"
             ],
-            "time": "2016-07-01 12:11:54"
+            "time": "2016-11-04 15:53:15"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
-                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
                 "shasum": ""
             },
             "require": {
@@ -1322,7 +1323,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-10-17 15:23:22"
+            "time": "2016-11-07 23:38:38"
         },
         {
             "name": "psr/cache",
@@ -1700,16 +1701,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "2.11.1",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00"
+                "reference": "6acef3bd201c4f35e42e52dedf1fe088f30e07e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
-                "reference": "e7caf4936c7be82bc6d68df87f1d23a0d5bf6e00",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/6acef3bd201c4f35e42e52dedf1fe088f30e07e8",
+                "reference": "6acef3bd201c4f35e42e52dedf1fe088f30e07e8",
                 "shasum": ""
             },
             "require": {
@@ -1756,7 +1757,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2016-04-13 16:21:01"
+            "time": "2016-11-06 18:54:50"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -2694,16 +2695,16 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v3.0.11",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "b9be7f1b3b2e8bcfc1debefc901b71da923a5e5c"
+                "reference": "0d3c9c4864142dc6a368fa0d952a8b83215e8740"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/b9be7f1b3b2e8bcfc1debefc901b71da923a5e5c",
-                "reference": "b9be7f1b3b2e8bcfc1debefc901b71da923a5e5c",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/0d3c9c4864142dc6a368fa0d952a8b83215e8740",
+                "reference": "0d3c9c4864142dc6a368fa0d952a8b83215e8740",
                 "shasum": ""
             },
             "require": {
@@ -2720,7 +2721,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -2742,7 +2743,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2016-10-10 14:17:42"
+            "time": "2016-11-07 19:48:31"
         },
         {
             "name": "squizlabs/php_codesniffer",
