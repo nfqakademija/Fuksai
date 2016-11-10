@@ -1,7 +1,7 @@
+![SkyAboveUs](https://s16.postimg.org/fna1mt7px/Logomakr_8k_Hl_Xj.png)
+
 [![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=master)](https://travis-ci.org/nfqakademija/Fuksai)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/?branch=master)
-
-![SkyAboveUs](https://s16.postimg.org/fna1mt7px/Logomakr_8k_Hl_Xj.png)
 
 # Table of Contents
 
