@@ -1,7 +1,7 @@
-![SkyAboveUs](https://s16.postimg.org/fna1mt7px/Logomakr_8k_Hl_Xj.png)
+[![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=master)](https://travis-ci.org/nfqakademija/Fuksai)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/?branch=master)
 
-[![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=feature%2Ftravis-ci)](https://travis-ci.org/nfqakademija/Fuksai)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/?branch=develop)
+![SkyAboveUs](https://s16.postimg.org/fna1mt7px/Logomakr_8k_Hl_Xj.png)
 
 # Table of Contents
 
@@ -21,11 +21,10 @@ SkyAboveUs is a web projecet developed for people who are interested in astronom
 
 #### Team Mentor:
 
-* Justas Vitaitis  
+* Justas Vitaitis
 
 #### Developers:
 
-* Artur Litvinavicius  
+* Artur Litvinavicius
 * Arnas Grigaliūnas
-* Dmitrij Voronov  
-
+* Dmitrij Voronov
