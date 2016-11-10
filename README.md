@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=feature%2Ftravis-ci)](https://travis-ci.org/nfqakademija/Fuksai)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/?branch=develop)
 
 #  NFQ ACADEMY TEAM 4 PROJECT
 ### Dream team:
