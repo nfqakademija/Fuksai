@@ -1,14 +1,30 @@
 [![Build Status](https://travis-ci.org/nfqakademija/Fuksai.svg?branch=master)](https://travis-ci.org/nfqakademija/Fuksai)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nfqakademija/Fuksai/?branch=master)
 
-#  NFQ ACADEMY TEAM 4 PROJECT
-### Dream team:
-* Artur Litvinavicius  
-* Arnas Grigaliūnas  
-* Dmitrij Voronov  
+![SkyAboveUs](https://s16.postimg.org/fna1mt7px/Logomakr_8k_Hl_Xj.png)
 
-### Mentor:
-* Justas Vitaitis  
+# Table of Contents
 
-A Symfony project created on October 11, 2016, 9:39 pm.
+* [Project Description](#project-description)
+* [Requirements](#requirements)
+* [Team Members](#team-members)
 
+# <a name="project-description"></a>Project Description
+
+SkyAboveUs is a web projecet developed for people who are interested in astronomy.
+
+# <a name="requirements"></a>Requirements
+
+* PHP >= 7.0.0
+
+# <a name="team-members"></a>Team Members
+
+#### Team Mentor:
+
+* Justas Vitaitis
+
+#### Developers:
+
+* Artur Litvinavicius
+* Arnas Grigaliūnas
+* Dmitrij Voronov
