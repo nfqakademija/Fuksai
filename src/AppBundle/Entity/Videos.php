@@ -1,0 +1,97 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Videos
+ *
+ * @ORM\Table(name="videos")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VideosRepository")
+ */
+class Videos
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255)
+     */
+    private $path;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="keyName", type="string", length=255)
+     */
+    private $keyName;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Videos
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set keyName
+     *
+     * @param string $keyName
+     *
+     * @return Videos
+     */
+    public function setKeyName($keyName)
+    {
+        $this->keyName = $keyName;
+
+        return $this;
+    }
+
+    /**
+     * Get keyName
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return $this->keyName;
+    }
+}
+

@@ -34,19 +34,19 @@ class NasaAPI extends Controller
 
         return $data;
     }
-    public function saveNasaData($data)
-    {
-        $savingData = new Article();
-        $savingData->setDate($data['date']);
-        $savingData->setExplanation($data['explanation']);
-        $savingData->setTitle($data['title']);
-        $savingData->setType($data['type']);
-        $savingData->setUrl($data['url']);
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($savingData);
-        $em->flush();
-    }
+//    public function saveNasaData($data)
+//    {
+//        $savingData = new Article();
+//        $savingData->setDate($data['date']);
+//        $savingData->setExplanation($data['explanation']);
+//        $savingData->setTitle($data['title']);
+//        $savingData->setType($data['type']);
+//        $savingData->setUrl($data['url']);
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $em->persist($savingData);
+//        $em->flush();
+//    }
 
     public function getData($request)
     {
