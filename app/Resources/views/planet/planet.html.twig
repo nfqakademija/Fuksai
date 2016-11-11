@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<<<<<<< HEAD
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -151,4 +152,34 @@
         </footer>
 
     </div>
+=======
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Description</th>
+            <th>Names as</th>
+            <th>Diameter</th>
+            <th>Orbit</th>
+            <th>Day</th>
+            <th>Image path</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ planet.id }}</td>
+                <td>{{ planet.name }}</td>
+                <td>{{ planet.position }} </td>
+                <td>{{ planet.description }}</td>
+                <td>{{ planet.namedAs }}</td>
+                <td>{{ planet.diameter }}</td>
+                <td>{{ planet.orbit }}</td>
+                <td>{{ planet.day }}</td>
+                <td>{{ planet.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+>>>>>>> f0b1c416fa50c5ba97b0b0c78238cb251627127a
 {% endblock %}

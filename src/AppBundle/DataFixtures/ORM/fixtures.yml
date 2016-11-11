@@ -80,7 +80,7 @@ AppBundle\Entity\Planet:
           orbit: 165 Earth years
           day: 19 Earth hours
       Pluto:
-          name: Pluto
+          name: Pluto (Dwarf planet)
           position: 9
           description: Once the ninth planet from the sun, Pluto is unlike other planets in many respects. It is smaller than Earth's moon. Its orbit carries it inside the orbit of Neptune and then way out beyond that orbit. From 1979 until early 1999, Pluto had actually been the eighth planet from the sun. Then, on Feb. 11, 1999, it crossed Neptune's path and once again became the solar system's most distant planet — until it was demoted to dwarf planet status. Pluto will stay beyond Neptune for 228 years. Pluto’s orbit is tilted to the main plane of the solar system — where the other planets orbit — by 17.1 degrees. It’s a cold, rocky world with only a very ephemeral atmosphere. NASA's New Horizons mission performed history's first flyby of the Pluto system on July 14, 2015.
           image: http://i.imgur.com/loDjBjx.jpg
