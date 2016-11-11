@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Videos
+ * Class Videos
+ * @package AppBundle\Entity
  *
  * @ORM\Table(name="videos")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VideosRepository")

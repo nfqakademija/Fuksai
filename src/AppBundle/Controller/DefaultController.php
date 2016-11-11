@@ -159,7 +159,6 @@ class DefaultController extends Controller
      */
     public function constellationDisplayAction()
     {
-
         return $this->render('services/constellation.html.twig');
     }
 

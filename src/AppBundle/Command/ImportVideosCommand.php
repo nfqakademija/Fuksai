@@ -1,9 +1,11 @@
 <?php
 namespace AppBundle\Command;
 use AppBundle\Entity\Planet;
+use AppBundle\Entity\Videos;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use AppBundle\Repository\PlanetRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
@@ -17,7 +19,7 @@ class ImportVideosCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('demo:greet')->setDescription('Import youtube videos for articles.')->setHelp('This command finds and imports videos for all articles.');
+        $this->setName('app:import-videos')->setDescription('Import youtube videos for articles.')->setHelp('This command finds and imports videos for all articles.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -25,24 +27,32 @@ class ImportVideosCommand extends ContainerAwareCommand
         $planetNames = $this->getPlanets();
         foreach ($planetNames as $planet => $url) {
             $planet = $this->getVideo($url);
-            $result[]= array($url => $planet);
+            $result = array($url => $planet);
+
+            foreach ($result as $name => $url) {
+                if ($url == null)
+                {
+                    $url = "Didnt find video!";
+                }
+                $videos = $this->createVideos($name, $url);
+                $this->insertVideos($videos);
+                $output->writeln("Inserting ".$name." video.... ->".$url);
+            }
+
         }
-        dump($result);exit;
-        foreach ($result as $number => $name ) {
-            dump($number);exit;
-//            $output->writeln("This is name:".$name."This is Link:".$link);
-        }
+        $output->writeln('All videos inserted!');
     }
 
     private function getPlanets()
     {
-        $em = $this->getContainer()
+        $planet = $this->getContainer()
             ->get('doctrine')
-            ->getManager();
-        $planet = $em->getRepository('AppBundle:Planet')
-            ->findAllPlanets();
+            ->getRepository('AppBundle:Planet')
+            ->createQueryBuilder('planet')
+            ->select('planet.name')
+            ->getQuery()
+            ->execute();//NEDS TO BE CHANGED, CANT GET METHOD FROM REPOSITORY
         $planetsNames = [];
-//        dump($planet[1]['name']);exit;
         foreach ($planet as $planets){
             $planetsNames[] = $planets['name'];
         }
@@ -68,13 +78,30 @@ class ImportVideosCommand extends ContainerAwareCommand
         return $data_array;
     }
 
-    private function insertVideos($data)
+    private function createVideos($key , $url)
     {
-        $target = $this->getContainer()
-            ->get('doctrine')
-            ->getRepository('AppBundle:Planet')
-            ->find($data);
+        $Video = new Videos();
+        $Video->setKeyName($key)
+            ->setPath($url);
+        return $Video;
     }
+
+    private function insertVideos($videos)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        foreach ($videos as $video) {
+
+            $em->persist($video);
+        }
+
+        $em->flush();
+    }
+    private function checkExists($name, $url)
+    {
+        //Cia pagalvosiu, nes manau reik pakeisti jaigu yra naujas video ar daug geresnis :|
+    }
+
 
 
 }
