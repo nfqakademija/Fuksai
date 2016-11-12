@@ -98,15 +98,7 @@ class DefaultController extends Controller
      */
     public function showTest()
     {
-        $nasa_api = new NasaAPI();
-        $text = $nasa_api->getNews();
 
-        return $this->render(
-            'nasaApi/test.html.twig',
-            [
-                'text' => $text,
-            ]
-        );
     }
 
     /**
