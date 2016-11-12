@@ -4,27 +4,27 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <field name="url" type="string" column="url" length="255" nullable="false">
+    <field name="url" type="string" column="url" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="title" type="string" column="title" length="255" nullable="false">
+    <field name="title" type="string" column="title" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="type" type="string" column="type" length="255" nullable="false">
+    <field name="type" type="string" column="type" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="explanation" type="string" column="explanation" length="255" nullable="false">
+    <field name="explanation" type="string" column="explanation" length="99999" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="date" type="string" column="date" length="255" nullable="false">
+    <field name="date" type="string" column="date" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
