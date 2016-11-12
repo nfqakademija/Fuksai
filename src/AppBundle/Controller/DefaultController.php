@@ -40,13 +40,17 @@ class DefaultController extends Controller
 
 
         return $this->render(
-            'planet/planets_list.html.twig', [
+            'planet/planets_list.html.twig',
+            [
             'planets' => $planets
-        ]);
+            ]
+        );
     }
 
     /**
      * @Route("/planets/{planetName}", name="show_planet")
+     * @param $planetName
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showPlanet($planetName)
     {
@@ -54,7 +58,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
-        if(!$planet){
+        if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
         $youtube = new Youtube_videos();
@@ -68,14 +72,17 @@ class DefaultController extends Controller
 
     /**
      * @Route("/news/{articleID}", name="show_article")
+     * @param $articleID
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showArticle($articleID)
     {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
-        if(!$article){
+        if (!$article) {
             throw $this->createNotFoundException('Ups! No article found!');
         }
+
         return $this->render('newsFeed/article.html.twig', [
             'article' => $article,
         ]);
@@ -89,7 +96,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('newsFeed/news.html.twig',[
+        return $this->render('newsFeed/news.html.twig', [
             'articles' => $articles,
         ]);
     }
@@ -179,5 +186,4 @@ class DefaultController extends Controller
 
         return $this->render('services/planet_calculator.html.twig');
     }
-
 }
