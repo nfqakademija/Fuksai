@@ -1,5 +1,7 @@
 <?php
 
+namespace AppBundle\Command;
+
 /**
  * Created by PhpStorm.
  * User: shalifar
