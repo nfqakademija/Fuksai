@@ -56,14 +56,15 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
+        $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
         return $this->render('planet/planet.html.twig', [
 
             'planet' => $planet,
-            'video' => $video,
-            'planetsList' => $planets
+            'planetsList' => $planets,
+            'video' => $video
         ]);
     }
 
