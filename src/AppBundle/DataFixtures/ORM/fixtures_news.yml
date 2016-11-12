@@ -6,7 +6,7 @@ AppBundle\Entity\Article:
           type: True
           date: True
       Article2:
-          explanation: was compth 
+          explanation: was compth
           url: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
           title: True
           type: True
