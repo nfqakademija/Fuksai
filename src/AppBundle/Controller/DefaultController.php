@@ -64,8 +64,6 @@ class DefaultController extends Controller
             'planet' => $planet,
             'video' => $video,
             'planetsList' => $planets
-
-        'planet' => $planet
         ]);
     }
 
