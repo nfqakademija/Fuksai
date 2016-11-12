@@ -23,7 +23,7 @@ class DefaultController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $nasa_api = new NasaAPI();
         $news = $nasa_api->getNews();
-
+//        $nasa_api->saveNasaData($news);
         return $this->render('default/index.html.twig', [
             'planets' => $planets,
             'articles' => $news
@@ -159,7 +159,6 @@ class DefaultController extends Controller
      */
     public function constellationDisplayAction()
     {
-
         return $this->render('services/constellation.html.twig');
     }
 

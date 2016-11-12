@@ -63,7 +63,7 @@
                             <div class="clearfix"></div>
                             <h2 style="color:black">{{ articles.title }}</h2>
                             <p>{{ articles.date }}</p>
-                            <p >{{ articles.explanation|length > 50 ? articles.explanation|slice(0,450)~'...':articles.explanation }} <a href="{{ path('news_list') }}">More</a></p>
+                            <p >{{ articles.explanation|length > 50 ? articles.explanation|slice(0,450)~'...':articles.explanation }} <a style="color:black;" href="{{ path('news_list') }}">More</a></p>
                         </div>
                     </div>
                 </div>
@@ -175,11 +175,21 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 {% for planet in planets %}
-                <div class="col-lg-4 col-sm-6">
-                    <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
-                        <img src="{{ planet.image }}" class="img-responsive" alt="" >
-                    </a>
-                </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
+                            <img src="{{ planet.image }}" class="img-responsive" alt="">
+                            <div class="portfolio-box-caption">
+                                <div class="portfolio-box-caption-content">
+                                    <div class="project-category text-faded">
+                                        {{ planet.namedAs }}
+                                    </div>
+                                    <div class="project-name">
+                                        {{ planet.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
