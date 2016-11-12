@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Command\AsteroidsImport;
+use AppBundle\Command\AsteroidsImportCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,8 +99,8 @@ class DefaultController extends Controller
      */
     public function showTest()
     {
-        $ai = new AsteroidsImport();
-        $ai->getApproachingAsteroids();
+        $ai = new AsteroidsImportCommand();
+        $ai->func();
 
         return null;
     }
