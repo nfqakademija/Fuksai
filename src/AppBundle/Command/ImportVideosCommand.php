@@ -34,8 +34,9 @@ class ImportVideosCommand extends ContainerAwareCommand
                 {
                     $url = "Didnt find video!";
                 }
-                $videos = $this->createVideos($name, $url);
+                $videos = $this->checkExists($name, $url);
                 $this->insertVideos($videos);
+
                 $output->writeln("Inserting ".$name." video.... ->".$url);
             }
 
@@ -89,17 +90,25 @@ class ImportVideosCommand extends ContainerAwareCommand
     private function insertVideos($videos)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
+            $em->persist($videos);
+            $em->flush();
 
-        foreach ($videos as $video) {
-
-            $em->persist($video);
-        }
-
-        $em->flush();
     }
     private function checkExists($name, $url)
     {
-        //Cia pagalvosiu, nes manau reik pakeisti jaigu yra naujas video ar daug geresnis :|
+        $em = $this->getContainer()->get('doctrine')
+            ->getManager();
+        $video = $em->getRepository('AppBundle:Videos')
+            ->findOneBykeyName($name);
+        if (!empty($video)){
+            $video->setpath($url);
+            return $video;
+        }
+        else
+        {
+            $video = $this->createVideos($name, $url);
+            return $video;
+        }
     }
 
 
