@@ -5,12 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Videos
+ * Video
+ * Class Video
+ * @package AppBundle\Entity
  *
- * @ORM\Table(name="videos")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\VideosRepository")
+ * @ORM\Table(name="video")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VideoRepository")
  */
-class Videos
+class Video
 {
     /**
      * @var int
@@ -51,7 +53,7 @@ class Videos
      *
      * @param string $path
      *
-     * @return Videos
+     * @return Video
      */
     public function setPath($path)
     {
@@ -75,7 +77,7 @@ class Videos
      *
      * @param string $keyName
      *
-     * @return Videos
+     * @return Video
      */
     public function setKeyName($keyName)
     {
@@ -94,4 +96,3 @@ class Videos
         return $this->keyName;
     }
 }
-

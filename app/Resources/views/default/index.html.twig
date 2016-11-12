@@ -55,17 +55,7 @@
         <div class="container-fluid">
             <div>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5 col-sm-6">
-                        {{ articles.url|raw }}
-                        </div>
-                        <div class="col-lg-5 col-lg-offset-1 col-sm-7">
-                            <div class="clearfix"></div>
-                            <h2 style="color:black">{{ articles.title }}</h2>
-                            <p>{{ articles.date }}</p>
-                            <p >{{ articles.explanation|length > 50 ? articles.explanation|slice(0,450)~'...':articles.explanation }} <a style="color:black;" href="{{ path('news_list') }}">More</a></p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
