@@ -8,7 +8,7 @@ namespace AppBundle\Command;
  * Date: 16.11.12
  * Time: 14.32
  */
-class NewsImport
+class AsteroidsImport
 {
     public function getApproachingAsteroids()
     {
@@ -18,10 +18,10 @@ class NewsImport
         for ($i = 0; $i < $count; $i++)
         {
             $asteroid = new \AppBundle\Entity\Asteroid();
-            $asteroid->setName($data['near_earth_objects'][$date][$i]['name']);
-            $asteroid->setDiameter($data['near_earth_objects'][$date][$i]['estimated_diameter']['meters']['estimated_diameter_max']);
-            $asteroid->setVelocity($data['near_earth_objects'][$date][$i]['close_approach_data']['relative_velocity']['kilometers_per_hour']);
-            $asteroid->setMissDistance($data['near_earth_objects'][$date][$i]['close_approach_data']['miss_distance']['kilometers']);
+            $asteroid->setName($data['near_earth_objects'][$date][0]['name']);
+            $asteroid->setDiameter($data['near_earth_objects'][$date][0]['estimated_diameter']['meters']['estimated_diameter_max']);
+            $asteroid->setVelocity($data['near_earth_objects'][$date][0]['close_approach_data'][0]['relative_velocity']['kilometers_per_hour']);
+            $asteroid->setMissDistance($data['near_earth_objects'][$date][0]['close_approach_data'][0]['miss_distance']['kilometers']);
             var_dump($asteroid);
         }
     }
