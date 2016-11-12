@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultController
@@ -20,11 +21,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
-        $articles = $em->getRepository('AppBundle:Article')->findAll();
-
+        $nasa_api = new NasaAPI();
+        $news = $nasa_api->getNews();
+//        $nasa_api->saveNasaData($news);
         return $this->render('default/index.html.twig', [
             'planets' => $planets,
-            'articles' => $articles,
+            'articles' => $news
         ]);
     }
 
@@ -52,13 +54,19 @@ class DefaultController extends Controller
      */
     public function showPlanet($planetName)
     {
+        dump($planetName);
         $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
+        $youtube = new Youtube_videos();
+        $video = $youtube->getVideoByKey($planetName);
         return $this->render('planet/planet.html.twig', [
-            'planet' => $planet
+            'planet' => $planet,
+            'video' => $video,
+            'planetsList' => $planets
         ]);
     }
 
@@ -81,7 +89,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/news")
+     * @Route("/news", name="news_list")
      */
     public function showNews()
     {
@@ -114,7 +122,6 @@ class DefaultController extends Controller
      */
     public function upcomingEventsAction()
     {
-
         return $this->render('services/upcoming_events.html.twig');
     }
 
@@ -123,9 +130,9 @@ class DefaultController extends Controller
      */
     public function astronomicalVideosAction()
     {
-
         return $this->render('services/videos.html.twig');
     }
+
 
     /**
      * @Route("/articles", name="astronomical_articles")
@@ -159,7 +166,6 @@ class DefaultController extends Controller
      */
     public function constellationDisplayAction()
     {
-
         return $this->render('services/constellation.html.twig');
     }
 
