@@ -55,9 +55,25 @@ class AsteroidsImportCommand
 
     public function func()
     {
-        $feed = $this->getData('https://api.nasa.gov/neo/rest/v1/feed?start_date=2016-11-13&end_date=2016-11-13&detailed=false&api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
-        dump($feed);
-        exit();
+        $date = '2016-11-13';
+        $data = $this
+            ->getData('https://api.nasa.gov/neo/rest/v1/feed?start_date=2016-11-13&end_date=2016-11-13&detailed=false&api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
+
+        $count = $data['element_count'];
+        $em = $this->getContainer()->getDoctrine()->getManager();
+
+        for ($i = 0; $i < $count; $i++)
+        {
+            $asteroid = new \AppBundle\Entity\Asteroid();
+            $asteroid->setName($data['near_earth_objects'][$date][1]['name']);
+            $asteroid->setDiameter($data['near_earth_objects'][$date][2]['estimated_diameter']['meters']['estimated_diameter_max']);
+            $asteroid->setVelocity($data['near_earth_objects'][$date][3]['close_approach_data'][0]['relative_velocity']['kilometers_per_hour']);
+            $asteroid->setMissDistance($data['near_earth_objects'][$date][4 ]['close_approach_data'][0]['miss_distance']['kilometers']);
+
+
+        }
+
+
     }
 
     public function getData($request)
