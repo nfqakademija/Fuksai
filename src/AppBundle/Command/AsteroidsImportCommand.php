@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use AppBundle\Repository\AsteroidRepository;
 
 /**
  * Created by PhpStorm.
@@ -60,7 +61,7 @@ class AsteroidsImportCommand
             ->getData('https://api.nasa.gov/neo/rest/v1/feed?start_date=2016-11-13&end_date=2016-11-13&detailed=false&api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
 
         $count = $data['element_count'];
-        $em = $this->getContainer()->getDoctrine()->getManager();
+
 
         for ($i = 0; $i < $count; $i++)
         {
