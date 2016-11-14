@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Command\AsteroidsImportCommand;
-use AppBundle\Command\ImportMarsPhotos;
+use AppBundle\Command\ImportMarsPhotosCommand;
 use AppBundle\Command\ImportISSPosition ;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -101,9 +101,6 @@ class DefaultController extends Controller
      */
     public function showTest()
     {
-        $ai = new ImportMarsPhotos();
-        $ai->func();
-
         return null;
     }
 

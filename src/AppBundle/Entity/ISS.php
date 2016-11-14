@@ -38,9 +38,9 @@ class ISS
     /**
      * @var string
      *
-     * @ORM\Column(name="timezone", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255)
      */
-    private $timezone;
+    private $country;
 
     /**
      * @var string
@@ -111,13 +111,13 @@ class ISS
     /**
      * Set timezone
      *
-     * @param string $timezone
+     * @param string $country
      *
      * @return ISS
      */
-    public function setTimezone($timezone)
+    public function setCountry($country)
     {
-        $this->timezone = $timezone;
+        $this->country = $country;
 
         return $this;
     }
@@ -127,9 +127,9 @@ class ISS
      *
      * @return string
      */
-    public function getTimezone()
+    public function getCountry()
     {
-        return $this->timezone;
+        return $this->country;
     }
 
     /**
