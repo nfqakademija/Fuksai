@@ -17,6 +17,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use AppBundle\Repository\PlanetRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ImportVideosCommand
+ * @package AppBundle\Command
+ */
 class ImportVideosCommand extends ContainerAwareCommand
 {
     /**
@@ -25,7 +29,7 @@ class ImportVideosCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:import-videos')
+            ->setName('app:import:videos')
             ->setDescription('Import youtube videos for articles.')
             ->setHelp('This command finds and imports videos for all articles.');
     }
@@ -33,7 +37,6 @@ class ImportVideosCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $planetNames = $this->getPlanets();
@@ -48,7 +51,11 @@ class ImportVideosCommand extends ContainerAwareCommand
             }
 
             $data = $this->checkExists($planetName, $video);
-            $this->insertVideos($data);
+            $this
+                ->getContainer()
+                ->get('doctrine')
+                ->getRepository('AppBundle:Video')
+                ->save($data);
 
             $output->writeln('Inserting ' . $planetName . ' video... -> ' . $video);
         }
@@ -61,18 +68,16 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getPlanets()
     {
-        $planet = $this->getContainer()
+        $planets = $this
+            ->getContainer()
             ->get('doctrine')
             ->getRepository('AppBundle:Planet')
-            ->createQueryBuilder('planet')
-            ->select('planet.name')
-            ->getQuery()
-            ->execute();//NEDS TO BE CHANGED, CANT GET METHOD FROM REPOSITORY
+            ->findPlanets();
 
         $planetsNames = [];
 
-        foreach ($planet as $planets){
-            $planetsNames[] = $planets['name'];
+        foreach ($planets as $planet){
+            $planetsNames[] = $planet['name'];
         }
 
         return $planetsNames;
@@ -85,7 +90,15 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getVideo($planetName)
     {
-        $url = $this->getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
+        $apiKey = $this->getContainer()->getParameter('youtube_api_key');
+        $url = $this
+            ->getData(
+                sprintf(
+                    'https://www.googleapis.com/youtube/v3/search?key=%s&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=%s',
+                    $apiKey,
+                    $planetName
+                )
+            );
 
         if (isset($url['items'][0])) {
                 $videoid = $url['items'][0]['id']['videoId'];
@@ -102,7 +115,6 @@ class ImportVideosCommand extends ContainerAwareCommand
      *
      * @return array
      */
-
     private function getData($url)
     {
         $json = file_get_contents($url);
@@ -117,7 +129,6 @@ class ImportVideosCommand extends ContainerAwareCommand
      *
      * @return Video
      */
-
     private function createVideos($key , $url)
     {
         $video = new Video();
@@ -126,18 +137,6 @@ class ImportVideosCommand extends ContainerAwareCommand
             ->setPath($url);
 
         return $video;
-    }
-
-    /**
-     * @param Video $videos
-     */
-
-    private function insertVideos(Video $videos)
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $em->persist($videos);
-        $em->flush();
-
     }
 
     /**
@@ -160,6 +159,6 @@ class ImportVideosCommand extends ContainerAwareCommand
             return $video;
         }
 
-            return $this->createVideos($name, $url);
+        return $this->createVideos($name, $url);
     }
 }
