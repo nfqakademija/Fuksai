@@ -30,9 +30,6 @@ class ImportVideosCommand extends ContainerAwareCommand
             ->setHelp('This command finds and imports videos for all articles.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {

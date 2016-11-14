@@ -1,0 +1,25 @@
+AppBundle\Entity\Article:
+      Article1:
+          description: Is only one black h
+          urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
+          url: True
+          title: True
+          type: True
+          publishedAt: True
+          author: True
+      Article2:
+          description: was compth
+          urlToImage: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
+          url: True
+          title: True
+          type: True
+          publishedAt: True
+          author: True
+      Article3:
+          description: Is only o
+          urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
+          url: True
+          title: True
+          type: True
+          publishedAt: True
+          author: True

@@ -13,30 +13,33 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
     /**
+     * @var integer
+     *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+     * @ORM\Column(type="integer")     */
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $author;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
     private $title;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $explanation;
-
-    /**
-     * @ORM\Column(type="string")
-     */private $date;
+    private $description;
 
     /**
      * @var string
@@ -45,6 +48,60 @@ class Article
      */
     private $url;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="urlToImage", type="string", length=255)
+     */
+    private $urlToImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $publishedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $type;
+
+    //                      GETTERS AND SETTERS
+
+    /**
+     * @param string $urlToImage
+     */
+    public function setUrlToImage($urlToImage)
+    {
+        $this->urlToImage = $urlToImage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlToImage()
+    {
+        return $this->urlToImage;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
     /**
      * Set url
@@ -69,62 +126,69 @@ class Article
     {
         return $this->url;
     }
+
     /**
- * @return mixed
- */
-public function getTitle()
-{
-    return $this->title;
-}/**
- * @param mixed $title
- */
-public function setTitle($title)
-{
-    $this->title = $title;
-}/**
- * @return mixed
- */
-public function getType()
-{
-    return $this->type;
-}/**
- * @param mixed $type
- */
-public function setType($type)
-{
-    $this->type = $type;
-}/**
- * @return mixed
- */
-public function getExplanation()
-{
-    return $this->explanation;
-}/**
- * @param mixed $explanation
- */
-public function setExplanation($explanation)
-{
-    $this->explanation = $explanation;
-}/**
- * @return mixed
- */
-public function getDate()
-{
-    return $this->date;
-}/**
- * @param mixed $date
- */
-public function setDate($date)
-{
-    $this->date = $date;
-}
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->id;
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $publishedAt
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
     }
 
     /**
@@ -135,5 +199,11 @@ public function setDate($date)
         $this->id = $id;
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
