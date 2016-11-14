@@ -94,16 +94,20 @@ class ImportVideosCommand extends ContainerAwareCommand
         $url = $this
             ->getData(
                 sprintf(
-                    'https://www.googleapis.com/youtube/v3/search?key=%s&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=%s',
+                    'https://www.googleapis.com/youtube/v3/search?key=%s&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=3&q=%s',
                     $apiKey,
                     $planetName
                 )
             );
 
-        if (isset($url['items'][0])) {
-                $videoid = $url['items'][0]['id']['videoId'];
+        if (isset($url['items'])) {
+                $videos = $url['items'];
+            foreach ($videos as $video){
+                $videoss = $video['id']['videoId'];
+                $videosPath [] = "https://www.youtube.com/embed/" . $videoss;
+            }
 
-                return "https://www.youtube.com/embed/" . $videoid;
+            return implode(' ', $videosPath);
         }
 
         return null;

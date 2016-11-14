@@ -30,18 +30,19 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/list")
+     * @Route("/list/{planetName}", name="show_paths")
+     * @param $planetName
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function planetsAction()
+    public function planetsAction($planetName)
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
 
 
-        return $this->render(
-            'planet/planets_list.html.twig',
+        return $this->render('planet/planets_list.html.twig',
             [
-            'planets' => $planets
+                'video' => $video
             ]
         );
     }

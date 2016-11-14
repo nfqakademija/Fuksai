@@ -1,33 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Description</th>
-            <th>Names as</th>
-            <th>Diameter</th>
-            <th>Orbit</th>
-            <th>Day</th>
-            <th>Image path</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for planet in planets %}
-            <tr>
-                <td>{{ planet.id }}</td>
-                <td>{{ planet.name }}</td>
-                <td>{{planet.position}} </td>
-                <td>{{ planet.description }}</td>
-                <td>{{ planet.namedAs }}</td>
-                <td>{{ planet.diameter }}</td>
-                <td>{{ planet.orbit }}</td>
-                <td>{{ planet.day }}</td>
-                <td>{{ planet.image }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% set videos = video.path|split(' ') %}
+
+    {% for video in videos %}
+        {{ video }}<br />
+    {% endfor %}
 {% endblock %}
