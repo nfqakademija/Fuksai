@@ -8,8 +8,14 @@
 
 namespace AppBundle\Controller;
 
-class NasaAPI
+
+use AppBundle\Entity\Article;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager;
+
+class NasaAPI extends Controller
 {
+
     public function getNews()
     {
         $news = $this->getData('https://api.nasa.gov/planetary/apod?api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
