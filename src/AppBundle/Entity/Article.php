@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Article
@@ -16,6 +17,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @UniqueEntity("keyName")
      */
     private $id;
 
@@ -44,6 +46,29 @@ class Article
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $keyName;
+
+    /**
+     * @return mixed
+     */
+    public function getKeyName()
+    {
+        return $this->keyName;
+    }
+
+    /**
+     * @param mixed $keyName
+     */
+    public function setKeyName($keyName)
+    {
+        $this->keyName = $keyName;
+    }
 
 
     /**

@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Video
  * Class Video
@@ -20,6 +22,8 @@ class Video
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @UniqueEntity("keyName")
+     *
      */
     private $id;
 
@@ -33,7 +37,7 @@ class Video
     /**
      * @var string
      *
-     * @ORM\Column(name="keyName", type="string", length=255)
+     * @ORM\Column(name="keyName", type="string", length=255, unique=true)
      */
     private $keyName;
 

@@ -10,12 +10,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Planet
  *
  * @ORM\Table(name="planet")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetRepository")
+ * @UniqueEntity("keyName")
  */
 class Planet
 {
@@ -68,6 +70,27 @@ class Planet
      * @ORM\Column(type="string")
      */
     private $day;
+
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $keyName;
+
+    /**
+     * @return mixed
+     */
+    public function getKeyName()
+    {
+        return $this->keyName;
+    }
+
+    /**
+     * @param mixed $keyName
+     */
+    public function setKeyName($keyName)
+    {
+        $this->keyName = $keyName;
+    }
 
 
     /**
