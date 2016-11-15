@@ -20,12 +20,16 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $news = $em->getRepository('AppBundle:Article')->findAll();
+
         $nasa_api = new NasaAPI();
-        $news = $nasa_api->getNews();
+        $nasa_news = $nasa_api->getNews();
 //        $nasa_api->saveNasaData($news);
+
         return $this->render('default/index.html.twig', [
             'planets' => $planets,
-            'articles' => $news
+            'news' => $news,
+            'nasa_articles' => $nasa_news
         ]);
     }
 
@@ -76,26 +80,32 @@ class DefaultController extends Controller
     public function showArticle($articleID)
     {
         $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
+
         if (!$article) {
             throw $this->createNotFoundException('Ups! No article found!');
         }
 
         return $this->render('newsFeed/article.html.twig', [
             'article' => $article,
+            'planetsList' => $planets,
         ]);
     }
 
     /**
      * @Route("/news", name="news_list")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showNews()
     {
         $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
         return $this->render('newsFeed/news.html.twig', [
             'articles' => $articles,
+            'planetsList' => $planets,
         ]);
     }
 

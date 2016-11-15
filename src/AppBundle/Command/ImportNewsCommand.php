@@ -58,7 +58,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         $keywords[8] = "planet";
         $keywords[9] = "astronomy";
 
-        // astronomical news got using the keywords
+        // astronomical news got using the astronomical keywords
         $astronomicalNews = $this->getAstronomicalNews($news, $keywords);
 
         /* if found zero astronomical articles then insert other articles to the

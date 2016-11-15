@@ -51,13 +51,26 @@
 
     </header>
 
+    <div class="container">
+        <hr class="primary">
+    </div>
+
+    <!-- show first article from news list -->
     <section class="bg-primary" id="news">
         <div class="container-fluid">
-            <div>
-                <div class="container">
-
+            <a href="{{ path('show_article', {'articleID': news[0].id}) }}" class="portfolio-box">
+                <img src="{{ news[0].urlToImage }}" class="img-responsive" alt="">
+                <div class="portfolio-box-caption">
+                    <div class="portfolio-box-caption-content">
+                        <div class="project-category text-faded">
+                            {{ news[0].title }}
+                        </div>
+                        <div class="project-name">
+                            {{ news[0].description }}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
 
