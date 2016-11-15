@@ -44,7 +44,6 @@ class ImportVideosCommand extends ContainerAwareCommand
             if ($video == null) {
                 $output->writeln('Didn\'t find video: '. $planetName);
                 continue;
-
             }
 
             $data = $this->checkExists($planetName, $video);
@@ -95,7 +94,6 @@ class ImportVideosCommand extends ContainerAwareCommand
         }
 
         return null;
-
     }
 
     /**
@@ -136,7 +134,6 @@ class ImportVideosCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($videos);
         $em->flush();
-
     }
 
     /**
@@ -147,7 +144,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function checkExists($name, $url)
     {
-        $em = $this->getContainer()->get('doctrine')
+        $em = $this->getContainer()->get('doctrine')g
             ->getManager();
 
         $video = $em->getRepository('AppBundle:Video')
