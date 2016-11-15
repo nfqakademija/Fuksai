@@ -102,11 +102,11 @@ class ImportVideosCommand extends ContainerAwareCommand
 
         if (isset($url['items'])) {
                 $videos = $url['items'];
+                $videosPath = [];
             foreach ($videos as $video){
-                $videoss = $video['id']['videoId'];
-                $videosPath [] = "https://www.youtube.com/embed/" . $videoss;
+                $videoId = $video['id']['videoId'];
+                $videosPath [] = "https://www.youtube.com/embed/" . $videoId;
             }
-
             return implode(' ', $videosPath);
         }
 

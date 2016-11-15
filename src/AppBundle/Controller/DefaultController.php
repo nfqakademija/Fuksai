@@ -30,7 +30,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/list/{planetName}", name="show_paths")
+     * @Route("/list/{planetName}", name="show_videos")
      * @param $planetName
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -38,11 +38,15 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
+        $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
 
 
         return $this->render('planet/planets_list.html.twig',
             [
-                'video' => $video
+                'video' => $video,
+                'planet' => $planet,
+                'planetsList' => $planets
             ]
         );
     }
