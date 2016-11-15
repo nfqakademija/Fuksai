@@ -38,7 +38,7 @@ class ImportVideosCommand extends ContainerAwareCommand
     {
         $planetNames = $this->getPlanets();
 
-        foreach ($planetNames as $planetName){
+        foreach ($planetNames as $planetName) {
             $video = $this->getVideo($planetName);
 
             if ($video == null) {
@@ -71,7 +71,7 @@ class ImportVideosCommand extends ContainerAwareCommand
 
         $planetsNames = [];
 
-        foreach ($planet as $planets){
+        foreach ($planet as $planets) {
             $planetsNames[] = $planets['name'];
         }
 
@@ -85,7 +85,8 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getVideo($planetName)
     {
-        $url = $this->getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
+        $url = $this->getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L'.
+        '4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
 
         if (isset($url['items'][0])) {
                 $videoid = $url['items'][0]['id']['videoId'];
@@ -117,8 +118,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      *
      * @return Video
      */
-
-    private function createVideos($key , $url)
+    private function createVideos($key, $url)
     {
         $video = new Video();
         $video
@@ -131,7 +131,6 @@ class ImportVideosCommand extends ContainerAwareCommand
     /**
      * @param Video $videos
      */
-
     private function insertVideos(Video $videos)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
@@ -154,7 +153,7 @@ class ImportVideosCommand extends ContainerAwareCommand
         $video = $em->getRepository('AppBundle:Video')
             ->findOneBykeyName($name);
 
-        if (!empty($video)){
+        if (!empty($video)) {
             $video->setpath($url);
 
             return $video;

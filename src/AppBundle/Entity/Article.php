@@ -70,54 +70,68 @@ class Article
         return $this->url;
     }
     /**
- * @return mixed
- */
-public function getTitle()
-{
-    return $this->title;
-}/**
- * @param mixed $title
- */
-public function setTitle($title)
-{
-    $this->title = $title;
-}/**
- * @return mixed
- */
-public function getType()
-{
-    return $this->type;
-}/**
- * @param mixed $type
- */
-public function setType($type)
-{
-    $this->type = $type;
-}/**
- * @return mixed
- */
-public function getExplanation()
-{
-    return $this->explanation;
-}/**
- * @param mixed $explanation
- */
-public function setExplanation($explanation)
-{
-    $this->explanation = $explanation;
-}/**
- * @return mixed
- */
-public function getDate()
-{
-    return $this->date;
-}/**
- * @param mixed $date
- */
-public function setDate($date)
-{
-    $this->date = $date;
-}
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
+    /**
+     * @param mixed $explanation
+     */
+    public function setExplanation($explanation)
+    {
+        $this->explanation = $explanation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
 
     /**
      * @return mixed
@@ -134,6 +148,4 @@ public function setDate($date)
     {
         $this->id = $id;
     }
-
-
 }
