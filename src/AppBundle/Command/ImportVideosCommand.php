@@ -144,7 +144,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function checkExists($name, $url)
     {
-        $em = $this->getContainer()->get('doctrine')g
+        $em = $this->getContainer()->get('doctrine')
             ->getManager();
 
         $video = $em->getRepository('AppBundle:Video')
