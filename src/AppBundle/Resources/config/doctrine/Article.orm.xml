@@ -14,11 +14,6 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="type" type="string" column="type" length="255" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
     <field name="description" type="string" column="explanation" length="255" nullable="false">
       <options>
         <option name="fixed"/>

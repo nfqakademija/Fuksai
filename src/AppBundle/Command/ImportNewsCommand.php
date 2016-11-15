@@ -10,11 +10,13 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\Planet;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\PlanetArticle;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use AppBundle\Repository\PlanetRepository;
 use AppBundle\Repository\ArticleRepository;
+use AppBundle\Repository\PlanetArticleRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -43,10 +45,21 @@ class ImportNewsCommand extends ContainerAwareCommand
         // all news got using API
         $news = $this->getAllNews();
 
-        $keyword = "planet";
+        // array of astronomical keywords
+        $keywords = [];
+        $keywords[0] = "earth";
+        $keywords[1] = "sun";
+        $keywords[2] = "moon";
+        $keywords[3] = "satellite";
+        $keywords[4] = "meteor";
+        $keywords[5] = "meteorite";
+        $keywords[6] = "meteoroid";
+        $keywords[7] = "moon";
+        $keywords[8] = "planet";
+        $keywords[9] = "astronomy";
 
-        // astronomical news got using a keyword
-        $astronomicalNews = $this->getAstronomicalNews($news, $keyword);
+        // astronomical news got using the keywords
+        $astronomicalNews = $this->getAstronomicalNews($news, $keywords);
 
         /* if found zero astronomical articles then insert other articles to the
         database, otherwise insert astronomical articles */
@@ -54,7 +67,7 @@ class ImportNewsCommand extends ContainerAwareCommand
 
             foreach ($news as $article) {
 
-                $newArticle = $this->createArticle("", $article);
+                $newArticle = $this->checkIfArticleExistAndCreateOne($article);
                 $this->insertNewArticleToDB($newArticle);
 
                 $output->writeln('Inserting "' . $article['title'] . '" article...');
@@ -62,25 +75,35 @@ class ImportNewsCommand extends ContainerAwareCommand
             }
         } else {
 
-            // all planets names got from our DB
-            $planetsNames = $this->getPlanetsNames();
+            foreach ($astronomicalNews as $article) {
 
-            foreach ($planetsNames as $planetName) {
-
-                // article related to given planet name
-                $article = $this->getArticle($astronomicalNews, $planetName);
-
-                if ($article == null) {
-                    $output->writeln('Could not find article related to: '. $planetName);
-                    continue;
-                }
-
-                $newArticle = $this->checkIfArticleExistAndCreateOne($planetName, $article);
+                $newArticle = $this->checkIfArticleExistAndCreateOne($article);
                 $this->insertNewArticleToDB($newArticle);
 
-                $output->writeln('Inserting "' . $newArticle['title'] . '" article... related to:' . $planetName);
+                $output->writeln('Inserting "' . $article['title'] . '" article...');
+
             }
 
+        }
+
+        // all planets names got from our DB
+        $planetsNames = $this->getPlanetsNames();
+
+        // insert articles related to planet name to database
+        foreach ($planetsNames as $planetName) {
+
+            // article related to given planet name
+            $article = $this->getArticle($news, $planetName);
+
+            if ($article == null) {
+                $output->writeln('Could not find article related to: '. $planetName);
+                continue;
+            }
+
+            $newArticle = $this->checkIfPlanetArticleExistAndCreateOne($planetName, $article);
+            $this->insertNewPlanetArticleToDB($newArticle);
+
+            $output->writeln('Inserting "' . $newArticle['title'] . '" article... related to:' . $planetName);
         }
 
         $output->writeln('All news were inserted!');
@@ -133,19 +156,28 @@ class ImportNewsCommand extends ContainerAwareCommand
 
     /**
      * @param $news
-     * @param $keyword
+     * @param $keywords
      * @return array
      */
-    private function getAstronomicalNews($news, $keyword)
+    private function getAstronomicalNews($news, $keywords)
     {
         $astronomicalNews = [];
 
         foreach ($news as $article) {
 
-            // if found keyword in article's title or description then add that article to astronomicalNews array
-            if (strpos($article['title'], $keyword) !== false || strpos($article['description'], $keyword) !== false) {
-                $astronomicalNews[] = $article;
+            foreach ($keywords as $keyword) {
+
+                // if found keyword in article's title or description then add that article to astronomicalNews array
+                if (preg_match('/\b'.$keyword.'\b/i', $article[''.
+                    'title']) || preg_match('/\b'. $keyword .'\b/i', $article['description'])) {
+                    $astronomicalNews[] = $article;
+
+                    // if found keyword in article then break out from foreach to checck a new article
+                    break;
+                }
+
             }
+
 
         }
 
@@ -155,7 +187,7 @@ class ImportNewsCommand extends ContainerAwareCommand
     /**
      * @param $astronomicalNews
      * @param $planetName
-     * @return null
+     * @return null|array
      */
     private function getArticle($astronomicalNews, $planetName)
     {
@@ -163,10 +195,12 @@ class ImportNewsCommand extends ContainerAwareCommand
         foreach ($astronomicalNews as $article) {
 
             // if found planet name in article's title or description then return that article
-            if (strpos($article['title'], $planetName) !== false || strpos($article[''.
-                'description'], $planetName) !== false) {
+            if (preg_match('/\b'.$planetName.'\b/i', $article[''.
+                'title']) || preg_match('/\b'. $planetName .'\b/i', $article['description'])) {
+
                 return $article;
             }
+
 
         }
 
@@ -187,11 +221,10 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $name
      * @param $article
      * @return Article
      */
-    private function createArticle($name, $article)
+    private function createArticle($article)
     {
         $newArticle = new Article();
 
@@ -201,7 +234,6 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newArticle->setUrl($article['url']);
         $newArticle->setUrlToImage($article['urlToImage']);
         $newArticle->setPublishedAt($article['publishedAt']);
-        $newArticle->setType($name);
 
         return $newArticle;
     }
@@ -219,15 +251,74 @@ class ImportNewsCommand extends ContainerAwareCommand
 
     /**
      * @param $name
+     * @param $planetArticle
+     * @return PlanetArticle
+     */
+    private function createPlanetArticle($name, $planetArticle)
+    {
+        $newPlanetArticle = new PlanetArticle();
+
+        $newPlanetArticle->setAuthor($planetArticle['author']);
+        $newPlanetArticle->setTitle($planetArticle['title']);
+        $newPlanetArticle->setDescription($planetArticle['description']);
+        $newPlanetArticle->setUrl($planetArticle['url']);
+        $newPlanetArticle->setUrlToImage($planetArticle['urlToImage']);
+        $newPlanetArticle->setPublishedAt($planetArticle['publishedAt']);
+        $newPlanetArticle->setType($name);
+
+        return $newPlanetArticle;
+    }
+
+    /**
+     * @param PlanetArticle $newPlanetArticle
+     */
+    private function insertNewPlanetArticleToDB(PlanetArticle $newPlanetArticle)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em->persist($newPlanetArticle);
+        $em->flush();
+
+    }
+
+    /**
      * @param $newArticle
      * @return Article
      */
-    private function checkIfArticleExistAndCreateOne($name, $newArticle)
+    private function checkIfArticleExistAndCreateOne($newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         // article got by name
         $oldArticle = $em->getRepository('AppBundle:Article')
+            ->findOneByTitle($newArticle['title']);
+
+        // if old article is not empty then set new values to the columns from new article
+        if (!empty($oldArticle)) {
+            $oldArticle->setAuthor($newArticle['author']);
+            $oldArticle->setTitle($newArticle['title']);
+            $oldArticle->setDescription($newArticle['description']);
+            $oldArticle->setUrl($newArticle['url']);
+            $oldArticle->setUrlToImage($newArticle['urlToImage']);
+            $oldArticle->setPublishedAt($newArticle['publishedAt']);
+
+            return $oldArticle;
+        }
+
+        // otherwise create new article
+        return $this->createArticle($newArticle);
+    }
+
+    /**
+     * @param $name
+     * @param $newArticle
+     * @return PlanetArticle
+     */
+    private function checkIfPlanetArticleExistAndCreateOne($name, $newArticle)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        // article got by name
+        $oldArticle = $em->getRepository('AppBundle:PlanetArticle')
             ->findOneByType($name);
 
         // if old article is not empty then set new values to the columns from new article
@@ -243,6 +334,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         }
 
         // otherwise create new article
-        return $this->createArticle($name, $newArticle);
+        return $this->createPlanetArticle($name, $newArticle);
     }
+
 }

@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Article
+ * PlanetArticle
  *
- * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
+ * @ORM\Table(name="planet_article")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetArticleRepository")
  */
-class Article
+class PlanetArticle
 {
     /**
      * @var integer
@@ -62,6 +62,13 @@ class Article
      */
     private $publishedAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $type;
+
     //                      GETTERS AND SETTERS
 
     /**
@@ -100,14 +107,11 @@ class Article
      * Set url
      *
      * @param string $url
-     *
-     * @return Article
-     */
+=     */
     public function setUrl($url)
     {
         $this->url = $url;
 
-        return $this;
     }
 
     /**
@@ -134,6 +138,22 @@ class Article
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
@@ -184,3 +204,4 @@ class Article
         return $this->id;
     }
 }
+
