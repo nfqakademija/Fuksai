@@ -23,7 +23,8 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:import:mars-photos');
+            ->setName('app:import:mars-photos')
+            ->setDescription('Import mars rover photos');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

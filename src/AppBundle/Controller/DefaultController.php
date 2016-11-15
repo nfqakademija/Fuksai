@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Command\AsteroidsImportCommand;
+use AppBundle\Command\ImportAsteroidsCommand;
 use AppBundle\Command\ImportMarsPhotosCommand;
 use AppBundle\Command\ImportISSPosition ;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

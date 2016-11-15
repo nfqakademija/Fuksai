@@ -22,11 +22,14 @@ class ImportISSPositionCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:import:iss');
+            ->setName('app:import:iss')
+            ->setDescription('Imports and calculates ISS position');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('Starting to import International Space Station position');
+
         $data = $this->getData('https://api.wheretheiss.at/v1/satellites/25544');
 
         $lat = $data['latitude'];
@@ -36,14 +39,26 @@ class ImportISSPositionCommand extends ContainerAwareCommand
             'https://maps.googleapis.com/maps/api/geocode/json?latlng='
             . $lat . ',' . $long.'&key=AIzaSyBQBUCFjc27X6txm90las2YFe_bNeDDBRw');
 
-        $iss = new ISS();
+        $em = $this->getEntityManager();
+
+        $iss = $em->getRepository('AppBundle:ISS')->find(1);
 
         $iss->setLatitude($lat);
         $iss->setLongitude($long);
-        $iss->setCountry($position['results']['adress_components'][3]['long_name']);
         $iss->setMapUrl('https://www.google.com/maps/@'. $lat . ',' .$long. ',10z');
 
-        $this->save($iss);
+        if(isset($position['results'][0]))
+        {
+            $iss->setCountry($position['results'][0]['address_components'][0]['long_name']);
+
+        }
+        else
+        {
+            $iss->setCountry('No country');
+        }
+        $em->flush();
+
+        $output->writeln('Import successful!');
     }
 
     public function getData($request)
@@ -54,18 +69,16 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         return $data;
     }
 
-    private function save(ISS $iss)
-    {
-        $em = $this->getEntityManager();
-        $em->persist($iss);
-        $em->flush();
-    }
-
     private function getEntityManager()
     {
         return $this
             ->getContainer()
             ->get('doctrine')
             ->getManager();
+    }
+
+    private function clearTable()
+    {
+
     }
 }
