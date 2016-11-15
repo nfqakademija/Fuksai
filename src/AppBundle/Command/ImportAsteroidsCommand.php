@@ -1,6 +1,8 @@
 <?php
 
 namespace AppBundle\Command;
+use AppBundle\Entity\Asteroid;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use AppBundle\Repository\AsteroidRepository;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,13 +14,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Date: 16.11.12
  * Time: 14.32
  */
+
+/*
+ * Class ImportAsteroidsCommand
+ * @package AppBundle\Command
+ */
 class ImportAsteroidsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
             ->setName('app:import:asteroids')
-            ->setDefinition('Import incoming asteroids');
+            ->setDescription('Import incoming asteroids');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -31,6 +38,8 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
 
         $count = $data['element_count'];
 
+        $em = $this->getEntityManager();
+
         for ($i = 0; $i < $count; $i++)
         {
             $asteroid = new \AppBundle\Entity\Asteroid();
@@ -39,9 +48,13 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
                 ->setDiameter($data['near_earth_objects'][$date][$i]['estimated_diameter']['meters']['estimated_diameter_max'])
                 ->setVelocity($data['near_earth_objects'][$date][$i]['close_approach_data'][0]['relative_velocity']['kilometers_per_hour'])
                 ->setMissDistance($data['near_earth_objects'][$date][$i]['close_approach_data'][0]['miss_distance']['kilometers']);
-            dump($asteroid);
-            exit;
+
+            $this->save($em, $asteroid);
         }
+
+        $em->flush();
+
+        $output->writeln('Import successful!');
     }
 
     public function getData($request)
@@ -50,5 +63,18 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
         $data = json_decode($json, true);
 
         return $data;
+    }
+
+    private function save(EntityManager $manager,Asteroid $asteroid)
+    {
+        $manager->persist($asteroid);
+    }
+
+    private function getEntityManager()
+    {
+        return $this
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
     }
 }
