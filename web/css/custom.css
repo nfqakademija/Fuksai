@@ -1,3 +1,7 @@
+.header #main {
+    background-image: url('../img/headers/header.jpg');
+}
+
 .btn-space {
     margin-bottom: -50px;
 }

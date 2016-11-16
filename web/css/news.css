@@ -1,0 +1,69 @@
+/* Home Page Carousel */
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.carousel-caption {
+    height: 400px;
+}
+
+.carousel-caption h2 {
+    font-family: 'Bevan', cursive;
+    text-shadow: 4px 4px 4px #000;
+    font-size: 70px;
+    background-color:rgba(0, 0, 0, 0.5);
+
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+    font-size: 100px;
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 50px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+

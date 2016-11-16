@@ -35,44 +35,71 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <header>
+    <header id="main">
         <div class="header-content">
             <div class="header-content-inner">
                 <h1 id="home-header">Sky above us</h1>
             </div>
-
-
             <div class="btn-space">
                 <h2>Astronomy for everyone!</h2>
                 <a href="#news" class="btn btn-primary btn-xl page-scroll">Explore the universe with us!</a>
             </div>
         </div>
-
-
     </header>
 
     <div class="container">
-        <hr class="primary">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <hr class="primary">
+            </div>
+        </div>
     </div>
 
-    <!-- show first article from news list -->
-    <section class="bg-primary" id="news">
-        <div class="container-fluid">
-            <a href="{{ path('show_article', {'articleID': news[0].id}) }}" class="portfolio-box">
-                <img src="{{ news[0].urlToImage }}" class="img-responsive" alt="">
-                <div class="portfolio-box-caption">
-                    <div class="portfolio-box-caption-content">
-                        <div class="project-category text-faded">
-                            {{ news[0].title }}
-                        </div>
-                        <div class="project-name">
-                            {{ news[0].description }}
-                        </div>
-                    </div>
+    <!-- Header Carousel -->
+    <header id="article" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#article" data-slide-to="0" class="active"></li>
+            <li data-target="#article" data-slide-to="1"></li>
+            <li data-target="#article" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" id="news">
+            <div class="item active">
+                <a href="{{ path('show_article', {'articleID': news[0].id}) }}">
+                    <div class="fill" style="background-image:url({{ news[0].urlToImage }}); "></div>
+                </a>
+                <div class="carousel-caption">
+                    <h2>{{news[0].title }}</h2>
                 </div>
-            </a>
+            </div>
+            <div class="item">
+                <a href="{{ path('show_article', {'articleID': news[1].id}) }}">
+                    <div class="fill" style="background-image:url({{ news[1].urlToImage }});"></div>
+                </a>
+                <div class="carousel-caption">
+                    <h2>{{news[1].title }}</h2>
+                </div>
+            </div>
+            <div class="item">
+                <a href="{{ path('show_article', {'articleID': news[2].id}) }}">
+                    <div class="fill" style="background-image:url({{ news[2].urlToImage }});"></div>
+                </a>
+                <div class="carousel-caption">
+                    <h2>{{news[2].title }}</h2>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#article" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#article" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
 
     <section id="features">
         <div class="container">
