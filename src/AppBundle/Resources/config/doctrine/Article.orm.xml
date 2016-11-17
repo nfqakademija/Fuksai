@@ -19,12 +19,12 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="explanation" type="string" column="explanation" length="255" nullable="false">
+    <field name="explanation" type="text" column="explanation" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="date" type="string" column="date" length="255" nullable="false">
+    <field name="date" type="datetime" column="date" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

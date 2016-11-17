@@ -33,7 +33,6 @@ class ImportVideosCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $planetNames = $this->getPlanets();
@@ -42,7 +41,7 @@ class ImportVideosCommand extends ContainerAwareCommand
             $video = $this->getVideo($planetName);
 
             if ($video == null) {
-                $output->writeln('Didn\'t find video: '. $planetName);
+                $output->writeln('Did not find video: '. $planetName);
                 continue;
             }
 
@@ -98,10 +97,8 @@ class ImportVideosCommand extends ContainerAwareCommand
 
     /**
      * @param $url
-     *
-     * @return array
+     * @return mixed
      */
-
     private function getData($url)
     {
         $json = file_get_contents($url);

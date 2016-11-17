@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * Article
@@ -30,12 +31,12 @@ class Article
     private $type;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $explanation;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */private $date;
 
     /**
@@ -70,7 +71,7 @@ class Article
         return $this->url;
     }
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -78,7 +79,7 @@ class Article
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
     public function setTitle($title)
     {
@@ -86,7 +87,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getType()
     {
@@ -94,7 +95,7 @@ class Article
     }
 
     /**
-     * @param mixed $type
+     * @param string $type
      */
     public function setType($type)
     {
@@ -102,7 +103,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getExplanation()
     {
@@ -110,7 +111,7 @@ class Article
     }
 
     /**
-     * @param mixed $explanation
+     * @param string $explanation
      */
     public function setExplanation($explanation)
     {
@@ -118,7 +119,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getDate()
     {
@@ -126,7 +127,7 @@ class Article
     }
 
     /**
-     * @param mixed $date
+     * @param DateTime $date
      */
     public function setDate($date)
     {
@@ -134,7 +135,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -142,7 +143,7 @@ class Article
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
      */
     public function setId($id)
     {
