@@ -83,9 +83,4 @@ class ImportISSPositionCommand extends ContainerAwareCommand
             ->get('doctrine')
             ->getManager();
     }
-
-    private function clearTable()
-    {
-
-    }
 }
