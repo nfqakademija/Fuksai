@@ -46,7 +46,6 @@ class ImportNewsCommand extends ContainerAwareCommand
 
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomicalNews as $astronomicalArticle) {
-
             // if article has no multimedia or author, then check next article in an array
             if ($astronomicalArticle['multimedia'] == null || $astronomicalArticle['byline'] == null) {
                 continue;
@@ -67,7 +66,6 @@ class ImportNewsCommand extends ContainerAwareCommand
 
         // insert astronomical articles related to planet name to database
         foreach ($planetsNames as $planetName) {
-
             // article related to given planet name
             $planetArticles = $this->getPlanetsArticles($planetName);
 
@@ -78,7 +76,6 @@ class ImportNewsCommand extends ContainerAwareCommand
 
             // go through all got planet articles, check if article exists in DB and create one if it does not exist
             foreach ($planetArticles as $planetArticle) {
-
                 // if article has no multimedia or author, then check next article in an array
                 if ($planetArticle['multimedia'] == null || $planetArticle['byline'] == null) {
                     continue;
@@ -151,7 +148,6 @@ class ImportNewsCommand extends ContainerAwareCommand
 
         // check if we got any result, otherwise return null
         if (isset($result['response']['docs'])) {
-
             return $result['response']['docs'];
         }
 
@@ -189,7 +185,6 @@ class ImportNewsCommand extends ContainerAwareCommand
 
         // check if we got any result, otherwise return null
         if (isset($result['response']['docs'])) {
-
             return $result['response']['docs'];
         }
 
@@ -256,7 +251,6 @@ class ImportNewsCommand extends ContainerAwareCommand
             ->findOneByarticle_id($newArticle['_id']);
 
         if (!empty($oldArticle)) {
-
             return true;
         }
 

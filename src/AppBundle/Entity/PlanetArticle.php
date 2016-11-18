@@ -119,7 +119,6 @@ class PlanetArticle
     public function setUrl($url)
     {
         $this->url = $url;
-
     }
 
     /**
