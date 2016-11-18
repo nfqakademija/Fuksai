@@ -1,10 +1,9 @@
-AppBundle\Entity\PlanetArticle:
+AppBundle\Entity\Article:
       Article1:
           description: Is only one black h
           urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           url: True
           title: True
-          planet: Venus
           publishDate: True
           author: True
           articleId: 0
@@ -13,7 +12,6 @@ AppBundle\Entity\PlanetArticle:
           urlToImage: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
           url: True
           title: True
-          planet: Saturn
           publishDate: True
           author: True
           articleId: 1
@@ -22,7 +20,6 @@ AppBundle\Entity\PlanetArticle:
           urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           url: True
           title: True
-          planet: Mars
           publishDate: True
           author: True
           articleId: 2

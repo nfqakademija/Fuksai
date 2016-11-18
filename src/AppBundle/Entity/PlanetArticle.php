@@ -17,8 +17,16 @@ class PlanetArticle
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")     */
+     * @ORM\Column(type="integer")
+     */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="article_id", type="string")
+     */
+    private $articleId;
 
     /**
      * @var string
@@ -44,14 +52,14 @@ class PlanetArticle
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="urlToImage", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $urlToImage;
 
@@ -60,14 +68,14 @@ class PlanetArticle
      *
      * @ORM\Column(type="string")
      */
-    private $publishedAt;
+    private $publishDate;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
      */
-    private $type;
+    private $planet;
 
     //                      GETTERS AND SETTERS
 
@@ -88,7 +96,7 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $author
+     * @param string $author
      */
     public function setAuthor($author)
     {
@@ -96,7 +104,7 @@ class PlanetArticle
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getAuthor()
     {
@@ -125,7 +133,7 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
     public function setTitle($title)
     {
@@ -133,7 +141,7 @@ class PlanetArticle
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -141,23 +149,23 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $type
+     * @param string $planet
      */
-    public function setType($type)
+    public function setPlanet($planet)
     {
-        $this->type = $type;
+        $this->planet = $planet;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getType()
+    public function getPlanet()
     {
-        return $this->type;
+        return $this->planet;
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -165,7 +173,7 @@ class PlanetArticle
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -173,19 +181,19 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $publishedAt
+     * @param mixed $publishDate
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishDate($publishDate)
     {
-        $this->publishedAt = $publishedAt;
+        $this->publishDate = $publishDate;
     }
 
     /**
      * @return mixed
      */
-    public function getPublishedAt()
+    public function getPublishDate()
     {
-        return $this->publishedAt;
+        return $this->publishDate;
     }
 
     /**
@@ -203,5 +211,20 @@ class PlanetArticle
     {
         return $this->id;
     }
-}
 
+    /**
+     * @return string
+     */
+    public function getArticleId(): string
+    {
+        return $this->articleId;
+    }
+
+    /**
+     * @param string $articleId
+     */
+    public function setArticleId(string $articleId)
+    {
+        $this->articleId = $articleId;
+    }
+}

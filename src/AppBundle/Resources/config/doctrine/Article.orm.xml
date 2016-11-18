@@ -14,12 +14,12 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="description" type="string" column="explanation" length="255" nullable="false">
+    <field name="description" type="string" column="description" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="publishedAt" type="string" column="publishedAt" length="255" nullable="false">
+    <field name="publishDate" type="string" column="publishDate" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
@@ -30,6 +30,11 @@
       </options>
     </field>
     <field name="author" type="string" column="author" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="articleId" type="string" column="articleId" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

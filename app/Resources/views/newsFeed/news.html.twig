@@ -49,10 +49,8 @@
                     <!-- Title -->
                     <h1>{{ article.title }}</h1>
 
-                    <!-- Author -->
-                    <p>
-                        by {{ article.author }}
-                    </p>
+                    <!-- Author and Publish Date -->
+                    <h6> {{ article.author }} | Published: {{ article.publishDate }} </h6>
 
                     <!-- Preview Image -->
                     <a href="{{ path('show_article', {'articleID': article.id}) }}">

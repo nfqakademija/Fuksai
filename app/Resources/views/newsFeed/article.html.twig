@@ -47,23 +47,20 @@
                 <!-- Title -->
                 <h1>{{ article.title }}</h1>
 
-                <!-- Author -->
-                <p>
-                    by {{ article.author }}
-                </p>
+                <!-- Author and Publish Date -->
+                <h6> {{ article.author }} | Published: {{ article.publishDate }} </h6>
 
-                <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="{{ article.urlToImage }}" alt="">
+                <img class="img-responsive" src="{{ article.urlToImage }}" alt="" >
 
                 <hr>
 
                 <!-- Post Content -->
                 <p>{{ article.description }}</p>
-                <p> Full text: <br/>
+                <p> <i> This article originally appeared on</i>
                     <a href={{ article.url }}>
-                        {{ article.url }}
+                        The New York Times.
                     </a>
                 </p>
 

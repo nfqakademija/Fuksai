@@ -17,8 +17,16 @@ class Article
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")     */
+     * @ORM\Column(type="integer")
+     */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="article_id", type="string")
+     */
+    private $articleId;
 
     /**
      * @var string
@@ -44,23 +52,23 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="urlToImage", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $urlToImage;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */
-    private $publishedAt;
+    private $publishDate;
 
     //                      GETTERS AND SETTERS
 
@@ -81,7 +89,7 @@ class Article
     }
 
     /**
-     * @param mixed $author
+     * @param string $author
      */
     public function setAuthor($author)
     {
@@ -89,7 +97,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getAuthor()
     {
@@ -97,17 +105,11 @@ class Article
     }
 
     /**
-     * Set url
-     *
      * @param string $url
-     *
-     * @return Article
      */
     public function setUrl($url)
     {
         $this->url = $url;
-
-        return $this;
     }
 
     /**
@@ -121,7 +123,7 @@ class Article
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
     public function setTitle($title)
     {
@@ -129,7 +131,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -137,7 +139,7 @@ class Article
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -145,7 +147,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -153,19 +155,19 @@ class Article
     }
 
     /**
-     * @param mixed $publishedAt
+     * @param mixed $publishDate
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishDate($publishDate)
     {
-        $this->publishedAt = $publishedAt;
+        $this->publishDate = $publishDate;
     }
 
     /**
      * @return mixed
      */
-    public function getPublishedAt()
+    public function getPublishDate()
     {
-        return $this->publishedAt;
+        return $this->publishDate;
     }
 
     /**
@@ -182,5 +184,21 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleId(): string
+    {
+        return $this->articleId;
+    }
+
+    /**
+     * @param string $articleId
+     */
+    public function setArticleId(string $articleId)
+    {
+        $this->articleId = $articleId;
     }
 }

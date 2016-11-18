@@ -25,13 +25,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportNewsCommand extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
             ->setName('app:import:news')
             ->setDescription('Import news.')
-            ->setHelp('This command finds and imports news in the website.');
+            ->setHelp('This command finds and imports astronomical news in the website.');
     }
 
     /**
@@ -42,68 +41,59 @@ class ImportNewsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        // all news got using API
-        $news = $this->getAllNews();
+        // astronomical news got using API
+        $astronomicalNews = $this->getArticles();
 
-        // array of astronomical keywords
-        $keywords = [];
-        $keywords[0] = "earth";
-        $keywords[1] = "sun";
-        $keywords[2] = "moon";
-        $keywords[3] = "satellite";
-        $keywords[4] = "meteor";
-        $keywords[5] = "meteorite";
-        $keywords[6] = "meteoroid";
-        $keywords[7] = "moon";
-        $keywords[8] = "planet";
-        $keywords[9] = "astronomy";
+        // go through all got astronomical news, check if article exists in DB and create one if it does not exist
+        foreach ($astronomicalNews as $astronomicalArticle) {
 
-        // astronomical news got using the astronomical keywords
-        $astronomicalNews = $this->getAstronomicalNews($news, $keywords);
-
-        /* if found zero astronomical articles then insert other articles to the
-        database, otherwise insert astronomical articles */
-        if ($astronomicalNews == []) {
-
-            foreach ($news as $article) {
-
-                $newArticle = $this->checkIfArticleExistAndCreateOne($article);
-                $this->insertNewArticleToDB($newArticle);
-
-                $output->writeln('Inserting "' . $article['title'] . '" article...');
-
-            }
-        } else {
-
-            foreach ($astronomicalNews as $article) {
-
-                $newArticle = $this->checkIfArticleExistAndCreateOne($article);
-                $this->insertNewArticleToDB($newArticle);
-
-                $output->writeln('Inserting "' . $article['title'] . '" article...');
-
+            // if article has no multimedia or author, then check next article in an array
+            if ($astronomicalArticle['multimedia'] == null || $astronomicalArticle['byline'] == null) {
+                continue;
             }
 
+            if ($this->checkArticleExistence($astronomicalArticle)) {
+                $output->writeln('There is the same article -'.
+                    '"' . $astronomicalArticle['headline']['main'] . '" in database...');
+            } else {
+                $newArticle = $this->createArticle($astronomicalArticle);
+                $this->insertNewArticleToDB($newArticle);
+                $output->writeln('Inserting "' . $newArticle->getTitle() . '" article...');
+            }
         }
 
         // all planets names got from our DB
         $planetsNames = $this->getPlanetsNames();
 
-        // insert articles related to planet name to database
+        // insert astronomical articles related to planet name to database
         foreach ($planetsNames as $planetName) {
 
             // article related to given planet name
-            $article = $this->getArticle($news, $planetName);
+            $planetArticles = $this->getPlanetsArticles($planetName);
 
-            if ($article == null) {
-                $output->writeln('Could not find article related to: '. $planetName);
+            if ($planetArticles == null) {
+                $output->writeln('Could not find articles related to: '. $planetName);
                 continue;
             }
 
-            $newArticle = $this->checkIfPlanetArticleExistAndCreateOne($planetName, $article);
-            $this->insertNewPlanetArticleToDB($newArticle);
+            // go through all got planet articles, check if article exists in DB and create one if it does not exist
+            foreach ($planetArticles as $planetArticle) {
 
-            $output->writeln('Inserting "' . $newArticle['title'] . '" article... related to:' . $planetName);
+                // if article has no multimedia or author, then check next article in an array
+                if ($planetArticle['multimedia'] == null || $planetArticle['byline'] == null) {
+                    continue;
+                }
+
+                if ($this->checkPlanetArticleExistence($planetArticle)) {
+                    $output->writeln('There is the same planet "'.$planetName.'" article -'.
+                        '"' . $planetArticle['headline']['main'] . '" in database...');
+                } else {
+                    $newPlanetArticle = $this->createPlanetArticle($planetName, $planetArticle);
+                    $this->insertNewArticleToDB($newPlanetArticle);
+                    $output->writeln('Inserting "' . $newPlanetArticle->getTitle() . '" planet article'.
+                        ' related to: '. $planetName .'...');
+                }
+            }
         }
 
         $output->writeln('All news were inserted!');
@@ -134,90 +124,76 @@ class ImportNewsCommand extends ContainerAwareCommand
     /**
      * @return null|array
      */
-    private function getAllNews()
+    private function getArticles()
     {
+        // The New York Times api key
+        $api_key = '0c3bb1800a1b4895ac8ae744d010d5ad';
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        //$response = $this->getData("https://newsapi.org/v1/articles?source=new-scientist&sortBy".
-        //    "=top&apiKey=c869ce160f3d4013b365336a2f9fa3f3");
+        $query = array(
+            "api-key" => $api_key,
+            "q" => "astronomy",
+            "fq" => "news_desk:(\"Science\")",
+            "sort" => "newest",
+            "fl" => "_id,headline,snippet,lead_paragraph,web_url,pub_date,byline,multimedia"
+        );
 
-        $response = $this->getData("https://newsapi.org/v1/articles?source=new-scientist&sortBy=".
-            "top&apiKey=c869ce160f3d4013b365336a2f9fa3f3");
+        // get astronomical news
+        curl_setopt(
+            $curl,
+            CURLOPT_URL,
+            "https://api.nytimes.com/svc/search/v2/articlesearch.json" . "?" . http_build_query($query)
+        );
 
-        if (isset($response['articles'])) {
+        // result in array from json
+        $result = json_decode(curl_exec($curl), true);
 
-            return $response['articles'];
+        // check if we got any result, otherwise return null
+        if (isset($result['response']['docs'])) {
+
+            return $result['response']['docs'];
         }
-
-
 
         return null;
-
     }
 
     /**
-     * @param $news
-     * @param $keywords
-     * @return array
-     */
-    private function getAstronomicalNews($news, $keywords)
-    {
-        $astronomicalNews = [];
-
-        foreach ($news as $article) {
-
-            foreach ($keywords as $keyword) {
-
-                // if found keyword in article's title or description then add that article to astronomicalNews array
-                if (preg_match('/\b'.$keyword.'\b/i', $article[''.
-                    'title']) || preg_match('/\b'. $keyword .'\b/i', $article['description'])) {
-                    $astronomicalNews[] = $article;
-
-                    // if found keyword in article then break out from foreach to checck a new article
-                    break;
-                }
-
-            }
-
-
-        }
-
-        return $astronomicalNews;
-    }
-
-    /**
-     * @param $astronomicalNews
      * @param $planetName
      * @return null|array
      */
-    private function getArticle($astronomicalNews, $planetName)
+    private function getPlanetsArticles($planetName)
     {
+        // The New York Times api key
+        $api_key = '0c3bb1800a1b4895ac8ae744d010d5ad';
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        foreach ($astronomicalNews as $article) {
+        $query = array(
+            "api-key" => $api_key,
+            "q" => $planetName,
+            "fq" => "news_desk:(\"Science\")",
+            "sort" => "newest",
+            "fl" => "_id,headline,snippet,lead_paragraph,web_url,pub_date,byline,multimedia"
+        );
 
-            // if found planet name in article's title or description then return that article
-            if (preg_match('/\b'.$planetName.'\b/i', $article[''.
-                'title']) || preg_match('/\b'. $planetName .'\b/i', $article['description'])) {
+        // get astronomical news
+        curl_setopt(
+            $curl,
+            CURLOPT_URL,
+            "https://api.nytimes.com/svc/search/v2/articlesearch.json" . "?" . http_build_query($query)
+        );
 
-                return $article;
-            }
+        // result in array from json
+        $result = json_decode(curl_exec($curl), true);
 
+        // check if we got any result, otherwise return null
+        if (isset($result['response']['docs'])) {
 
+            return $result['response']['docs'];
         }
 
         return null;
-
-    }
-
-    /**
-     * @param $url
-     * @return mixed
-     */
-    private function getData($url)
-    {
-        $json = file_get_contents($url);
-        $data = json_decode($json, true);
-
-        return $data;
     }
 
     /**
@@ -228,113 +204,81 @@ class ImportNewsCommand extends ContainerAwareCommand
     {
         $newArticle = new Article();
 
-        $newArticle->setAuthor($article['author']);
-        $newArticle->setTitle($article['title']);
-        $newArticle->setDescription($article['description']);
-        $newArticle->setUrl($article['url']);
-        $newArticle->setUrlToImage($article['urlToImage']);
-        $newArticle->setPublishedAt($article['publishedAt']);
+        $newArticle->setAuthor($article['byline']['original']);
+        $newArticle->setArticleId($article['_id']);
+        $newArticle->setTitle($article['headline']['main']);
+        $newArticle->setDescription($article['snippet']);
+        $newArticle->setUrl($article['web_url']);
+        $newArticle->setUrlToImage("https://static01.nyt.com/" . $article['multimedia'][1]['url']);
+        $newArticle->setPublishDate($article['pub_date']);
 
         return $newArticle;
     }
 
-    /**
-     * @param Article $newArticle
-     */
-    private function insertNewArticleToDB(Article $newArticle)
+    private function insertNewArticleToDB($newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($newArticle);
         $em->flush();
-
     }
 
     /**
-     * @param $name
+     * @param String $name
      * @param $planetArticle
      * @return PlanetArticle
      */
-    private function createPlanetArticle($name, $planetArticle)
+    private function createPlanetArticle(String $name, $planetArticle)
     {
         $newPlanetArticle = new PlanetArticle();
 
-        $newPlanetArticle->setAuthor($planetArticle['author']);
-        $newPlanetArticle->setTitle($planetArticle['title']);
-        $newPlanetArticle->setDescription($planetArticle['description']);
-        $newPlanetArticle->setUrl($planetArticle['url']);
-        $newPlanetArticle->setUrlToImage($planetArticle['urlToImage']);
-        $newPlanetArticle->setPublishedAt($planetArticle['publishedAt']);
-        $newPlanetArticle->setType($name);
+        $newPlanetArticle->setAuthor($planetArticle['byline']['original']);
+        $newPlanetArticle->setArticleId($planetArticle['_id']);
+        $newPlanetArticle->setTitle($planetArticle['headline']['main']);
+        $newPlanetArticle->setDescription($planetArticle['snippet']);
+        $newPlanetArticle->setUrl($planetArticle['web_url']);
+        $newPlanetArticle->setUrlToImage("https://static01.nyt.com/" . $planetArticle['multimedia'][1]['url']);
+        $newPlanetArticle->setPublishDate($planetArticle['pub_date']);
+        $newPlanetArticle->setPlanet($name);
 
         return $newPlanetArticle;
     }
 
     /**
-     * @param PlanetArticle $newPlanetArticle
-     */
-    private function insertNewPlanetArticleToDB(PlanetArticle $newPlanetArticle)
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $em->persist($newPlanetArticle);
-        $em->flush();
-
-    }
-
-    /**
      * @param $newArticle
-     * @return Article
+     * @return bool
      */
-    private function checkIfArticleExistAndCreateOne($newArticle)
+    private function checkArticleExistence($newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        // article got by name
+        // article got by article id
         $oldArticle = $em->getRepository('AppBundle:Article')
-            ->findOneByTitle($newArticle['title']);
+            ->findOneByarticle_id($newArticle['_id']);
 
-        // if old article is not empty then set new values to the columns from new article
         if (!empty($oldArticle)) {
-            $oldArticle->setAuthor($newArticle['author']);
-            $oldArticle->setTitle($newArticle['title']);
-            $oldArticle->setDescription($newArticle['description']);
-            $oldArticle->setUrl($newArticle['url']);
-            $oldArticle->setUrlToImage($newArticle['urlToImage']);
-            $oldArticle->setPublishedAt($newArticle['publishedAt']);
 
-            return $oldArticle;
+            return true;
         }
 
-        // otherwise create new article
-        return $this->createArticle($newArticle);
+        return false;
     }
 
     /**
-     * @param $name
      * @param $newArticle
-     * @return PlanetArticle
+     * @return bool
      */
-    private function checkIfPlanetArticleExistAndCreateOne($name, $newArticle)
+    private function checkPlanetArticleExistence($newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        // article got by name
+        // article got by article id
         $oldArticle = $em->getRepository('AppBundle:PlanetArticle')
-            ->findOneByType($name);
+            ->findOneByarticle_id($newArticle['_id']);
 
-        // if old article is not empty then set new values to the columns from new article
         if (!empty($oldArticle)) {
-            $oldArticle->setAuthor($newArticle['author']);
-            $oldArticle->setTitle($newArticle['title']);
-            $oldArticle->setDescription($newArticle['description']);
-            $oldArticle->setUrl($newArticle['url']);
-            $oldArticle->setUrlToImage($newArticle['urlToImage']);
-            $oldArticle->setPublishedAt($newArticle['publishedAt']);
-
-            return $oldArticle;
+            return true;
         }
 
-        // otherwise create new article
-        return $this->createPlanetArticle($name, $newArticle);
+        return false;
     }
-
 }
