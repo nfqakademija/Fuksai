@@ -30,6 +30,8 @@ class ImportISSPositionCommand extends ContainerAwareCommand
     {
         $output->writeln('Starting to import International Space Station position');
 
+        $api_key = $this->getContainer()->getParameter('googlemaps_api_key');
+
         $data = $this->getData('https://api.wheretheiss.at/v1/satellites/25544');
 
         $lat = $data['latitude'];
@@ -37,25 +39,30 @@ class ImportISSPositionCommand extends ContainerAwareCommand
 
         $position = $this->getData(
             'https://maps.googleapis.com/maps/api/geocode/json?latlng='
-            . $lat . ',' . $long.'&key=AIzaSyBQBUCFjc27X6txm90las2YFe_bNeDDBRw');
+            . $lat . ',' . $long.'&key=' . $api_key);
 
         $em = $this->getEntityManager();
 
-        $iss = $em->getRepository('AppBundle:ISS')->find(1);
+        if(!is_null($em->getRepository('AppBundle:ISS')->find(1))) {
+            $iss = $em->getRepository('AppBundle:ISS')->find(1);
 
-        $iss->setLatitude($lat);
-        $iss->setLongitude($long);
-        $iss->setMapUrl('https://www.google.com/maps/@'. $lat . ',' .$long. ',10z');
+            $iss->setLatitude($lat);
+            $iss->setLongitude($long);
+            $iss->setMapUrl('https://www.google.com/maps/@' . $lat . ',' . $long . ',10z');
 
-        if(isset($position['results'][0]))
-        {
-            $iss->setCountry($position['results'][0]['address_components'][0]['long_name']);
+            if (isset($position['results'][0])) {
+                $iss->setCountry($position['results'][0]['address_components'][0]['long_name']);
 
+            } else {
+                $iss->setCountry('No country');
+            }
         }
         else
         {
-            $iss->setCountry('No country');
+            $iss = new ISS();
+            $em->persist($iss);
         }
+
         $em->flush();
 
         $output->writeln('Import successful!');

@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 
 use AppBundle\Entity\RoverPhoto;
+use Faker\Provider\DateTime;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,11 +30,18 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $date = '2016-11-10';
+        $output->writeln('Starting Mars Photo Import');
+
+        $api_key = $this->getContainer()->getParameter('nasa_api_key');
+
+        $date = date_create(date('Y-m-d'));
+        date_sub($date, date_interval_create_from_date_string('3 days'));
+        $date = date_format($date, 'Y-m-d');
+
         $data = $this->getData
             ('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date='.
             $date
-            .'&api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
+            .'&api_key=' . $api_key);
 
         foreach ($data['photos'] as $element)
         {
@@ -46,6 +54,8 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
 
             $this->save($image);
         }
+
+        $output->writeln('Import successful!');
     }
 
     public function getData($request)

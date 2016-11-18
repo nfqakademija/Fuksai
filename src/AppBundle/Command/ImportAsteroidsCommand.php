@@ -32,9 +32,11 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
     {
         $output->writeln('Starting to import asteroid list');
 
-        $date = '2016-11-14';
+        $api_key = $this->getContainer()->getParameter('nasa_api_key');
+
+        $date = date('Y-m-d');
         $data = $this->getData('https://api.nasa.gov/neo/rest/v1/feed?start_date='
-            .$date.'&end_date='.$date.'&detailed=false&api_key=Mb2wUHphygVlLVqIGgYG5FBcrTcSYrc9Gb1XzG8s');
+            .$date.'&end_date='.$date.'&detailed=false&api_key=' . $api_key);
 
         $count = $data['element_count'];
 
