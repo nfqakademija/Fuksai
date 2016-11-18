@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * Article
@@ -30,12 +31,12 @@ class Article
     private $type;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $explanation;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */private $date;
 
     /**
@@ -70,57 +71,71 @@ class Article
         return $this->url;
     }
     /**
- * @return mixed
- */
-public function getTitle()
-{
-    return $this->title;
-}/**
- * @param mixed $title
- */
-public function setTitle($title)
-{
-    $this->title = $title;
-}/**
- * @return mixed
- */
-public function getType()
-{
-    return $this->type;
-}/**
- * @param mixed $type
- */
-public function setType($type)
-{
-    $this->type = $type;
-}/**
- * @return mixed
- */
-public function getExplanation()
-{
-    return $this->explanation;
-}/**
- * @param mixed $explanation
- */
-public function setExplanation($explanation)
-{
-    $this->explanation = $explanation;
-}/**
- * @return mixed
- */
-public function getDate()
-{
-    return $this->date;
-}/**
- * @param mixed $date
- */
-public function setDate($date)
-{
-    $this->date = $date;
-}
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
     /**
-     * @return mixed
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
+    /**
+     * @param string $explanation
+     */
+    public function setExplanation($explanation)
+    {
+        $this->explanation = $explanation;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return int
      */
     public function getId()
     {
@@ -128,12 +143,10 @@ public function setDate($date)
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
      */
     public function setId($id)
     {
         $this->id = $id;
     }
-
-
 }

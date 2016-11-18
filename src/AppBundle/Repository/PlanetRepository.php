@@ -22,5 +22,4 @@ class PlanetRepository extends EntityRepository
             ->getQuery()
             ->execute();
     }
-
 }

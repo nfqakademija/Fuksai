@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;

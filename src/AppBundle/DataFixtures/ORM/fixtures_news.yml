@@ -4,16 +4,16 @@ AppBundle\Entity\Article:
           url: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           title: True
           type: True
-          date: True
+          date: <(new \DateTime('2014-04-02'))>
       Article2:
           explanation: was compth
           url: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
           title: True
           type: True
-          date: True
+          date: <(new \DateTime('2015-02-02'))>
       Article3:
           explanation: Is only o
           url: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           title: True
           type: True
-          date: True
+          date: <(new \DateTime('2016-02-02'))>
