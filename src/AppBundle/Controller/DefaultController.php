@@ -30,14 +30,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/list/{planetName}", name="show_videos")
+     * @Route("/list/{planetName}", name="show_videos_by_name")
      * @param $planetName
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function planetsAction($planetName)
     {
         $em = $this->getDoctrine()->getManager();
-        $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
+        $video = $em->getRepository('AppBundle:Video')->findBykeyName($planetName);
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
 
@@ -50,6 +50,28 @@ class DefaultController extends Controller
             ]
         );
     }
+
+    /**
+     * @Route("/channels/{channelName}", name="show_videos_by_channel")
+     * @param $channelName
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function channelAction($channelName)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $video = $em->getRepository('AppBundle:Video')->findBychannelName($channelName);
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+
+
+        return $this->render('planet/planet_channel_list.html.twig',
+            [
+                'video' => $video,
+                'planetsList' => $planets,
+                'channelName' => $channelName
+            ]
+        );
+    }
+
 
     /**
      * @Route("/planets/{planetName}", name="show_planet")
