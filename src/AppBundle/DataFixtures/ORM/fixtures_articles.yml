@@ -4,7 +4,7 @@ AppBundle\Entity\Article:
           urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           url: True
           title: True
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 0
       Article2:
@@ -12,7 +12,7 @@ AppBundle\Entity\Article:
           urlToImage: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
           url: True
           title: True
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 1
       Article3:
@@ -20,6 +20,6 @@ AppBundle\Entity\Article:
           urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
           url: True
           title: True
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 2

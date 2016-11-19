@@ -5,7 +5,7 @@ AppBundle\Entity\PlanetArticle:
           url: True
           title: True
           planet: Venus
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 0
       Article2:
@@ -14,7 +14,7 @@ AppBundle\Entity\PlanetArticle:
           url: True
           title: True
           planet: Saturn
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 1
       Article3:
@@ -23,6 +23,6 @@ AppBundle\Entity\PlanetArticle:
           url: True
           title: True
           planet: Mars
-          publishDate: True
+          publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 2

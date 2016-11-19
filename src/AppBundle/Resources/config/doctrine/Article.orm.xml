@@ -19,11 +19,16 @@
         <option name="fixed"/>
       </options>
     </field>
+<<<<<<< HEAD
     <field name="publishDate" type="string" column="publishDate" length="255" nullable="false">
+=======
+    <field name="explanation" type="text" column="explanation" length="255" nullable="false">
+>>>>>>> develop
       <options>
         <option name="fixed"/>
       </options>
     </field>
+<<<<<<< HEAD
     <field name="urlToImage" type="string" column="urlToImage" length="255" nullable="false">
       <options>
         <option name="fixed"/>
@@ -35,6 +40,9 @@
       </options>
     </field>
     <field name="articleId" type="string" column="articleId" length="255" nullable="false">
+=======
+    <field name="date" type="datetime" column="date" length="255" nullable="false">
+>>>>>>> develop
       <options>
         <option name="fixed"/>
       </options>
