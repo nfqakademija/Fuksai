@@ -104,7 +104,7 @@ class Video
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getChannelName()
     {
@@ -112,7 +112,7 @@ class Video
     }
 
     /**
-     * @param mixed $channelName
+     * @param string $channelName
      */
     public function setChannelName($channelName)
     {

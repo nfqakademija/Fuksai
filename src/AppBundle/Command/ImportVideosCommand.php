@@ -28,7 +28,10 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this->setName('app:import:videos')->setDescription('Import youtube videos for articles.')->setHelp('This command finds and imports videos for all articles.');
+        $this
+            ->setName('app:import:videos')
+            ->setDescription('Import youtube videos for articles.')
+            ->setHelp('This command finds and imports videos for all articles.');
     }
 
     /**
@@ -38,8 +41,8 @@ class ImportVideosCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $planetNames = $this->getPlanets();
-        $channelIDs = $this->getContainer()->getParameter('channel_ids');
-        $channels = $this->getChannels($channelIDs);
+        $channels = $this->getContainer()->getParameter('channel_ids');
+
         foreach($channels as $channelName => $channelurl)
         {
             $videos = $this->getVideo($planetNames, $channelurl);
@@ -159,23 +162,6 @@ class ImportVideosCommand extends ContainerAwareCommand
         {
             return 1;
         }
-    }
-
-    /**
-     * @param $channelIds
-     * @return array
-     */
-    private function getChannels($channelIds)
-    {
-        $channels = array();
-        $channelIds = explode(',', $channelIds);
-        foreach($channelIds as $channelId)
-        {
-            $structure = explode(':', $channelId);
-            $channels[$structure[0]] = $structure[1];
-        }
-
-        return $channels;
     }
 
     /**

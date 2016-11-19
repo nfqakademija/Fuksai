@@ -147,8 +147,7 @@ class DefaultController extends Controller
      */
     public function upcomingEventsAction()
     {
-        $date =date('H:i:s d/m/Y');
-        dump($date);exit;
+//        $date =date('H:i:s d/m/Y');
         return $this->render('services/upcoming_events.html.twig');
     }
 

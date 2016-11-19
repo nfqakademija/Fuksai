@@ -23,6 +23,9 @@ class VideoRepository extends EntityRepository
         $em->flush();
     }
 
+    /**
+     * @param array $videos
+     */
     public function saveMany(array $videos)
     {
         $em = $this->getEntityManager();
