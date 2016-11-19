@@ -226,6 +226,4 @@ class PlanetArticle
     {
         $this->articleId = $articleId;
     }
-
-
 }

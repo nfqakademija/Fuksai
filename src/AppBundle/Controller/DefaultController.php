@@ -87,7 +87,6 @@ class DefaultController extends Controller
 
         // if could find article from Article entity then get from PlanetArticle entity
         if (!$article) {
-
             $article = $em->getRepository('AppBundle:PlanetArticle')->findOneBy(['articleId' => $articleID]);
 
             if (!$article) {
