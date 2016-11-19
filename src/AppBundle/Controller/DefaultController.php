@@ -58,6 +58,7 @@ class DefaultController extends Controller
     public function showPlanet($planetName)
     {
         $em = $this->getDoctrine()->getManager();
+        $planetArticles = $em->getRepository('AppBundle:PlanetArticle')->findBy(['planet' => $planetName]);
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
         $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
@@ -68,7 +69,8 @@ class DefaultController extends Controller
 
             'planet' => $planet,
             'planetsList' => $planets,
-            'video' => $video
+            'video' => $video,
+            'planetArticles' => $planetArticles,
         ]);
     }
 
@@ -81,10 +83,16 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
-        $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
+        $article = $em->getRepository('AppBundle:Article')->findOneBy(['articleId' => $articleID]);
 
+        // if could find article from Article entity then get from PlanetArticle entity
         if (!$article) {
-            throw $this->createNotFoundException('Ups! No article found!');
+
+            $article = $em->getRepository('AppBundle:PlanetArticle')->findOneBy(['articleId' => $articleID]);
+
+            if (!$article) {
+                throw $this->createNotFoundException('Ups! No article found!');
+            }
         }
 
         return $this->render('newsFeed/article.html.twig', [

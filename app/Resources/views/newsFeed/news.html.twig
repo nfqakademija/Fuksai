@@ -53,7 +53,7 @@
                     <h6> {{ article.author }} | Published: {{ article.publishDate }} </h6>
 
                     <!-- Preview Image -->
-                    <a href="{{ path('show_article', {'articleID': article.id}) }}">
+                    <a href="{{ path('show_article', {'articleID': article.articleId}) }}">
                         <img class="img-responsive" src="{{ article.urlToImage }}" alt="">
                     </a>
 

@@ -66,6 +66,28 @@
 
                 <hr>
 
+                <h1 align="center">RELATED ARTICLES</h1>
+
+                <hr>
+
+                <!-- Articles related to the planet -->
+                {% for planetArticle in planetArticles %}
+
+                    <!-- Title -->
+                    <h1>{{ planetArticle.title }}</h1>
+
+                    <!-- Author and Publish Date -->
+                    <h6> {{ planetArticle.author }} | Published: {{ planetArticle.publishDate }} </h6>
+
+                    <!-- Preview Image -->
+                    <a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}">
+                        <img class="img-responsive" src="{{ planetArticle.urlToImage }}" alt="">
+                    </a>
+
+                    <hr>
+
+                {% endfor %}
+
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->

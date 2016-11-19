@@ -67,7 +67,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" id="news">
             <div class="item active">
-                <a href="{{ path('show_article', {'articleID': news[0].id}) }}">
+                <a href="{{ path('show_article', {'articleID': news[0].articleId}) }}">
                     <div class="fill" style="background-image:url({{ news[0].urlToImage }}); "></div>
                 </a>
                 <div class="carousel-caption">
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[1].id}) }}">
+                <a href="{{ path('show_article', {'articleID': news[1].articleId}) }}">
                     <div class="fill" style="background-image:url({{ news[1].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[2].id}) }}">
+                <a href="{{ path('show_article', {'articleID': news[2].articleId}) }}">
                     <div class="fill" style="background-image:url({{ news[2].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
