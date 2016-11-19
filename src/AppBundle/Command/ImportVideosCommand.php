@@ -45,10 +45,12 @@ class ImportVideosCommand extends ContainerAwareCommand
         foreach ($channels as $channelName => $channelurl) {
             $videos = $this->getVideo($planetNames, $channelurl);
             foreach ($videos as $video) {
-                    if ($video == null) {
-                        $output->writeln('Didn\'t find video: ' . $video['name'] . ", in youtube channel: " . $channelName);
-                    }
-//                $data = $this->checkExists($planetName, $video);
+                $data = $this->checkExists($video['name'], $video['path']);
+
+                if ($data == 1) {
+                    $output->writeln('Video: ' . $video['name'] . ' ,with path: ' . $video['path'] . ' alredy exists in database');
+                    continue;
+                }
                     $data = $this->createVideos($video['name'], $video['path'], $channelName);
                     $this
                         ->getContainer()
@@ -57,11 +59,10 @@ class ImportVideosCommand extends ContainerAwareCommand
                         ->save($data);
 
                     $output->writeln('Inserting ' . $video['name'] . ' video url... -> ' . $video['path']);
+
             }
             $output->writeln('All ' . $channelName . ' videos inserted!');
         }
-
-
 
 
     }
@@ -148,21 +149,21 @@ class ImportVideosCommand extends ContainerAwareCommand
      *
      * @return Video
      */
-    private function checkExists($name, $url)
+    private function checkExists($name, $path)
     {
         $em = $this->getContainer()->get('doctrine')
             ->getManager();
-
-        $video = $em->getRepository('AppBundle:Video')
-            ->findOneBykeyName($name);
-
-        if (!empty($video)){
-            $video->setpath($url);
-
-            return $video;
+        $url = $em->getRepository('AppBundle:Video')->findOneBy(
+            array(
+                'keyName' => $name,
+                'path' => $path
+            )
+        );
+        if ($url == null){
+            return null;
+        }else{
+            return 1;
         }
-
-        return $this->createVideos($name, $url);
     }
 
     private function getChannels($channelIds)

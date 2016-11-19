@@ -42,7 +42,7 @@ class Video
     private $keyName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="channelName")
      */
     private $channelName;
     /**
