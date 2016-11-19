@@ -95,8 +95,8 @@ class ImportVideosCommand extends ContainerAwareCommand
         {
             if (isset($url[$key]))
             {
-                $url2 = $url[$key]['items'];
-                foreach($url2 as $video)
+                $items = $url[$key]['items'];
+                foreach($items as $video)
                 {
                     $videoId = $video['id']['videoId'];
                     $videosPath = array(
