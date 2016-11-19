@@ -44,24 +44,26 @@ class ImportVideosCommand extends ContainerAwareCommand
         $channels = $this->getChannels($channelIDs);
         foreach ($channels as $channelName => $channelurl) {
             $videos = $this->getVideo($planetNames, $channelurl);
-            dump($videos);exit;
             foreach ($videos as $video) {
-                if ($video == null) {
-                    $output->writeln('Didn\'t find video: '. $video['name'] . ", in youtube channel: " . $channelName);
-                }
-
+                    if ($video == null) {
+                        $output->writeln('Didn\'t find video: ' . $video['name'] . ", in youtube channel: " . $channelName);
+                    }
 //                $data = $this->checkExists($planetName, $video);
-                $data = $this->createVideos($video['name'] , $video['path'], $channelName);
-                $this
-                    ->getContainer()
-                    ->get('doctrine')
-                    ->getRepository('AppBundle:Video')
-                    ->save($data);
+                    $data = $this->createVideos($video['name'], $video['path'], $channelName);
+                    $this
+                        ->getContainer()
+                        ->get('doctrine')
+                        ->getRepository('AppBundle:Video')
+                        ->save($data);
 
-                $output->writeln('Inserting ' . $video['name'] . ' video url... -> ' . $video['path']);
+                    $output->writeln('Inserting ' . $video['name'] . ' video url... -> ' . $video['path']);
             }
-            $output->writeln('All ' .$channelName . ' videos inserted!');
+            $output->writeln('All ' . $channelName . ' videos inserted!');
         }
+
+
+
+
     }
 
     /**
@@ -93,26 +95,21 @@ class ImportVideosCommand extends ContainerAwareCommand
     {
         $apiKey = $this->getContainer()->getParameter('youtube_api_key');
         $url = $this->getPaths($channelurl, $apiKey, $planetName);
-        foreach ($planetName as $name) {
-            foreach ($url as $urli) {
-            if (isset($urli['items'])) {
-                $url2 = $urli['items'];
-
-                        foreach ($url2 as $video)
-                        {
-                            $videosPath = array();
-                            $videoId = $video['id']['videoId'];
-                        $videosPath[] = array(
-                            'name' => $name,
-                            'path' => "https://www.youtube.com/embed/" . $videoId
-                        );
-                            $master[] = $videosPath;
-                }
+        foreach ($planetName as $key => $name) {
+            if (isset($url[$key])) {
+                $url2 = $url[$key]['items'];
+                $videosPath = array();
+                foreach ($url2 as $video) {
+                    $videoId = $video['id']['videoId'];
+                    $videosPath = array(
+                        'name' => $name,
+                        'path' => "https://www.youtube.com/embed/" . $videoId
+                    );
+                    $master[] = $videosPath;
                 }
             }
-            dump($master);exit;
-            return $pureData;
         }
+        return $master;
     }
 
     /**
@@ -187,7 +184,7 @@ class ImportVideosCommand extends ContainerAwareCommand
             $channelPath[] = $this
                 ->getData(
                     sprintf(
-                        'https://www.googleapis.com/youtube/v3/search?key=%s&channelId=%s&part=id&order=date&maxResults=1&q=%s',
+                        'https://www.googleapis.com/youtube/v3/search?key=%s&channelId=%s&part=id&order=date&maxResults=2&q=%s',
                         $apiKey,
                         $url,
                         $planet
