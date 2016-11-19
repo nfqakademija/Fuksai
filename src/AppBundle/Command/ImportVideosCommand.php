@@ -29,7 +29,7 @@ class ImportVideosCommand extends ContainerAwareCommand
             ->setDescription('Import youtube videos for articles.')
             ->setHelp('This command finds and imports videos for all articles.');
     }
-    
+
     /**
      * {@inheritdoc}
      */

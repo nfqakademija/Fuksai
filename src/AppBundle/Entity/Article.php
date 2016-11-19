@@ -164,6 +164,14 @@ class Article
     }
 
     /**
+     * @return string
+     */
+    public function getPublishDateInString()
+    {
+        return (date('Y-m-d', $this->publishDate->getTimestamp()));
+    }
+
+    /**
      * @return DateTime
      */
     public function getPublishDate()

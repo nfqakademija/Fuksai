@@ -205,7 +205,14 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newArticle->setDescription($article['snippet']);
         $newArticle->setUrl($article['web_url']);
         $newArticle->setUrlToImage("https://static01.nyt.com/" . $article['multimedia'][1]['url']);
-        $newArticle->setPublishDate($article['pub_date']);
+
+        // date string converted to a specific format
+        $pub_date = substr($article['pub_date'], 0, -10);
+
+        // DateTime object converted from string
+        $pub_date = date_create_from_format('Y-m-d', $pub_date);
+
+        $newArticle->setPublishDate($pub_date);
 
         return $newArticle;
     }
@@ -232,7 +239,14 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newPlanetArticle->setDescription($planetArticle['snippet']);
         $newPlanetArticle->setUrl($planetArticle['web_url']);
         $newPlanetArticle->setUrlToImage("https://static01.nyt.com/" . $planetArticle['multimedia'][1]['url']);
-        $newPlanetArticle->setPublishDate($planetArticle['pub_date']);
+
+        // date string converted to a specific format
+        $pub_date = substr($planetArticle['pub_date'], 0, -10);
+
+        // DateTime object converted from string
+        $pub_date = date_create_from_format('Y-m-d', $pub_date);
+
+        $newPlanetArticle->setPublishDate($pub_date);
         $newPlanetArticle->setPlanet($name);
 
         return $newPlanetArticle;

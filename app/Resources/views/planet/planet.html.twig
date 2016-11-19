@@ -77,7 +77,7 @@
                     <h1>{{ planetArticle.title }}</h1>
 
                     <!-- Author and Publish Date -->
-                    <h6> {{ planetArticle.author }} | Published: {{ planetArticle.publishDate }} </h6>
+                    <h6> {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateInString }} </h6>
 
                     <!-- Preview Image -->
                     <a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}">

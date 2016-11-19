@@ -19,7 +19,7 @@
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="publishDate" type="string" column="publishDate" length="255" nullable="false">
+        <field name="publishDate" type="datetime" column="publishDate" length="255" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * PlanetArticle
@@ -64,9 +65,9 @@ class PlanetArticle
     private $urlToImage;
 
     /**
-     * @var string
+     * @var DateTime
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */
     private $publishDate;
 
@@ -180,7 +181,7 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $publishDate
+     * @param DateTime $publishDate
      */
     public function setPublishDate($publishDate)
     {
@@ -188,7 +189,15 @@ class PlanetArticle
     }
 
     /**
-     * @return mixed
+     * @return string
+     */
+    public function getPublishDateInString()
+    {
+        return (date('Y-m-d', $this->publishDate->getTimestamp()));
+    }
+
+    /**
+     * @return DateTime
      */
     public function getPublishDate()
     {
@@ -196,7 +205,7 @@ class PlanetArticle
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -204,7 +213,7 @@ class PlanetArticle
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
