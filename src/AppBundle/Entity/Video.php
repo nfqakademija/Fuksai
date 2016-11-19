@@ -37,11 +37,14 @@ class Video
     /**
      * @var string
      *
-     * @ORM\Column(name="keyName", type="string", length=255, unique=true)
+     * @ORM\Column(name="keyName", type="string", length=255)
      */
     private $keyName;
 
-
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $channelName;
     /**
      * Get id
      *
@@ -99,4 +102,22 @@ class Video
     {
         return $this->keyName;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getChannelName()
+    {
+        return $this->channelName;
+    }
+
+    /**
+     * @param mixed $channelName
+     */
+    public function setChannelName($channelName)
+    {
+        $this->channelName = $channelName;
+    }
+
+
 }
