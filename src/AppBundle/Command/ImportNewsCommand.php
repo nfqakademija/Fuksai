@@ -42,7 +42,10 @@ class ImportNewsCommand extends ContainerAwareCommand
     {
 
         // astronomical news got using API
-        $astronomicalNews = $this->getArticles();
+        $queryTerm = 'astronomy';
+        $astronomicalNews = $this->getArticles($queryTerm);
+
+        $repository = 'AppBundle:Article';
 
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomicalNews as $astronomicalArticle) {
@@ -51,9 +54,9 @@ class ImportNewsCommand extends ContainerAwareCommand
                 continue;
             }
 
-            if ($this->checkArticleExistence($astronomicalArticle)) {
+            if ($this->checkArticleExistence($astronomicalArticle, $repository)) {
                 $output->writeln('There is the same article -'.
-                    '"' . $astronomicalArticle['headline']['main'] . '" in database...');
+                    '"' . $astronomicalArticle['headline']['main'] . '" in the database...');
             } else {
                 $newArticle = $this->createArticle($astronomicalArticle);
                 $this->insertNewArticleToDB($newArticle);
@@ -64,10 +67,12 @@ class ImportNewsCommand extends ContainerAwareCommand
         // all planets names got from our DB
         $planetsNames = $this->getPlanetsNames();
 
+        $repository = 'AppBundle:PlanetArticle';
+
         // insert astronomical articles related to planet name to database
         foreach ($planetsNames as $planetName) {
             // article related to given planet name
-            $planetArticles = $this->getPlanetsArticles($planetName);
+            $planetArticles = $this->getArticles($planetName);
 
             if ($planetArticles == null) {
                 $output->writeln('Could not find articles related to: '. $planetName);
@@ -81,9 +86,9 @@ class ImportNewsCommand extends ContainerAwareCommand
                     continue;
                 }
 
-                if ($this->checkPlanetArticleExistence($planetArticle)) {
+                if ($this->checkArticleExistence($planetArticle, $repository)) {
                     $output->writeln('There is the same planet "'.$planetName.'" article -'.
-                        '"' . $planetArticle['headline']['main'] . '" in database...');
+                        '"' . $planetArticle['headline']['main'] . '" in the database...');
                 } else {
                     $newPlanetArticle = $this->createPlanetArticle($planetName, $planetArticle);
                     $this->insertNewArticleToDB($newPlanetArticle);
@@ -119,9 +124,10 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return null|array
+     * @param $queryTerm
+     * @return array
      */
-    private function getArticles()
+    private function getArticles($queryTerm)
     {
         // The New York Times api key
         $api_key = '0c3bb1800a1b4895ac8ae744d010d5ad';
@@ -130,7 +136,7 @@ class ImportNewsCommand extends ContainerAwareCommand
 
         $query = array(
             "api-key" => $api_key,
-            "q" => "astronomy",
+            "q" => $queryTerm,
             "fq" => "news_desk:(\"Science\")",
             "sort" => "newest",
             "fl" => "_id,headline,snippet,lead_paragraph,web_url,pub_date,byline,multimedia"
@@ -146,49 +152,12 @@ class ImportNewsCommand extends ContainerAwareCommand
         // result in array from json
         $result = json_decode(curl_exec($curl), true);
 
-        // check if we got any result, otherwise return null
+        // check if we got any result, otherwise return empty array
         if (isset($result['response']['docs'])) {
             return $result['response']['docs'];
         }
 
-        return null;
-    }
-
-    /**
-     * @param $planetName
-     * @return null|array
-     */
-    private function getPlanetsArticles($planetName)
-    {
-        // The New York Times api key
-        $api_key = '0c3bb1800a1b4895ac8ae744d010d5ad';
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-        $query = array(
-            "api-key" => $api_key,
-            "q" => $planetName,
-            "fq" => "news_desk:(\"Science\")",
-            "sort" => "newest",
-            "fl" => "_id,headline,snippet,lead_paragraph,web_url,pub_date,byline,multimedia"
-        );
-
-        // get astronomical news
-        curl_setopt(
-            $curl,
-            CURLOPT_URL,
-            "https://api.nytimes.com/svc/search/v2/articlesearch.json" . "?" . http_build_query($query)
-        );
-
-        // result in array from json
-        $result = json_decode(curl_exec($curl), true);
-
-        // check if we got any result, otherwise return null
-        if (isset($result['response']['docs'])) {
-            return $result['response']['docs'];
-        }
-
-        return null;
+        return [];
     }
 
     /**
@@ -256,31 +225,18 @@ class ImportNewsCommand extends ContainerAwareCommand
      * @param $newArticle
      * @return bool
      */
-    private function checkArticleExistence($newArticle)
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-
-        // article got by article id
-        $oldArticle = $em->getRepository('AppBundle:Article')
-            ->findOneByarticle_id($newArticle['_id']);
-
-        if (!empty($oldArticle)) {
-            return true;
-        }
-
-        return false;
-    }
 
     /**
      * @param $newArticle
+     * @param $repository
      * @return bool
      */
-    private function checkPlanetArticleExistence($newArticle)
+    private function checkArticleExistence($newArticle, $repository)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         // article got by article id
-        $oldArticle = $em->getRepository('AppBundle:PlanetArticle')
+        $oldArticle = $em->getRepository($repository)
             ->findOneByarticle_id($newArticle['_id']);
 
         if (!empty($oldArticle)) {
