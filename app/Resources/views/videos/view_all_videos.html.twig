@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+        {% for video in videos %}
+                <iframe  src= {{ video.path }} frameborder="0" allowfullscreen></iframe>
+        {% endfor %}
+
+        {% if maxPages > 1 %}
+            <li {{ currentPage == 1 ? 'class="disabled"' }}>
+                <a href="{{ path('viewing_all_videos', {currentPage: currentPage-1 < 1 ? 1 : currentPage-1}) }}">«</a>
+            </li>
+        {% for i in 1..maxPages %}
+            <li {{ currentPage == i ? 'class="active"' }}>
+                <a href="{{ path('viewing_all_videos', {currentPage: i}) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        <li {{ currentPage == maxPages ? 'class="disabled"' }}>
+            <a href="{{ path('viewing_all_videos', {currentPage: currentPage+1 <= maxPages ? currentPage+1 : currentPage}) }}">»</a>
+        </li>
+        </ul>
+    {% endif %}
+{% endblock %}

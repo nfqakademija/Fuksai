@@ -30,26 +30,52 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/list/{planetName}", name="show_videos_by_name")
-     * @param $planetName
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/videos/{currentPage}", name="viewing_all_videos")
      */
-    public function planetsAction($planetName)
+    public function viewingAllVideosAction($currentPage)
     {
-        $em = $this->getDoctrine()->getManager();
-        $video = $em->getRepository('AppBundle:Video')->findBykeyName($planetName);
-        $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
-        $planets = $em->getRepository('AppBundle:Planet')->findAll();
-
-
-        return $this->render('planet/planets_list.html.twig',
+        $videos = $this->getDoctrine()
+            ->getRepository('AppBundle:Video')
+            ->getAllVideos($currentPage);
+        $iterator = $videos->getIterator();
+        $videosPerPage = 6;
+        $maxPages = ceil($videos->count()/$videosPerPage);
+        return $this->render('videos/view_all_videos.html.twig',
             [
-                'video' => $video,
-                'planet' => $planet,
-                'planetsList' => $planets
+                'maxPages' => $maxPages,
+                'videos' => $iterator,
+                'currentPage' => $currentPage
             ]
         );
     }
+
+//    /**
+//     * @Route("/videos/{planetName}/{currentPage}", name="show_videos_by_name")
+//     * @param $planetName
+//     * @return \Symfony\Component\HttpFoundation\Response
+//     */
+//    public function planetsAction($planetName, $currentPage)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $video = $em->getRepository('AppBundle:Video')->findBykeyName($planetName);
+//        $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
+//        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+//        $videos = $em->getRepository('AppBundle:Video')
+//            ->getAllVideos($currentPage);
+//        $iterator = $videos->getIterator();
+//        $videos = 6;
+//        $maxPages = ceil($videos->count()/$videos);
+//        return $this->render('services/upcoming_events.html.twig',
+//            [
+//                'maxPages' => $maxPages,
+//                'videos' => $iterator,
+//                'currentPage' => $currentPage
+//                'video' => $video,
+//                'planet' => $planet,
+//                'planetsList' => $planets
+//            ]
+//        );
+//    }
 
     /**
      * @Route("/channels/{channelName}", name="show_videos_by_channel")
@@ -143,21 +169,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/events/{currentPage}", name="upcoming_events")
+     * @Route("/events", name="upcoming_events")
      */
-    public function upcomingEventsAction($currentPage)
+    public function upcomingEventsAction()
     {
-        $videos = $this->getDoctrine()
-            ->getRepository('AppBundle:Video')
-            ->getAllVideos($currentPage);
-        $iterator = $videos->getIterator();
-        $maxPages = ceil($videos->count()/6);
-        return $this->render('services/upcoming_events.html.twig',
-            [
-                'maxPages' => $maxPages,
-                'videos' => $iterator
-            ]
-            );
+        return $this->render('services/upcoming_events.html.twig');
     }
 
     /**
