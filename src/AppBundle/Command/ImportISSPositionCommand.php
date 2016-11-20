@@ -19,6 +19,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportISSPositionCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -26,6 +29,9 @@ class ImportISSPositionCommand extends ContainerAwareCommand
             ->setDescription('Imports and calculates ISS position');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Starting to import International Space Station position');
@@ -68,6 +74,10 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         $output->writeln('Import successful!');
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function getData($request)
     {
         $json = file_get_contents($request);
@@ -76,6 +86,9 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         return $data;
     }
 
+    /**
+     * @return mixed
+     */
     private function getEntityManager()
     {
         return $this

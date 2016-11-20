@@ -21,6 +21,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportAsteroidsCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -28,6 +31,9 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
             ->setDescription('Import incoming asteroids');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Starting to import asteroid list');
@@ -59,6 +65,10 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
         $output->writeln('Import successful!');
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function getData($request)
     {
         $json = file_get_contents($request);
@@ -67,11 +77,18 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
         return $data;
     }
 
+    /**
+     * @param EntityManager $manager
+     * @param Asteroid $asteroid
+     */
     private function save(EntityManager $manager,Asteroid $asteroid)
     {
         $manager->persist($asteroid);
     }
 
+    /**
+     * @return mixed
+     */
     private function getEntityManager()
     {
         return $this

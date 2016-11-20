@@ -20,7 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Package AppBundle/Command
  */
 class ImportMarsPhotosCommand extends ContainerAwareCommand
-{
+{   /**
+    * {@inheritdoc}
+    */
     protected function configure()
     {
         $this
@@ -28,6 +30,9 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
             ->setDescription('Import mars rover photos');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Starting Mars Photo Import');
@@ -58,6 +63,10 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
         $output->writeln('Import successful!');
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function getData($request)
     {
         $json = file_get_contents($request);
@@ -66,6 +75,9 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
         return $data;
     }
 
+    /**
+     * @param RoverPhoto $photo
+     */
     private function save(RoverPhoto $photo)
     {
         $em = $this->getEntityManager();
@@ -73,6 +85,9 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
         $em->flush();
     }
 
+    /**
+     * @return mixed
+     */
     private function getEntityManager()
     {
         return $this
