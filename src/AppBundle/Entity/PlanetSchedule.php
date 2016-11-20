@@ -29,6 +29,13 @@ class PlanetSchedule
     private $object;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, unique=false)
+     */
+    private $city;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="longitude", type="float", length=255)
@@ -103,6 +110,28 @@ class PlanetSchedule
     public function getObject()
     {
         return $this->object;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * return PlanetSchedule
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 
     /**
