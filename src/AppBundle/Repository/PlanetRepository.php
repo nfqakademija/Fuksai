@@ -17,7 +17,7 @@ class PlanetRepository extends EntityRepository
     public function findPlanets()
     {
         return $this->createQueryBuilder('planet')
-            ->select('planet.name')
+            ->select('planet.keyName')
             ->getQuery()
             ->execute();
     }

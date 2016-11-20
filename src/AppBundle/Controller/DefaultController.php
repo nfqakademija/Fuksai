@@ -143,11 +143,21 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/events", name="upcoming_events")
+     * @Route("/events/{currentPage}", name="upcoming_events")
      */
-    public function upcomingEventsAction()
+    public function upcomingEventsAction($currentPage)
     {
-        return $this->render('services/upcoming_events.html.twig');
+        $videos = $this->getDoctrine()
+            ->getRepository('AppBundle:Video')
+            ->getAllVideos($currentPage);
+        $iterator = $videos->getIterator();
+        $maxPages = ceil($videos->count()/6);
+        return $this->render('services/upcoming_events.html.twig',
+            [
+                'maxPages' => $maxPages,
+                'videos' => $iterator
+            ]
+            );
     }
 
     /**

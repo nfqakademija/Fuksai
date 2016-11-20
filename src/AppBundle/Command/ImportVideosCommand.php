@@ -40,7 +40,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $planetNames = $this->getPlanets();
+        $planetNames = $this->getKeyNames();
         $channels = $this->getContainer()->getParameter('channel_ids');
 
         foreach($channels as $channelName => $channelurl)
@@ -70,7 +70,7 @@ class ImportVideosCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    private function getPlanets()
+    private function getKeyNames()
     {
         $planets = $this->getContainer()
             ->get('doctrine')
@@ -79,7 +79,7 @@ class ImportVideosCommand extends ContainerAwareCommand
         $planetsNames = [];
         foreach($planets as $planet)
         {
-            $planetsNames[] = $planet['name'];
+            $planetsNames[] = $planet['keyName'];
         }
 
         return $planetsNames;

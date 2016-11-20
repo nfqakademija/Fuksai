@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Video;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * VideosRepository
@@ -35,5 +36,28 @@ class VideoRepository extends EntityRepository
         }
 
         $em->flush();
+    }
+
+    public function getAllVideos($currentPage = 1)
+    {
+        $videos = $this->createQueryBuilder('video')
+            ->orderBy('video.id', 'DESC')
+            ->getQuery();
+
+        $paginator = $this->paginate($videos, $currentPage);
+
+        return $paginator;
+
+    }
+
+    public function paginate($dql, $page = 1, $limit = 5)
+    {
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit);
+
+        return $paginator;
     }
 }
