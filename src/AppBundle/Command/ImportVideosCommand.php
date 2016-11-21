@@ -19,9 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class ImportVideosCommand
  * @package AppBundle\Command
  */
-class ImportVideosCommand extends ContainerAwareCommand
+class ImportVideosCommand extends ContainerAwareCommand{
 
-{
     /**
      * {@inheritdoc}
 
@@ -40,22 +39,31 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $planetNames = $this->getKeyNames();//Returns planet names
-        $channels = $this->getContainer()->getParameter('channel_ids');//Returns channels names and channel Ids from parameters.yml
+        //Returns planet names
+        $planetNames = $this->getKeyNames();
+        //Returns channels names and channel Ids from parameters.yml
+        $channels = $this->getContainer()->getParameter('channel_ids');
 
-        foreach($channels as $channelName => $channelurl)
+        foreach ($channels as $channelName => $channelurl)
         {
-            $videos = $this->getVideo($planetNames, $channelurl);//Returns videos
+            //Returns videos
+            $videos = $this->getVideo($planetNames, $channelurl);
             foreach($videos as $video)
             {
-                $data = $this->checkExists($video['name'], $video['path']);//Checks if videos already exists in database
+                //Checks if videos already exists in database
+                $data = $this->checkExists($video['name'], $video['path']);
                 if ($data == 1)
                 {
-                    $output->writeln('Video: ' . $video['name'] . ' ,with path: ' . $video['path'] . ' alredy exists in database');
+                    $output
+                        ->writeln(
+                            'Video: ' . $video['name'] .
+                            ' ,with path: ' . $video['path'] .
+                            ' alredy exists in database'
+                        );
                     continue;
                 }
-
-                $data = $this->createVideos($video['name'], $video['path'], $channelName);//Creates video's data
+                //Creates video's data
+                $data = $this->createVideos($video['name'], $video['path'], $channelName);
                 $this->getContainer()
                     ->get('doctrine')
                     ->getRepository('AppBundle:Video')
@@ -72,14 +80,16 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getKeyNames()
     {
+        //Returns all planet
         $planets = $this->getContainer()
             ->get('doctrine')
             ->getRepository('AppBundle:Planet')
-            ->findPlanets();//Returns all planet
+            ->findPlanets();
         $planetsNames = [];
         foreach($planets as $planet)
         {
-            $planetsNames[] = $planet['keyName'];//Saves planet keyNames in array
+            //Saves planet keyNames in array
+            $planetsNames[] = $planet['keyName'];
         }
 
         return $planetsNames;
@@ -92,20 +102,24 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getVideo($planetName, $channelurl)
     {
-        $apiKey = $this->getContainer()->getParameter('youtube_api_key');//Return youtube Api key from parameters.yml
-        $url = $this->getPaths($channelurl, $apiKey, $planetName);//Gets videos id
+        //Return youtube Api key from parameters.yml
+        $apiKey = $this->getContainer()->getParameter('youtube_api_key');
+        //Gets videos id
+        $url = $this->getPaths($channelurl, $apiKey, $planetName);
         foreach($planetName as $key => $name)
         {
-            if (isset($url[$key]))//checks if key exists, if in found data there are videos
+            //checks if key exists, if in found data there are videos
+            if (isset($url[$key]))
             {
                 $items = $url[$key]['items'];
                 foreach($items as $video)
                 {
+                    //Creates array for each found video
                     $videoId = $video['id']['videoId'];
                     $videosPath = array(
                         'name' => $name,
                         'path' => "https://www.youtube.com/embed/" . $videoId
-                    );//Creates array for each found video
+                    );
                     $master[] = $videosPath;
                 }
             }
@@ -118,7 +132,8 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $url
      * @return mixed
      */
-    private function getData($url)//retruns json data
+    //retruns json data
+    private function getData($url)
     {
         $json = file_get_contents($url);
         $data = json_decode($json, true);
@@ -131,7 +146,8 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $channelName
      * @return Video
      */
-    private function createVideos($key, $url, $channelName)//Creates videos that will be pushed to database
+    //Creates videos that will be pushed to database
+    private function createVideos($key, $url, $channelName)
     {
         $video = new Video();
         $video->setKeyName($key)->setPath($url)->setChannelName($channelName);
@@ -143,7 +159,8 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $path
      * @return int|null
      */
-    private function checkExists($name, $path)//Checks if videos already exists
+    //Checks if videos already exists
+    private function checkExists($name, $path)
     {
         $em = $this->getContainer()
             ->get('doctrine')
@@ -170,12 +187,17 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $planetName
      * @return array
      */
-    private function getPaths($url, $apiKey, $planetName)//gets videos for every planet
+    //gets videos for every planet
+    private function getPaths($url, $apiKey, $planetName)
     {
         foreach($planetName as $planet)
         {
+            $youtube = 'https://www.googleapis.com/youtube/v3/search?';
             $channelPath[] = $this
-                ->getData(sprintf('https://www.googleapis.com/youtube/v3/search?key=%s&channelId=%s&part=id&order=date&maxResults=3&q=%s',
+                ->getData(
+                    sprintf(
+                        '%skey=%s&channelId=%s&part=id&order=date&maxResults=4&q=%s',
+                $youtube,
                 $apiKey,
                 $url,
                 $planet
