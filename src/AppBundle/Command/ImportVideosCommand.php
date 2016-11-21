@@ -164,11 +164,11 @@ class ImportVideosCommand extends ContainerAwareCommand
                 array(
                     'keyName' => $name,
                     'path' => $path
-                ));
+                )
+            );
         if ($url == null) {
             return null;
-        }
-        else {
+        } else {
             return 1;
         }
     }
@@ -192,7 +192,8 @@ class ImportVideosCommand extends ContainerAwareCommand
                         $apiKey,
                         $url,
                         $planet
-                    ));
+                    )
+                );
             $result = $channelPath;
         }
 

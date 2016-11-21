@@ -118,6 +118,4 @@ class Video
     {
         $this->channelName = $channelName;
     }
-
-
 }

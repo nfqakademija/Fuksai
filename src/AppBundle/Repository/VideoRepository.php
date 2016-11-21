@@ -17,7 +17,8 @@ class VideoRepository extends EntityRepository
     /**
      * @param Video $videos
      */
-    public function save(Video $video)//Saves videos to database
+    //Saves videos to database
+    public function save(Video $video)
     {
         $em = $this->getEntityManager();
         $em->persist($video);
@@ -27,7 +28,8 @@ class VideoRepository extends EntityRepository
     /**
      * @return array $channels
      */
-    public function findAllChannels()//Returns channels channel names that are being used to search videos in youtube
+    //Returns channels channel names that are being used to search videos in youtube
+    public function findAllChannels()
     {
         $channels = $this->createQueryBuilder('video')
             ->select('video.channelName')
@@ -36,13 +38,13 @@ class VideoRepository extends EntityRepository
             ->execute();
 
         return $channels;
-
     }
 
     /**
      * @param array $videos
      */
-    public function saveMany(array $videos)//Saves many videos to database
+    //Saves many videos to database
+    public function saveMany(array $videos)
     {
         $em = $this->getEntityManager();
 
@@ -57,7 +59,8 @@ class VideoRepository extends EntityRepository
      * @param int $currentPage
      * @return Paginator
      */
-    public function getAllVideos($currentPage = 1)//Return all videos from database and passes values to paginate
+    //Return all videos from database and passes values to paginate
+    public function getAllVideos($currentPage = 1)
     {
         $videos = $this->createQueryBuilder('video')
             ->orderBy('video.id', 'DESC')
@@ -66,7 +69,6 @@ class VideoRepository extends EntityRepository
         $paginator = $this->paginate($videos, $currentPage);
 
         return $paginator;
-
     }
 
     /**
@@ -74,7 +76,8 @@ class VideoRepository extends EntityRepository
      * @param $channelName
      * @return Paginator
      */
-    public function getAllChannelVideos($currentPage, $channelName)//Return all channel videos from database and passes values to paginate
+    //Return all channel videos from database and passes values to paginate
+    public function getAllChannelVideos($currentPage, $channelName)
     {
         $videos = $this->createQueryBuilder('video')
             ->where('video.channelName = :channelName')
@@ -91,7 +94,8 @@ class VideoRepository extends EntityRepository
      * @param $planetName
      * @return Paginator
      */
-    public function getAllVideosByName($currentPage, $planetName)//Return all videos by name from database and passes values to paginate
+    //Return all videos by name from database and passes values to paginate
+    public function getAllVideosByName($currentPage, $planetName)
     {
         $videos = $this->createQueryBuilder('video')
             ->where('video.keyName = :planetName')
@@ -101,7 +105,6 @@ class VideoRepository extends EntityRepository
         $paginator = $this->paginate($videos, $currentPage);
 
         return $paginator;
-
     }
 
     /**
@@ -110,7 +113,8 @@ class VideoRepository extends EntityRepository
      * @param int $limit
      * @return Paginator
      */
-    public function paginate($dql, $page = 1, $limit = 6)//Creates pagination class and sets how much videos should be in one page
+    //Creates pagination class and sets how much videos should be in one page
+    public function paginate($dql, $page = 1, $limit = 6)
     {
         $paginator = new Paginator($dql);
 
@@ -120,5 +124,4 @@ class VideoRepository extends EntityRepository
 
         return $paginator;
     }
-
 }

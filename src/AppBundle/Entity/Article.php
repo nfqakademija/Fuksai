@@ -57,96 +57,6 @@ class Article
     /**
      * @return mixed
      */
-    public function getKeyName()
-    {
-        return $this->keyName;
-    }
-
-    /**
-     * @param mixed $keyName
-     */
-    public function setKeyName($keyName)
-    {
-        $this->keyName = $keyName;
-    }
-
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return Article
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-    /**
- * @return mixed
- */
-public function getTitle()
-{
-    return $this->title;
-}/**
- * @param mixed $title
- */
-public function setTitle($title)
-{
-    $this->title = $title;
-}/**
- * @return mixed
- */
-public function getType()
-{
-    return $this->type;
-}/**
- * @param mixed $type
- */
-public function setType($type)
-{
-    $this->type = $type;
-}/**
- * @return mixed
- */
-public function getExplanation()
-{
-    return $this->explanation;
-}/**
- * @param mixed $explanation
- */
-public function setExplanation($explanation)
-{
-    $this->explanation = $explanation;
-}/**
- * @return mixed
- */
-public function getDate()
-{
-    return $this->date;
-}/**
- * @param mixed $date
- */
-public function setDate($date)
-{
-    $this->date = $date;
-}
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
@@ -160,5 +70,99 @@ public function setDate($date)
         $this->id = $id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
+    /**
+     * @param mixed $explanation
+     */
+    public function setExplanation($explanation)
+    {
+        $this->explanation = $explanation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return $this->keyName;
+    }
+
+    /**
+     * @param string $keyName
+     */
+    public function setKeyName($keyName)
+    {
+        $this->keyName = $keyName;
+    }
 }

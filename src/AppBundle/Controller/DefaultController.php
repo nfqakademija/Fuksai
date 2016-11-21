@@ -50,8 +50,7 @@ class DefaultController extends Controller
         if (empty($iterator[0])) {
             throw $this->createNotFoundException('There are no videos on this page!');
         }
-        return $this->render('videos/view_all_videos.html.twig',
-            [
+        return $this->render('videos/view_all_videos.html.twig', [
                 'maxPages' => $maxPages,
                 'videos' => $iterator,
                 'currentPage' => $currentPage,
@@ -84,8 +83,7 @@ class DefaultController extends Controller
         if (empty($iterator[0])) {
             throw $this->createNotFoundException('There are no videos on this page!');
         }
-        return $this->render('videos/view_videos_by_name.html.twig',
-            [
+        return $this->render('videos/view_videos_by_name.html.twig', [
                 'maxPages' => $maxPages,
                 'videos' => $iterator,
                 'currentPage' => $currentPage,
@@ -119,8 +117,7 @@ class DefaultController extends Controller
         if (empty($iterator[0])) {
             throw $this->createNotFoundException('There are no videos on this page!');
         }
-        return $this->render('videos/view_all_channel_videos.html.twig',
-            [
+        return $this->render('videos/view_all_channel_videos.html.twig', [
                 'maxPages' => $maxPages,
                 'videos' => $iterator,
                 'currentPage' => $currentPage,
@@ -153,7 +150,6 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Ups! No planet found!');
         }
         return $this->render('planet/planet.html.twig', [
-
             'planet' => $planet,
             'planetsList' => $planets,
             'video' => $video
