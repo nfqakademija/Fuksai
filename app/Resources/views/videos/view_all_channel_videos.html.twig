@@ -37,8 +37,8 @@
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">All
-                    <small>Videos</small>
+                <h1 class="page-header">{{ currentChannel }}
+                    <small>channel</small>
                 </h1>
             </div>
         </div>
@@ -47,17 +47,17 @@
 
         <div class="container feature-page">
             <div class="row">
-        <div class="col-lg-8">
-            {% for video in videos %}
-                <div class="col-md-6 portfolio-item">
-                <iframe  src= {{ video.path }} frameborder="0" allowfullscreen></iframe>
-                <h3>
-                    <a href="#">Video Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-            {% endfor %}
-        </div>
+                <div class="col-lg-8">
+                    {% for video in videos %}
+                        <div class="col-md-6 portfolio-item">
+                            <iframe  src= {{ video.path }} frameborder="0" allowfullscreen></iframe>
+                            <h3>
+                                <a href="#">Video Name</a>
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                        </div>
+                    {% endfor %}
+                </div>
                 <div class="col-md-4">
                     <div class="well videoSideSearch">
                         <h4>Search</h4>
@@ -90,7 +90,7 @@
                             <div class="col-lg-6">
                                 <ul class="list-unstyled">
                                     {% for planetlist in planetsList %}
-                                    <li><a href="{{ path('show_planet', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
+                                    <li><a href="{{ path('view_videos_by_name', {planetName: planetlist.name, currentPage:1}) }}" class="portfolio-box">{{ planetlist.name }}</a>
                                         {% endfor %}
                                     </li>
                                 </ul>
@@ -99,27 +99,27 @@
                     </div>
                     <!-- /.row -->
                 </div>
-        <div class="row text-center">
-            <div class="col-lg-12">
-        <ul class="pagination">
-            {% if maxPages > 1 %}
-            <li {{ currentPage == 1 ? 'class="disabled"' }}>
-                <a href="{{ path('viewing_all_videos', {currentPage: currentPage-1 < 1 ? 1 : currentPage-1}) }}">&laquo;</a>
-            </li>
-            {% for i in 1..maxPages %}
-                <li {{ currentPage == i ? 'class="active"' }}>
-                    <a href="{{ path('viewing_all_videos', {currentPage: i}) }}">{{ i }}</a>
-                </li>
-            {% endfor %}
-            <li {{ currentPage == maxPages ? 'class="disabled"' }}>
-                <a href="{{ path('viewing_all_videos', {currentPage: currentPage+1 <= maxPages ? currentPage+1 : currentPage}) }}">&raquo;</a>
-            </li>
-        </ul>
-        {% endif %}
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <ul class="pagination">
+                            {% if maxPages > 1 %}
+                            <li {{ currentPage == 1 ? 'class="disabled"' }}>
+                                <a href="{{ path('viewing_all_channel_videos', {currentPage: currentPage-1 < 1 ? 1 : currentPage-1, channelName: currentChannel}) }}">&laquo;</a>
+                            </li>
+                            {% for i in 1..maxPages %}
+                                <li {{ currentPage == i ? 'class="active"' }}>
+                                    <a href="{{ path('viewing_all_channel_videos', {currentPage: i, channelName: currentChannel}) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            <li {{ currentPage == maxPages ? 'class="disabled"' }}>
+                                <a href="{{ path('viewing_all_channel_videos', {currentPage: currentPage+1 <= maxPages ? currentPage+1 : currentPage, channelName: currentChannel}) }}">&raquo;</a>
+                            </li>
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-                </div>
-            </div>
+        </div>
 
         <!-- Footer -->
         <footer>

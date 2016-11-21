@@ -40,26 +40,26 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $planetNames = $this->getKeyNames();
-        $channels = $this->getContainer()->getParameter('channel_ids');
+        $planetNames = $this->getKeyNames();//Returns planet names
+        $channels = $this->getContainer()->getParameter('channel_ids');//Returns channels names and channel Ids from parameters.yml
 
         foreach($channels as $channelName => $channelurl)
         {
-            $videos = $this->getVideo($planetNames, $channelurl);
+            $videos = $this->getVideo($planetNames, $channelurl);//Returns videos
             foreach($videos as $video)
             {
-                $data = $this->checkExists($video['name'], $video['path']);
+                $data = $this->checkExists($video['name'], $video['path']);//Checks if videos already exists in database
                 if ($data == 1)
                 {
                     $output->writeln('Video: ' . $video['name'] . ' ,with path: ' . $video['path'] . ' alredy exists in database');
                     continue;
                 }
 
-                $data = $this->createVideos($video['name'], $video['path'], $channelName);
+                $data = $this->createVideos($video['name'], $video['path'], $channelName);//Creates video's data
                 $this->getContainer()
                     ->get('doctrine')
                     ->getRepository('AppBundle:Video')
-                    ->save($data);
+                    ->save($data);//Saves that data
                 $output->writeln('Inserting ' . $video['name'] . ' video url... -> ' . $video['path']);
             }
 
@@ -75,11 +75,11 @@ class ImportVideosCommand extends ContainerAwareCommand
         $planets = $this->getContainer()
             ->get('doctrine')
             ->getRepository('AppBundle:Planet')
-            ->findPlanets();
+            ->findPlanets();//Returns all planet
         $planetsNames = [];
         foreach($planets as $planet)
         {
-            $planetsNames[] = $planet['keyName'];
+            $planetsNames[] = $planet['keyName'];//Saves planet keyNames in array
         }
 
         return $planetsNames;
@@ -92,11 +92,11 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getVideo($planetName, $channelurl)
     {
-        $apiKey = $this->getContainer()->getParameter('youtube_api_key');
-        $url = $this->getPaths($channelurl, $apiKey, $planetName);
+        $apiKey = $this->getContainer()->getParameter('youtube_api_key');//Return youtube Api key from parameters.yml
+        $url = $this->getPaths($channelurl, $apiKey, $planetName);//Gets videos id
         foreach($planetName as $key => $name)
         {
-            if (isset($url[$key]))
+            if (isset($url[$key]))//checks if key exists, if in found data there are videos
             {
                 $items = $url[$key]['items'];
                 foreach($items as $video)
@@ -105,7 +105,7 @@ class ImportVideosCommand extends ContainerAwareCommand
                     $videosPath = array(
                         'name' => $name,
                         'path' => "https://www.youtube.com/embed/" . $videoId
-                    );
+                    );//Creates array for each found video
                     $master[] = $videosPath;
                 }
             }
@@ -118,7 +118,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $url
      * @return mixed
      */
-    private function getData($url)
+    private function getData($url)//retruns json data
     {
         $json = file_get_contents($url);
         $data = json_decode($json, true);
@@ -131,7 +131,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $channelName
      * @return Video
      */
-    private function createVideos($key, $url, $channelName)
+    private function createVideos($key, $url, $channelName)//Creates videos that will be pushed to database
     {
         $video = new Video();
         $video->setKeyName($key)->setPath($url)->setChannelName($channelName);
@@ -143,7 +143,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $path
      * @return int|null
      */
-    private function checkExists($name, $path)
+    private function checkExists($name, $path)//Checks if videos already exists
     {
         $em = $this->getContainer()
             ->get('doctrine')
@@ -170,7 +170,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $planetName
      * @return array
      */
-    private function getPaths($url, $apiKey, $planetName)
+    private function getPaths($url, $apiKey, $planetName)//gets videos for every planet
     {
         foreach($planetName as $planet)
         {

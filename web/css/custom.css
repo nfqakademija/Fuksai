@@ -32,6 +32,9 @@ h3 {
 .sideSearch {
     margin-top: 80px;
 }
+.videoSideSearch {
+    margin-top: 0px;
+}
 .news-img {
     height:150px !important;
     width:auto;

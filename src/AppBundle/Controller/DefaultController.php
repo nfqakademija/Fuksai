@@ -15,6 +15,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -31,6 +32,8 @@ class DefaultController extends Controller
 
     /**
      * @Route("/videos/{currentPage}", name="viewing_all_videos")
+     * @param $currentPage
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewingAllVideosAction($currentPage)
     {
@@ -38,10 +41,12 @@ class DefaultController extends Controller
         $videos = $em
             ->getRepository('AppBundle:Video')
             ->getAllVideos($currentPage);
+        $channels = $em
+            ->getRepository('AppBundle:Video')
+            ->findAllChannels();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $iterator = $videos->getIterator();
-        $videosPerPage = 6;
-        $maxPages = ceil($videos->count()/$videosPerPage);
+        $maxPages = ceil($videos->count()/6);
         if (empty($iterator[0])) {
             throw $this->createNotFoundException('There are no videos on this page!');
         }
@@ -50,56 +55,78 @@ class DefaultController extends Controller
                 'maxPages' => $maxPages,
                 'videos' => $iterator,
                 'currentPage' => $currentPage,
-                'planetsList' => $planets
+                'planetsList' => $planets,
+                'channels' => $channels
             ]
         );
     }
 
-//    /**
-//     * @Route("/videos/{planetName}/{currentPage}", name="show_videos_by_name")
-//     * @param $planetName
-//     * @return \Symfony\Component\HttpFoundation\Response
-//     */
-//    public function planetsAction($planetName, $currentPage)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $video = $em->getRepository('AppBundle:Video')->findBykeyName($planetName);
-//        $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
-//        $planets = $em->getRepository('AppBundle:Planet')->findAll();
-//        $videos = $em->getRepository('AppBundle:Video')
-//            ->getAllVideos($currentPage);
-//        $iterator = $videos->getIterator();
-//        $videos = 6;
-//        $maxPages = ceil($videos->count()/$videos);
-//        return $this->render('services/upcoming_events.html.twig',
-//            [
-//                'maxPages' => $maxPages,
-//                'videos' => $iterator,
-//                'currentPage' => $currentPage
-//                'video' => $video,
-//                'planet' => $planet,
-//                'planetsList' => $planets
-//            ]
-//        );
-//    }
-
     /**
-     * @Route("/channels/{channelName}", name="show_videos_by_channel")
-     * @param $channelName
+     * @Route("/videos/{planetName}/{currentPage}", name="view_videos_by_name")
+     * @param $planetName
+     * @param $currentPage
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function channelAction($channelName)
+    public function planetsAction($planetName, $currentPage)
     {
         $em = $this->getDoctrine()->getManager();
-        $video = $em->getRepository('AppBundle:Video')->findBychannelName($channelName);
-        $planets = $em->getRepository('AppBundle:Planet')->findAll();
-
-
-        return $this->render('planet/planet_channel_list.html.twig',
+        $planets = $em
+            ->getRepository('AppBundle:Planet')
+            ->findAll();
+        $channels = $em
+            ->getRepository('AppBundle:Video')
+            ->findAllChannels();
+        $videos = $em
+            ->getRepository('AppBundle:Video')
+            ->getAllVideosByName($currentPage, $planetName);
+        $iterator = $videos->getIterator();
+        $maxPages = ceil($videos->count()/6);
+        if (empty($iterator[0])) {
+            throw $this->createNotFoundException('There are no videos on this page!');
+        }
+        return $this->render('videos/view_videos_by_name.html.twig',
             [
-                'video' => $video,
+                'maxPages' => $maxPages,
+                'videos' => $iterator,
+                'currentPage' => $currentPage,
                 'planetsList' => $planets,
-                'channelName' => $channelName
+                'channels' => $channels,
+                'currentPlanet' => $planetName
+            ]
+        );
+    }
+
+    /**
+     * @Route("/videos/channel/{channelName}/{currentPage}", name="viewing_all_channel_videos")
+     * @param $channelName
+     * @param $currentPage
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function channelAction($channelName, $currentPage)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em
+            ->getRepository('AppBundle:Planet')
+            ->findAll();
+        $channels = $em
+            ->getRepository('AppBundle:Video')
+            ->findAllChannels();
+        $videos = $em
+            ->getRepository('AppBundle:Video')
+            ->getAllChannelVideos($currentPage, $channelName);
+        $iterator = $videos->getIterator();
+        $maxPages = ceil($videos->count()/6);
+        if (empty($iterator[0])) {
+            throw $this->createNotFoundException('There are no videos on this page!');
+        }
+        return $this->render('videos/view_all_channel_videos.html.twig',
+            [
+                'maxPages' => $maxPages,
+                'videos' => $iterator,
+                'currentPage' => $currentPage,
+                'planetsList' => $planets,
+                'channels' => $channels,
+                'currentChannel' => $channelName
             ]
         );
     }
@@ -113,9 +140,15 @@ class DefaultController extends Controller
     public function showPlanet($planetName)
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em->getRepository('AppBundle:Planet')->findAll();
-        $planet = $em->getRepository('AppBundle:Planet')->findOneBy(['name' => $planetName]);
-        $video = $em->getRepository('AppBundle:Video')->findOneBy(['keyName' => $planetName]);
+        $planets = $em
+            ->getRepository('AppBundle:Planet')
+            ->findAll();
+        $planet = $em
+            ->getRepository('AppBundle:Planet')
+            ->findOneBy(['name' => $planetName]);
+        $video = $em
+            ->getRepository('AppBundle:Video')
+            ->findOneBy(['keyName' => $planetName]);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
@@ -159,36 +192,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test")
-     */
-    public function showTest()
-    {
-        $nasa_api = new NasaAPI();
-        $text = $nasa_api->getNews();
-
-        return $this->render(
-            'nasaApi/test.html.twig',
-            [
-                'text' => $text,
-            ]
-        );
-    }
-
-    /**
      * @Route("/events", name="upcoming_events")
      */
     public function upcomingEventsAction()
     {
         return $this->render('services/upcoming_events.html.twig');
-    }
-
-    /**
-     * @Route("/videos", name="astronomical_videos")
-     */
-    public function astronomicalVideosAction()
-    {
-
-        return $this->render('services/videos.html.twig');
     }
 
     /**
