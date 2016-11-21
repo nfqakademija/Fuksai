@@ -117,6 +117,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/planetArticles/{planet}", name="planet_articles")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showPlanetArticles($planet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $planetArticles = $em->getRepository('AppBundle:PlanetArticle')->findBy(['planet' => $planet]);
+
+        return $this->render('newsFeed/planet_articles.html.twig', [
+            'planetArticles' => $planetArticles,
+            'planetsList' => $planets,
+        ]);
+    }
+
+    /**
      * @Route("/test")
      */
     public function showTest()

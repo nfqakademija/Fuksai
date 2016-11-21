@@ -66,28 +66,68 @@
 
                 <hr>
 
-                <h1 align="center">RELATED ARTICLES</h1>
+                <div class="container">
+                    <div class="col-md-8">
+                        <h1 align="center">RELATED ARTICLES</h1>
 
-                <hr>
+                        <div class="well">
+                            <div id="sliderRelatedArticles" class="carousel slide">
 
-                <!-- Articles related to the planet -->
-                {% for planetArticle in planetArticles %}
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <div class="row">
+                                            {% for planetArticle in planetArticles %}
+                                                {% if (planetArticle is not null) and (loop.index < 5) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                    </div>
+                                                    <!-- Title -->
+                                                    <h6>{{ planetArticle.title }}<</h6>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+                                    <!--/item-->
+                                    <div class="item">
+                                        <div class="row">
+                                            {% for planetArticle in planetArticles %}
+                                                {% if (planetArticle is not null) and (loop.index < 5) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                    </div>
+                                                    <!-- Title -->
+                                                    <h6>{{ planetArticle.title }}<</h6>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+                                    <!--/item-->
+                                    <div class="item">
+                                        <div class="row">
+                                            {% for planetArticle in planetArticles %}
+                                                {% if (planetArticle is not null) and (loop.index < 5) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                    </div>
+                                                    <!-- Title -->
+                                                    <h6>{{ planetArticle.title }}<</h6>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+                                    <!--/item-->
+                                </div>
+                                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
 
-                    <!-- Title -->
-                    <h1>{{ planetArticle.title }}</h1>
-
-                    <!-- Author and Publish Date -->
-                    <h6> {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateInString }} </h6>
-
-                    <!-- Preview Image -->
-                    <a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}">
-                        <img class="img-responsive" src="{{ planetArticle.urlToImage }}" alt="">
-                    </a>
-
-                    <hr>
-
-                {% endfor %}
-
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                            </div>
+                            <!--/myCarousel-->
+                        </div>
+                        <!--/well-->
+                    </div>
+                </div>
+                <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">More related articles</a>
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
