@@ -48,12 +48,10 @@ class ImportVideosCommand extends ContainerAwareCommand
         foreach ($channels as $channelName => $channelurl) {
             //Returns videos
             $videos = $this->getVideo($planetNames, $channelurl);
-            foreach ($videos as $video)
-            {
+            foreach ($videos as $video) {
                 //Checks if videos already exists in database
                 $data = $this->checkExists($video['name'], $video['path']);
-                if ($data == 1)
-                {
+                if ($data == 1) {
                     $output
                         ->writeln(
                             'Video: ' . $video['name'] .
@@ -86,8 +84,7 @@ class ImportVideosCommand extends ContainerAwareCommand
             ->getRepository('AppBundle:Planet')
             ->findPlanets();
         $planetsNames = [];
-        foreach ($planets as $planet)
-        {
+        foreach ($planets as $planet) {
             //Saves planet keyNames in array
             $planetsNames[] = $planet['keyName'];
         }
@@ -106,14 +103,11 @@ class ImportVideosCommand extends ContainerAwareCommand
         $apiKey = $this->getContainer()->getParameter('youtube_api_key');
         //Gets videos id
         $url = $this->getPaths($channelurl, $apiKey, $planetName);
-        foreach ($planetName as $key => $name)
-        {
+        foreach ($planetName as $key => $name) {
             //checks if key exists, if in found data there are videos
-            if (isset($url[$key]))
-            {
+            if (isset($url[$key])) {
                 $items = $url[$key]['items'];
-                foreach ($items as $video)
-                {
+                foreach ($items as $video) {
                     //Creates array for each found video
                     $videoId = $video['id']['videoId'];
                     $videosPath = array(
@@ -171,12 +165,10 @@ class ImportVideosCommand extends ContainerAwareCommand
             'keyName' => $name,
             'path' => $path
         ));
-        if ($url == null)
-        {
+        if ($url == null) {
             return null;
         }
-        else
-        {
+        else {
             return 1;
         }
     }
@@ -190,8 +182,7 @@ class ImportVideosCommand extends ContainerAwareCommand
     //gets videos for every planet
     private function getPaths($url, $apiKey, $planetName)
     {
-        foreach ($planetName as $planet)
-        {
+        foreach ($planetName as $planet) {
             $youtube = 'https://www.googleapis.com/youtube/v3/search?';
             $channelPath[] = $this
                 ->getData(
