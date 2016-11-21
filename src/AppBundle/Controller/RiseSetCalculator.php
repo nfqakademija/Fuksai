@@ -69,9 +69,19 @@ class RiseSetCalculator
             '&tz='.$timezone.
             '&tz_sign='.$tz_sign);
 
-        dump($data); exit;
+        $schedule = $this->parseResponse($data);
+
+
 
         return $data;
+    }
+
+    private function parseResponse($response)
+    {
+        $result['rise'] = substr($response, 1421, 5);
+        $result['set'] = substr($response, 1455, 5);
+
+        return $result;
     }
 
     private function parseCoordinates($coordinate)
