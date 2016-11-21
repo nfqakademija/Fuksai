@@ -34,17 +34,23 @@ class DefaultController extends Controller
      */
     public function viewingAllVideosAction($currentPage)
     {
-        $videos = $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $videos = $em
             ->getRepository('AppBundle:Video')
             ->getAllVideos($currentPage);
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $iterator = $videos->getIterator();
         $videosPerPage = 6;
         $maxPages = ceil($videos->count()/$videosPerPage);
+        if (empty($iterator[0])) {
+            throw $this->createNotFoundException('There are no videos on this page!');
+        }
         return $this->render('videos/view_all_videos.html.twig',
             [
                 'maxPages' => $maxPages,
                 'videos' => $iterator,
-                'currentPage' => $currentPage
+                'currentPage' => $currentPage,
+                'planetsList' => $planets
             ]
         );
     }
