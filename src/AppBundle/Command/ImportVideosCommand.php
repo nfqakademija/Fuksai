@@ -162,9 +162,9 @@ class ImportVideosCommand extends ContainerAwareCommand
         $url = $em->getRepository('AppBundle:Video')
             ->findOneBy(
                 array(
-            'keyName' => $name,
-            'path' => $path
-        ));
+                    'keyName' => $name,
+                    'path' => $path
+                ));
         if ($url == null) {
             return null;
         }
@@ -188,11 +188,11 @@ class ImportVideosCommand extends ContainerAwareCommand
                 ->getData(
                     sprintf(
                         '%skey=%s&channelId=%s&part=id&order=date&maxResults=4&q=%s',
-                $youtube,
-                $apiKey,
-                $url,
-                $planet
-            ));
+                        $youtube,
+                        $apiKey,
+                        $url,
+                        $planet
+                    ));
             $result = $channelPath;
         }
 
