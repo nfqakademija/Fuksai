@@ -56,8 +56,7 @@ class DefaultController extends Controller
                 'currentPage' => $currentPage,
                 'planetsList' => $planets,
                 'channels' => $channels
-            ]
-        );
+            ]);
     }
 
     /**
@@ -90,8 +89,7 @@ class DefaultController extends Controller
                 'planetsList' => $planets,
                 'channels' => $channels,
                 'currentPlanet' => $planetName
-            ]
-        );
+            ]);
     }
 
     /**
@@ -124,8 +122,7 @@ class DefaultController extends Controller
                 'planetsList' => $planets,
                 'channels' => $channels,
                 'currentChannel' => $channelName
-            ]
-        );
+            ]);
     }
 
 
