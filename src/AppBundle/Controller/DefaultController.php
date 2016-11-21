@@ -104,8 +104,8 @@ class DefaultController extends Controller
      */
     public function showTest()
     {
-        $nasa_api = new NasaAPI();
-        $text = $nasa_api->getNews();
+        $calc = new RiseSetCalculator();
+        $calc->getRiseSet('Vilnius');
 
         return $this->render(
             'nasaApi/test.html.twig',
