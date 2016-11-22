@@ -129,7 +129,6 @@ class ImportNewsCommand extends ContainerAwareCommand
             if (!$this->checkArticleExistence($astronomicalArticle, $repository)) {
                 $newArticle = $this->createArticle($astronomicalArticle, $planetsNames);
                 $this->insertNewArticleToDB($newArticle);
-                //echo('Inserting "' . $newArticle->getTitle() . '" article...');
             }
         }
     }
@@ -154,20 +153,14 @@ class ImportNewsCommand extends ContainerAwareCommand
         // go through all planet names and check if found planet name in title or description
         // then set found planet name to new article otherwise set empty string
         foreach ($planetsNames as $planetName) {
-
             if (preg_match('/\b'.$planetName.'\b/i', $article[''.
                 'headline']['main']) || preg_match('/\b'. $planetName .
                     '\b/i', $article['snippet'])) {
                 $newArticle->setPlanet($planetName);
-                //dump($newArticle);
-
             } else {
                 $newArticle->setPlanet("");
             }
         }
-
-        dump($newArticle);
-
         return $newArticle;
     }
 
