@@ -1,4 +1,4 @@
-/* news in hompage */
+/* news in homepage */
 header.carousel {
     height: 50%;
 }
@@ -78,7 +78,17 @@ header.carousel .fill {
 }
 
 /* planet related articles */
-#sliderRelatedArticles .carousel-control {
+#planetArticle .carousel-control {
     padding-top:10%;
     width:5%;
+}
+
+#planetArticle .carousel-control .icon-prev,
+.carousel-control .icon-next {
+    font-size: 50px;
+}
+
+#planetArticle .carousel-indicators {
+    font-size: 100px;
+    top: 200px;
 }

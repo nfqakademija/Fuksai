@@ -26,7 +26,7 @@ class DefaultController extends Controller
         $nasa_news = $nasa_api->getNews();
 //        $nasa_api->saveNasaData($news);
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/homepage.html.twig', [
             'planets' => $planets,
             'news' => $news,
             'nasa_articles' => $nasa_news
@@ -118,6 +118,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/planetArticles/{planet}", name="planet_articles")
+     * @param $planet
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showPlanetArticles($planet)

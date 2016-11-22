@@ -66,23 +66,31 @@
 
                 <hr>
 
-                <div class="container">
-                    <div class="col-md-8">
+                <div class="container" >
+                    <div class="col-md-12">
                         <h1 align="center">RELATED ARTICLES</h1>
 
                         <div class="well">
-                            <div id="sliderRelatedArticles" class="carousel slide">
+                            <div id="planetArticle" class="carousel slide">
+
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#planetArticle" data-slide-to="0" class="active"></li>
+                                    <li data-target="#planetArticle" data-slide-to="1"></li>
+                                    <li data-target="#planetArticle" data-slide-to="2"></li>
+                                    <li data-target="#planetArticle" data-slide-to="3"></li>
+                                </ol>
 
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
                                     <div class="item active">
                                         <div class="row">
-                                            {% for planetArticle in planetArticles %}
-                                                {% if (planetArticle is not null) and (loop.index < 5) %}
-                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                            {% for i in 0..3 %}
+                                                {% if (planetArticles[i] is defined) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <!-- Title -->
+                                                        <h5>{{ planetArticles[i].title }}</h5>
                                                     </div>
-                                                    <!-- Title -->
-                                                    <h6>{{ planetArticle.title }}<</h6>
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
@@ -91,12 +99,12 @@
                                     <!--/item-->
                                     <div class="item">
                                         <div class="row">
-                                            {% for planetArticle in planetArticles %}
-                                                {% if (planetArticle is not null) and (loop.index < 5) %}
-                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                            {% for i in 4..7 %}
+                                                {% if (planetArticles[i] is defined) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <!-- Title -->
+                                                        <h5>{{ planetArticles[i].title }}</h5>
                                                     </div>
-                                                    <!-- Title -->
-                                                    <h6>{{ planetArticle.title }}<</h6>
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
@@ -105,12 +113,12 @@
                                     <!--/item-->
                                     <div class="item">
                                         <div class="row">
-                                            {% for planetArticle in planetArticles %}
-                                                {% if (planetArticle is not null) and (loop.index < 5) %}
-                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}" class="thumbnail"><img src="{{ planetArticle.urlToImage }}" alt="Image" class="img-responsive"></a>
+                                            {% for i in 8..11 %}
+                                                {% if (planetArticles[i] is defined) %}
+                                                    <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <!-- Title -->
+                                                        <h5>{{ planetArticles[i].title }}</h5>
                                                     </div>
-                                                    <!-- Title -->
-                                                    <h6>{{ planetArticle.title }}<</h6>
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
@@ -118,16 +126,23 @@
                                     </div>
                                     <!--/item-->
                                 </div>
-                                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-
-                                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                                <!--/carousel-inner-->
+                                <a class="left carousel-control" href="#planetArticle" data-slide="prev">
+                                    <span class="icon-prev"></span>
+                                </a>
+                                <a class="right carousel-control" href="#planetArticle" data-slide="next">
+                                    <span class="icon-next"></span>
+                                </a>
                             </div>
-                            <!--/myCarousel-->
+                            <!--/sliderRelatedArticles-->
                         </div>
                         <!--/well-->
                     </div>
                 </div>
+
+                <!-- More related planet articles -->
                 <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">More related articles</a>
+
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
