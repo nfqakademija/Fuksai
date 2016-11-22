@@ -46,7 +46,7 @@ class RiseSetCalculator
             $lat . ','.
             $lng. '&timestamp='.
             time() . '&key='.
-            $google_api_key);
+            $this->googleApiKey);
         $timezone = $data['rawOffset'] / 3600;
 
         $tz_sign = $this->getSign($timezone);
@@ -86,7 +86,7 @@ class RiseSetCalculator
         $schedule = $this->parseResponse($data);
 
 
-        dump($this->googleApiKey); exit;
+        dump($schedule); exit;
     }
 
     private function parseResponse($response)

@@ -6,5 +6,5 @@ parameters:
 services:
     app.calculator.rise_set_calculator:
         class: AppBundle\Calculator\RiseSetCalculator
-        arguments: ["@doctrine.orm.entity_manager", "%googlemaps_api_key%"]
+        arguments: ["@doctrine.orm.entity_manager", "%google_timezone_api_key%"]
 
