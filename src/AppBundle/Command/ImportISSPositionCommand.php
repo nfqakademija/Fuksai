@@ -44,12 +44,12 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         $long = $data['longitude'];
 
         $position = $this->getData(
-            'https://maps.googleapis.com/maps/api/geocode/json?latlng='
-            . $lat . ',' . $long.'&key=' . $api_key);
+            'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&key='.$api_key
+        );
 
         $em = $this->getEntityManager();
 
-        if(!is_null($em->getRepository('AppBundle:ISS')->find(1))) {
+        if (!is_null($em->getRepository('AppBundle:ISS')->find(1))) {
             $iss = $em->getRepository('AppBundle:ISS')->find(1);
 
             $iss->setLatitude($lat);
@@ -58,13 +58,10 @@ class ImportISSPositionCommand extends ContainerAwareCommand
 
             if (isset($position['results'][0])) {
                 $iss->setCountry($position['results'][0]['address_components'][0]['long_name']);
-
             } else {
                 $iss->setCountry('No country');
             }
-        }
-        else
-        {
+        } else {
             $iss = new ISS();
             $em->persist($iss);
         }
