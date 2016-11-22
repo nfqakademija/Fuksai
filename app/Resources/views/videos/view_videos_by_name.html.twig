@@ -104,15 +104,15 @@
                         <ul class="pagination">
                             {% if maxPages > 1 %}
                             <li {{ currentPage == 1 ? 'class="disabled"' }}>
-                                <a href="{{ path('viewing_all_channel_videos', {currentPage: currentPage-1 < 1 ? 1 : currentPage-1, channelName: currentPlanet}) }}">&laquo;</a>
+                                <a href="{{ path('view_videos_by_name', {currentPage: currentPage-1 < 1 ? 1 : currentPage-1, planetName: currentPlanet}) }}">&laquo;</a>
                             </li>
                             {% for i in 1..maxPages %}
                                 <li {{ currentPage == i ? 'class="active"' }}>
-                                    <a href="{{ path('viewing_all_channel_videos', {currentPage: i, channelName: currentPlanet}) }}">{{ i }}</a>
+                                    <a href="{{ path('view_videos_by_name', {currentPage: i, planetName: currentPlanet}) }}">{{ i }}</a>
                                 </li>
                             {% endfor %}
                             <li {{ currentPage == maxPages ? 'class="disabled"' }}>
-                                <a href="{{ path('viewing_all_channel_videos', {currentPage: currentPage+1 <= maxPages ? currentPage+1 : currentPage, channelName: currentPlanet}) }}">&raquo;</a>
+                                <a href="{{ path('view_videos_by_name', {currentPage: currentPage+1 <= maxPages ? currentPage+1 : currentPage, planetName: currentPlanet}) }}">&laquo;</a>
                             </li>
                         </ul>
                         {% endif %}
