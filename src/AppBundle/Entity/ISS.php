@@ -156,4 +156,3 @@ class ISS
         return $this->mapUrl;
     }
 }
-

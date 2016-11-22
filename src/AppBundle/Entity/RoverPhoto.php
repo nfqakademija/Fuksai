@@ -156,4 +156,3 @@ class RoverPhoto
         return $this->camera;
     }
 }
-
