@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Command;
+
 use AppBundle\Entity\Asteroid;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -53,9 +54,12 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
             $asteroid = new \AppBundle\Entity\Asteroid();
             $asteroid
                 ->setName($data['near_earth_objects'][$date][$i]['name'])
-                ->setDiameter($data['near_earth_objects'][$date][$i]['estimated_diameter']['meters']['estimated_diameter_max'])
-                ->setVelocity($data['near_earth_objects'][$date][$i]['close_approach_data'][0]['relative_velocity']['kilometers_per_hour'])
-                ->setMissDistance($data['near_earth_objects'][$date][$i]['close_approach_data'][0]['miss_distance']['kilometers']);
+                ->setDiameter($data['near_earth_objects'][$date]
+                [$i]['estimated_diameter']['meters']['estimated_diameter_max'])
+                ->setVelocity($data['near_earth_objects'][$date]
+                [$i]['close_approach_data'][0]['relative_velocity']['kilometers_per_hour'])
+                ->setMissDistance($data['near_earth_objects'][$date]
+                [$i]['close_approach_data'][0]['miss_distance']['kilometers']);
 
             $this->save($em, $asteroid);
         }
@@ -81,7 +85,7 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
      * @param EntityManager $manager
      * @param Asteroid $asteroid
      */
-    private function save(EntityManager $manager,Asteroid $asteroid)
+    private function save(EntityManager $manager, Asteroid $asteroid)
     {
         $manager->persist($asteroid);
     }
