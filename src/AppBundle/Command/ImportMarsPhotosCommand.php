@@ -48,8 +48,7 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
             .'&api_key='.$api_key
         );
 
-        foreach ($data['photos'] as $element)
-        {
+        foreach ($data['photos'] as $element) {
             $image = new RoverPhoto();
 
             $image->setDate($date);

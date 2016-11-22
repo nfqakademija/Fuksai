@@ -49,8 +49,7 @@ class ImportAsteroidsCommand extends ContainerAwareCommand
 
         $em = $this->getEntityManager();
 
-        for ($i = 0; $i < $count; $i++)
-        {
+        for ($i = 0; $i < $count; $i++) {
             $asteroid = new \AppBundle\Entity\Asteroid();
             $asteroid
                 ->setName($data['near_earth_objects'][$date][$i]['name'])
