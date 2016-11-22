@@ -8,7 +8,6 @@
 
 namespace AppBundle\Command;
 
-
 use AppBundle\Entity\RoverPhoto;
 use Faker\Provider\DateTime;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -20,7 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Package AppBundle/Command
  */
 class ImportMarsPhotosCommand extends ContainerAwareCommand
-{   /**
+{
+    /**
     * {@inheritdoc}
     */
     protected function configure()
@@ -43,10 +43,10 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
         date_sub($date, date_interval_create_from_date_string('3 days'));
         $date = date_format($date, 'Y-m-d');
 
-        $data = $this->getData
-            ('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date='.
-            $date
-            .'&api_key=' . $api_key);
+        $data = $this->getData(
+            'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date='.$date
+            .'&api_key='.$api_key
+        );
 
         foreach ($data['photos'] as $element)
         {
