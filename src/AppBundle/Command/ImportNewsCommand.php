@@ -40,12 +40,14 @@ class ImportNewsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         // astronomical news got using API
         $queryTerm = 'astronomy';
+
         $astronomicalNews = $this->getArticles($queryTerm);
 
         $repository = 'AppBundle:Article';
+
+        $planetsNames = $this->getPlanetsNames();
 
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomicalNews as $astronomicalArticle) {
@@ -54,10 +56,7 @@ class ImportNewsCommand extends ContainerAwareCommand
                 continue;
             }
 
-            if ($this->checkArticleExistence($astronomicalArticle, $repository)) {
-                $output->writeln('There is the same article -'.
-                    '"' . $astronomicalArticle['headline']['main'] . '" in the database...');
-            } else {
+            if (!$this->checkArticleExistence($astronomicalArticle, $repository)) {
                 $newArticle = $this->createArticle($astronomicalArticle);
                 $this->insertNewArticleToDB($newArticle);
                 $output->writeln('Inserting "' . $newArticle->getTitle() . '" article...');
@@ -65,7 +64,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         }
 
         // all planets names got from our DB
-        $planetsNames = $this->getPlanetsNames();
+        /* $planetsNames = $this->getPlanetsNames();
 
         $repository = 'AppBundle:PlanetArticle';
 
@@ -96,7 +95,7 @@ class ImportNewsCommand extends ContainerAwareCommand
                         ' related to: '. $planetName .'...');
                 }
             }
-        }
+        } */
 
         $output->writeln('All news were inserted!');
     }

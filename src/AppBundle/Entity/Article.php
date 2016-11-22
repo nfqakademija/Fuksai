@@ -71,7 +71,30 @@ class Article
      */
     private $publishDate;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $planet;
+
     //                      GETTERS AND SETTERS
+
+    /**
+     * @return string
+     */
+    public function getPlanet(): string
+    {
+        return $this->planet;
+    }
+
+    /**
+     * @param string $planet
+     */
+    public function setPlanet(string $planet)
+    {
+        $this->planet = $planet;
+    }
 
     /**
      * @param string $urlToImage

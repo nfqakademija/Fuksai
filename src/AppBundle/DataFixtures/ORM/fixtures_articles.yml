@@ -7,6 +7,7 @@ AppBundle\Entity\Article:
           publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 0
+          planet: Venus
       Article2:
           description: was compth
           urlToImage: http://apod.nasa.gov/apod/image/1611/M27_Hayes_960.jpg
@@ -15,6 +16,7 @@ AppBundle\Entity\Article:
           publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 1
+          planet: Saturn
       Article3:
           description: Is only o
           urlToImage: http://apod.nasa.gov/apod/image/1611/Arp299_NustarHubble_960.jpg
@@ -23,3 +25,5 @@ AppBundle\Entity\Article:
           publishDate: <(new \DateTime('2014-04-02'))>
           author: True
           articleId: 2
+          planet: Mars
+
