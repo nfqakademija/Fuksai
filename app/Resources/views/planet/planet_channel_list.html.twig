@@ -44,19 +44,12 @@
 
             <h1>{{ channelName }} Videos</h1>
             <!-- Author -->
-            <p>
-                by Fuksai
-            </p>
-
+            <p>by Fuksai</p>
             <hr>
-
             {% for videos in video %}
                 <iframe  src= {{ videos.path }} frameborder="0" allowfullscreen></iframe>
             {% endfor %}
-
-
         </div>
-
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
 
