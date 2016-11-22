@@ -96,7 +96,6 @@ class RiseSetCalculator
     {
         if($value < 0 ){return -1;}
         return 1;
-
     }
 
     private function getData($url)

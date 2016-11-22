@@ -173,7 +173,6 @@ class DefaultController extends Controller
      */
     public function constellationPositionCalculatorAction()
     {
-
         return $this->render('services/constellation_calculator.html.twig');
     }
 
