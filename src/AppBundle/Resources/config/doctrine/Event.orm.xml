@@ -14,7 +14,7 @@
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="date" type="datetime" column="date" length="20" nullable="false">
+        <field name="date" type="string" column="date" length="20" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
