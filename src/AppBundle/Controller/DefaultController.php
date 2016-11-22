@@ -104,8 +104,12 @@ class DefaultController extends Controller
      */
     public function showTest()
     {
-        $calc = new RiseSetCalculator();
-        $calc->getRiseSet('Vilnius');
+        /**
+         * @var RiseSetCalculator $calc
+         */
+        $calc = $this->get('app.calculator.rise_set_calculator');
+        $calc->getRiseSet('vilnius');
+
 
         return $this->render(
             'nasaApi/test.html.twig',

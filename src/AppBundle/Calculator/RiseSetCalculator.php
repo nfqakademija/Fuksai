@@ -6,17 +6,31 @@
  * Time: 18.31
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Calculator;
 
+use Doctrine\ORM\EntityManager;
 
 class RiseSetCalculator
 {
-    public function __construct()
+    /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
+     * @var string
+     */
+    private $googleApiKey;
+
+    /**
+     * RiseSetCalculator constructor.
+     * @param EntityManager $em
+     * @param string $googleApiKey
+     */
+    public function __construct(EntityManager $em, $googleApiKey)
     {
-        //$this->city=$city;
-//        $this->latitude=$latitude;
-//        $this->longitude=$longitude;
-//        $this->timezone=$timezone;
+        $this->em = $em;
+        $this->googleApiKey = $googleApiKey;
     }
 
     public function getRiseSet($city)
@@ -72,8 +86,7 @@ class RiseSetCalculator
         $schedule = $this->parseResponse($data);
 
 
-
-        return $data;
+        dump($this->googleApiKey); exit;
     }
 
     private function parseResponse($response)
