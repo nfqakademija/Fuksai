@@ -40,62 +40,14 @@ class ImportNewsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // astronomical news got using API
         $queryTerm = 'astronomy';
 
+        // astronomical news got using API
         $astronomicalNews = $this->getArticles($queryTerm);
-
-        $repository = 'AppBundle:Article';
 
         $planetsNames = $this->getPlanetsNames();
 
-        // go through all got astronomical news, check if article exists in DB and create one if it does not exist
-        foreach ($astronomicalNews as $astronomicalArticle) {
-            // if article has no multimedia or author, then check next article in an array
-            if ($astronomicalArticle['multimedia'] == null || $astronomicalArticle['byline'] == null) {
-                continue;
-            }
-
-            if (!$this->checkArticleExistence($astronomicalArticle, $repository)) {
-                $newArticle = $this->createArticle($astronomicalArticle);
-                $this->insertNewArticleToDB($newArticle);
-                $output->writeln('Inserting "' . $newArticle->getTitle() . '" article...');
-            }
-        }
-
-        // all planets names got from our DB
-        /* $planetsNames = $this->getPlanetsNames();
-
-        $repository = 'AppBundle:PlanetArticle';
-
-        // insert astronomical articles related to planet name to database
-        foreach ($planetsNames as $planetName) {
-            // article related to given planet name
-            $planetArticles = $this->getArticles($planetName);
-
-            if ($planetArticles == null) {
-                $output->writeln('Could not find articles related to: '. $planetName);
-                continue;
-            }
-
-            // go through all got planet articles, check if article exists in DB and create one if it does not exist
-            foreach ($planetArticles as $planetArticle) {
-                // if article has no multimedia or author, then check next article in an array
-                if ($planetArticle['multimedia'] == null || $planetArticle['byline'] == null) {
-                    continue;
-                }
-
-                if ($this->checkArticleExistence($planetArticle, $repository)) {
-                    $output->writeln('There is the same planet "'.$planetName.'" article -'.
-                        '"' . $planetArticle['headline']['main'] . '" in the database...');
-                } else {
-                    $newPlanetArticle = $this->createPlanetArticle($planetName, $planetArticle);
-                    $this->insertNewArticleToDB($newPlanetArticle);
-                    $output->writeln('Inserting "' . $newPlanetArticle->getTitle() . '" planet article'.
-                        ' related to: '. $planetName .'...');
-                }
-            }
-        } */
+        $this->createNewArticles($astronomicalNews, $planetsNames);
 
         $output->writeln('All news were inserted!');
     }
@@ -160,10 +112,34 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param $astronomicalNews
+     * @param $planetsNames
+     */
+    private function createNewArticles($astronomicalNews, $planetsNames)
+    {
+        $repository = 'AppBundle:Article';
+
+        // go through all got astronomical news, check if article exists in DB and create one if it does not exist
+        foreach ($astronomicalNews as $astronomicalArticle) {
+            // if article has no multimedia or author, then check next article in an array
+            if ($astronomicalArticle['multimedia'] == null || $astronomicalArticle['byline'] == null) {
+                continue;
+            }
+
+            if (!$this->checkArticleExistence($astronomicalArticle, $repository)) {
+                $newArticle = $this->createArticle($astronomicalArticle, $planetsNames);
+                $this->insertNewArticleToDB($newArticle);
+                //echo('Inserting "' . $newArticle->getTitle() . '" article...');
+            }
+        }
+    }
+
+    /**
      * @param $article
+     * @param $planetsNames
      * @return Article
      */
-    private function createArticle($article)
+    private function createArticle($article, $planetsNames)
     {
         $newArticle = new Article();
 
@@ -173,14 +149,24 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newArticle->setDescription($article['snippet']);
         $newArticle->setUrl($article['web_url']);
         $newArticle->setUrlToImage("https://static01.nyt.com/" . $article['multimedia'][1]['url']);
+        $newArticle->setPublishStringDate($article['pub_date']);
 
-        // date string converted to a specific format
-        $pub_date = substr($article['pub_date'], 0, -10);
+        // go through all planet names and check if found planet name in title or description
+        // then set found planet name to new article otherwise set empty string
+        foreach ($planetsNames as $planetName) {
 
-        // DateTime object converted from string
-        $pub_date = date_create_from_format('Y-m-d', $pub_date);
+            if (preg_match('/\b'.$planetName.'\b/i', $article[''.
+                'headline']['main']) || preg_match('/\b'. $planetName .
+                    '\b/i', $article['snippet'])) {
+                $newArticle->setPlanet($planetName);
+                //dump($newArticle);
 
-        $newArticle->setPublishDate($pub_date);
+            } else {
+                $newArticle->setPlanet("");
+            }
+        }
+
+        dump($newArticle);
 
         return $newArticle;
     }
@@ -190,40 +176,9 @@ class ImportNewsCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($newArticle);
         $em->flush();
+        dump($newArticle);
+        exit;
     }
-
-    /**
-     * @param String $name
-     * @param $planetArticle
-     * @return PlanetArticle
-     */
-    private function createPlanetArticle(String $name, $planetArticle)
-    {
-        $newPlanetArticle = new PlanetArticle();
-
-        $newPlanetArticle->setAuthor($planetArticle['byline']['original']);
-        $newPlanetArticle->setArticleId($planetArticle['_id']);
-        $newPlanetArticle->setTitle($planetArticle['headline']['main']);
-        $newPlanetArticle->setDescription($planetArticle['snippet']);
-        $newPlanetArticle->setUrl($planetArticle['web_url']);
-        $newPlanetArticle->setUrlToImage("https://static01.nyt.com/" . $planetArticle['multimedia'][1]['url']);
-
-        // date string converted to a specific format
-        $pub_date = substr($planetArticle['pub_date'], 0, -10);
-
-        // DateTime object converted from string
-        $pub_date = date_create_from_format('Y-m-d', $pub_date);
-
-        $newPlanetArticle->setPublishDate($pub_date);
-        $newPlanetArticle->setPlanet($name);
-
-        return $newPlanetArticle;
-    }
-
-    /**
-     * @param $newArticle
-     * @return bool
-     */
 
     /**
      * @param $newArticle

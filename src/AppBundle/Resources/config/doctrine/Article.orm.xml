@@ -39,5 +39,10 @@
             <option name="fixed"/>
         </options>
     </field>
+    <field name="planet" type="string" column="planet" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

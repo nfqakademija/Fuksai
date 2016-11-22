@@ -179,6 +179,20 @@ class Article
     }
 
     /**
+     * @param $newPublishDate
+     */
+    public function setPublishStringDate($newPublishDate)
+    {
+        // date string converted to a specific format
+        $pub_date = substr($newPublishDate, 0, 10);
+
+        // DateTime object converted from string
+        $pub_date = date_create_from_format('Y-m-d', $pub_date);
+
+        $this->publishDate = $pub_date;
+    }
+
+    /**
      * @param DateTime $publishDate
      */
     public function setPublishDate($publishDate)
