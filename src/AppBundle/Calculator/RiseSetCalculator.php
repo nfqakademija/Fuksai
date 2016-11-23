@@ -57,7 +57,7 @@ class RiseSetCalculator
     public function getRiseSet($city)
     {
         $city = strtolower($city);
-        $cache = new FilesystemAdapter();
+        $cache = new FilesystemAdapter('', 24*3600, null);
 
         $today = date('Y-m-d');
 
