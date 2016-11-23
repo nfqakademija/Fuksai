@@ -50,6 +50,10 @@ class RiseSetCalculator
         $this->googleApiKey = $googleApiKey;
     }
 
+    /**
+     * @param $city
+     * @return \AppBundle\Entity\PlanetSchedule[]|array
+     */
     public function getRiseSet($city)
     {
         $city = strtolower($city);
@@ -129,6 +133,10 @@ class RiseSetCalculator
         return $this->scheduleList;
     }
 
+    /**
+     * @param $response
+     * @return mixed
+     */
     private function parseResponse($response)
     {
         $result['rise'] = substr($response, 1421, 5);
@@ -137,6 +145,10 @@ class RiseSetCalculator
         return $result;
     }
 
+    /**
+     * @param $coordinate
+     * @return mixed
+     */
     private function parseCoordinates($coordinate)
     {
         $result['min'] = rtrim(round(($coordinate - floor($coordinate))/5*3, 2)*100, ".0");
@@ -145,12 +157,20 @@ class RiseSetCalculator
         return $result;
     }
 
+    /**
+     * @param $value
+     * @return int
+     */
     private function getSign($value)
     {
         if($value < 0 ){return -1;}
         return 1;
     }
 
+    /**
+     * @param $url
+     * @return mixed
+     */
     private function getData($url)
     {
         $json = file_get_contents($url);
@@ -159,6 +179,10 @@ class RiseSetCalculator
         return $data;
     }
 
+    /**
+     * @param $url
+     * @return string
+     */
     private function getPlainData($url)
     {
         $data = file_get_contents($url);
