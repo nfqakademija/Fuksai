@@ -69,7 +69,6 @@ class Planet
      */
     private $day;
 
-
     /**
      * @return string
      */
