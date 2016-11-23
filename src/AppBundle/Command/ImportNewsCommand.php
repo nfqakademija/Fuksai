@@ -169,8 +169,6 @@ class ImportNewsCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($newArticle);
         $em->flush();
-        dump($newArticle);
-        exit;
     }
 
     /**

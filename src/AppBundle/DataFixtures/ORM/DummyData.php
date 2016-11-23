@@ -20,5 +20,6 @@ class DummyData implements FixtureInterface
     {
         Fixtures::load(__DIR__.'/fixtures.yml', $manager);
         Fixtures::load(__DIR__ . '/fixtures_articles.yml', $manager);
+        Fixtures::load(__DIR__.'/event.yml', $manager);
     }
 }
