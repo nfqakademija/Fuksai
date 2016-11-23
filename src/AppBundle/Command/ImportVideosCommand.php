@@ -99,6 +99,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getVideo($planetName, $channelurl)
     {
+        $master = array();
         //Return youtube Api key from parameters.yml
         $apiKey = $this->getContainer()->getParameter('youtube_api_key');
         //Gets videos id
