@@ -31,13 +31,6 @@ class PlanetSchedule
     /**
      * @var string
      *
-     * @ORM\Column(name="key", type="string", length=255, unique=true)
-     */
-    private $key;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="city", type="string", length=255, unique=false)
      */
     private $city;
@@ -117,22 +110,6 @@ class PlanetSchedule
     public function getObject()
     {
         return $this->object;
-    }
-
-    /**
-     * @param string $key
-     */
-    public function setKey($key)
-    {
-        $this->key = $key;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-        return $this->key;
     }
 
     /**
