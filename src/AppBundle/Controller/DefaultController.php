@@ -21,9 +21,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $news = $em->getRepository('AppBundle:Article')->findAll();
 //        $nasa_api->saveNasaData($news);
-        return $this->render('default/index.html.twig', [
-            'planets' => $planets
+
+        return $this->render('default/homepage.html.twig', [
+            'planets' => $planets,
+            'news' => $news
         ]);
     }
 
@@ -122,7 +125,6 @@ class DefaultController extends Controller
             ]);
     }
 
-
     /**
      * @Route("/planets/{planetName}", name="show_planet")
      * @param $planetName
@@ -158,26 +160,49 @@ class DefaultController extends Controller
     public function showArticle($articleID)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $articleID]);
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $article = $em->getRepository('AppBundle:Article')->findOneBy(['articleId' => $articleID]);
+
         if (!$article) {
             throw $this->createNotFoundException('Ups! No article found!');
         }
 
         return $this->render('newsFeed/article.html.twig', [
             'article' => $article,
+            'planetsList' => $planets,
         ]);
     }
 
     /**
      * @Route("/news", name="news_list")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showNews()
     {
         $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
         return $this->render('newsFeed/news.html.twig', [
             'articles' => $articles,
+            'planetsList' => $planets,
+        ]);
+    }
+
+    /**
+     * @Route("/planetArticles/{planet}", name="planet_articles")
+     * @param $planet
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showPlanetArticles($planet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $planetArticles = $em->getRepository('AppBundle:Article')->findBy(['planet' => $planet]);
+
+        return $this->render('newsFeed/planet_articles.html.twig', [
+            'planetArticles' => $planetArticles,
+            'planetsList' => $planets,
         ]);
     }
 
