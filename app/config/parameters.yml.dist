@@ -17,12 +17,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    youtube_api_key: test_key
-        channel_ids:
-            CrashCourse: test_key
-            SciShow: test_key
-            NasaTelevision: test_key
-    youtube_api_key: test_key
-    nasa_api_key: test_key
-    googlemaps_api_key: test_key
-    news_api_key

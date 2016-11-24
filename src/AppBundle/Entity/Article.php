@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * Article
@@ -14,8 +13,6 @@ use Faker\Provider\cs_CZ\DateTime;
 class Article
 {
     /**
-     * @var integer
-     *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -23,117 +20,44 @@ class Article
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="article_id", type="string")
-     */
-    private $articleId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $author;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
     private $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
-    private $description;
+    private $type;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $explanation;
+
+    /**
+     * @ORM\Column(type="string")
+     */private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
 
+
     /**
-     * @var string
+     * Set url
      *
-     * @ORM\Column(type="string")
-     */
-    private $urlToImage;
-
-    /**
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $publishDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $planet;
-
-    //                      GETTERS AND SETTERS
-
-    /**
-     * @return string
-     */
-    public function getPlanet(): string
-    {
-        return $this->planet;
-    }
-
-    /**
-     * @param string $planet
-     */
-    public function setPlanet(string $planet)
-    {
-        $this->planet = $planet;
-    }
-
-    /**
-     * @param string $urlToImage
-     */
-    public function setUrlToImage($urlToImage)
-    {
-        $this->urlToImage = $urlToImage;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrlToImage()
-    {
-        return $this->urlToImage;
-    }
-
-    /**
-     * @param string $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * @param string $url
+     *
+     * @return Article
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
@@ -145,87 +69,58 @@ class Article
     {
         return $this->url;
     }
+    /**
+ * @return mixed
+ */
+public function getTitle()
+{
+    return $this->title;
+}/**
+ * @param mixed $title
+ */
+public function setTitle($title)
+{
+    $this->title = $title;
+}/**
+ * @return mixed
+ */
+public function getType()
+{
+    return $this->type;
+}/**
+ * @param mixed $type
+ */
+public function setType($type)
+{
+    $this->type = $type;
+}/**
+ * @return mixed
+ */
+public function getExplanation()
+{
+    return $this->explanation;
+}/**
+ * @param mixed $explanation
+ */
+public function setExplanation($explanation)
+{
+    $this->explanation = $explanation;
+}/**
+ * @return mixed
+ */
+public function getDate()
+{
+    return $this->date;
+}/**
+ * @param mixed $date
+ */
+public function setDate($date)
+{
+    $this->date = $date;
+}
 
     /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param $newPublishDate
-     */
-    public function setPublishStringDate($newPublishDate)
-    {
-        // date string converted to a specific format
-        $pub_date = substr($newPublishDate, 0, 10);
-
-        // DateTime object converted from string
-        $pub_date = date_create_from_format('Y-m-d', $pub_date);
-
-        $this->publishDate = $pub_date;
-    }
-
-    /**
-     * @param DateTime $publishDate
-     */
-    public function setPublishDate($publishDate)
-    {
-        $this->publishDate = $publishDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPublishDateInString()
-    {
-        return (date('Y-m-d', $this->publishDate->getTimestamp()));
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getPublishDate()
-    {
-        return $this->publishDate;
-    }
-
-    /**
-     * @param integer $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
@@ -233,18 +128,12 @@ class Article
     }
 
     /**
-     * @return string
+     * @param mixed $id
      */
-    public function getArticleId(): string
+    public function setId($id)
     {
-        return $this->articleId;
+        $this->id = $id;
     }
 
-    /**
-     * @param string $articleId
-     */
-    public function setArticleId(string $articleId)
-    {
-        $this->articleId = $articleId;
-    }
+
 }

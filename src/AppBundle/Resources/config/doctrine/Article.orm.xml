@@ -14,32 +14,17 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="description" type="string" column="description" length="255" nullable="false">
+    <field name="type" type="string" column="type" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="publishDate" type="datetime" column="publishDate" length="255" nullable="false">
+    <field name="explanation" type="string" column="explanation" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="urlToImage" type="string" column="urlToImage" length="255" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
-    <field name="author" type="string" column="author" length="255" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
-    <field name="articleId" type="string" column="articleId" length="255" nullable="false">
-        <options>
-            <option name="fixed"/>
-        </options>
-    </field>
-    <field name="planet" type="string" column="planet" length="255" nullable="false">
+    <field name="date" type="string" column="date" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
