@@ -20,3 +20,5 @@ parameters:
 
     youtube_api_key: test_key
     channel_ids: CrashCourse:UCX6b17PVsYBQ0ip5gyeme-Q,SciShow:UCZYTClx2T1of7BRZ86-8fow,NasaTelevision:UCLA_DiR1FfKNvjuUpBHmylQ
+    nasa_api_key: test_key
+    googlemaps_api_key: test_key
