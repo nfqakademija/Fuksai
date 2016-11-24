@@ -81,7 +81,7 @@ class ImportNewsCommand extends ContainerAwareCommand
     private function getArticles($queryTerm)
     {
         // The New York Times api key
-        $api_key = '0c3bb1800a1b4895ac8ae744d010d5ad';
+        $api_key = $this->getContainer()->getParameter('news_api_key');
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
