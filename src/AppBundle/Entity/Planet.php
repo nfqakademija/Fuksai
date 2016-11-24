@@ -10,14 +10,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Planet
  *
  * @ORM\Table(name="planet")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetRepository")
- * @UniqueEntity("keyName")
  */
 class Planet
 {
@@ -71,30 +69,9 @@ class Planet
      */
     private $day;
 
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $keyName;
 
     /**
-     * @return string
-     */
-    public function getKeyName()
-    {
-        return $this->keyName;
-    }
-
-    /**
-     * @param string $keyName
-     */
-    public function setKeyName($keyName)
-    {
-        $this->keyName = $keyName;
-    }
-
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function getDiscovery()
     {
@@ -102,7 +79,7 @@ class Planet
     }
 
     /**
-     * @param string $discovery
+     * @param mixed $discovery
      */
     public function setDiscovery($discovery)
     {
@@ -110,7 +87,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDiameter()
     {
@@ -118,7 +95,7 @@ class Planet
     }
 
     /**
-     * @param string $diameter
+     * @param mixed $diameter
      */
     public function setDiameter($diameter)
     {
@@ -126,7 +103,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getOrbit()
     {
@@ -134,7 +111,7 @@ class Planet
     }
 
     /**
-     * @param string $orbit
+     * @param mixed $orbit
      */
     public function setOrbit($orbit)
     {
@@ -142,7 +119,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDay()
     {
@@ -150,7 +127,7 @@ class Planet
     }
 
     /**
-     * @param string $day
+     * @param mixed $day
      */
     public function setDay($day)
     {
@@ -158,7 +135,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getPosition()
     {
@@ -166,7 +143,7 @@ class Planet
     }
 
     /**
-     * @param string $position
+     * @param mixed $position
      */
     public function setPosition($position)
     {
@@ -174,7 +151,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getId()
     {
@@ -182,7 +159,7 @@ class Planet
     }
 
     /**
-     * @param string $id
+     * @param mixed $id
      */
     public function setId($id)
     {
@@ -191,7 +168,7 @@ class Planet
 
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getImage()
     {
@@ -199,7 +176,7 @@ class Planet
     }
 
     /**
-     * @param string $image
+     * @param mixed $image
      */
     public function setImage($image)
     {
@@ -207,7 +184,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
 
     public function getDescription()
@@ -216,7 +193,7 @@ class Planet
     }
 
     /**
-     * @param string $description
+     * @param mixed $description
      */
     public function setDescription($description)
     {
@@ -224,7 +201,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getNamedAs()
     {
@@ -232,7 +209,7 @@ class Planet
     }
 
     /**
-     * @param string $namedAs
+     * @param mixed $namedAs
      */
     public function setNamedAs($namedAs)
     {
@@ -240,7 +217,7 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getName()
     {
@@ -248,7 +225,7 @@ class Planet
     }
 
     /**
-     * @param string $name
+     * @param mixed $name
      */
     public function setName($name)
     {

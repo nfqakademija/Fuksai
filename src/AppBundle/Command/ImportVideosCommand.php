@@ -12,81 +12,67 @@ namespace AppBundle\Command;
 use AppBundle\Entity\Planet;
 use AppBundle\Entity\Video;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use AppBundle\Repository\PlanetRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ImportVideosCommand
- * @package AppBundle\Command
- */
 class ImportVideosCommand extends ContainerAwareCommand
 {
-
     /**
      * {@inheritdoc}
-
      */
     protected function configure()
     {
         $this
-            ->setName('app:import:videos')
+            ->setName('app:import-videos')
             ->setDescription('Import youtube videos for articles.')
             ->setHelp('This command finds and imports videos for all articles.');
     }
 
     /**
      * {@inheritdoc}
-
      */
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //Returns planet names
-        $planetNames = $this->getKeyNames();
-        //Returns channels names and channel Ids from parameters.yml
-        $channels = $this->getContainer()->getParameter('channel_ids');
+        $planetNames = $this->getPlanets();
 
-        foreach ($channels as $channelName => $channelurl) {
-            //Returns videos
-            $videos = $this->getVideo($planetNames, $channelurl);
-            foreach ($videos as $video) {
-                //Checks if videos already exists in database
-                $data = $this->checkExists($video['name'], $video['path']);
-                if ($data == 1) {
-                    $output
-                        ->writeln(
-                            'Video: ' . $video['name'] .
-                            ' ,with path: ' . $video['path'] .
-                            ' alredy exists in database'
-                        );
-                    continue;
-                }
-                //Creates video's data
-                $data = $this->createVideos($video['name'], $video['path'], $channelName);
-                $this->getContainer()
-                    ->get('doctrine')
-                    ->getRepository('AppBundle:Video')
-                    ->save($data);//Saves that data
-                $output->writeln('Inserting ' . $video['name'] . ' video url... -> ' . $video['path']);
+        foreach ($planetNames as $planetName){
+            $video = $this->getVideo($planetName);
+
+            if ($video == null) {
+                $output->writeln('Didn\'t find video: '. $planetName);
+                continue;
+
             }
 
-            $output->writeln('All ' . $channelName . ' videos inserted!');
+            $data = $this->checkExists($planetName, $video);
+            $this->insertVideos($data);
+
+            $output->writeln('Inserting ' . $planetName . ' video... -> ' . $video);
         }
+
+        $output->writeln('All videos inserted!');
     }
 
     /**
      * @return array
      */
-    private function getKeyNames()
+    private function getPlanets()
     {
-        //Returns all planet
-        $planets = $this->getContainer()
+        $planet = $this->getContainer()
             ->get('doctrine')
             ->getRepository('AppBundle:Planet')
-            ->findPlanets();
+            ->createQueryBuilder('planet')
+            ->select('planet.name')
+            ->getQuery()
+            ->execute();//NEDS TO BE CHANGED, CANT GET METHOD FROM REPOSITORY
+
         $planetsNames = [];
-        foreach ($planets as $planet) {
-            //Saves planet keyNames in array
-            $planetsNames[] = $planet['keyName'];
+
+        foreach ($planet as $planets){
+            $planetsNames[] = $planets['name'];
         }
 
         return $planetsNames;
@@ -94,110 +80,86 @@ class ImportVideosCommand extends ContainerAwareCommand
 
     /**
      * @param $planetName
-     * @param $channelurl
-     * @return array
+     *
+     * @return null|string
      */
-    private function getVideo($planetName, $channelurl)
+    private function getVideo($planetName)
     {
-        $master = array();
-        //Return youtube Api key from parameters.yml
-        $apiKey = $this->getContainer()->getParameter('youtube_api_key');
-        //Gets videos id
-        $url = $this->getPaths($channelurl, $apiKey, $planetName);
-        foreach ($planetName as $key => $name) {
-            //checks if key exists, if in found data there are videos
-            if (isset($url[$key])) {
-                $items = $url[$key]['items'];
-                foreach ($items as $video) {
-                    //Creates array for each found video
-                    $videoId = $video['id']['videoId'];
-                    $videosPath = array(
-                        'name' => $name,
-                        'path' => "https://www.youtube.com/embed/" . $videoId
-                    );
-                    $master[] = $videosPath;
-                }
-            }
+        $url = $this->getData("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDzxAdrNX8XPi0L4EQQW3kBpUrnHXrbvkM&channelId=UCX6b17PVsYBQ0ip5gyeme-Q&part=id&order=date&maxResults=1&q=".$planetName);
+
+        if (isset($url['items'][0])) {
+                $videoid = $url['items'][0]['id']['videoId'];
+
+                return "https://www.youtube.com/embed/" . $videoid;
         }
 
-        return $master;
+        return null;
+
     }
 
     /**
      * @param $url
-     * @return mixed
+     *
+     * @return array
      */
-    //retruns json data
+
     private function getData($url)
     {
         $json = file_get_contents($url);
         $data = json_decode($json, true);
+
         return $data;
     }
 
     /**
      * @param $key
      * @param $url
-     * @param $channelName
+     *
      * @return Video
      */
-    //Creates videos that will be pushed to database
-    private function createVideos($key, $url, $channelName)
+
+    private function createVideos($key , $url)
     {
         $video = new Video();
-        $video->setKeyName($key)->setPath($url)->setChannelName($channelName);
+        $video
+            ->setKeyName($key)
+            ->setPath($url);
+
         return $video;
     }
 
     /**
-     * @param $name
-     * @param $path
-     * @return int|null
+     * @param Video $videos
      */
-    //Checks if videos already exists
-    private function checkExists($name, $path)
+
+    private function insertVideos(Video $videos)
     {
-        $em = $this->getContainer()
-            ->get('doctrine')
-            ->getManager();
-        $url = $em->getRepository('AppBundle:Video')
-            ->findOneBy(
-                array(
-                    'keyName' => $name,
-                    'path' => $path
-                )
-            );
-        if ($url == null) {
-            return null;
-        } else {
-            return 1;
-        }
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em->persist($videos);
+        $em->flush();
+
     }
 
     /**
+     * @param $name
      * @param $url
-     * @param $apiKey
-     * @param $planetName
-     * @return array
+     *
+     * @return Video
      */
-    //gets videos for every planet
-    private function getPaths($url, $apiKey, $planetName)
+    private function checkExists($name, $url)
     {
-        foreach ($planetName as $planet) {
-            $youtube = 'https://www.googleapis.com/youtube/v3/search?';
-            $channelPath[] = $this
-                ->getData(
-                    sprintf(
-                        '%skey=%s&channelId=%s&part=id&order=date&maxResults=4&q=%s',
-                        $youtube,
-                        $apiKey,
-                        $url,
-                        $planet
-                    )
-                );
-            $result = $channelPath;
+        $em = $this->getContainer()->get('doctrine')
+            ->getManager();
+
+        $video = $em->getRepository('AppBundle:Video')
+            ->findOneBykeyName($name);
+
+        if (!empty($video)){
+            $video->setpath($url);
+
+            return $video;
         }
 
-        return $result;
+            return $this->createVideos($name, $url);
     }
 }
