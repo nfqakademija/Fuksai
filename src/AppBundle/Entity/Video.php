@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Video
  * Class Video
@@ -20,6 +22,8 @@ class Video
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @UniqueEntity("keyName")
+     *
      */
     private $id;
 
@@ -37,7 +41,10 @@ class Video
      */
     private $keyName;
 
-
+    /**
+     * @ORM\Column(type="string", name="channelName")
+     */
+    private $channelName;
     /**
      * Get id
      *
@@ -94,5 +101,21 @@ class Video
     public function getKeyName()
     {
         return $this->keyName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChannelName()
+    {
+        return $this->channelName;
+    }
+
+    /**
+     * @param string $channelName
+     */
+    public function setChannelName($channelName)
+    {
+        $this->channelName = $channelName;
     }
 }

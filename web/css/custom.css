@@ -1,3 +1,7 @@
+.header #main {
+    background-image: url('../img/headers/header.jpg');
+}
+
 .btn-space {
     margin-bottom: -50px;
 }
@@ -32,6 +36,9 @@ h3 {
 .sideSearch {
     margin-top: 80px;
 }
+.videoSideSearch {
+    margin-top: 0px;
+}
 .news-img {
     height:150px !important;
     width:auto;
@@ -39,6 +46,3 @@ h3 {
 #news-bar {
     margin:0 10% 0 10%;
 }
-
-
-

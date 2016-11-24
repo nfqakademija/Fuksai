@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Faker\Provider\cs_CZ\DateTime;
 
 /**
- * Article
+ * PlanetArticle
  *
- * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
+ * @ORM\Table(name="planet_article")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetArticleRepository")
  */
-class Article
+class PlanetArticle
 {
     /**
      * @var integer
@@ -81,22 +81,6 @@ class Article
     //                      GETTERS AND SETTERS
 
     /**
-     * @return string
-     */
-    public function getPlanet(): string
-    {
-        return $this->planet;
-    }
-
-    /**
-     * @param string $planet
-     */
-    public function setPlanet(string $planet)
-    {
-        $this->planet = $planet;
-    }
-
-    /**
      * @param string $urlToImage
      */
     public function setUrlToImage($urlToImage)
@@ -129,8 +113,10 @@ class Article
     }
 
     /**
+     * Set url
+     *
      * @param string $url
-     */
+=     */
     public function setUrl($url)
     {
         $this->url = $url;
@@ -163,6 +149,22 @@ class Article
     }
 
     /**
+     * @param string $planet
+     */
+    public function setPlanet($planet)
+    {
+        $this->planet = $planet;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlanet()
+    {
+        return $this->planet;
+    }
+
+    /**
      * @param string $description
      */
     public function setDescription($description)
@@ -176,20 +178,6 @@ class Article
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param $newPublishDate
-     */
-    public function setPublishStringDate($newPublishDate)
-    {
-        // date string converted to a specific format
-        $pub_date = substr($newPublishDate, 0, 10);
-
-        // DateTime object converted from string
-        $pub_date = date_create_from_format('Y-m-d', $pub_date);
-
-        $this->publishDate = $pub_date;
     }
 
     /**
@@ -217,7 +205,7 @@ class Article
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -225,7 +213,7 @@ class Article
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
