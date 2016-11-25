@@ -42,12 +42,10 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
         $date = date_create(date('Y-m-d'));
         date_sub($date, date_interval_create_from_date_string('3 days'));
         $date = date_format($date, 'Y-m-d');
-
         $data = $this->getData(
             'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date='.$date
             .'&api_key='.$api_key
         );
-
         foreach ($data['photos'] as $element) {
             $image = new RoverPhoto();
 

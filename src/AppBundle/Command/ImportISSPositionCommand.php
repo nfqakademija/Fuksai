@@ -39,7 +39,6 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         $api_key = $this->getContainer()->getParameter('googlemaps_api_key');
 
         $data = $this->getData('https://api.wheretheiss.at/v1/satellites/25544');
-
         $lat = $data['latitude'];
         $long = $data['longitude'];
 
@@ -48,7 +47,6 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         );
 
         $em = $this->getEntityManager();
-
         if (!is_null($em->getRepository('AppBundle:ISS')->find(1))) {
             $iss = $em->getRepository('AppBundle:ISS')->find(1);
 
