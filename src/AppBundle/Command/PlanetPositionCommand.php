@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 
 use AppBundle\Entity\PlanetSchedule;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,11 +28,15 @@ class PlanetPositionCommand extends ContainerAwareCommand
     {
         $calculator = $this->getContainer()->get('app.calculator.rise_set_calculator');
         $schedule = $calculator->getRiseSet('vilnius');
+        $em = $this->getEntityManager();
 
         foreach ($schedule as $planet)
         {
-
+            $em->persist($planet);
+            $output->writeln("Planet data imported");
         }
+        $em->flush();
+        $output->writeln("Data flushed");
     }
 
     private function getData($url)
@@ -40,5 +45,16 @@ class PlanetPositionCommand extends ContainerAwareCommand
         $data = json_decode($json, true);
 
         return $data;
+    }
+
+    /**
+     * @return EntityManager
+     */
+    private function getEntityManager()
+    {
+        return $this
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
     }
 }

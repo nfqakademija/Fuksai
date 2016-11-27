@@ -53,7 +53,7 @@ class RiseSetCalculator
 
     /**
      * @param $city
-     * @return array
+     * @return PlanetSchedule[]
      */
     public function getRiseSet($city)
     {
