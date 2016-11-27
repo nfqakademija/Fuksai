@@ -216,10 +216,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $coordinates = $em->getRepository('AppBundle:ISS')->find(1);
-        //dump($coordinates); exit;
+        $apiKey = $this->getParameter('google_timezone_api_key');
 
         return $this->render('services/space_station.html.twig', [
-            'apiCall' => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDLb1IJhIOqiRZ0OnvjxFT7W270Z7LXIMQ&callback=initMap',
+            'apiCall' => 'https://maps.googleapis.com/maps/api/js?key='.$apiKey.'&callback=initMap',
             'lat' => $coordinates->getLatitude(),
             'long' => $coordinates->getLongitude(),
             'country' => $coordinates->getCountry(),
