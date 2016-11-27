@@ -17,11 +17,12 @@ class RiseSetCalculator
     private $planetMap = array(
         1 => 'Mercury',
         2 => 'Venus',
-        3 => 'Mars',
-        4 => 'Jupiter',
-        5 => 'Saturn',
-        6 => 'Uranus',
-        7 => 'Neptune',
+        3 => '',
+        4 => 'Mars',
+        5 => 'Jupiter',
+        6 => 'Saturn',
+        7 => 'Uranus',
+        8 => 'Neptune',
     );
 
     /**
@@ -52,88 +53,83 @@ class RiseSetCalculator
 
     /**
      * @param $city
-     * @return \AppBundle\Entity\PlanetSchedule[]|array
+     * @return array
      */
     public function getRiseSet($city)
     {
+        $wholeSchedule = array();
+
         $city = strtolower($city);
-        $cache = new FilesystemAdapter('', 24*3600, null);
 
         $today = date('Y-m-d');
 
-        for($i = 0; $i<7; $i++) {
+        for($i = 1; $i<=7; $i++) {
 
-            $object = $this->planetMap[$i];
-            $key = $city . $today . $object;
-
-            $planetScheduleItem = $cache->getItem($key);
-
-            if (!$planetScheduleItem->isHit()) {
-
-                $data = $this->getData('https://maps.googleapis.com/maps/api/geocode/json?address=' . $city);
-                $lat = $data['results'][0]['geometry']['location']['lat'];
-                $lng = $data['results'][0]['geometry']['location']['lng'];
-
-                $data = $this->getData('https://maps.googleapis.com/maps/api/timezone/json?location=' .
-                    $lat . ',' .
-                    $lng . '&timestamp=' .
-                    time() . '&key=' .
-                    $this->googleApiKey);
-                $timezone = $data['rawOffset'] / 3600;
-
-                $tz_sign = $this->getSign($timezone);
-                $timezone = abs($timezone);
-
-                $lat_sign = $this->getSign($lat);
-                $lat = abs($lat);
-
-                $lng_sign = $this->getSign($lng);
-                $lng = abs($lng);
-
-                $latitude = $this->parseCoordinates($lat);
-                $longitude = $this->parseCoordinates($lng);
-
-                $date_args = explode("-", $today);
-
-                $data = $this->getPlainData('http://aa.usno.navy.mil/cgi-bin/aa_mrst2.pl?form=2&ID=AA' .
-                    '&year=' . $date_args[0] .
-                    '&month=' . $date_args[1] .
-                    '&day=' . $date_args[2] .
-                    '&reps=1' .
-                    '&body=' . $i .
-                    '&place=mercury' .
-                    '&lon_sign=' . $lng_sign .
-                    '&lon_deg=' . $longitude['deg'] .
-                    '&lon_min=' . $longitude['min'] .
-                    '&lon_sec=1' .
-                    '&lat_sign=' . $lat_sign .
-                    '&lat_deg=' . $latitude['deg'] .
-                    '&lat_min=' . $latitude['min'] .
-                    '&lat_sec=1' .
-                    '&height=1' .
-                    '&tz=' . $timezone .
-                    '&tz_sign=' . $tz_sign);
-
-                $schedule = $this->parseResponse($data);
-
-                $planetSchedule = new PlanetSchedule();
-                $planetSchedule->setCity($city);
-                $planetSchedule->setDate($today);
-                $planetSchedule->setObject($object);
-                $planetSchedule->setLatitude($latitude);
-                $planetSchedule->setLongitude($longitude);
-                $planetSchedule->setTimezone($timezone);
-                $planetSchedule->setRise($schedule['rise']);
-                $planetSchedule->setFall($schedule['fall']);
-                $planetScheduleItem->set($planetSchedule);
-                $cache->save($planetScheduleItem);
-            } else {
-                $planetSchedule = $planetScheduleItem->get();
+            if ($i == 3) {
+                continue;
             }
 
-            $this->scheduleList[] = $planetSchedule;
+            $object = $this->planetMap[$i];
+
+            $data = $this->getData('https://maps.googleapis.com/maps/api/geocode/json?address=' . $city);
+            $lat = $data['results'][0]['geometry']['location']['lat'];
+            $lng = $data['results'][0]['geometry']['location']['lng'];
+
+            $data = $this->getData('https://maps.googleapis.com/maps/api/timezone/json?location=' .
+                $lat . ',' .
+                $lng . '&timestamp=' .
+                time() . '&key=' .
+                $this->googleApiKey);
+            $timezone = $data['rawOffset'] / 3600;
+
+            $tz_sign = $this->getSign($timezone);
+            $timezone = abs($timezone);
+
+            $lat_sign = $this->getSign($lat);
+            $lat = abs($lat);
+
+            $lng_sign = $this->getSign($lng);
+            $lng = abs($lng);
+
+            $latitude = $this->parseCoordinates($lat);
+            $longitude = $this->parseCoordinates($lng);
+
+            $date_args = explode("-", $today);
+
+            $data = $this->getPlainData('http://aa.usno.navy.mil/cgi-bin/aa_mrst2.pl?form=2&ID=AA' .
+                '&year=' . $date_args[0] .
+                '&month=' . $date_args[1] .
+                '&day=' . $date_args[2] .
+                '&reps=1' .
+                '&body=' . $i .
+                '&place=mercury' .
+                '&lon_sign=' . $lng_sign .
+                '&lon_deg=' . $longitude['deg'] .
+                '&lon_min=' . $longitude['min'] .
+                '&lon_sec=1' .
+                '&lat_sign=' . $lat_sign .
+                '&lat_deg=' . $latitude['deg'] .
+                '&lat_min=' . $latitude['min'] .
+                '&lat_sec=1' .
+                '&height=1' .
+                '&tz=' . $timezone .
+                '&tz_sign=' . $tz_sign);
+
+            $schedule = $this->parseResponse($data);
+
+            $planetSchedule = new PlanetSchedule();
+            $planetSchedule->setCity($city);
+            $planetSchedule->setDate($today);
+            $planetSchedule->setObject($object);
+            $planetSchedule->setLatitude($latitude);
+            $planetSchedule->setLongitude($longitude);
+            $planetSchedule->setTimezone($timezone);
+            $planetSchedule->setRise($schedule['rise']);
+            $planetSchedule->setFall($schedule['fall']);
+            $wholeSchedule[] = $planetSchedule;
         }
-        return $this->scheduleList;
+
+        return $wholeSchedule;
     }
 
     /**
@@ -143,7 +139,7 @@ class RiseSetCalculator
     private function parseResponse($response)
     {
         $result['rise'] = substr($response, 1421, 5);
-        $result['set'] = substr($response, 1455, 5);
+        $result['fall'] = substr($response, 1455, 5);
 
         return $result;
     }
@@ -166,7 +162,9 @@ class RiseSetCalculator
      */
     private function getSign($value)
     {
-        if($value < 0 ){return -1;}
+        if ($value < 0) {
+            return -1;
+        }
         return 1;
     }
 

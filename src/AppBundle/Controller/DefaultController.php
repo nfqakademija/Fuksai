@@ -110,7 +110,6 @@ class DefaultController extends Controller
         $calc = $this->get('app.calculator.rise_set_calculator');
         $calc->getRiseSet('vilnius');
 
-
         return $this->render(
             'nasaApi/test.html.twig',
             [
