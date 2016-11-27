@@ -21,7 +21,7 @@ class HomeController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $news = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('home/homepage.html.twig', [
+        return $this->render('default/homepage.html.twig', [
             'planets' => $planets,
             'news' => $news
         ]);

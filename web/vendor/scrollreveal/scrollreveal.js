@@ -92,7 +92,7 @@
             //            'onload' - delay only for animations triggered by first load
             useDelay    : 'always',
 
-            //            Change when an element is considered in the viewport. The home value
+            //            Change when an element is considered in the viewport. The default value
             //            of 0.20 means 20% of an element must be visible for its reveal to occur.
             viewFactor  : 0.2,
 
@@ -344,7 +344,7 @@
                 config.container = null;
             }
 
-            // Otherwise use <html> by home.
+            // Otherwise use <html> by default.
             if (container == null) {
                 config.container = window.document.documentElement;
             }
@@ -778,7 +778,7 @@
                 }
             }
 
-            // Otherwise, home to the window object’s scroll values.
+            // Otherwise, default to the window object’s scroll values.
             else {
                 return {
                     x : window.pageXOffset,
