@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    parent();
+    {{ parent() }}
     <style>
         #map {
             height: 400px;
@@ -54,7 +54,7 @@
 
                 <!-- Blog Post -->
 
-                <h3>My Google Maps Demo</h3>
+                <h3>Space Station right now is:</h3>
                 <div id="map"></div>
                 <script>
                     function initMap() {
@@ -72,6 +72,8 @@
                 <script async defer
                         src="{{  apiCall }}">
                 </script>
+
+                <iframe width="745" height="420" src="https://www.youtube.com/embed/ddFvjfvPnqk" frameborder="0" allowfullscreen></iframe>
 
                 <!-- Blog Comments -->
 
