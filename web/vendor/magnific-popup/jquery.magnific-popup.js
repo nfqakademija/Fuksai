@@ -1576,7 +1576,7 @@ $.magnificPopup.registerModule(IFRAME_NS, {
 
 		srcAction: 'iframe_src',
 
-		// we don't care and support only one default type of URL by default
+		// we don't care and support only one home type of URL by home
 		patterns: {
 			youtube: {
 				index: 'youtube.com',

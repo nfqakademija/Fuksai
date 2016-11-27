@@ -98,7 +98,7 @@ jQuery.fn = jQuery.prototype = {
 	// Start with an empty selector
 	selector: "",
 
-	// The default length of a jQuery object is 0
+	// The home length of a jQuery object is 0
 	length: 0,
 
 	toArray: function() {
@@ -944,7 +944,7 @@ function assert( fn ) {
 	} catch (e) {
 		return false;
 	} finally {
-		// Remove from its parent by default
+		// Remove from its parent by home
 		if ( div.parentNode ) {
 			div.parentNode.removeChild( div );
 		}
@@ -1981,7 +1981,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		"selected": function( elem ) {
-			// Accessing this property makes selected-by-default
+			// Accessing this property makes selected-by-home
 			// options in Safari work properly
 			if ( elem.parentNode ) {
 				elem.parentNode.selectedIndex;
@@ -2654,7 +2654,7 @@ support.sortStable = expando.split("").sort( sortOrder ).join("") === expando;
 // Always assume duplicates if they aren't passed to the comparison function
 support.detectDuplicates = !!hasDuplicate;
 
-// Initialize against the default document
+// Initialize against the home document
 setDocument();
 
 // Support: Webkit<537.32 - Safari 6.0.3/Chrome 25 (fixed in Chrome 27)
@@ -3170,7 +3170,7 @@ function createOptions( options ) {
  *	options: an optional list of space-separated options that will change how
  *			the callback list behaves or a more traditional option object
  *
- * By default a callback list will act like an event callback list and can be
+ * By home a callback list will act like an event callback list and can be
  * "fired" multiple times.
  *
  * Possible options:
@@ -4212,7 +4212,7 @@ jQuery.fn.extend( {
 	},
 
 	// Get a promise resolved when queues of a certain type
-	// are emptied (fx is the type by default)
+	// are emptied (fx is the type by home)
 	promise: function( type, obj ) {
 		var tmp,
 			count = 1,
@@ -5141,7 +5141,7 @@ jQuery.event = {
 		}
 		event.type = type;
 
-		// If nobody prevented the default action, do it now
+		// If nobody prevented the home action, do it now
 		if ( !onlyHandlers && !event.isDefaultPrevented() ) {
 
 			if (
@@ -5152,7 +5152,7 @@ jQuery.event = {
 
 				// Call a native DOM method on the target with the same name name as the event.
 				// Can't use an .isFunction() check here because IE6/7 fails that test.
-				// Don't do default actions on window, that's where global variables be (#6170)
+				// Don't do home actions on window, that's where global variables be (#6170)
 				if ( ontype && elem[ type ] && !jQuery.isWindow( elem ) ) {
 
 					// Don't re-trigger an onFOO event when we call its FOO() method
@@ -5994,7 +5994,7 @@ function fixCloneNodeIssues( src, dest ) {
 			dest.value = src.value;
 		}
 
-	// IE6-8 fails to return the selected option to the default selected
+	// IE6-8 fails to return the selected option to the home selected
 	// state when cloning options
 	} else if ( nodeName === "option" ) {
 		dest.defaultSelected = dest.selected = src.defaultSelected;
@@ -6452,7 +6452,7 @@ function actualDisplay( name, doc ) {
 }
 
 /**
- * Try to determine the default display value of an element
+ * Try to determine the home display value of an element
  * @param {String} nodeName
  */
 function defaultDisplay( nodeName ) {
@@ -6480,7 +6480,7 @@ function defaultDisplay( nodeName ) {
 			iframe.detach();
 		}
 
-		// Store the correct default display
+		// Store the correct home display
 		elemdisplay[ nodeName ] = display;
 	}
 
@@ -6770,7 +6770,7 @@ if ( window.getComputedStyle ) {
 		ret = computed ? computed[ name ] : undefined;
 
 		// Avoid setting ret to empty string here
-		// so we don't default to auto
+		// so we don't home to auto
 		if ( ret == null && style && style[ name ] ) {
 			ret = style[ name ];
 		}
@@ -6901,7 +6901,7 @@ function showHide( elements, show ) {
 			}
 
 			// Set elements which have been overridden with display: none
-			// in a stylesheet to whatever the default browser style is
+			// in a stylesheet to whatever the home browser style is
 			// for such an element
 			if ( elem.style.display === "" && isHidden( elem ) ) {
 				values[ index ] =
@@ -7036,7 +7036,7 @@ function getWidthOrHeight( elem, name, extra ) {
 
 jQuery.extend( {
 
-	// Add in style property hooks for overriding the default
+	// Add in style property hooks for overriding the home
 	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
@@ -7586,7 +7586,7 @@ function defaultPrefilter( elem, props, opts ) {
 		// animations on inline elements that are having width/height animated
 		display = jQuery.css( elem, "display" );
 
-		// Test default display if display is currently "none"
+		// Test home display if display is currently "none"
 		checkDisplay = display === "none" ?
 			jQuery._data( elem, "olddisplay" ) || defaultDisplay( elem.nodeName ) : display;
 
@@ -8155,13 +8155,13 @@ jQuery.fn.delay = function( time, type ) {
 	support.style = /top/.test( a.getAttribute( "style" ) );
 
 	// Make sure that URLs aren't manipulated
-	// (IE normalizes it by default)
+	// (IE normalizes it by home)
 	support.hrefNormalized = a.getAttribute( "href" ) === "/a";
 
-	// Check the default checkbox/radio value ("" on WebKit; "on" elsewhere)
+	// Check the home checkbox/radio value ("" on WebKit; "on" elsewhere)
 	support.checkOn = !!input.value;
 
-	// Make sure that a selected-by-default option has a working selected property.
+	// Make sure that a selected-by-home option has a working selected property.
 	// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
 	support.optSelected = opt.selected;
 
@@ -8446,7 +8446,7 @@ jQuery.extend( {
 					jQuery.nodeName( elem, "input" ) ) {
 
 					// Setting the type on a radio button after the value resets the value in IE8-9
-					// Reset value to default in case type is set after value during creation
+					// Reset value to home in case type is set after value during creation
 					var val = elem.value;
 					elem.setAttribute( "type", value );
 					if ( val ) {
@@ -8477,7 +8477,7 @@ jQuery.extend( {
 					// Support: IE<9
 					// Also clear defaultChecked/defaultSelected (if appropriate)
 					} else {
-						elem[ jQuery.camelCase( "default-" + name ) ] =
+						elem[ jQuery.camelCase( "home-" + name ) ] =
 							elem[ propName ] = false;
 					}
 
@@ -8508,7 +8508,7 @@ boolHook = {
 
 			// Support: IE<9
 			// Use defaultChecked and defaultSelected for oldIE
-			elem[ jQuery.camelCase( "default-" + name ) ] = elem[ name ] = true;
+			elem[ jQuery.camelCase( "home-" + name ) ] = elem[ name ] = true;
 		}
 		return name;
 	}
@@ -8535,7 +8535,7 @@ jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) 
 	} else {
 		attrHandle[ name ] = function( elem, name, isXML ) {
 			if ( !isXML ) {
-				return elem[ jQuery.camelCase( "default-" + name ) ] ?
+				return elem[ jQuery.camelCase( "home-" + name ) ] ?
 					name.toLowerCase() :
 					null;
 			}
@@ -8745,7 +8745,7 @@ if ( !support.hrefNormalized ) {
 // Accessing the selectedIndex property
 // forces the browser to respect setting selected
 // on the option
-// The getter ensures a default option is selected
+// The getter ensures a home option is selected
 // when in an optgroup
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
