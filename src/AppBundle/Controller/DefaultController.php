@@ -119,6 +119,19 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/riseset", name="rise_set_times")
+     */
+    public function showRiseSetTimes()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
+
+        return $this->render('services/rise_set.html.twig',[
+            'planets' => $planets,
+        ]);
+    }
+
+    /**
      * @Route("/events", name="upcoming_events")
      */
     public function upcomingEventsAction()

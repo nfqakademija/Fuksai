@@ -118,12 +118,12 @@ class RiseSetCalculator
             $schedule = $this->parseResponse($data);
 
             $planetSchedule = new PlanetSchedule();
-            $planetSchedule->setCity($city);
-            $planetSchedule->setDate($today);
             $planetSchedule->setObject($object);
-            $planetSchedule->setLatitude($latitude);
+            $planetSchedule->setCity($city);
             $planetSchedule->setLongitude($longitude);
+            $planetSchedule->setLatitude($latitude);
             $planetSchedule->setTimezone($timezone);
+            $planetSchedule->setDate($today);
             $planetSchedule->setRise($schedule['rise']);
             $planetSchedule->setFall($schedule['fall']);
             $wholeSchedule[] = $planetSchedule;

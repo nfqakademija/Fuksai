@@ -33,12 +33,16 @@ class PlanetPositionCommand extends ContainerAwareCommand
         foreach ($schedule as $planet)
         {
             $em->persist($planet);
-            $output->writeln("Planet data imported");
+            $output->writeln("Planet ". $planet->getObject() ." data imported");
         }
         $em->flush();
         $output->writeln("Data flushed");
     }
 
+    /**
+     * @param $url
+     * @return mixed
+     */
     private function getData($url)
     {
         $json = file_get_contents($url);
