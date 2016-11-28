@@ -2,96 +2,96 @@ AppBundle\Entity\Event:
       Event1:
           type: Observational:moon
           description: It’s very cool to see the last quarter moon just after it rises, around midnight. Just after the last quarter moon rises, its lighted portion is always facing downwards, more or less toward the horizon. Why? Because you’re on the midnight portion of Earth – with the sun below your feet – just as it’s below this moon.
-          date: "19:37 21/11/2016"
+          date: "2016-11-21"
           title: Moon position Last Quarter
           keyName: Last Quarter
       Event2:
           type: Observation:moon
           description: Phenomena
-          date: "12:08 21/11/2016"
+          date: "2016-11-26"
           title: Moon-Regulus 1.4° N
           keyName: Moon-Regulus
       Event3:
           type: Observation:moon
           description: The lunar nodes are the orbital nodes of the Moon – that is – the points where the orbit of the Moon crosses the ecliptic. The ascending node is where the moon crosses from south of the ecliptic to north of the ecliptic. The descending node is where it crosses from north of the ecliptic to south of the ecliptic.
-          date: "04:48 22/11/2016"
+          date: "2016-11-22"
           title: Moon Ascending Node
           keyName: Moon Ascending Node
       Event4:
           type: Observationa:mercury,saturn
           description: Mercury-Saturn 3.4° N
-          date: "20:48 23/11/2016"
+          date: "2016-11-23"
           title: Mercury-Saturn 3.4° N
           keyName: Mercury-Saturn 3.4° N
       Event5:
           type: Observation:moon,jupiter
           description: Moon-Jupiter 2.1° S
-          date: "03:47 25/11/2016"
+          date: "2016-11-25"
           title: Moon-Jupiter 2.1° S
           keyName: Moon-Jupiter 2.1° S
       Event6:
           type: Observation:moon
           description: Moon-Jupiter 2.1° S
-          date: "22:08 27/11/2016"
+          date: "2016-11-27"
           title: Moon-Jupiter 2.1° S
           keyName: Moon-Jupiter 2.1° S
       Event7:
            type: Observation:moon
            description: New moon
-           date: "14:18 29/11/2016"
+           date: "2016-11-29"
            title: New Moon
            keyName: New Moon
       Event8:
            type: Observation:venus
            description: Venus 43.2° E
-           date: "00:00 01/12/2016"
+           date: "2016-12-01"
            title: Venus 43.2° E
            keyName: Venus 43.2° E
       Event9:
            type: Observation:moon
            description: Moon South Dec 18.9° S
-           date: "21:56 01/12/2016"
+           date: "2016-12-01"
            title: Moon South Dec 18.9° S
            keyName: Moon South Dec 18.9° S
       Event10:
            type: Observation:moon,venus
            description: Moon South Dec 18.9° S
-           date: "14:34 03/12/2016"
+           date: "2016-12-03"
            title: Moon South Dec 18.9° S
            keyName: Moon South Dec 18.9° S
       Event11:
            type: Observation:moon,venus
            description: Moon South Dec 18.9° S
-           date: "14:34 03/12/2016"
+           date: "2016-12-03"
            title: Moon South Dec 18.9° S
            keyName: Moon South Dec 18.9° S
       Event12:
            type: Observation:moon,mars
            description: Moon-Mars 3.1° S
-           date: "12:39 05/12/2016"
+           date: "2016-12-05"
            title: Moon-Mars 3.1° S
            keyName: Moon-Mars 3.1° S
       Event13:
            type: Observation:moon
            description: Moon Descending Node
-           date: "19:35 06/12/2016"
+           date: "2016-12-06"
            title: Moon Descending Node
            keyName: Moon Descending Node
       Event14:
            type: Observation:moon
            description: First Quarter
-           date: "11:03 07/12/2016"
+           date: "2016-12-07"
            title: First Quarter
            keyName: First Quarter
       Event15:
            type: Observation:saturn
            description: Saturn Conjunction
-           date: "13:03 10/12/2016"
+           date: "2016-12-10"
            title: Saturn Conjunction
            keyName: Saturn Conjunction
       Event16:
            type: Observation:mercury
            description: Mercury Elongation 20.8° E
-           date: "05:59 11/12/2016"
+           date: "2016-12-11"
            title: Mercury Elongation 20.8° E
            keyName: Mercury Elongation 20.8° E

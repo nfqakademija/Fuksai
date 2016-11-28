@@ -19,7 +19,6 @@ class DummyData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         Fixtures::load(__DIR__.'/fixtures.yml', $manager);
-        Fixtures::load(__DIR__ . '/fixtures_articles.yml', $manager);
         Fixtures::load(__DIR__.'/event.yml', $manager);
     }
 }

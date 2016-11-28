@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Command\ImportAsteroidsCommand;
 use AppBundle\Command\ImportMarsPhotosCommand;
 use AppBundle\Command\ImportISSPosition ;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Feature\EventCalendar;
 
 /**
  * Class DefaultController
@@ -213,7 +215,13 @@ class DefaultController extends Controller
      */
     public function upcomingEventsAction()
     {
-        return $this->render('services/upcoming_events.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $calendar = new EventCalendar($em, 11, 2016);
+        $test = $calendar->AddEvents('2016-11-02');
+        dump($test);exit;
+        return $this->render('services/upcoming_events.html.twig',[
+            'test' => $test
+            ]);
     }
 
     /**

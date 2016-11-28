@@ -10,6 +10,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class Event
+ * @package AppBundle\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
+
+ */
 class Event
 {
     /**
