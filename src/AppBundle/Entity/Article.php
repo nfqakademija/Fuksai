@@ -25,13 +25,6 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="article_id", type="string")
-     */
-    private $articleId;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
     private $author;
@@ -39,7 +32,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="title")
      */
     private $title;
 
@@ -183,6 +176,11 @@ class Article
      */
     public function setPublishStringDate($newPublishDate)
     {
+        $pub_date = date('d/m/Y', strtotime($newPublishDate));
+
+        dump($pub_date);
+        exit;
+
         // date string converted to a specific format
         $pub_date = substr($newPublishDate, 0, 10);
 
@@ -230,21 +228,5 @@ class Article
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getArticleId(): string
-    {
-        return $this->articleId;
-    }
-
-    /**
-     * @param string $articleId
-     */
-    public function setArticleId(string $articleId)
-    {
-        $this->articleId = $articleId;
     }
 }
