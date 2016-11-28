@@ -155,15 +155,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/news/{articleID}", name="show_article")
-     * @param $articleID
+     * @Route("/news/{id}", name="show_article")
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArticle($articleID)
+    public function showArticle($id)
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
-        $article = $em->getRepository('AppBundle:Article')->findOneBy(['articleId' => $articleID]);
+        $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $id]);
 
         if (!$article) {
             throw $this->createNotFoundException('Ups! No article found!');

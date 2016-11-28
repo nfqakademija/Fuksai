@@ -76,12 +76,15 @@ class ImportNewsCommand extends ContainerAwareCommand
     private function getArticles()
     {
         $links = $this->getArticlesLinks();
+        $images = $this->getArticlesImages();
 
         $articles = [];
 
+        $i = 0;
+
         foreach ($links as $link) {
 
-            $articles = $this->getArticle($link->getUri());
+            $articles[] = $this->getArticle($link->getUri(), $images[$i++]);
 
         }
 
@@ -105,10 +108,29 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
+     * @return \Symfony\Component\DomCrawler\Link[]
+     */
+    private function getArticlesImages()
+    {
+        // string url converted to html
+        $html = file_get_contents('https://astronomynow.com/category/news/');
+
+        $crawler = new Crawler($html, 'https');
+
+        // array of the astronomy articles images
+        $images = $crawler->filter('div.mh-loop-thumb > a > img')->each(function (Crawler $node) {
+            return $node->attr('src');
+        });
+
+        return $images;
+    }
+
+    /**
      * @param $link
+     * @param $image
      * @return array
      */
-    private function getArticle($link)
+    private function getArticle($link, $image)
     {
         // string url converted to html
         $html = file_get_contents($link);
@@ -118,24 +140,19 @@ class ImportNewsCommand extends ContainerAwareCommand
         $crawler = new Crawler($html, 'https');
 
         $article['url'] = $link;
+        $article['urlToImage'] = $image;
         $article['title'] = $crawler->filter('header > h1')->text();
         $article['author'] = $crawler->filter('header > p > span > a.fn')->text();
         $article['publishDate'] = $crawler->filter('header > p > span > a')->text();
-
-        $article['urlToImage'] = $crawler->selectImage($crawler->filter(''.
-           'article img')->eq(0)->attr('alt'))->image()->getUri();
-
         $article['description'] = $crawler->filter('div.entry-content')->text();
 
         $imageCaptions = $crawler->filter('figcaption')->each(function (Crawler $node) {
             return $node->text();
         });
-
-        // remove image captions of the description from the article
+        // remove image captions from the article description
         foreach ($imageCaptions as $imageCaption) {
             $article['description'] = str_replace($imageCaption, "", $article['description']);
         }
-
 
         return $article;
     }
@@ -146,12 +163,10 @@ class ImportNewsCommand extends ContainerAwareCommand
      */
     private function createNewArticles($astronomyNews, $planetsNames)
     {
-        $repository = 'AppBundle:Article';
-
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomyNews as $astronomyArticle) {
 
-            if (!$this->checkArticleExistence($astronomyArticle, $repository)) {
+            if (!$this->checkArticleExistence($astronomyArticle)) {
                 $newArticle = $this->createArticle($astronomyArticle, $planetsNames);
                 $this->insertNewArticleToDB($newArticle);
             }
@@ -200,16 +215,19 @@ class ImportNewsCommand extends ContainerAwareCommand
 
     /**
      * @param $newArticle
-     * @param $repository
      * @return bool
      */
-    private function checkArticleExistence($newArticle, $repository)
+    private function checkArticleExistence($newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         // article got by article title
-        $oldArticle = $em->getRepository($repository)
-            ->findOneBytitle($newArticle['title']);
+        $oldArticle = $em->getRepository('AppBundle:Article')
+            ->findOneBy(
+                array(
+                    'title' => $newArticle['title'],
+                )
+            );
 
         if (!empty($oldArticle)) {
             return true;

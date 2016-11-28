@@ -32,14 +32,14 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="title")
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -67,7 +67,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $planet;
 
@@ -160,7 +160,7 @@ class Article
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = trim($description);
     }
 
     /**
@@ -176,18 +176,10 @@ class Article
      */
     public function setPublishStringDate($newPublishDate)
     {
-        $pub_date = date('d/m/Y', strtotime($newPublishDate));
-
-        dump($pub_date);
-        exit;
-
-        // date string converted to a specific format
-        $pub_date = substr($newPublishDate, 0, 10);
-
         // DateTime object converted from string
-        $pub_date = date_create_from_format('Y-m-d', $pub_date);
+        $pub_date = date('Y-m-d', strtotime($newPublishDate));
 
-        $this->publishDate = $pub_date;
+        $this->publishDate = new \DateTime($pub_date);
     }
 
     /**
