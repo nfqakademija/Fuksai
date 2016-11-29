@@ -2,78 +2,53 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * PlanetSchedule
- *
- * @ORM\Table(name="planet_schedule")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetScheduleRepository")
  */
 class PlanetSchedule
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="object", type="string", length=255, unique=false)
      */
     private $object;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255, unique=false)
      */
     private $city;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="longitude", type="float", length=255)
      */
     private $longitude;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="latitude", type="float", length=255)
      */
     private $latitude;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="timezone", type="integer")
      */
     private $timezone;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="date", type="string", length=255)
      */
     private $date;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="rise", type="string", length=255)
      */
     private $rise;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="fall", type="string", length=255)
      */
     private $fall;
 
@@ -117,11 +92,13 @@ class PlanetSchedule
      *
      * @param string $city
      *
-     * return PlanetSchedule
+     * @return PlanetSchedule
      */
     public function setCity($city)
     {
         $this->city = $city;
+
+        return $this;
     }
 
     /**
@@ -137,7 +114,7 @@ class PlanetSchedule
     /**
      * Set longitude
      *
-     * @param string $longitude
+     * @param float $longitude
      *
      * @return PlanetSchedule
      */
@@ -151,7 +128,7 @@ class PlanetSchedule
     /**
      * Get longitude
      *
-     * @return string
+     * @return float
      */
     public function getLongitude()
     {
@@ -161,7 +138,7 @@ class PlanetSchedule
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param float $latitude
      *
      * @return PlanetSchedule
      */
@@ -175,7 +152,7 @@ class PlanetSchedule
     /**
      * Get latitude
      *
-     * @return string
+     * @return float
      */
     public function getLatitude()
     {
