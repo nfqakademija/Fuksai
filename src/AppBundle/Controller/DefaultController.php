@@ -126,7 +126,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
-        return $this->render('services/rise_set.html.twig',[
+        return $this->render('services/rise_set.html.twig', [
             'planets' => $planets,
         ]);
     }

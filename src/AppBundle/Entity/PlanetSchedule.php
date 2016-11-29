@@ -255,4 +255,3 @@ class PlanetSchedule
         return $this->fall;
     }
 }
-

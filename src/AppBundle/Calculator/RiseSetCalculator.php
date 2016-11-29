@@ -63,7 +63,7 @@ class RiseSetCalculator
 
         $today = date('Y-m-d');
 
-        for($i = 1; $i<9; $i++) {
+        for ($i = 1; $i<9; $i++) {
             if ($i == 3) {
                 continue;
             }

@@ -8,7 +8,6 @@
 
 namespace AppBundle\Command;
 
-
 use AppBundle\Entity\PlanetSchedule;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -30,7 +29,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
         $schedule = $calculator->getRiseSet('vilnius');
         $em = $this->getEntityManager();
 
-        if(!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
+        if (!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
             $schedules = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
             foreach ($schedules as $planet) {
