@@ -72,7 +72,9 @@ class ImportNewsCommand extends ContainerAwareCommand
         return $planetsNames;
     }
 
-
+    /**
+     * @return array
+     */
     private function getArticles()
     {
         $links = $this->getArticlesLinks();
@@ -124,11 +126,11 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $link
-     * @param $image
+     * @param string $link
+     * @param string $image
      * @return array
      */
-    private function getArticle($link, $image)
+    private function getArticle(string $link, string $image)
     {
         // string url converted to html
         $html = file_get_contents($link);
@@ -142,24 +144,34 @@ class ImportNewsCommand extends ContainerAwareCommand
         $article['title'] = $crawler->filter('header > h1')->text();
         $article['author'] = $crawler->filter('header > p > span > a.fn')->text();
         $article['publishDate'] = $crawler->filter('header > p > span > a')->text();
-        $article['description'] = $crawler->filter('div.entry-content')->text();
+        $article['description'] = $this->getDescriptionWithoutImageCaptions($crawler);
+
+        return $article;
+    }
+
+    /**
+     * @param Crawler $crawler
+     * @return string
+     */
+    private function getDescriptionWithoutImageCaptions(Crawler $crawler)
+    {
+        $articleDescription = $crawler->filter('div.entry-content')->text();
 
         $imageCaptions = $crawler->filter('figcaption')->each(function (Crawler $node) {
             return $node->text();
         });
         // remove image captions from the article description
         foreach ($imageCaptions as $imageCaption) {
-            $article['description'] = str_replace($imageCaption, "", $article['description']);
+            $articleDescription = str_replace($imageCaption, "", $articleDescription);
         }
-
-        return $article;
+        return $articleDescription;
     }
 
     /**
      * @param $astronomyNews
      * @param $planetsNames
      */
-    private function createNewArticles($astronomyNews, $planetsNames)
+    private function createNewArticles(array $astronomyNews, array $planetsNames)
     {
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomyNews as $astronomyArticle) {
@@ -171,11 +183,11 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $article
-     * @param $planetsNames
+     * @param array $article
+     * @param array $planetsNames
      * @return Article
      */
-    private function createArticle($article, $planetsNames)
+    private function createArticle(array $article, array $planetsNames)
     {
         $newArticle = new Article();
 
@@ -199,9 +211,9 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $newArticle
+     * @param Article $newArticle
      */
-    private function insertNewArticleToDB($newArticle)
+    private function insertNewArticleToDB(Article $newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($newArticle);
@@ -209,10 +221,10 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $newArticle
+     * @param array $newArticle
      * @return bool
      */
-    private function checkArticleExistence($newArticle)
+    private function checkArticleExistence(array $newArticle)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 

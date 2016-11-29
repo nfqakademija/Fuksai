@@ -144,13 +144,17 @@ class DefaultController extends Controller
         $video = $em
             ->getRepository('AppBundle:Video')
             ->findOneBy(['keyName' => $planetName]);
+        $planetArticles = $em
+            ->getRepository('AppBundle:Article')
+            ->findBy(['planet' => $planetName]);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
         return $this->render('planet/planet.html.twig', [
             'planet' => $planet,
             'planetsList' => $planets,
-            'video' => $video
+            'video' => $video,
+            'planetArticles' => $planetArticles,
         ]);
     }
 

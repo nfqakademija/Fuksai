@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function findAll()
+    {
+        // get articles ordered by publish date
+        return $this->findBy([], ['publishDate' => 'DESC']);
+    }
 }
