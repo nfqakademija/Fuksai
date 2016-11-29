@@ -63,7 +63,7 @@ class RiseSetCalculator
 
         $today = date('Y-m-d');
 
-        for($i = 1; $i<8; $i++) {
+        for($i = 1; $i<9; $i++) {
             if ($i == 3) {
                 continue;
             }
@@ -90,8 +90,8 @@ class RiseSetCalculator
             $lng_sign = $this->getSign($lng);
             $lng = abs($lng);
 
-            $latitude = $this->parseCoordinates($lat);
-            $longitude = $this->parseCoordinates($lng);
+            $latitude = $this->floatToDeg($lat);
+            $longitude = $this->floatToDeg($lng);
 
             $date_args = explode("-", $today);
 
@@ -114,13 +114,13 @@ class RiseSetCalculator
                 '&tz=' . $timezone .
                 '&tz_sign=' . $tz_sign);
 
-            $schedule = $this->parseResponse($data);
+            $schedule = $this->parseResponse($data, $i);
 
             $planetSchedule = new PlanetSchedule();
             $planetSchedule->setObject($object);
             $planetSchedule->setCity($city);
-            $planetSchedule->setLongitude($longitude);
-            $planetSchedule->setLatitude($latitude);
+            $planetSchedule->setLongitude($this->degToFloat($longitude));
+            $planetSchedule->setLatitude($this->degToFloat($latitude));
             $planetSchedule->setTimezone($timezone);
             $planetSchedule->setDate($today);
             $planetSchedule->setRise($schedule['rise']);
@@ -135,10 +135,30 @@ class RiseSetCalculator
      * @param $response
      * @return mixed
      */
-    private function parseResponse($response)
+    private function parseResponse($response, $planetID)
     {
-        $result['rise'] = substr($response, 1421, 5);
-        $result['fall'] = substr($response, 1455, 5);
+        $substring1 = null;
+        $substring2 = null;
+
+        switch ($planetID) {
+            case 1:
+            case 2:
+            case 5:
+            case 8:
+                $substring1 = 1421;
+                $substring2 = 1455;
+                break;
+            case 4:
+            case 6:
+            case 7:
+                $substring1 = 1426;
+                $substring2 = 1460;
+                //var_dump(substr($response, 1426)); exit;
+                break;
+        }
+
+        $result['rise'] = substr($response, $substring1, 5);
+        $result['fall'] = substr($response, $substring2, 5);
 
         return $result;
     }
@@ -147,12 +167,22 @@ class RiseSetCalculator
      * @param $coordinate
      * @return mixed
      */
-    private function parseCoordinates($coordinate)
+    private function floatToDeg($coordinate)
     {
         $result['min'] = rtrim(round(($coordinate - floor($coordinate))/5*3, 2)*100, ".0");
         $result['deg'] = rtrim(floor($coordinate), ".0");
 
         return $result;
+    }
+
+    /**
+     * @param $coordinate
+     * @return string
+     */
+    private function degToFloat($coordinate)
+    {
+        $min = $coordinate['min']/300*5;
+        return rtrim($coordinate['deg'], ".0") + round($min, 2);
     }
 
     /**

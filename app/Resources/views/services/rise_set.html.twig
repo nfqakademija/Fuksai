@@ -1,2 +1,13 @@
-{% extends base.html.twig %}
+{% extends 'base.html.twig' %}
 
+{% block body %}
+<table>
+{% for planet in planets %}
+    <tr>
+        <td>{{ planet.getObject() }}</td>
+        <td>{{ planet.getRise() }}</td>
+        <td>{{ planet.getFall() }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

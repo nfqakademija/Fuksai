@@ -30,8 +30,18 @@ class PlanetPositionCommand extends ContainerAwareCommand
         $schedule = $calculator->getRiseSet('vilnius');
         $em = $this->getEntityManager();
 
-        foreach ($schedule as $planet)
-        {
+        if(!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
+            $schedules = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
+
+            foreach ($schedules as $planet) {
+                $em->remove($planet);
+            }
+            $em->flush();
+
+            $output->writeln('Table cleared');
+        }
+
+        foreach ($schedule as $planet) {
             $em->persist($planet);
             $output->writeln("Planet ". $planet->getObject() ." data imported");
         }
