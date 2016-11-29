@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    parent();
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -17,7 +27,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{ path('news_list') }}">News</a>
+                        <a href="#news">News</a>
                     </li>
                     <li>
                         <a href="#features">Features</a>
@@ -44,27 +54,24 @@
 
                 <!-- Blog Post -->
 
-                <!-- Title -->
-                <h1>{{ article.title }}</h1>
-
-                <!-- Author and Publish Date -->
-                <h6> {{ article.author }} | Published:  {{ article.getPublishDateInString }} </h6>
-
-
-                <!-- Preview Image -->
-                <img class="img-responsive" src="{{ article.urlToImage }}" alt="" >
-
-                <hr>
-
-                <!-- Post Content -->
-                <p>{{ article.description }}</p>
-                <p> <i> This article originally appeared on</i>
-                    <a href={{ article.url }}>
-                        The New York Times.
-                    </a>
-                </p>
-
-                <hr>
+                <h3>My Google Maps Demo</h3>
+                <div id="map"></div>
+                <script>
+                    function initMap() {
+                        var coordinates = {lat: {{ lat }}, lng: {{ long}}};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 4,
+                            center: coordinates
+                        });
+                        var marker = new google.maps.Marker({
+                            position: coordinates,
+                            map: map
+                        });
+                    }
+                </script>
+                <script async defer
+                        src="{{  apiCall }}">
+                </script>
 
                 <!-- Blog Comments -->
 
@@ -107,10 +114,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                {% for planetlist in planetsList %}
-                                <li><a href="{{ path('show_planet', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
-                                    {% endfor %}
-                                </li>
+
                             </ul>
                         </div>
                     </div>
