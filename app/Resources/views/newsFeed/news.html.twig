@@ -11,7 +11,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Sky Above Us</a>
+                <a class="navbar-brand" href="/">
+                    <img src="../../../../web/img/headers/header.jpg">
+                </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,18 +44,22 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
 
+                <header id="article-header" class="page-header">
+                    <h1 class="page-title">News</h1>
+                </header>
+
                 {% for article in articles %}
 
-                    <!-- Blog Post -->
-
                     <!-- Title -->
-                    <h1>{{ article.title }}</h1>
+                    <a id="article-title" href="{{ path('show_article', {'id': article.id}) }}">
+                        <h1 id="article-title">{{ article.title }}</h1>
+                    </a>
 
                     <!-- Author and Publish Date -->
-                    <h6> {{ article.author }} | Published: {{ article.getPublishDateInString }} </h6>
+                    <h6> Author: {{ article.author }} | Published: {{ article.getPublishDateInString }} </h6>
 
                     <!-- Preview Image -->
-                    <a href="{{ path('show_article', {'articleID': article.articleId}) }}">
+                    <a href="{{ path('show_article', {'id': article.id}) }}">
                         <img class="img-responsive" src="{{ article.urlToImage }}" alt="">
                     </a>
 

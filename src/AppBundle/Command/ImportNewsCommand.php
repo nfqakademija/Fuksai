@@ -83,9 +83,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         $i = 0;
 
         foreach ($links as $link) {
-
             $articles[] = $this->getArticle($link->getUri(), $images[$i++]);
-
         }
 
         return $articles;
@@ -165,7 +163,6 @@ class ImportNewsCommand extends ContainerAwareCommand
     {
         // go through all got astronomical news, check if article exists in DB and create one if it does not exist
         foreach ($astronomyNews as $astronomyArticle) {
-
             if (!$this->checkArticleExistence($astronomyArticle)) {
                 $newArticle = $this->createArticle($astronomyArticle, $planetsNames);
                 $this->insertNewArticleToDB($newArticle);
@@ -190,14 +187,12 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newArticle->setPublishStringDate($article['publishDate']);
 
         // go through all planet names and check if found planet name in title or description
-        // then set found planet name to new article otherwise set empty string
+        // then set found planet name to new article
         foreach ($planetsNames as $planetName) {
             if (preg_match('/\b'.$planetName.'\b/i', $article[''.
                 'title']) || preg_match('/\b'. $planetName .
                     '\b/i', $article['description'])) {
                 $newArticle->setPlanet($planetName);
-            } else {
-                $newArticle->setPlanet("");
             }
         }
         return $newArticle;

@@ -160,7 +160,10 @@ class Article
      */
     public function setDescription($description)
     {
-        $this->description = trim($description);
+        // description with removed whitespaces from the beginning and end of a description
+        $trimmedDescription = trim($description);
+
+        $this->description = $trimmedDescription;
     }
 
     /**

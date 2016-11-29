@@ -25,4 +25,3 @@ parameters:
     youtube_api_key: test_key
     nasa_api_key: test_key
     googlemaps_api_key: test_key
-    news_api_key: etst_key
