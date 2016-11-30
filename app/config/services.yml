@@ -4,6 +4,7 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.calculator.rise_set_calculator:
+        class: AppBundle\Calculator\RiseSetCalculator
+        arguments: ["@doctrine.orm.entity_manager", "%google_timezone_api_key%"]
+
