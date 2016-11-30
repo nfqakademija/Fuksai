@@ -7,24 +7,40 @@
 
 * [Project Description](#project-description)
 * [Requirements](#requirements)
-* [Team Members](#team-members)
+* [Prepare project](#download)
+* [Commands](#commands)
 
 # <a name="project-description"></a>Project Description
 
-SkyAboveUs is a web projecet developed for people who are interested in astronomy.
+SkyAboveUs is a web project developed for people who are interested in astronomy.
 
-# <a name="requirements"></a>Requirements
+# <a name="requirements"></a>Environment requirements
 
-* PHP >= 7.0.0
+* PHP (7.0)
+* MySQL
+* Composer
+* Symfony 3.1
 
-# <a name="team-members"></a>Team Members
+## <a name="download"></a>Download and prepare the project
 
-#### Team Mentor:
+1. Install [Git](https://git-scm.com/downloads)
+1. Clone repository 'git clone https://github.com/nfqakademija/Fuksai.git'
+1. cd 'fuksai'
+1. Get [Composer](https://getcomposer.org/download/)
+1. Run 'composer install'
 
-* Justas Vitaitis
+## Prepare database - run commands:
 
-#### Developers:
+1. php bin/console doctrine:schema:update
+1. php bin/console doctrine:fixtures:load
 
-* Artur Litvinavicius
-* Arnas Grigaliūnas
-* Dmitrij Voronov
+## Run project
+
+* php bin/console server:run
+
+## <a name="commands"></a>Commands should be scheduled
+
+* 'app:import:iss' should be executed once a minute
+* 'app:import:videos' should be executed /TODO
+* 'app:import:news' should be executed /TODO
+* 'app:planet-position' should be executed every day at 12:01 AM
