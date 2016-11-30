@@ -25,3 +25,4 @@ parameters:
     youtube_api_key: test_key
     nasa_api_key: test_key
     googlemaps_api_key: test_key
+    google_timezone_api_key: test_key

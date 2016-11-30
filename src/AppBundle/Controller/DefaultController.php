@@ -211,4 +211,83 @@ class DefaultController extends Controller
             'planetsList' => $planets,
         ]);
     }
+
+    /**
+     * @Route("/space_station", name="space_station")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showISS()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $coordinates = $em->getRepository('AppBundle:ISS')->find(1);
+        $apiKey = $this->getParameter('google_timezone_api_key');
+
+        return $this->render('services/space_station.html.twig', [
+            'apiCall' => 'https://maps.googleapis.com/maps/api/js?key='.$apiKey.'&callback=initMap',
+            'lat' => $coordinates->getLatitude(),
+            'long' => $coordinates->getLongitude(),
+            'country' => $coordinates->getCountry(),
+        ]);
+    }
+
+    /**
+     * @Route("/events", name="upcoming_events")
+     */
+    public function upcomingEventsAction()
+    {
+        return $this->render('services/upcoming_events.html.twig');
+    }
+
+    /**
+     * @Route("/articles", name="astronomical_articles")
+     */
+    public function astronomicalArticlesAction()
+    {
+
+        return $this->render('services/articles.html.twig');
+    }
+
+    /**
+     * @Route("/astronomy-picture", name="astronomy_picture")
+     */
+    public function astronomyPictureAction()
+    {
+
+        return $this->render('services/picture_of_the_day.html.twig');
+    }
+
+    /**
+     * @Route("/solar-system-display", name="solar_system_display")
+     */
+    public function solarSystemDisplayAction()
+    {
+
+        return $this->render('services/solar_system_display.html.twig');
+    }
+
+    /**
+     * @Route("/constellation-display", name="constellation_display")
+     */
+    public function constellationDisplayAction()
+    {
+        return $this->render('services/constellation.html.twig');
+    }
+
+    /**
+     * @Route("/constellation-position-calculator", name="constellation_position_calculator")
+     */
+    public function constellationPositionCalculatorAction()
+    {
+
+        return $this->render('services/constellation_calculator.html.twig');
+    }
+
+    /**
+     * @Route("/planet-position-calculator", name="planet_position_calculator")
+     */
+    public function planetPositionCalculatorAction()
+    {
+
+        return $this->render('services/planet_calculator.html.twig');
+    }
 }
