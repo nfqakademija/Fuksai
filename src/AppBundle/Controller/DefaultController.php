@@ -2,16 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Command\ImportAsteroidsCommand;
-use AppBundle\Command\ImportMarsPhotosCommand;
-use AppBundle\Command\ImportISSPosition ;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Class DefaultController
- *
  * @package AppBundle\Controller
  */
 class DefaultController extends Controller
@@ -31,6 +26,7 @@ class DefaultController extends Controller
             'news' => $news
         ]);
     }
+<<<<<<< HEAD
 
     /**
      * @Route("/videos/{currentPage}", name="viewing_all_videos")
@@ -290,4 +286,6 @@ class DefaultController extends Controller
 
         return $this->render('services/planet_calculator.html.twig');
     }
+=======
+>>>>>>> master
 }
