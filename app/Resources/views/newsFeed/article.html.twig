@@ -42,25 +42,24 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
 
-                <!-- Blog Post -->
-
                 <!-- Title -->
                 <h1>{{ article.title }}</h1>
 
                 <!-- Author and Publish Date -->
-                <h6> {{ article.author }} | Published:  {{ article.getPublishDateInString }} </h6>
+                <h6> Author: {{ article.author }} | Published:  {{ article.getPublishDateInString }} </h6>
 
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="{{ article.urlToImage }}" alt="" >
+                <img class="img-responsive" src="{{ article.urlToImage }}" alt="" style='height: 100%; width: 100%; object-fit: contain' >
 
                 <hr>
 
                 <!-- Post Content -->
-                <p>{{ article.description }}</p>
+                <p>{{ article.description|nl2br|nl2br }}</p>
+
                 <p> <i> This article originally appeared on</i>
                     <a href={{ article.url }}>
-                        The New York Times.
+                        Astronomy Now.
                     </a>
                 </p>
 

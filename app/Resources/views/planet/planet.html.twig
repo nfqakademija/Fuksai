@@ -75,22 +75,14 @@
 
                             <div class="well">
                                 <div id="planetArticle" class="carousel slide">
-
-                                    <!-- Indicators -->
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#planetArticle" data-slide-to="0" class="active"></li>
-                                        <li data-target="#planetArticle" data-slide-to="1"></li>
-                                        <li data-target="#planetArticle" data-slide-to="2"></li>
-                                        <li data-target="#planetArticle" data-slide-to="3"></li>
-                                    </ol>
-
+                                    
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
                                         <div class="item active">
                                             <div class="row">
                                                 {% for i in 0..3 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
                                                             <!-- Title -->
                                                             <h5>{{ planetArticles[i].title }}</h5>
                                                         </div>
@@ -104,7 +96,7 @@
                                             <div class="row">
                                                 {% for i in 4..7 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
                                                             <!-- Title -->
                                                             <h5>{{ planetArticles[i].title }}</h5>
                                                         </div>
@@ -118,7 +110,7 @@
                                             <div class="row">
                                                 {% for i in 8..11 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'articleID': planetArticles[i].articleId}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
+                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
                                                             <!-- Title -->
                                                             <h5>{{ planetArticles[i].title }}</h5>
                                                         </div>
