@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="AppBundle\Repository\PlanetScheduleRepository" name="AppBundle\Entity\PlanetSchedule">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="object" type="string" column="object" length="255"/>
+    <field name="city" type="string" column="city" length="255"/>
+    <field name="longitude" type="float" column="longitude"/>
+    <field name="latitude" type="float" column="latitude"/>
+    <field name="timezone" type="integer" column="timezone"/>
+    <field name="date" type="string" column="date" length="255"/>
+    <field name="rise" type="string" column="rise" length="255"/>
+    <field name="fall" type="string" column="fall" length="255"/>
+  </entity>
+</doctrine-mapping>
