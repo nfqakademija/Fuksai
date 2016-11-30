@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.11.13
- * Time: 20.40
- */
 
 namespace AppBundle\Command;
 
@@ -61,6 +55,10 @@ class ImportISSPositionCommand extends ContainerAwareCommand
             }
         } else {
             $iss = new ISS();
+            $iss->setLatitude(1);
+            $iss->setLongitude(1);
+            $iss->setCountry('Some country');
+            $iss->setMapUrl('aaa');
             $em->persist($iss);
         }
 

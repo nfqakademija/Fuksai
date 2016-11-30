@@ -92,3 +92,18 @@ header.carousel .fill {
     font-size: 100px;
     top: 200px;
 }
+
+/* articles in news page */
+#article-title {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #000 ;
+}
+
+#article-header {
+    background: #f5f5f5;
+}
+
+#article-header h1 {
+    color: #000;
+    margin: auto;
+}

@@ -9,42 +9,28 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
 
+                <header id="article-header" class="page-header">
+                    <h1 class="page-title">News</h1>
+                </header>
+
                 {% for planetArticle in planetArticles %}
 
-                    <!-- Blog Post -->
-
                     <!-- Title -->
-                    <h1>{{ planetArticle.title }}</h1>
+                    <a id="article-title" href="{{ path('show_article', {'id': planetArticle.id}) }}">
+                        <h1 id="article-title">{{ planetArticle.title }}</h1>
+                    </a>
 
                     <!-- Author and Publish Date -->
-                    <h6> {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateInString }} </h6>
+                    <h6> Author: {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateInString }} </h6>
 
                     <!-- Preview Image -->
-                    <a href="{{ path('show_article', {'articleID': planetArticle.articleId}) }}">
+                    <a href="{{ path('show_article', {'id': planetArticle.id}) }}">
                         <img class="img-responsive" src="{{ planetArticle.urlToImage }}" alt="">
                     </a>
 
                     <hr>
 
                 {% endfor %}
-
-
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
-                <hr>
-
 
             </div>
 

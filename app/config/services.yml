@@ -4,6 +4,7 @@ parameters:
 #    parameter_name: value
 
 services:
-    calendar:
-        class: AppBundle\Feature\EventCalendar
-        arguments: ["@doctrine.orm.entity_manager", "month", "year"]
+    app.calculator.rise_set_calculator:
+        class: AppBundle\Calculator\RiseSetCalculator
+        arguments: ["@doctrine.orm.entity_manager", "%google_timezone_api_key%"]
+

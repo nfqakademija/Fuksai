@@ -80,7 +80,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" id="news">
             <div class="item active">
-                <a href="{{ path('show_article', {'articleID': news[0].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[0].id}) }}">
                     <div class="fill" style="background-image:url({{ news[0].urlToImage }}); "></div>
                 </a>
                 <div class="carousel-caption">
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[1].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[1].id}) }}">
                     <div class="fill" style="background-image:url({{ news[1].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[2].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[2].id}) }}">
                     <div class="fill" style="background-image:url({{ news[2].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[3].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[3].id}) }}">
                     <div class="fill" style="background-image:url({{ news[3].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[4].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[4].id}) }}">
                     <div class="fill" style="background-image:url({{ news[4].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div class="item">
-                <a href="{{ path('show_article', {'articleID': news[5].articleId}) }}">
+                <a href="{{ path('show_article', {'id': news[5].id}) }}">
                     <div class="fill" style="background-image:url({{ news[5].urlToImage }});"></div>
                 </a>
                 <div class="carousel-caption">
@@ -151,9 +151,7 @@
             <div class="row" >
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('upcoming_events') }}">
-                            <i class="fa fa-4x fa-adjust text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-adjust text-primary sr-icons"></i>
                         <h3>Upcoming astronomical events</h3>
                         <p class="text-muted">Be aware of the eclipses, meteor showers, meteor falls, solstice and much more!</p>
                     </div>
@@ -169,7 +167,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('astronomical_articles') }}">
+                        <a href="{{ path('news_list') }}">
                             <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
                         </a>
                         <h3>Interesting articles</h3>
@@ -178,9 +176,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('astronomy_picture') }}">
-                            <i class="fa fa-4x fa-picture-o text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-picture-o text-primary sr-icons"></i>
                         <h3>Astronomy picture of the day</h3>
                         <p class="text-muted">See a new high quality picture along with a brief explanation of that!</p>
                     </div>
@@ -190,36 +186,28 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('solar_system_display') }}">
-                            <i class="fa fa-4x fa-sun-o text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-sun-o text-primary sr-icons"></i>
                         <h3>Solar system display</h3>
                         <p class="text-muted">See the general view of our solar system displayed dynamically!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('constellation_display') }}">
-                            <i class="fa fa-4x fa-star text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-star text-primary sr-icons"></i>
                         <h3>Constellation display</h3>
                         <p class="text-muted">See how constellations look in the sky or how they will look after some time!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('constellation_position_calculator') }}">
-                            <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
                         <h3>Constellation position calculator</h3>
                         <p class="text-muted">Find out when the certain constellation will appear in the sky above you!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="{{ path('planet_position_calculator') }}">
-                            <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
-                        </a>
+                        <i class="fa fa-4x fa-calculator text-primary sr-icons"></i>
                         <h3>Planet position calculator</h3>
                         <p class="text-muted">Find out when the certain planet will appear in the sky above certain place!</p>
                     </div>

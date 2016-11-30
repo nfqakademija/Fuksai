@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: artur
- * Date: 11/10/16
- * Time: 9:46 AM
- */
-
 namespace AppBundle\Command;
 
 use AppBundle\Entity\Planet;

@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -44,20 +54,41 @@
 
                 <!-- Blog Post -->
 
-                <!-- Title -->
-                <h1>{{ planet.name }}</h1>
-                <h6>{{ planet.namedAs }}</h6>
+                <h3>Space Station right now is:</h3>
+                <div id="map"></div>
+                <script>
+                    function initMap() {
+                        var coordinates = {lat: {{ lat }}, lng: {{ long}}};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 4,
+                            center: coordinates
+                        });
+                        var marker = new google.maps.Marker({
+                            position: coordinates,
+                            map: map
+                        });
+                    }
+                </script>
+                <script async defer
+                        src="{{  apiCall }}">
+                </script>
 
-                <!-- Author -->
-                <p>
-                    by Fuksai
-                </p>
+                <iframe width="745" height="420" src="https://www.youtube.com/embed/ddFvjfvPnqk" frameborder="0" allowfullscreen></iframe>
+
+                <!-- Blog Comments -->
+
+                <!-- Comments Form -->
+                <div class="well">
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
 
                 <hr>
-
-                {% for videos in video %}
-                    <iframe  src= {{ videos.path }} frameborder="0" allowfullscreen></iframe>
-                {% endfor %}
 
 
             </div>
@@ -78,32 +109,32 @@
                     </div>
                     <!-- /.input-group -->
                 </div>
+
+                <!-- Blog Categories Well -->
                 <div class="well">
                     <h4>Categories</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                {% for planetlist in planetsList %}
-                                <li><a href="{{ path('show_videos_by_name', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
-                                    {% endfor %}
-                                </li>
+
                             </ul>
                         </div>
                     </div>
                     <!-- /.row -->
                 </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy;Sky Above Us</p>
+                    <p>Copyright &copy;SkyAboveUs</p>
                 </div>
             </div>
             <!-- /.row -->
         </footer>
-
-            </div>
-        </div>
     </div>
 {% endblock %}
-
