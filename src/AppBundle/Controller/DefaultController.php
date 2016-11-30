@@ -210,19 +210,19 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/events", name="upcoming_events")
-     */
-    public function upcomingEventsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $calendar = new EventCalendar($em, 11, 2016);
-        $test = $calendar->AddEvents('2016-11-02');
-        dump($test);exit;
-        return $this->render('services/upcoming_events.html.twig',[
-            'test' => $test
-            ]);
-    }
+//    /**
+//     * @Route("/events", name="upcoming_events")
+//     */
+//    public function upcomingEventsAction()
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $calendar = new EventCalendar($em, 11, 2016);
+//        $test = $calendar->AddEvents('2016-11-02');
+//        dump($test);exit;
+//        return $this->render('services/upcoming_events.html.twig',[
+//            'test' => $test
+//            ]);
+//    }
 
     /**
      * @Route("/articles", name="astronomical_articles")

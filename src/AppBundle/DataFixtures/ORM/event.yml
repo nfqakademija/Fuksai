@@ -37,7 +37,7 @@ AppBundle\Entity\Event:
           keyName: Moon-Jupiter 2.1° S
       Event7:
            type: Observation:moon
-           description: New moon
+           description: The Moon will located on the same side of the Earth as the Sun and will not be visible in the night sky. This phase occurs at 12:18 UTC. This is the best time of the month to observe faint objects such as galaxies and star clusters because there is no moonlight to interfere.
            date: "2016-11-29"
            title: New Moon
            keyName: New Moon
@@ -91,7 +91,7 @@ AppBundle\Entity\Event:
            keyName: Saturn Conjunction
       Event16:
            type: Observation:mercury
-           description: Mercury Elongation 20.8° E
+           description: The planet Mercury reaches greatest eastern elongation of 20.8 degrees from the Sun. This is the best time to view Mercury since it will be at its highest point above the horizon in the evening sky. Look for the planet low in the western sky just after sunset.
            date: "2016-12-11"
-           title: Mercury Elongation 20.8° E
+           title: Mercury at Greatest Eastern Elongation
            keyName: Mercury Elongation 20.8° E

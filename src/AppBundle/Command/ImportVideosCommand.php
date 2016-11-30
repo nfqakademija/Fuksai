@@ -61,7 +61,7 @@ class ImportVideosCommand extends ContainerAwareCommand
                     continue;
                 }
                 //Creates video's data
-                $data = $this->createVideos($video['name'], $video['path'], $channelName);
+                $data = $this->createVideos($video['name'], $video['path'], $channelName, $video['image'], $video['title'], $video['description'] );
                 $this->getContainer()
                     ->get('doctrine')
                     ->getRepository('AppBundle:Video')
@@ -111,9 +111,15 @@ class ImportVideosCommand extends ContainerAwareCommand
                 foreach ($items as $video) {
                     //Creates array for each found video
                     $videoId = $video['id']['videoId'];
+                    $videoImage = $video['snippet']['thumbnails']['medium']['url'];
+                    $videoTitle = $video['snippet']['title'];
+                    $videoDescription = $video['snippet']['description'];
                     $videosPath = array(
                         'name' => $name,
-                        'path' => "https://www.youtube.com/embed/" . $videoId
+                        'path' => "https://www.youtube.com/embed/" . $videoId,
+                        'image' => $videoImage,
+                        'title' => $videoTitle,
+                        'description' => $videoDescription
                     );
                     $master[] = $videosPath;
                 }
@@ -139,13 +145,23 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $key
      * @param $url
      * @param $channelName
+     * @param $image
+     * @param $title
+     * @param $description
      * @return Video
      */
     //Creates videos that will be pushed to database
-    private function createVideos($key, $url, $channelName)
+    private function createVideos($key, $url, $channelName, $image, $title, $description)
     {
         $video = new Video();
-        $video->setKeyName($key)->setPath($url)->setChannelName($channelName);
+        $video
+            ->setKeyName($key)
+            ->setPath($url)
+            ->setChannelName($channelName)
+            ->setImage($image)
+            ->setTitle($title)
+            ->setDescription($description);
+
         return $video;
     }
 
@@ -188,7 +204,7 @@ class ImportVideosCommand extends ContainerAwareCommand
             $channelPath[] = $this
                 ->getData(
                     sprintf(
-                        '%skey=%s&channelId=%s&part=id&order=date&maxResults=4&q=%s',
+                        '%skey=%s&channelId=%s&part=snippet&order=date&maxResults=4&q=%s',
                         $youtube,
                         $apiKey,
                         $url,
