@@ -19,6 +19,9 @@ class PlanetsController extends Controller
     public function planetAction($planetName)
     {
         $em = $this->getDoctrine()->getManager();
+        $planetsArticles = $em
+            ->getRepository('AppBundle:Article')
+            ->findBy(['planet' => $planetName]);
         $planets = $em
             ->getRepository('AppBundle:Planet')
             ->findAll();
@@ -34,7 +37,8 @@ class PlanetsController extends Controller
         return $this->render('planet/planet.html.twig', [
             'planet' => $planet,
             'planetsList' => $planets,
-            'video' => $video
+            'video' => $video,
+            'planetArticles' => $planetsArticles
         ]);
     }
 }
