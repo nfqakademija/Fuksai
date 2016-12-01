@@ -20,7 +20,7 @@ h3 {
 }
 
 .section-heading{
-    font-family: 'Bevan', cursive;
+    font-family: 'Bitstream Charter', sans-serif;
     text-shadow: 4px 4px 4px #aaa;
     font-size: 60px;
 }
@@ -45,4 +45,8 @@ h3 {
 }
 #news-bar {
     margin:0 10% 0 10%;
+}
+#planets {
+    margin-top: 80px;
+    margin-bottom: 40px;
 }

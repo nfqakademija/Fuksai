@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Events
+            </h1>
+        </div>
+    </div>
+
+    <!-- /.row -->
+
+    <div class="container feature-page">
+        <div class="row">
+            <div class="col-lg-8">
+                {% for event in events %}
+                    <div class="col-md-6 portfolio-item" style="min-height: 350px;">
+                        <h2>
+                            Event: {{ event.keyName }}
+                        </h2>
+                        <h4> Title: {{ event.title }} </h4>
+                        <p> Date: {{ event.date }}</p>
+                        <p> Description: {{ event.description }} </p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <div class="well videoSideSearch">
+                    <h4>Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- /.row -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Sky Above Us</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </footer>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for planet in planets %}
+        <p>{{ planet.name }}</p> </<br>
+    {% endfor %}
+{% endblock %}

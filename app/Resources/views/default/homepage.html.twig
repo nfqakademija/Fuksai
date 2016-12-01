@@ -1,4 +1,22 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Sky above us{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')  }}" rel="stylesheet" >
+        <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/creative.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/news.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Bevan" rel="stylesheet" type="text/css">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% endblock %}
+</head>
 
 {% block body %}
     <body id="page-top">
@@ -17,16 +35,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#news">NEWS</a>
+                        <a href="{{ path('news_list') }}">NEWS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#features">FEATURES</a>
+                        <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#planets">PLANETS</a>
+                        <a href={{ path('view_all_planets') }}>PLANETS</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contacts">CONTACT US</a>
+                        <a href={{ path('view_events') }}>EVENTS</a>
                     </li>
                 </ul>
             </div>
@@ -120,7 +138,7 @@
         </a>
     </header>
 
-    <section id="features">
+    {#<section id="features">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -197,7 +215,7 @@
             </div>
         </div>
 
-    </section>
+    </section>#}
 
     <div class="container" id="planets">
         <div class="row">
@@ -246,7 +264,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:ICanSee@YouNaked.com">emailEmail@gmail.com</a></p>
+                    <p><a href="mailto:ICanStill@SeeYouNaked.com">emailEmail@gmail.com</a></p>
                 </div>
             </div>
         </div>
