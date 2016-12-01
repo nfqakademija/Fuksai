@@ -54,7 +54,14 @@ class ImportVideosCommand extends ContainerAwareCommand
                     continue;
                 }
                 //Creates video's data
-                $data = $this->createVideos($video['name'], $video['path'], $channelName, $video['image'], $video['title'], $video['description'] );
+                $data = $this->createVideos(
+                    $video['name'],
+                    $video['path'],
+                    $channelName,
+                    $video['image'],
+                    $video['title'],
+                    $video['description']
+                );
                 $this->getContainer()
                     ->get('doctrine')
                     ->getRepository('AppBundle:Video')
