@@ -42,5 +42,5 @@ SkyAboveUs is a web project developed for people who are interested in astronomy
 
 * 'app:import:iss' should be executed once a minute
 * 'app:import:videos' should be executed /TODO
-* 'app:import:news' should be executed /TODO
+* 'app:import:news' should be executed once an hour
 * 'app:planet-position' should be executed every day at 12:01 AM
