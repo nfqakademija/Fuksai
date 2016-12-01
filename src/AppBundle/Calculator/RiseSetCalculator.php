@@ -25,15 +25,6 @@ class RiseSetCalculator
         8 => 'Neptune',
     );
 
-    /**
-     * @var PlanetSchedule[]
-     */
-    private $scheduleList;
-
-    /**
-     * @var EntityManager
-     */
-    private $em;
 
     /**
      * @var string
@@ -42,12 +33,10 @@ class RiseSetCalculator
 
     /**
      * RiseSetCalculator constructor.
-     * @param EntityManager $em
      * @param string $googleApiKey
      */
-    public function __construct(EntityManager $em, $googleApiKey)
+    public function __construct($googleApiKey)
     {
-        $this->em = $em;
         $this->googleApiKey = $googleApiKey;
     }
 
@@ -133,10 +122,12 @@ class RiseSetCalculator
 
     /**
      * @param $response
+     * @param $planetID
      * @return mixed
      */
     private function parseResponse($response, $planetID)
     {
+        $result = array();
         $substring1 = null;
         $substring2 = null;
 
@@ -153,7 +144,6 @@ class RiseSetCalculator
             case 7:
                 $substring1 = 1426;
                 $substring2 = 1460;
-                //var_dump(substr($response, 1426)); exit;
                 break;
         }
 
@@ -169,6 +159,8 @@ class RiseSetCalculator
      */
     private function floatToDeg($coordinate)
     {
+        $result = array();
+
         $result['min'] = rtrim(round(($coordinate - floor($coordinate))/5*3, 2)*100, ".0");
         $result['deg'] = rtrim(floor($coordinate), ".0");
 

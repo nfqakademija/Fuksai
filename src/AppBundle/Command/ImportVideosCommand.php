@@ -199,6 +199,8 @@ class ImportVideosCommand extends ContainerAwareCommand
     //gets videos for every planet
     private function getPaths($url, $apiKey, $planetName)
     {
+        $result = array();
+        $channelPath = array();
         foreach ($planetName as $planet) {
             $youtube = 'https://www.googleapis.com/youtube/v3/search?';
             $channelPath[] = $this

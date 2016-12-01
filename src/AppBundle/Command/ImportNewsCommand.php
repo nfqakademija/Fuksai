@@ -102,7 +102,7 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Symfony\Component\DomCrawler\Link[]
+     * @return \Symfony\Component\DomCrawler\Link
      */
     private function getArticlesImages()
     {
