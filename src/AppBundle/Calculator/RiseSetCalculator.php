@@ -27,16 +27,25 @@ class RiseSetCalculator
 
 
     /**
+     * @var PlanetSchedule[]
+     */
+    private $scheduleList;
+    /**
+     * @var EntityManager
+     */
+    private $em;
+    /**
      * @var string
      */
     private $googleApiKey;
-
     /**
      * RiseSetCalculator constructor.
+     * @param EntityManager $em
      * @param string $googleApiKey
      */
-    public function __construct($googleApiKey)
+    public function __construct(EntityManager $em, $googleApiKey)
     {
+        $this->em = $em;
         $this->googleApiKey = $googleApiKey;
     }
 
