@@ -41,4 +41,18 @@ class PlanetsController extends Controller
             'planetArticles' => $planetsArticles
         ]);
     }
+
+    /**
+     * @Route("/planet/list", name="view_all_planets")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function planetList()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+
+        return $this->render(':planet:view_all_planets.html.twig', [
+           'planets' => $planets
+        ]);
+    }
 }
