@@ -2,56 +2,61 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * PlanetSchedule
+ * @ORM\Table(name="PlanetSchedule")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanetScheduleRepository")
  */
 class PlanetSchedule
 {
     /**
-     * @var int
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $object;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $city;
 
     /**
-     * @var float
+     * @ORM\Column(type="float")
      */
     private $longitude;
 
     /**
-     * @var float
+     * @ORM\Column(type="float")
      */
     private $latitude;
 
     /**
-     * @var int
+     * @ORM\Column(type="integer")
      */
     private $timezone;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $date;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $rise;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $fall;
-
 
     /**
      * Get id
