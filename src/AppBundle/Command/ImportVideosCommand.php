@@ -97,7 +97,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $channelurl
      * @return array
      */
-    private function getVideo($planetName, $channelurl)
+    private function getVideo(array $planetName, string $channelurl)
     {
         $master = array();
         //Return youtube Api key from parameters.yml
@@ -134,7 +134,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return mixed
      */
     //retruns json data
-    private function getData($url)
+    private function getData(string $url)
     {
         $json = file_get_contents($url);
         $data = json_decode($json, true);
@@ -171,7 +171,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return int|null
      */
     //Checks if videos already exists
-    private function checkExists($name, $path)
+    private function checkExists(string $name, string $path)
     {
         $em = $this->getContainer()
             ->get('doctrine')
@@ -197,7 +197,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return array
      */
     //gets videos for every planet
-    private function getPaths($url, $apiKey, $planetName)
+    private function getPaths(string $url, string $apiKey, array $planetName)
     {
         $result = array();
         $channelPath = array();
