@@ -79,17 +79,17 @@ class RiseSetCalculator
                 $this->googleApiKey);
             $timezone = $data['rawOffset'] / 3600;
 
-            $tz_sign = $this->getSign($timezone);
+            $tz_sign = Converter::getSign($timezone);
             $timezone = abs($timezone);
 
-            $lat_sign = $this->getSign($lat);
+            $lat_sign = Converter::getSign($lat);
             $lat = abs($lat);
 
-            $lng_sign = $this->getSign($lng);
+            $lng_sign = Converter::getSign($lng);
             $lng = abs($lng);
 
-            $latitude = $this->floatToDeg($lat);
-            $longitude = $this->floatToDeg($lng);
+            $latitude = Converter::floatToDeg($lat);
+            $longitude = Converter::floatToDeg($lng);
 
             $date_args = explode("-", $today);
 
@@ -101,12 +101,12 @@ class RiseSetCalculator
                 '&body=' . $i .
                 '&place=mercury' .
                 '&lon_sign=' . $lng_sign .
-                '&lon_deg=' . $longitude['deg'] .
-                '&lon_min=' . $longitude['min'] .
+                '&lon_deg=' . $longitude->getDegrees() .
+                '&lon_min=' . $longitude->getMinutes() .
                 '&lon_sec=1' .
                 '&lat_sign=' . $lat_sign .
-                '&lat_deg=' . $latitude['deg'] .
-                '&lat_min=' . $latitude['min'] .
+                '&lat_deg=' . $latitude->getDegrees() .
+                '&lat_min=' . $latitude->getMinutes() .
                 '&lat_sec=1' .
                 '&height=1' .
                 '&tz=' . $timezone .
@@ -117,8 +117,8 @@ class RiseSetCalculator
             $planetSchedule = new PlanetSchedule();
             $planetSchedule->setObject($object);
             $planetSchedule->setCity($city);
-            $planetSchedule->setLongitude($this->degToFloat($longitude));
-            $planetSchedule->setLatitude($this->degToFloat($latitude));
+            $planetSchedule->setLongitude(Converter::degToFloat($longitude));
+            $planetSchedule->setLatitude(Converter::degToFloat($latitude));
             $planetSchedule->setTimezone($timezone);
             $planetSchedule->setDate($today);
             $planetSchedule->setRise($schedule['rise']);
@@ -160,42 +160,6 @@ class RiseSetCalculator
         $result['fall'] = substr($response, $substring2, 5);
 
         return $result;
-    }
-
-    /**
-     * @param $coordinate
-     * @return mixed
-     */
-    private function floatToDeg($coordinate)
-    {
-        $result = array();
-
-        $result['min'] = rtrim(round(($coordinate - floor($coordinate))/5*3, 2)*100, ".0");
-        $result['deg'] = rtrim(floor($coordinate), ".0");
-
-        return $result;
-    }
-
-    /**
-     * @param $coordinate
-     * @return string
-     */
-    private function degToFloat($coordinate)
-    {
-        $min = $coordinate['min']/300*5;
-        return rtrim($coordinate['deg'], ".0") + round($min, 2);
-    }
-
-    /**
-     * @param $value
-     * @return int
-     */
-    private function getSign($value)
-    {
-        if ($value < 0) {
-            return -1;
-        }
-        return 1;
     }
 
     /**
