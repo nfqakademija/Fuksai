@@ -54,7 +54,14 @@ class ImportVideosCommand extends ContainerAwareCommand
                     continue;
                 }
                 //Creates video's data
-                $data = $this->createVideos($video['name'], $video['path'], $channelName);
+                $data = $this->createVideos(
+                    $video['name'],
+                    $video['path'],
+                    $channelName,
+                    $video['image'],
+                    $video['title'],
+                    $video['description']
+                );
                 $this->getContainer()
                     ->get('doctrine')
                     ->getRepository('AppBundle:Video')
@@ -90,7 +97,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $channelurl
      * @return array
      */
-    private function getVideo($planetName, $channelurl)
+    private function getVideo(array $planetName, string $channelurl)
     {
         $master = array();
         //Return youtube Api key from parameters.yml
@@ -104,9 +111,15 @@ class ImportVideosCommand extends ContainerAwareCommand
                 foreach ($items as $video) {
                     //Creates array for each found video
                     $videoId = $video['id']['videoId'];
+                    $videoImage = $video['snippet']['thumbnails']['medium']['url'];
+                    $videoTitle = $video['snippet']['title'];
+                    $videoDescription = $video['snippet']['description'];
                     $videosPath = array(
                         'name' => $name,
-                        'path' => "https://www.youtube.com/embed/" . $videoId
+                        'path' => "https://www.youtube.com/embed/" . $videoId,
+                        'image' => $videoImage,
+                        'title' => $videoTitle,
+                        'description' => $videoDescription
                     );
                     $master[] = $videosPath;
                 }
@@ -121,7 +134,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return mixed
      */
     //retruns json data
-    private function getData($url)
+    private function getData(string $url)
     {
         $json = file_get_contents($url);
         $data = json_decode($json, true);
@@ -132,13 +145,23 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $key
      * @param $url
      * @param $channelName
+     * @param $image
+     * @param $title
+     * @param $description
      * @return Video
      */
     //Creates videos that will be pushed to database
-    private function createVideos($key, $url, $channelName)
+    private function createVideos($key, $url, $channelName, $image, $title, $description)
     {
         $video = new Video();
-        $video->setKeyName($key)->setPath($url)->setChannelName($channelName);
+        $video
+            ->setKeyName($key)
+            ->setPath($url)
+            ->setChannelName($channelName)
+            ->setImage($image)
+            ->setTitle($title)
+            ->setDescription($description);
+
         return $video;
     }
 
@@ -148,7 +171,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return int|null
      */
     //Checks if videos already exists
-    private function checkExists($name, $path)
+    private function checkExists(string $name, string $path)
     {
         $em = $this->getContainer()
             ->get('doctrine')
@@ -174,14 +197,16 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return array
      */
     //gets videos for every planet
-    private function getPaths($url, $apiKey, $planetName)
+    private function getPaths(string $url, string $apiKey, array $planetName)
     {
+        $result = array();
+        $channelPath = array();
         foreach ($planetName as $planet) {
             $youtube = 'https://www.googleapis.com/youtube/v3/search?';
             $channelPath[] = $this
                 ->getData(
                     sprintf(
-                        '%skey=%s&channelId=%s&part=id&order=date&maxResults=4&q=%s',
+                        '%skey=%s&channelId=%s&part=snippet&order=date&maxResults=4&q=%s',
                         $youtube,
                         $apiKey,
                         $url,

@@ -19,7 +19,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
     public function configure()
     {
         $this
-            ->setName('app:planet-position')
+            ->setName('app:import:planet-position')
             ->setDescription('Gets planet rise and set times');
     }
 
