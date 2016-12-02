@@ -29,6 +29,12 @@ class PlanetPositionCommand extends ContainerAwareCommand
         $schedule = $calculator->getRiseSet('vilnius');
         $em = $this->getEntityManager();
 
+        $todaySchedule = $em->getRepository('AppBundle:PlanetSchedule')->findBy(['date' => date('Y-m-d')]);
+        if (!is_null($todaySchedule))
+        {
+            return 0;
+        }
+
         if (!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
             $schedules = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
