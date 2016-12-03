@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container feature-page">
+
+        <h1 id="apod"> List of astronomy pictures</h1>
+
+        <br>
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-12">
+
+                <ul type="square">
+
+                {% for picture in pictures %}
+
+                    <li>
+                        <h4 id="picture-date">{{ picture.getDateInString }}:</h4>
+
+                        <a href="{{ path('astronomy_picture', {picture: loop.index0}) }}">
+                            <h2>{{ picture.title }}</h2>
+                        </a>
+                    </li>
+                    <br>
+                {% endfor %}
+
+                </ul>
+
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <br>
+        <br>
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy;Sky Above Us</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+{% endblock %}
