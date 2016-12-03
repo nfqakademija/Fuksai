@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container feature-page">
+
+        <h1 id="apod"> Astronomy Picture of the Day</h1>
+
+        <br>
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-12">
+
+                <!-- Title -->
+                <h2 id="picture">{{ pictures[picture].title }}</h2>
+
+                <!-- Date -->
+                <h4 id="picture">{{ pictures[picture].getDateInString }}</h4>
+
+                <!-- Preview Image -->
+                <img class="img-responsive" src="{{ pictures[picture].url }}" alt="">
+
+                <br>
+                <!-- Post Content -->
+                <p>{{ pictures[picture].explanation }}</p>
+
+                <br>
+
+                <!-- All astronomy pictures of the day -->
+                <a id="link-pictures" href="{{ path('astronomy_pictures') }}">More astronomy pictures</a>
+
+                <hr>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy;Sky Above Us</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+{% endblock %}
