@@ -11,6 +11,7 @@
             <link href="{{ asset('css/creative.min.css') }}" rel="stylesheet">
             <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
             <link href="{{ asset('css/news.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/apod.css') }}" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel='stylesheet' type='text/css'>
             <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel='stylesheet' type='text/css'>
             <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
@@ -38,7 +39,7 @@
                                 <a href="{{ path('news_list') }}">NEWS</a>
                             </li>
                             <li>
-                                <a href="{{ path('astronomy_picture') }}">APOA</a>
+                                <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
                             </li>
                             <li>
                                 <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
