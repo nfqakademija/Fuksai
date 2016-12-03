@@ -31,8 +31,7 @@ SkyAboveUs is a web project developed for people who are interested in astronomy
 
 ## Prepare database - run commands:
 
-1. php bin/console doctrine:schema:update
-1. php bin/console doctrine:fixtures:load
+1. To create database and insert fixtures and all needed data to database you need to execure bash script file that is in the root folder of symfony (example: var/www/html/project) and execute ./setup.sh.
 
 ## Run project
 
