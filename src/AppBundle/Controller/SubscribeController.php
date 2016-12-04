@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SubscribeController extends Controller
 {
     /**
-     * @Route("/subscribe")
+     * @Route("/subscribe", name="show_subscribe_form")
      *
      * @param Request
      * @return \Symfony\Component\HttpFoundation\Request
@@ -35,23 +35,33 @@ class SubscribeController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $subscriber = $form->getData();
 
+            if (!filter_var($subscriber->getEmail(), FILTER_VALIDATE_EMAIL)) {
+                return $this->render('error/error.html.twig', [
+                    'errorMsg' => 'Invalid e-mail!',
+                ]);
+            }
+
             //email check
-            if(!is_null($em->getRepository('AppBundle:Subscriber')->findBy(['email' => $subscriber->getEmail()]))){
-                //such email exists, notify user
+            $users = $em->getRepository('AppBundle:Subscriber')->findBy(['email' => $subscriber->getEmail()]);
+            if (isset($users[0])) {
+                return $this->render('error/error.html.twig', [
+                    'errorMsg' => 'Such e-mail already subscribed!',
+                ]);
             }
 
             //keyName check
-            do{
+            do {
                 $subscriber->setKeyName(rand(1000, 9999));
+                $users = $em->getRepository('AppBundle:Subscriber')->findBy([
+                    'keyName' => $subscriber->getKeyName()
+                ]);
             }
-            while(!is_null($em->getRepository('AppBundle:Subscriber')->findBy([
-                'keyName' => $subscriber->getKeyName()
-            ])));
+            while (isset($users[0]));
 
             $em->persist($subscriber);
             $em->flush();
