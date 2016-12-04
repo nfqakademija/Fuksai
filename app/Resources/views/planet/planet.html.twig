@@ -37,7 +37,7 @@
 
                     <div class="container" >
                         <div class="col-md-8">
-                            <h1 align="center">RELATED ARTICLES</h1>
+                            <h1 align="center">Related Articles</h1>
 
                             <div class="well">
                                 <div id="planetArticle" class="carousel slide">
@@ -48,9 +48,12 @@
                                             <div class="row">
                                                 {% for i in 0..3 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
-                                                            <!-- Title -->
-                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        <div class="col-sm-3">
+                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                <!-- Title -->
+                                                                <h5>{{ planetArticles[i].title }}</h5>
+                                                            </a>
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
@@ -62,9 +65,12 @@
                                             <div class="row">
                                                 {% for i in 4..7 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
-                                                            <!-- Title -->
-                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        <div class="col-sm-3">
+                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                <!-- Title -->
+                                                                <h5>{{ planetArticles[i].title }}</h5>
+                                                            </a>
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
@@ -76,9 +82,12 @@
                                             <div class="row">
                                                 {% for i in 8..11 %}
                                                     {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3"><a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail"><img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive"></a>
-                                                            <!-- Title -->
-                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        <div class="col-sm-3">
+                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                <!-- Title -->
+                                                                <h5>{{ planetArticles[i].title }}</h5>
+                                                            </a>
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
@@ -103,7 +112,9 @@
 
                     <!-- More related planet articles -->
                     {% if (planetArticles[12] is defined) %}
-                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">More related articles</a>
+                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">
+                            <h3 align="center">More Related Articles</h3>
+                        </a>
                     {% endif %}
 
                 {% endif %}

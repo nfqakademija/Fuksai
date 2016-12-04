@@ -92,7 +92,7 @@ class Article
     /**
      * @param string $urlToImage
      */
-    public function setUrlToImage($urlToImage)
+    public function setUrlToImage(string $urlToImage)
     {
         $this->urlToImage = $urlToImage;
     }
@@ -100,7 +100,7 @@ class Article
     /**
      * @return string
      */
-    public function getUrlToImage()
+    public function getUrlToImage(): string
     {
         return $this->urlToImage;
     }
@@ -108,7 +108,7 @@ class Article
     /**
      * @param string $author
      */
-    public function setAuthor($author)
+    public function setAuthor(string $author)
     {
         $this->author = $author;
     }
@@ -116,7 +116,7 @@ class Article
     /**
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
@@ -124,7 +124,7 @@ class Article
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
     }
@@ -134,7 +134,7 @@ class Article
      *
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -142,7 +142,7 @@ class Article
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -150,7 +150,7 @@ class Article
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -158,12 +158,18 @@ class Article
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
-        // description with removed whitespaces from the beginning and end of a description
-        $trimmedDescription = trim($description);
+        $this->description = $this->getDescriptionWithoutWhitespaces($description);
+    }
 
-        $this->description = $trimmedDescription;
+    /**
+     * @param string $description
+     * @return string description with removed whitespaces from the beginning and end of a description
+     */
+    private function getDescriptionWithoutWhitespaces(string $description): string
+    {
+        return trim($description);
     }
 
     /**
@@ -177,18 +183,27 @@ class Article
     /**
      * @param $newPublishDate
      */
-    public function setPublishStringDate($newPublishDate)
+    public function setPublishDateString(string $newPublishDate)
     {
-        // DateTime object converted from string
-        $pub_date = date('Y-m-d', strtotime($newPublishDate));
+        // Formatted date string
+        $pub_date = $this->getFormattedDateString($newPublishDate);
 
         $this->publishDate = new \DateTime($pub_date);
     }
 
     /**
+     * @param string $dateString
+     * @return string
+     */
+    private function getFormattedDateString(string $dateString): string
+    {
+        return date('Y-m-d', strtotime($dateString));
+    }
+
+    /**
      * @param DateTime $publishDate
      */
-    public function setPublishDate($publishDate)
+    public function setPublishDate(DateTime $publishDate)
     {
         $this->publishDate = $publishDate;
     }
@@ -196,7 +211,7 @@ class Article
     /**
      * @return string
      */
-    public function getPublishDateInString()
+    public function getPublishDateString(): string
     {
         return (date('Y-m-d', $this->publishDate->getTimestamp()));
     }
@@ -204,7 +219,7 @@ class Article
     /**
      * @return DateTime
      */
-    public function getPublishDate()
+    public function getPublishDate(): DateTime
     {
         return $this->publishDate;
     }

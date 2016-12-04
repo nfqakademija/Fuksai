@@ -35,11 +35,6 @@ header.carousel .fill {
     box-decoration-break: clone;
 }
 
-.carousel-control .icon-prev,
-.carousel-control .icon-next {
-    font-size: 100px;
-}
-
 .carousel-indicators {
     font-size: 200px;
 }
@@ -106,4 +101,9 @@ header.carousel .fill {
 #article-header h1 {
     color: #000;
     margin: auto;
+}
+
+/* all news pages */
+.page-title {
+    font-size: 60px;
 }
