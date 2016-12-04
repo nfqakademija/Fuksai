@@ -62,6 +62,7 @@ class NewsController extends Controller
         return $this->render('newsFeed/planet_articles.html.twig', [
             'planetArticles' => $planetArticles,
             'planetsList' => $planets,
+            'planet' => $planet,
         ]);
     }
 }

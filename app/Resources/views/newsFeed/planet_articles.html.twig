@@ -10,7 +10,7 @@
             <div class="col-lg-8">
 
                 <header id="article-header" class="page-header">
-                    <h1 class="page-title">News</h1>
+                    <h1 class="page-title">News related to {{ planet }}</h1>
                 </header>
 
                 {% for planetArticle in planetArticles %}
@@ -21,7 +21,7 @@
                     </a>
 
                     <!-- Author and Publish Date -->
-                    <h6> Author: {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateInString }} </h6>
+                    <h6> Author: {{ planetArticle.author }} | Published: {{ planetArticle.getPublishDateString }} </h6>
 
                     <!-- Preview Image -->
                     <a href="{{ path('show_article', {'id': planetArticle.id}) }}">
@@ -57,8 +57,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                {% for planetlist in planetsList %}
-                                <li><a href="{{ path('show_planet', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
+                                {% for planet in planetsList %}
+                                <li><a href="{{ path('planet_articles', {'planet': planet.name}) }}" class="portfolio-box">{{ planet.name }}</a>
                                     {% endfor %}
                                 </li>
                             </ul>
