@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Entity\Subscriber;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -60,8 +59,7 @@ class SubscribeController extends Controller
                 $users = $em->getRepository('AppBundle:Subscriber')->findBy([
                     'keyName' => $subscriber->getKeyName()
                 ]);
-            }
-            while (isset($users[0]));
+            } while (isset($users[0]));
 
             $em->persist($subscriber);
             $em->flush();

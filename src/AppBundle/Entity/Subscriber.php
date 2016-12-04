@@ -86,4 +86,3 @@ class Subscriber
         return $this->email;
     }
 }
-
