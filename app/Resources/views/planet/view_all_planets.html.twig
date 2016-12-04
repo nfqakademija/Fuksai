@@ -1,6 +1,26 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="container" id="planet-list" xmlns="http://www.w3.org/1999/html">
     {% for planet in planets %}
-        <p>{{ planet.name }}</p> </<br>
+        <div class="row">
+        <div class="col-md-12">
+            <h2>{{ planet.name }}</h2>
+            <div class="col-md-4">
+            <p>Planet News: </br>
+                <a href="{{ path('planet_articles', {'planet': planet.name}) }}" >News</a>
+            </p>
+        </div>
+        <div class="col-md-4 list-space">
+            <p>Planet Videos:</br>
+                <a href="{{ path('view_videos_by_name', {planetName: planet.name, currentPage: 1})}}">Videos</a>
+            </p>
+        </div>
+        <div class="col-md-4 list-space">
+            <p>Information:</br>
+                <a href="{{ path('show_planet', {planetName: planet.name}) }}">Information</a></p>
+        </div>
+            </div>
+            </div>
     {% endfor %}
+    </div>
 {% endblock %}

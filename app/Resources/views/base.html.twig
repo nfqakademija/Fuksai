@@ -29,7 +29,9 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                         </button>
-                        <a class="navbar-brand page-scroll" href="{{ path('homepage') }}">SKY ABOVE US</a>
+                        <a href="{{ path('homepage') }}">
+                            <img class="logo" src="{{ asset('img/img/sky_above_us.png') }}">
+                        </a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,7 +50,7 @@
                                 <a href="{{ path('view_all_planets') }}">PLANETS</a>
                             </li>
                             <li>
-                                <a href="{{ path('view_events') }}">Evnets</a>
+                                <a href="{{ path('view_events') }}">Events</a>
                             </li>
                         </ul>
                     </div>
