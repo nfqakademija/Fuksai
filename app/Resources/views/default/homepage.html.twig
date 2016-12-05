@@ -44,6 +44,9 @@
                         <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
                     </li>
                     <li>
+                        <a href="{{ path('space_station') }}">ISS</a>
+                    </li>
+                    <li>
                         <a href={{ path('view_all_planets') }}>PLANETS</a>
                     </li>
                     <li>
@@ -235,7 +238,7 @@
                 {% for planet in planets %}
                     <div class="col-lg-4 col-sm-6">
                         <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
-                            <img src="{{ planet.image }}" class="img-responsive" alt="">
+                            <img src="{{ asset( planet.image ) }}" class="img-responsive" alt="">
                             <div class="portfolio-box-caption">
                                 <div class="portfolio-box-caption-content">
                                     <div class="project-category text-faded">
