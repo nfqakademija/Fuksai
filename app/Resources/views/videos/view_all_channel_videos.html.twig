@@ -20,8 +20,10 @@
                 <div class="col-lg-8">
                     {% for video in videos %}
                         <div class="col-md-6 portfolio-item" style="min-height: 350px;">
-                            <div class="youtube-player" data-id="{{ video.path }}"></div>
-                            <h5>
+                            <div style="width:240px; heigth:auto; margin: 27px 0px;" class="youtube-player" data-id={{ video.path }}>
+                            <img  class="youtube-image" src="{{ video.image }}" />
+                            </div>
+                                <h5>
                                 {{ video.title }}
                             </h5>
                             <p> {{ video.description }} </p>

@@ -64,4 +64,8 @@ h3 {
     width: auto;
     padding: 10px 5px;
 }
-
+.youtube-player iframe {
+    width:300px;
+    heigth:auto;
+    margin: 27px 0px;
+}
