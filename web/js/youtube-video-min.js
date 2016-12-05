@@ -3,7 +3,7 @@
  */
 document.addEventListener("DOMContentLoaded",
     function() {
-        $('.youtube-player').on('click', function () {
+        $('.youtube-image').on('click', function () {
             var element = $(this);
             var video = document.createElement('iframe');
             var path = element.data('id');

@@ -19,9 +19,9 @@
             <div class="row">
                 <div class="col-lg-8">
                     {% for video in videos %}
-                        <div class="col-md-6 portfolio-item" style="min-height: 350px;">
-                            <div style="width:240px; heigth:auto; margin: 27px 0px;" class="youtube-player" data-id={{ video.path }}>
-                            <img  class="youtube-image" src="{{ video.image }}" />
+                        <div class="col-md-6 portfolio-item" style="min-height: 400px;">
+                            <div style="width:240px; heigth:auto; margin: 27px 0px;" class="youtube-player">
+                            <img style="width:320px; height: 155px;" data-id={{ video.path }}  class="youtube-image" src="{{ video.image }}" />
                             </div>
                                 <h5>
                                 {{ video.title }}
