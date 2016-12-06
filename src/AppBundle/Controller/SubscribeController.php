@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Subscriber;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class SubscribeController extends Controller
         $subscriber = new Subscriber();
 
         $form = $this->createFormBuilder($subscriber)
-            ->add('email', TextType::class)
+            ->add('email', EmailType::class)
             ->add('submit', SubmitType::class, ['label'=>'Subscribe'])
             ->getForm();
 
@@ -39,15 +40,9 @@ class SubscribeController extends Controller
 
             $subscriber = $form->getData();
 
-            if (!filter_var($subscriber->getEmail(), FILTER_VALIDATE_EMAIL)) {
-                return $this->render('error/error.html.twig', [
-                    'errorMsg' => 'Invalid e-mail!',
-                ]);
-            }
-
             //email check
-            $users = $em->getRepository('AppBundle:Subscriber')->findBy(['email' => $subscriber->getEmail()]);
-            if (isset($users[0])) {
+            $user = $em->getRepository('AppBundle:Subscriber')->findOneBy(['email' => $subscriber->getEmail()]);
+            if (!is_null($user)) {
                 return $this->render('error/error.html.twig', [
                     'errorMsg' => 'Such e-mail already subscribed!',
                 ]);
@@ -56,10 +51,10 @@ class SubscribeController extends Controller
             //keyName check
             do {
                 $subscriber->setKeyName(rand(1000, 9999));
-                $users = $em->getRepository('AppBundle:Subscriber')->findBy([
+                $user = $em->getRepository('AppBundle:Subscriber')->findOneBy([
                     'keyName' => $subscriber->getKeyName()
                 ]);
-            } while (isset($users[0]));
+            } while (!is_null($user));
 
             $em->persist($subscriber);
             $em->flush();
