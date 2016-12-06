@@ -144,7 +144,12 @@
         </a>
     </div>
     <div class="col-me-6">
-        <h2>There will be events and other news here</h2>
+        <div class="event">
+        <h4>Closest astronomical event:</h4>
+        <p>{{ closestEvent.title }}</p>
+        <p>{{ closestEvent.date }}</p>
+        <p>{{ closestEvent.description }}</p>
+            </div>
     </div>
 
     {#<section id="features">

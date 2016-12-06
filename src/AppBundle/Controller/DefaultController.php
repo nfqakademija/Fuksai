@@ -20,10 +20,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $news = $em->getRepository('AppBundle:Article')->findAll();
-
+        $event = $em->getRepository('AppBundle:Event')->findNextEvent();
         return $this->render('default/homepage.html.twig', [
             'planets' => $planets,
-            'news' => $news
+            'news' => $news,
+            'closestEvent' => $event[0]
         ]);
     }
 }

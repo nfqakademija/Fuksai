@@ -68,3 +68,7 @@ h3 {
     padding-left: 0px;
     padding-right: 0px;
 }
+.event {
+    border: 1px black solid;
+    height: 33%;
+}
