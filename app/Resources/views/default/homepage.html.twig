@@ -59,7 +59,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <header id="main">
+    <header id="welcome">
         <div class="header-content">
             <div class="header-content-inner">
                 <h1 id="home-header">Sky above us</h1>
@@ -72,7 +72,7 @@
     </header>
 
     <!-- Header Carousel -->
-    <header id="article" class="carousel slide">
+    <div id="article" class="carousel slide col-md-6">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#article" data-slide-to="0" class="active"></li>
@@ -89,7 +89,7 @@
                 <a href="{{ path('show_article', {'id': news[0].id}) }}">
                     <div class="fill" style="background-image:url({{ news[0].urlToImage }}); "></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[0].title }}</h2>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 <a href="{{ path('show_article', {'id': news[1].id}) }}">
                     <div class="fill" style="background-image:url({{ news[1].urlToImage }});"></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[1].title }}</h2>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <a href="{{ path('show_article', {'id': news[2].id}) }}">
                     <div class="fill" style="background-image:url({{ news[2].urlToImage }});"></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[2].title }}</h2>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                 <a href="{{ path('show_article', {'id': news[3].id}) }}">
                     <div class="fill" style="background-image:url({{ news[3].urlToImage }});"></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[3].title }}</h2>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 <a href="{{ path('show_article', {'id': news[4].id}) }}">
                     <div class="fill" style="background-image:url({{ news[4].urlToImage }});"></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[4].title }}</h2>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 <a href="{{ path('show_article', {'id': news[5].id}) }}">
                     <div class="fill" style="background-image:url({{ news[5].urlToImage }});"></div>
                 </a>
-                <div class="carousel-caption">
+                <div id="caption" class="carousel-caption">
                     <h2>{{news[5].title }}</h2>
                 </div>
             </div>
@@ -137,12 +137,15 @@
 
         <!-- Controls -->
         <a class="left carousel-control" href="#article" data-slide="prev">
-            <span class="icon-prev" style="font-size: 150px;"></span>
+            <span class="icon-prev" style="font-size: 100px;"></span>
         </a>
         <a class="right carousel-control" href="#article" data-slide="next">
-            <span class="icon-next" style="font-size: 150px;"></span>
+            <span class="icon-next" style="font-size: 100px;"></span>
         </a>
-    </header>
+    </div>
+    <div class="col-me-6">
+        <h2>There will be events and other news here</h2>
+    </div>
 
     {#<section id="features">
         <div class="container">

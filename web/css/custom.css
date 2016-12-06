@@ -1,4 +1,4 @@
-.header #main {
+.header #welcome {
     background-image: url('../img/headers/header.jpg');
 }
 
@@ -63,4 +63,8 @@ h3 {
     height: 70px;
     width: auto;
     padding: 10px 5px;
+}
+#article {
+    padding-left: 0px;
+    padding-right: 0px;
 }
