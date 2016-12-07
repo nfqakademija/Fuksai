@@ -112,7 +112,7 @@
 
                     <!-- More related planet articles -->
                     {% if (planetArticles[12] is defined) %}
-                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">
+                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet, 'number': 1}) }}">
                             <h3 align="center">More Related Articles</h3>
                         </a>
                     {% endif %}

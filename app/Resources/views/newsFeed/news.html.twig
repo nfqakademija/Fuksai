@@ -13,16 +13,29 @@
                         <span class="sr-only">Toggle navigation</span>
                         Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="{{ path('homepage') }}">
-                        <img class="logo" src="{{ asset('img/img/sky_above_us.png') }}">
+                    <a href="{{ path('homepage') }}">
+                        <img class="logo" src="{{ asset('img/logo/sky_above_us_with_white_background.png') }}">
                     </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <!-- Planets news categories -->
+                    <div class="planets-categories">
+                        <ul id="planets-categories"class="nav navbar-nav navbar-left">
+                            {% for planet in planetsList %}
+                                <li>
+                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Features -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ path('news_list') }}">NEWS</a>
+                            <a href="{{ path('news_list', {number: 1}) }}">NEWS</a>
                         </li>
                         <li>
                             <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
@@ -38,64 +51,73 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
 
     {% endblock %}
 
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>News</h1>
-                        <hr class="small">
+    <div class="news-header">
+        <!-- Page Header -->
+        <!-- Set your background image for this header on the line below. -->
+        <header class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="site-heading">
+                            <h1>News</h1>
+                            <hr class="small">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Display articles from 0..9, 10..19, 20..29 and so on -->
+                {% for i in ((pageNumber-1)*10)..(pageNumber*10-1) %}
+                    {% if (articles[i] is defined) %}
+                        <div class="post-preview">
+                            <!-- Title -->
+                            <a id="article-title" href="{{ path('show_article', {'id': articles[i] .id}) }}">
+                                <h2 class="post-title">
+                                    {{ articles[i] .title }}
+                                </h2>
+                            </a>
+                            <!-- Author and Publish Date -->
+                            <p class="post-meta" style=' text-align: center;'>Posted by {{ articles[i] .author }} on {{ articles[i] .getPublishDateString }}</p>
+                            <!-- Preview Image -->
+                            <a href="{{ path('show_article', {'id': articles[i] .id}) }}">
+                                <img  style='height: 100%; width: 100%; object-fit: contain' class="img-responsive" src="{{ articles[i] .urlToImage }}" alt="">
+                            </a>
+                        </div>
 
-                {% for article in articles %}
-
-                    <div class="post-preview">
-                        <!-- Title -->
-                        <a id="article-title" href="{{ path('show_article', {'id': article.id}) }}">
-                            <h2 class="post-title">
-                                {{ article.title }}
-                            </h2>
-                        </a>
-                        <!-- Author and Publish Date -->
-                        <p class="post-meta">Posted by {{ article.author }} on {{ article.getPublishDateString }}</p>
-                        <!-- Preview Image -->
-                        <a href="{{ path('show_article', {'id': article.id}) }}">
-                            <img class="img-responsive" src="{{ article.urlToImage }}" alt="">
-                        </a>
-                    </div>
-
-                    <hr>
+                        <hr>
+                    {% endif %}
                 {% endfor %}
 
                 <!-- Pager -->
                 <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Articles &rarr;</a>
-                    </li>
+                    {# if news page number is not 1 then display button to newer articles #}
+                    {% if pageNumber != 1  %}
+                        <li class="previous">
+                            <a href="{{ path('news_list', {number: pageNumber-1}) }}">&larr; Newer Articles</a>
+                        </li>
+                    {% endif %}
+                    {# if there are more articles comparing current page then display button to older articles #}
+                    {% if articles[pageNumber*10] is defined  %}
+                        <li class="next">
+                            <a href="{{ path('news_list', {number: pageNumber+1}) }}">Older Articles &rarr;</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </div>
-
-    <hr>
 
     <!-- Footer -->
     <footer>
@@ -107,29 +129,5 @@
             </div>
         </div>
     </footer>
-
-
-    <!-- Planet news categories -->
-    {# <div class="col-md-4">
-
-        <div class="well">
-            <h4>Categories</h4>
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        {% for planet in planetsList %}
-                        <li><a href="{{ path('planet_articles', {'planet': planet.name}) }}" class="portfolio-box">{{ planet.name }}</a>
-                            {% endfor %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-
-    </div> #}
-
-
-
 
 {% endblock %}

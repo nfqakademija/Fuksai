@@ -62,6 +62,6 @@ h3 {
     float: left;
     height: 70px;
     width: auto;
-    padding: 10px 5px;
+    margin-left: -15px;
 }
 

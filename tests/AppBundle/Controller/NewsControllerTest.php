@@ -18,8 +18,8 @@ class NewsControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/news');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there are exactly 10 img tag with the class "img-responsive" on the page
-        $this->assertCount(10, $crawler->filter('img.img-responsive'));
+        // Assert that there are exactly 10 logo tag with the class "logo-responsive" on the page
+        $this->assertCount(10, $crawler->filter('logo.logo-responsive'));
     }
 
     public function testPlanetArticlesAction()
@@ -30,90 +30,90 @@ class NewsControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/planetArticles/Mercury');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Venus articles
         $crawler = $client->request('GET', '/planetArticles/Venus');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Earth articles
         $crawler = $client->request('GET', '/planetArticles/Earth');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Mars articles
         $crawler = $client->request('GET', '/planetArticles/Mars');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Jupiter articles
         $crawler = $client->request('GET', '/planetArticles/Jupiter');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Saturn articles
         $crawler = $client->request('GET', '/planetArticles/Saturn');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Uranus articles
         $crawler = $client->request('GET', '/planetArticles/Uranus');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Neptune articles
         $crawler = $client->request('GET', '/planetArticles/Neptune');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
 
         // Crawler for Pluto articles
         $crawler = $client->request('GET', '/planetArticles/Pluto');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is at least one img tag with the class "img-responsive" on the page
+        // Assert that there is at least one logo tag with the class "logo-responsive" on the page
         $this->assertGreaterThan(
             0,
-            $crawler->filter('img.img-responsive')->count()
+            $crawler->filter('logo.logo-responsive')->count()
         );
     }
 

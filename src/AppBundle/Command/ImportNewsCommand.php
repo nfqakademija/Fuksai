@@ -107,7 +107,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         $crawler = new Crawler($source, 'https');
 
         // array of the astronomy articles images
-        $images = $crawler->filter('div.mh-loop-thumb > a > img')->each(function (Crawler $node) {
+        $images = $crawler->filter('div.mh-loop-thumb > a > logo')->each(function (Crawler $node) {
             return $node->attr('src');
         });
 

@@ -34,7 +34,7 @@
                             <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                         </button>
                         <a href="{{ path('homepage') }}">
-                            <img class="logo" src="{{ asset('img/img/sky_above_us.png') }}">
+                            <img class="logo" src="{{ asset('img/logo/sky_above_us.png') }}">
                         </a>
                     </div>
 
@@ -42,7 +42,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="{{ path('news_list') }}">NEWS</a>
+                                <a href="{{ path('news_list', {number: 1}) }}">NEWS</a>
                             </li>
                             <li>
                                 <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
