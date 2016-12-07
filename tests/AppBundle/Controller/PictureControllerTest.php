@@ -18,8 +18,8 @@ class PictureControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/astronomy-picture-of-the-day/0');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
-        // Assert that there is exactly 1 logo tag with the class "logo-responsive" on the page
-        $this->assertCount(1, $crawler->filter('logo.logo-responsive'));
+        // Assert that there is exactly 1 img tag with the class "img-responsive" on the page
+        $this->assertCount(1, $crawler->filter('img.img-responsive'));
     }
 
     public function testAllPicturesAction()

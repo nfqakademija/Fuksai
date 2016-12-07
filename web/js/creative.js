@@ -50,7 +50,7 @@
         delegate: 'a',
         type: 'image',
         tLoading: 'Loading image #%curr%...',
-        mainClass: 'mfp-logo-mobile',
+        mainClass: 'mfp-img-mobile',
         gallery: {
             enabled: true,
             navigateByImgClick: true,

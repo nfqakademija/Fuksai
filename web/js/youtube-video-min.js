@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded",
     });
 
 function labnolThumb(id) {
-    var thumb = '<logo style="width: 300px; height: auto; margin: 27px 0px" src="https://camo.githubusercontent.com/2d1ecd0715be563b805dc2f210fa534ad899f9f5/68747470733a2f2f7331362e706f7374696d672e6f72672f666e61316d743770782f4c6f676f6d616b725f386b5f486c5f586a2e706e67">',
+    var thumb = '<img style="width: 300px; height: auto; margin: 27px 0px" src="https://camo.githubusercontent.com/2d1ecd0715be563b805dc2f210fa534ad899f9f5/68747470733a2f2f7331362e706f7374696d672e6f72672f666e61316d743770782f4c6f676f6d616b725f386b5f486c5f586a2e706e67">',
         play = '<div class="play"></div>';
     return thumb.replace("ID", id) + play;
 }
