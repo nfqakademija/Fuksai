@@ -144,12 +144,29 @@
         </a>
     </div>
     <div class="col-me-6">
-        <div class="event">
-        <h4>Closest astronomical event:</h4>
-        <p>{{ closestEvent.title }}</p>
+        <div class="whats-new event">
+        <h4 class="event-title" ><i class="fa fa-star" aria-hidden="true"></i>
+            Closest astronomical event:
+            <p>{{ closestEvent.title }}</p>
+        </h4>
         <p>{{ closestEvent.date }}</p>
         <p>{{ closestEvent.description }}</p>
             </div>
+        <div class="whats-new live container">
+            <div class="video col-md-6">
+            <iframe src="https://www.youtube.com/embed/qzMQza8xZCc" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-text col-md-6">
+                <p>The International Space Station - ISS - circles the earth at 240 miles above the planet.
+                    The station is crewed by NASA astronauts as well as Russian Cosmonauts and a mixture of Japanese,
+                    Canadian and European astronauts as well.</p>
+            </div>
+            <div class="col-md-12">
+                <div class="button">
+                    <a href="#">More live videos</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     {#<section id="features">

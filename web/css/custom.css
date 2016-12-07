@@ -69,6 +69,46 @@ h3 {
     padding-right: 0px;
 }
 .event {
-    border: 1px black solid;
-    height: 33%;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.whats-new {
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+.event-title {
+    font-size: 15px;
+    font-weight: 800!important;
+    font-falimy: sans-serif;
+    text-transform: uppercase;
+    color: rgba(47, 46, 46, 1);
+    margin: 10px;
+}
+.event p {
+    font-style: italic;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.video-text {
+    font-family: serif;
+    padding:10px;
+}
+.whats-new {
+    padding:10px;
+}
+.button a {
+    border: solid transparent 0px;
+    color: #F3F3F3;
+}
+.button {
+    border-radius: 0;
+    width:220px;
+    background: rgba(28, 28, 28, 1);
+    text-align: center;
+    padding: 10px 20px;
+}
+.button a:hover {
+    text-decoration: none;
+    color: #66afe9;
 }
