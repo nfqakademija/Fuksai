@@ -14,7 +14,7 @@
                         Menu <i class="fa fa-bars"></i>
                     </button>
                     <a href="{{ path('homepage') }}">
-                        <img class="logo" src="{{ asset('img/logo/sky_above_us_with_white_background.png') }}">
+                        <img class="logo" src="{{ asset('img/logo/sky_above_us_with_white_text.png') }}">
                     </a>
                 </div>
 
@@ -23,7 +23,7 @@
 
                     <!-- Planets news categories -->
                     <div class="planets-categories">
-                        <ul id="planets-categories"class="nav navbar-nav navbar-left">
+                        <ul class="nav navbar-nav navbar-left">
                             {% for planet in planetsList %}
                                 <li>
                                     <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
@@ -32,24 +32,27 @@
                         </ul>
                     </div>
 
-                    <!-- Features -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="{{ path('news_list', {number: 1}) }}">NEWS</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('view_all_planets') }}">PLANETS</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('view_events') }}">Events</a>
-                        </li>
-                    </ul>
+                    <!-- Features categories -->
+                    <div class="features-categories">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{{ path('news_list', {number: 1}) }}">NEWS</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('view_all_planets') }}">PLANETS</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('view_events') }}">Events</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
             <!-- /.container -->
@@ -65,7 +68,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                         <div class="site-heading">
-                            <h1>News related to {{ planet }}</h1>
+                            <h1>{{ planet }} news</h1>
                             <hr class="small">
                         </div>
                     </div>

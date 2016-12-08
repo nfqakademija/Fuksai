@@ -119,7 +119,11 @@ header.carousel .fill {
     font-size: 60px;
 }
 
-#planets-categories {
-    margin-left: 250px;
+.planets-categories {
     margin-top: 10px;
+    float: left;
+}
+
+.features-categories {
+    float: right;
 }
