@@ -21,17 +21,6 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <!-- Planets news categories -->
-                    <div class="planets-categories">
-                        <ul class="nav navbar-nav navbar-left">
-                            {% for planet in planetsList %}
-                                <li>
-                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
                     <!-- Features categories -->
                     <div class="features-categories">
                         <ul class="nav navbar-nav navbar-right">
@@ -50,6 +39,17 @@
                             <li>
                                 <a href="{{ path('view_events') }}">Events</a>
                             </li>
+                        </ul>
+                    </div>
+
+                    <!-- Planets news categories -->
+                    <div class="planets-categories">
+                        <ul class="nav navbar-nav">
+                            {% for planet in planetsList %}
+                                <li>
+                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
 

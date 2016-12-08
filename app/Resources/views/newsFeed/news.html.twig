@@ -21,17 +21,6 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <!-- Planets news categories -->
-                    <div class="planets-categories">
-                        <ul class="nav navbar-nav navbar-left">
-                            {% for planet in planetsList %}
-                                <li>
-                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
                     <!-- Features categories -->
                     <div class="features-categories">
                         <ul class="nav navbar-nav navbar-right">
@@ -53,7 +42,19 @@
                         </ul>
                     </div>
 
+                    <!-- Planets news categories -->
+                    <div class="planets-categories">
+                        <ul class="nav navbar-nav">
+                            {% for planet in planetsList %}
+                                <li>
+                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
                 </div>
+
             </div>
             <!-- /.container -->
         </nav>
@@ -86,16 +87,16 @@
                     {% if (articles[i] is defined) %}
                         <div class="post-preview">
                             <!-- Title -->
-                            <a id="article-title" href="{{ path('show_article', {'id': articles[i] .id}) }}">
+                            <a id="article-title" href="{{ path('show_article', {'id': articles[i].id}) }}">
                                 <h2 class="post-title">
-                                    {{ articles[i] .title }}
+                                    {{ articles[i].title }}
                                 </h2>
                             </a>
                             <!-- Author and Publish Date -->
-                            <p class="post-meta" style=' text-align: center;'>Posted by {{ articles[i] .author }} on {{ articles[i] .getPublishDateString }}</p>
+                            <p class="post-meta" style=' text-align: center;'>Posted by {{ articles[i].author }} on {{ articles[i].getPublishDateString }}</p>
                             <!-- Preview Image -->
-                            <a href="{{ path('show_article', {'id': articles[i] .id}) }}">
-                                <img  style='height: 100%; width: 100%; object-fit: contain' class="img-responsive" src="{{ articles[i] .urlToImage }}" alt="">
+                            <a href="{{ path('show_article', {'id': articles[i].id}) }}">
+                                <img  style='height: 100%; width: 100%; object-fit: contain' class="img-responsive" src="{{ articles[i].urlToImage }}" alt="">
                             </a>
                         </div>
 
