@@ -40,7 +40,7 @@ class NewsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
-        $articles = $em->getRepository('AppBundle:Article')->findAll();
+        $articles = $em->getRepository('AppBundle:Article')->findAllByDate();
 
         return $this->render('newsFeed/news.html.twig', [
             'articles' => $articles,
