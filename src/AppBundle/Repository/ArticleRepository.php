@@ -13,7 +13,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @return array
      */
-    public function findAll()
+    public function findAllByDate()
     {
         // get articles ordered by publish date
         return $this->findBy([], ['publishDate' => 'DESC']);

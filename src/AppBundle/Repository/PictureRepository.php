@@ -13,9 +13,9 @@ class PictureRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @return array
      */
-    public function findAll()
+    public function findAllByDate()
     {
-        // get articles ordered by publish date
+        // get astronomy pictures ordered by date
         return $this->findBy([], ['date' => 'DESC']);
     }
 }
