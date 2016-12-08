@@ -1,3 +1,8 @@
-Some E-mail text.
+New awesome articles have appeared on our website! Check it out. {{ link }}
 
-<a href="{{ myPath }}">Unsubscribe</a>
+The titles are:
+{% for title in titles %}
+{{ title }}
+{% endfor %}
+
+If you want to stop getting notification messages, click the following link: {{ unsubscribePath }}
