@@ -9,14 +9,18 @@
             <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
             <link href="{{ asset('css/creative.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/clean-blog.min.css') }}" rel="stylesheet">
             <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
             <link href="{{ asset('css/news.css') }}" rel="stylesheet">
             <link href="{{ asset('css/apod.css') }}" rel="stylesheet">
+
+            <!-- Custom Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel='stylesheet' type='text/css'>
             <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel='stylesheet' type='text/css'>
             <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
             <link href="https://fonts.googleapis.com/css?family=Bevan" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% endblock %}
     </head>
 {% endblock %}
@@ -30,7 +34,7 @@
                             <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                         </button>
                         <a href="{{ path('homepage') }}">
-                            <img class="logo" src="{{ asset('img/img/sky_above_us.png') }}">
+                            <img class="logo" src="{{ asset('img/logo/sky_above_us.png') }}">
                         </a>
                     </div>
 
@@ -38,7 +42,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="{{ path('news_list') }}">NEWS</a>
+                                <a href="{{ path('news_list', {number: 1}) }}">NEWS</a>
                             </li>
                             <li>
                                 <a href="{{ path('astronomy_picture', {picture: 0}) }}">APOD</a>
@@ -61,6 +65,15 @@
         {% endblock %}
         {% block body %}
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <!-- jQuery -->
+            <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+            <!-- Theme JavaScript -->
+            <script src="{{ asset('js/clean-blog.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
