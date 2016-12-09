@@ -9,7 +9,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\PlanetSchedule;
-use AppBundle\Exception\NoApiResponseException;
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -32,7 +32,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
         try {
             $schedule = $calculator->getRiseSet('vilnius');
         } catch (NoApiResponseException $e) {
-            $output->writeln($e);
+            $output->writeln($e->getMessage());
             return 1;
         }
         $em = $this->getEntityManager();

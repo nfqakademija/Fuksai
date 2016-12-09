@@ -9,10 +9,11 @@
 namespace AppBundle\Calculator;
 
 use AppBundle\Entity\PlanetSchedule;
-use AppBundle\Exception\NoApiResponseException;
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 
 class RiseSetCalculator
 {
@@ -172,7 +173,7 @@ class RiseSetCalculator
         try {
             $json = file_get_contents($url);
             $data = json_decode($json, true);
-        } catch (Exception $e) {
+        } catch (ContextErrorException $e) {
             throw new NoApiResponseException('No response from the google');
         }
         return $data;
@@ -186,7 +187,7 @@ class RiseSetCalculator
     {
         try {
             $data = file_get_contents($url);
-        } catch (Exception $e) {
+        } catch (ContextErrorException $e) {
             throw new NoApiResponseException('No response from the api call');
         }
         return $data;

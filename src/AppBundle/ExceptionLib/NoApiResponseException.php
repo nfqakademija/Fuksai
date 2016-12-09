@@ -6,7 +6,7 @@
  * Time: 14.29
  */
 
-namespace AppBundle\Exception;
+namespace AppBundle\ExceptionLib;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
