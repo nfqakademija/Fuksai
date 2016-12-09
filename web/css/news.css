@@ -56,3 +56,12 @@
 .list-group-item {
     padding: 5px 5px;
 }
+.item {
+    height: 345px;
+}
+.list-group {
+    height: 345px;
+}
+.item img {
+    width: 100%;
+}

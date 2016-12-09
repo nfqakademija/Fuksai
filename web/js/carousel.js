@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     var clickEvent = false;
     $('#myCarousel').carousel({
-        interval:   4000
+        interval:   4000000
     }).on('click', '.list-group li', function() {
         clickEvent = true;
         $('.list-group li').removeClass('active');
@@ -19,9 +19,4 @@ $(document).ready(function(){
         }
         clickEvent = false;
     });
-})
-
-$(window).load(function() {
-    var boxheight = $('#myCarousel .carousel-inner').innerHeight();
-    var itemlength = $('#myCarousel .item').length;
 });
