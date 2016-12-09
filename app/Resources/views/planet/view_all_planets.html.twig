@@ -7,7 +7,7 @@
             <h2>{{ planet.name }}</h2>
             <div class="col-md-4">
             <p>Planet News: </br>
-                <a href="{{ path('planet_articles', {'planet': planet.name}) }}" >News</a>
+                <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}" >News</a>
             </p>
         </div>
         <div class="col-md-4 list-space">

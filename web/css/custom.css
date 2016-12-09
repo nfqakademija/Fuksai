@@ -62,7 +62,7 @@ h3 {
     float: left;
     height: 70px;
     width: auto;
-    padding: 10px 5px;
+    margin-left: -15px;
 }
 #article {
     padding-left: 0px;
@@ -103,7 +103,6 @@ h3 {
 }
 .button {
     border-radius: 0;
-    width:220px;
     background: rgba(28, 28, 28, 1);
     text-align: center;
     padding: 10px 20px;

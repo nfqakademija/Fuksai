@@ -15,7 +15,7 @@ class PictureController extends Controller
     public function pictureAction($picture)
     {
         $em = $this->getDoctrine()->getManager();
-        $pictures = $em->getRepository('AppBundle:Picture')->findAll();
+        $pictures = $em->getRepository('AppBundle:Picture')->findAllByDate();
 
         return $this->render('picture/astronomy_picture.html.twig', [
             'pictures' => $pictures,
@@ -30,7 +30,7 @@ class PictureController extends Controller
     public function allPicturesAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $pictures = $em->getRepository('AppBundle:Picture')->findAll();
+        $pictures = $em->getRepository('AppBundle:Picture')->findAllByDate();
 
         return $this->render('picture/all_astronomy_pictures.html.twig', [
             'pictures' => $pictures,
