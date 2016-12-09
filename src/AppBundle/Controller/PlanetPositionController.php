@@ -22,7 +22,7 @@ class PlanetPositionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $schedule = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
-        return $this->render('rise_set.html.twig', [
+        return $this->render('services/rise_set.html.twig', [
             'planets' => $schedule,
         ]);
     }

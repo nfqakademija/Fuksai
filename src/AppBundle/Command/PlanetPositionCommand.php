@@ -9,8 +9,10 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\PlanetSchedule;
+use AppBundle\Exception\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -26,16 +28,21 @@ class PlanetPositionCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $calculator = $this->getContainer()->get('app.calculator.rise_set_calculator');
-        $schedule = $calculator->getRiseSet('vilnius');
+
+        try {
+            $schedule = $calculator->getRiseSet('vilnius');
+        } catch (NoApiResponseException $e) {
+            $output->writeln($e);
+            return 1;
+        }
         $em = $this->getEntityManager();
 
         $todaySchedule = $em->getRepository('AppBundle:PlanetSchedule')->findBy(['date' => date('Y-m-d')]);
-        if (!is_null($todaySchedule))
-        {
+        if (!empty($todaySchedule)) {
             return 0;
         }
 
-        if (!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
+        if (!empty($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
             $schedules = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
             foreach ($schedules as $planet) {
@@ -52,18 +59,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
         }
         $em->flush();
         $output->writeln("Data flushed");
-    }
-
-    /**
-     * @param $url
-     * @return mixed
-     */
-    private function getData($url)
-    {
-        $json = file_get_contents($url);
-        $data = json_decode($json, true);
-
-        return $data;
+        return 0;
     }
 
     /**
