@@ -28,7 +28,7 @@ class SendNotificationsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $context = $this->getContainer()->get('router')->getContext();
-        $context->setHost('localhost:8000');
+        $context->setHost('fuksai.projektai.nfqakademija.lt');
         $context->setScheme('http');
         $context->setBaseUrl('');
 
@@ -84,11 +84,11 @@ class SendNotificationsCommand extends ContainerAwareCommand
             ->setTo($user->getEmail())
             ->setBody(
                 $this->getContainer()->get('templating')->render(
-                    'emails/notification.html.twig', [
-                    'unsubscribePath' => $unsubscribeUrl,
+                    'emails/notification.html.twig',
+                    ['unsubscribePath' => $unsubscribeUrl,
                     'link' => $baseUrl,
-                    'titles' => $titleList,
-                ])
+                    'titles' => $titleList,]
+                )
             );
 
         return $message;
