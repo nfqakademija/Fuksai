@@ -31,6 +31,8 @@ class PlanetsController extends Controller
         $video = $em
             ->getRepository('AppBundle:Video')
             ->findOneBy(['keyName' => $planetName]);
+        $filters = [];
+        $page = 'planet';
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
@@ -38,7 +40,9 @@ class PlanetsController extends Controller
             'planet' => $planet,
             'planetsList' => $planets,
             'video' => $video,
-            'planetArticles' => $planetsArticles
+            'planetArticles' => $planetsArticles,
+            'filters' => $filters,
+            'page' => $page
         ]);
     }
 
@@ -50,9 +54,13 @@ class PlanetsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $filters = [];
+        $page = 'planets';
 
         return $this->render(':planet:view_all_planets.html.twig', [
-           'planets' => $planets
+           'planets' => $planets,
+            'filters' => $filters,
+            'page' => $page
         ]);
     }
 }
