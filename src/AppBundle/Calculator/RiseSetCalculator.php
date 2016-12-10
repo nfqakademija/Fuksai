@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.11.20
- * Time: 18.31
- */
 
 namespace AppBundle\Calculator;
 
@@ -12,6 +6,10 @@ use AppBundle\Entity\PlanetSchedule;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
+/**
+ * Class RiseSetCalculator
+ * @package AppBundle\Calculator
+ */
 class RiseSetCalculator
 {
     private $planetMap = array(
@@ -24,7 +22,6 @@ class RiseSetCalculator
         7 => 'Uranus',
         8 => 'Neptune',
     );
-
 
     /**
      * @var PlanetSchedule[]

@@ -1,15 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artur
- * Date: 11/28/16
- * Time: 6:47 PM
- */
 
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class EventRepository
+ * @package AppBundle\Repository
+ */
 class EventRepository extends EntityRepository
 {
     public function findEvent($date)
