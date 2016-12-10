@@ -14,7 +14,7 @@
                         Menu <i class="fa fa-bars"></i>
                     </button>
                     <a href="{{ path('homepage') }}">
-                        <img class="logo" src="{{ asset('img/logo/sky_above_us_with_white_text.png') }}">
+                        <img class="logo" src="{{ asset('img/logo/sky_above_us.png') }}">
                     </a>
                 </div>
 
@@ -41,18 +41,6 @@
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Planets news categories -->
-                    <div class="planets-categories">
-                        <ul class="nav navbar-nav">
-                            {% for planet in planetsList %}
-                                <li>
-                                    <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
                 </div>
 
             </div>
@@ -71,6 +59,15 @@
                         <div class="site-heading">
                             <h1>News</h1>
                             <hr class="small">
+                            <div class=" news-planets">
+                                <ul class="nav navbar-nav">
+                                    {% for planet in planetsList %}
+                                        <li>
+                                            <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}">{{ planet.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +82,7 @@
                 <!-- Display articles from 0..9, 10..19, 20..29 and so on -->
                 {% for i in ((pageNumber-1)*10)..(pageNumber*10-1) %}
                     {% if (articles[i] is defined) %}
-                        <div class="post-preview">
+                        <div class="post-preview col-md-12">
                             <!-- Title -->
                             <a id="article-title" href="{{ path('show_article', {'id': articles[i].id}) }}">
                                 <h2 class="post-title">
@@ -95,9 +92,12 @@
                             <!-- Author and Publish Date -->
                             <p class="post-meta" style=' text-align: center;'>Posted by {{ articles[i].author }} on {{ articles[i].getPublishDateString }}</p>
                             <!-- Preview Image -->
-                            <a href="{{ path('show_article', {'id': articles[i].id}) }}">
-                                <img  style='height: 100%; width: 100%; object-fit: contain' class="img-responsive" src="{{ articles[i].urlToImage }}" alt="">
+                            <a class="col-md-6" href="{{ path('show_article', {'id': articles[i].id}) }}">
+                                <img class="img-responsive" src="{{ articles[i].urlToImage }}" alt="">
                             </a>
+                            <p class="col-md-6">
+                                {{ articles[i].description|slice(0, 300) }}...
+                            </p>
                         </div>
 
                         <hr>

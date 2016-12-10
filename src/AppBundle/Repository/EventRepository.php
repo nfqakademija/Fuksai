@@ -18,4 +18,16 @@ class EventRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findNextEvent()
+    {
+        $Date = new \DateTime();
+        $currentDate = $Date->format('Y-m-d');
+        return $this->createQueryBuilder('event')
+            ->setParameter('date', $currentDate)
+            ->where('event.date >:date')
+            ->orderBy('event.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

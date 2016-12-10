@@ -1,4 +1,4 @@
-.header #main {
+.header #welcome {
     background-image: url('../img/headers/header.jpg');
 }
 
@@ -64,4 +64,66 @@ h3 {
     width: auto;
     margin-left: -15px;
 }
-
+#article {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.event {
+    margin-bottom: 0px;
+    text-align: center;
+}
+.whats-new {
+    height: 50%;
+}
+.event-title {
+    font-size: 15px;
+    font-weight: 800!important;
+    font-falimy: sans-serif;
+    text-transform: uppercase;
+    color: rgba(47, 46, 46, 1);
+    margin: 10px;
+}
+.event p {
+    font-style: italic;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.video-text {
+    font-family: serif;
+    padding:10px;
+}
+.whats-new {
+    padding:10px;
+}
+.button a {
+    border: solid transparent 0px;
+    color: #F3F3F3;
+}
+.button {
+    border-radius: 0;
+    background: rgba(28, 28, 28, 1);
+    text-align: center;
+    padding: 10px 20px;
+}
+.button a:hover {
+    text-decoration: none;
+    color: #66afe9;
+}
+.home-news h3 {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.news-planets {
+    padding-top: 30px;
+}
+.news-planets a {
+    color: #777;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.news-planets a:hover {
+    color: #000000;
+}

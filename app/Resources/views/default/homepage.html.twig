@@ -44,6 +44,9 @@
                         <a href="{{ path('viewing_all_videos', {currentPage: 1}) }}">VIDEOS</a>
                     </li>
                     <li>
+                        <a href="{{ path('space_station') }}">ISS</a>
+                    </li>
+                    <li>
                         <a href={{ path('view_all_planets') }}>PLANETS</a>
                     </li>
                     <li>
@@ -56,7 +59,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <header id="main">
+    <header id="welcome">
         <div class="header-content">
             <div class="header-content-inner">
                 <h1 id="home-header">Sky above us</h1>
@@ -67,80 +70,87 @@
             </div>
         </div>
     </header>
+    <!-- whats neew block -->
+    <div class="container-fluid" style="padding:0px;">
+    <div class="col-md-12 home-news">
+    <div class="col-md-6 home-news">
+        <h3>News</h3>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-    <!-- Header Carousel -->
-    <header id="article" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#article" data-slide-to="0" class="active"></li>
-            <li data-target="#article" data-slide-to="1"></li>
-            <li data-target="#article" data-slide-to="2"></li>
-            <li data-target="#article" data-slide-to="3"></li>
-            <li data-target="#article" data-slide-to="4"></li>
-            <li data-target="#article" data-slide-to="5"></li>
-        </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{{ news[0].urlToImage }}">
+                    <div class="carousel-caption">
+                        <h4><a href="{{ path('show_article', {'id': news[0].id}) }}">{{news[0].title }}</a></h4>
+                        <p>{{ news[0].description |slice(0, 250) }}... </br><a class="label label-primary" href="{{ path('show_article', {'id': news[0].id}) }}" target="_blank">More information</a></p>
+                    </div>
+                </div><!-- End Item -->
+                {% for i in 1..5 %}
+                <div class="item">
+                    <img src="{{ news[i].urlToImage }}">
+                    <div class="carousel-caption">
+                        <h4><a href="{{ path('show_article', {'id': news[i].id}) }}">{{news[i].title }}</a></h4>
+                        <p>{{ news[i].description | slice(0, 250) }}... </br><a class="label label-primary" href="{{ path('show_article', {'id': news[i].id}) }}" target="_blank">More information</a></p>
+                    </div>
+                </div><!-- End Item -->
+                {% endfor %}
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" id="news">
-            <div class="item active">
-                <a href="{{ path('show_article', {'id': news[0].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[0].urlToImage }}); "></div>
-                </a>
-                <div class="carousel-caption">
-                    <h2>{{news[0].title }}</h2>
-                </div>
             </div>
-            <div class="item">
-                <a href="{{ path('show_article', {'id': news[1].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[1].urlToImage }});"></div>
+
+
+            <ul class="list-group col-sm-4">
+                <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active"><h5>{{ news[0].title }}</h5></li>
+                {% for i in 1..5 %}
+                    <li data-target="#myCarousel" data-slide-to="{{ i }}" class="list-group-item"><h5>{{news[i].title }}</h5></li>
+                {% endfor %}
+
+            </ul>
+
+            <!-- Controls -->
+            <div class="carousel-controls">
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-                <div class="carousel-caption">
-                    <h2>{{news[1].title }}</h2>
-                </div>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
             </div>
-            <div class="item">
-                <a href="{{ path('show_article', {'id': news[2].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[2].urlToImage }});"></div>
-                </a>
-                <div class="carousel-caption">
-                    <h2>{{news[2].title }}</h2>
-                </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="button" style=" margin: 50px;">
+                <a href="{{ path('news_list', {'number': 1}) }}">More news</a>
             </div>
-            <div class="item">
-                <a href="{{ path('show_article', {'id': news[3].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[3].urlToImage }});"></div>
-                </a>
-                <div class="carousel-caption">
-                    <h2>{{news[3].title }}</h2>
-                </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12 whats-new event">
+        <h4 class="event-title" ><i class="fa fa-star" aria-hidden="true"></i>
+            Closest astronomical event:
+            <p>{{ closestEvent.title }}</p>
+        </h4>
+        <p>{{ closestEvent.date }}</p>
+        <p>{{ closestEvent.description }}</p>
             </div>
-            <div class="item">
-                <a href="{{ path('show_article', {'id': news[4].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[4].urlToImage }});"></div>
-                </a>
-                <div class="carousel-caption">
-                    <h2>{{news[4].title }}</h2>
+        <div class="col-md-12 whats-new live container">
+            <div class="video col-md-12">
+            <iframe class="col-md-6" src="https://www.youtube.com/embed/qzMQza8xZCc" frameborder="0" allowfullscreen></iframe>
+                <p class="col-md-6">The International Space Station - ISS - circles the earth at 240 miles above the planet.
+                    The station is crewed by NASA astronauts as well as Russian Cosmonauts and a mixture of Japanese,
+                    Canadian and European astronauts as well.</p>
                 </div>
-            </div>
-            <div class="item">
-                <a href="{{ path('show_article', {'id': news[5].id}) }}">
-                    <div class="fill" style="background-image:url({{ news[5].urlToImage }});"></div>
-                </a>
-                <div class="carousel-caption">
-                    <h2>{{news[5].title }}</h2>
+            <div class="col-md-12">
+                <div class="button" style="width:220px;">
+                    <a href="#">More live videos</a>
                 </div>
             </div>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#article" data-slide="prev">
-            <span class="icon-prev" style="font-size: 150px;"></span>
-        </a>
-        <a class="right carousel-control" href="#article" data-slide="next">
-            <span class="icon-next" style="font-size: 150px;"></span>
-        </a>
-    </header>
-    <div class="container" id="planets">
+    </div>
+    </div>
+    </div>
+    <!-- whats new endblock -->
+    <div class="container col-md-12" id="planets">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Our solar system</h2>
@@ -155,7 +165,7 @@
                 {% for planet in planets %}
                     <div class="col-lg-4 col-sm-6">
                         <a href="{{ path('show_planet', {'planetName': planet.name}) }}" class="portfolio-box">
-                            <img src="{{ planet.image }}" class="img-responsive" alt="">
+                            <img src="{{ asset( planet.image ) }}" class="img-responsive" alt="">
                             <div class="portfolio-box-caption">
                                 <div class="portfolio-box-caption-content">
                                     <div class="project-category text-faded">
@@ -200,12 +210,11 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('vendor/scrollreveal/scrollreveal.min.js') }}"></script>
     <script src="{{ asset('vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
 
     <!-- Theme JavaScript -->
     <script src="{{ asset('js/creative.min.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
 
     </body>
 {% endblock %}
