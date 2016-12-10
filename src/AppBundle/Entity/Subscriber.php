@@ -37,13 +37,13 @@ class Subscriber
     /**
      * @var int
      *
-     * @ORM\Column(name="key_name", type="integer", unique=true)
+     * @ORM\Column(name="key_name", type="string", unique=true)
      */
     private $keyName;
 
 
     /**
-     * @return int
+     * @return string
      */
     public function getKeyName()
     {
@@ -51,7 +51,7 @@ class Subscriber
     }
 
     /**
-     * @param int $keyName
+     * @param string $keyName
      */
     public function setKeyName($keyName)
     {
