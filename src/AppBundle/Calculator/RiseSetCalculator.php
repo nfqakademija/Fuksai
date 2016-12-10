@@ -9,6 +9,7 @@
 namespace AppBundle\Calculator;
 
 use AppBundle\Entity\PlanetSchedule;
+use AppBundle\ExceptionLib\NoAPIParameterException;
 use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -71,8 +72,12 @@ class RiseSetCalculator
             $object = $this->planetMap[$i];
 
             $data = $this->getData('https://maps.googleapis.com/maps/api/geocode/json?address=' . $city);
-            $lat = $data['results'][0]['geometry']['location']['lat'];
-            $lng = $data['results'][0]['geometry']['location']['lng'];
+            try {
+                $lat = $data['results'][0]['geometry']['location']['lat'];
+                $lng = $data['results'][0]['geometry']['location']['lng'];
+            } catch (Exception $e) {
+                throw new NoAPIParameterException('Parameter not found');
+            }
 
             $data = $this->getData('https://maps.googleapis.com/maps/api/timezone/json?location=' .
                 $lat . ',' .
@@ -174,7 +179,7 @@ class RiseSetCalculator
             $json = file_get_contents($url);
             $data = json_decode($json, true);
         } catch (ContextErrorException $e) {
-            throw new NoApiResponseException('No response from the google');
+            throw new NoApiResponseException('No response from the google API');
         }
         return $data;
     }
@@ -188,7 +193,7 @@ class RiseSetCalculator
         try {
             $data = file_get_contents($url);
         } catch (ContextErrorException $e) {
-            throw new NoApiResponseException('No response from the api call');
+            throw new NoApiResponseException('No response from the data provider');
         }
         return $data;
     }
