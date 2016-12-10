@@ -8,9 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/*
- * Class ImportMarsRoverPhotosCommand
- * Package AppBundle/Command
+/**
+ * Class ImportMarsPhotosCommand
+ * @package AppBundle\Command
  */
 class ImportMarsPhotosCommand extends ContainerAwareCommand
 {
