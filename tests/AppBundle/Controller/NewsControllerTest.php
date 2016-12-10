@@ -14,8 +14,8 @@ class NewsControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Crawler for news
-        $crawler = $client->request('GET', '/news');
+        // Crawler for first page of the news
+        $crawler = $client->request('GET', '/news/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there are exactly 10 img tag with the class "img-responsive" on the page
@@ -26,8 +26,8 @@ class NewsControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Crawler for Mercury articles
-        $crawler = $client->request('GET', '/planetArticles/Mercury');
+        // Crawler for first page of Mercury articles
+        $crawler = $client->request('GET', '/planetArticles/Mercury/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -36,8 +36,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Venus articles
-        $crawler = $client->request('GET', '/planetArticles/Venus');
+        // Crawler for first page of Venus articles
+        $crawler = $client->request('GET', '/planetArticles/Venus/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -46,8 +46,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Earth articles
-        $crawler = $client->request('GET', '/planetArticles/Earth');
+        // Crawler for first page of Earth articles
+        $crawler = $client->request('GET', '/planetArticles/Earth/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -56,8 +56,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Mars articles
-        $crawler = $client->request('GET', '/planetArticles/Mars');
+        // Crawler for first page of Mars articles
+        $crawler = $client->request('GET', '/planetArticles/Mars/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -66,8 +66,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Jupiter articles
-        $crawler = $client->request('GET', '/planetArticles/Jupiter');
+        // Crawler for first page of Jupiter articles
+        $crawler = $client->request('GET', '/planetArticles/Jupiter/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -76,8 +76,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Saturn articles
-        $crawler = $client->request('GET', '/planetArticles/Saturn');
+        // Crawler for first page of Saturn articles
+        $crawler = $client->request('GET', '/planetArticles/Saturn/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -86,8 +86,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Uranus articles
-        $crawler = $client->request('GET', '/planetArticles/Uranus');
+        // Crawler for first page of Uranus articles
+        $crawler = $client->request('GET', '/planetArticles/Uranus/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -96,8 +96,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Neptune articles
-        $crawler = $client->request('GET', '/planetArticles/Neptune');
+        // Crawler for first page of Neptune articles
+        $crawler = $client->request('GET', '/planetArticles/Neptune/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page
@@ -106,8 +106,8 @@ class NewsControllerTest extends WebTestCase
             $crawler->filter('img.img-responsive')->count()
         );
 
-        // Crawler for Pluto articles
-        $crawler = $client->request('GET', '/planetArticles/Pluto');
+        // Crawler for first page of Pluto articles
+        $crawler = $client->request('GET', '/planetArticles/Pluto/page/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one img tag with the class "img-responsive" on the page

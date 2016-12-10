@@ -19,10 +19,22 @@ class DefaultControllerTest extends WebTestCase
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there are exactly 2 header tags on the page
-        $this->assertCount(2, $crawler->filter('header'));
-        // Assert that there is exactly 1 span tag with the class "icon-prev" on the page
-        $this->assertCount(1, $crawler->filter('span.icon-prev'));
-        // Assert that there is exactly 1 span tag with the class "icon-next" on the page
-        $this->assertCount(1, $crawler->filter('span.icon-next'));
+        $this->assertCount(1, $crawler->filter('header'));
+        // Assert that the response content contains a string - "Our solar system"
+        $this->assertContains('Our solar system', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "Sky above us"
+        $this->assertContains('Sky above us', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "NEWS"
+        $this->assertContains('NEWS', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "APOD"
+        $this->assertContains('APOD', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "VIDEOS"
+        $this->assertContains('VIDEOS', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "ISS"
+        $this->assertContains('ISS', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "PLANETS"
+        $this->assertContains('PLANETS', $client->getResponse()->getContent());
+        // Assert that the response content contains a string - "EVENTS"
+        $this->assertContains('EVENTS', $client->getResponse()->getContent());
     }
 }
