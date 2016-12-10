@@ -14,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportVideosCommand extends ContainerAwareCommand
 {
-
     /**
      * {@inheritdoc}
 
@@ -76,7 +75,7 @@ class ImportVideosCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    private function getKeyNames()
+    private function getKeyNames(): array
     {
         //Returns all planet
         $planets = $this->getContainer()
@@ -97,7 +96,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @param $channelurl
      * @return array
      */
-    private function getVideo(array $planetName, string $channelurl)
+    private function getVideo(array $planetName, string $channelurl): array
     {
         $master = array();
         //Return youtube Api key from parameters.yml
@@ -151,7 +150,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return Video
      */
     //Creates videos that will be pushed to database
-    private function createVideos($key, $url, $channelName, $image, $title, $description)
+    private function createVideos($key, $url, $channelName, $image, $title, $description): Video
     {
         $video = new Video();
         $video
@@ -197,7 +196,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * @return array
      */
     //gets videos for every planet
-    private function getPaths(string $url, string $apiKey, array $planetName)
+    private function getPaths(string $url, string $apiKey, array $planetName): array
     {
         $result = array();
         $channelPath = array();
