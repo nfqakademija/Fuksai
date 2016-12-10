@@ -25,9 +25,10 @@ class VideosController extends Controller
         $channels = $em
             ->getRepository('AppBundle:Video')
             ->findAllChannels();
-        $planets = $em->getRepository('AppBundle:Planet')->findAll();
+        $filters = $em->getRepository('AppBundle:Planet')->findAll();
         $iterator = $videos->getIterator();
         $maxPages = ceil($videos->count()/6);
+        $page = 'videos';
         if (empty($iterator[0])) {
             throw $this->createNotFoundException('There are no videos on this page!');
         }
@@ -35,8 +36,9 @@ class VideosController extends Controller
             'maxPages' => $maxPages,
             'videos' => $iterator,
             'currentPage' => $currentPage,
-            'planetsList' => $planets,
-            'channels' => $channels
+            'filters' => $filters,
+            'channels' => $channels,
+            'page' => $page
         ]);
     }
 

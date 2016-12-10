@@ -34,9 +34,6 @@ h3 {
 ;
 }
 
-.feature-page {
-    margin-top: 100px;
-}
 .sideSearch {
     margin-top: 80px;
 }
@@ -132,6 +129,31 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.news-planets a:hover {
+.list-group .active {
     color: #000000;
 }
+.list-group .active:hover {
+    color: #000000;
+}
+
+header.intro-header.news {
+    background-image:url(../img/headers/news-header.jpg);
+}
+header.intro-header.event {
+    background-image:url(../img/headers/event-header.jpg);
+}
+header.intro-header.iss {
+    background-image:url(../img/headers/iss-header.jpg);
+}
+header.intro-header.videos {
+    background-image:url(../img/headers/video-header.jpg);
+}
+header.intro-header.potd {
+    background-image:url(../img/headers/potd-header.jpg);
+}
+header.intro-header.planet {
+    background-image:url(../img/headers/planet-header.jpg);
+}
+
+
+

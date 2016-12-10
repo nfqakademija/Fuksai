@@ -15,9 +15,13 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $events = $em->getRepository('AppBundle:Event')->findAll();
+        $page = 'events';
+        $filters = [];
 
         return $this->render('event/view_events.html.twig', [
-            'events' => $events
+            'events' => $events,
+            'page' => $page,
+            'filters' => $filters
         ]);
     }
 }
