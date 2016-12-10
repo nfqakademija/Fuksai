@@ -136,4 +136,24 @@ h3 {
     color: #000000;
 }
 
+header.intro-header.news {
+    background-image:url(../img/headers/news-header.jpg);
+}
+header.intro-header.event {
+    background-image:url(../img/headers/event-header.jpg);
+}
+header.intro-header.iss {
+    background-image:url(../img/headers/iss-header.jpg);
+}
+header.intro-header.videos {
+    background-image:url(../img/headers/video-header.jpg);
+}
+header.intro-header.potd {
+    background-image:url(../img/headers/potd-header.jpg);
+}
+header.intro-header.planet {
+    background-image:url(../img/headers/planet-header.jpg);
+}
+
+
 

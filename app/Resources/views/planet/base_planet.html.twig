@@ -78,7 +78,7 @@
     <div class="news-header">
         <!-- Page Header -->
         <!-- Set your background image for this header on the line below. -->
-        <header class="intro-header videos">
+        <header class="intro-header planet">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -87,16 +87,9 @@
                             <hr class="small">
                             <div class=" news-planets">
                                 <ul class="nav navbar-nav">
-                                    <h3>Planets</h3>
                                     {% for filter in filters %}
                                         <li>
                                             <a href="{{ path('view_videos_by_name', {planetName: filter.name, currentPage:1}) }}">{{ filter.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                    <h3> Channels </h3>
-                                    {% for channel in channels %}
-                                        <li>
-                                            <a href="{{ path('viewing_all_channel_videos', {currentPage: 1, channelName: channel.channelName}) }}">{{ channel.channelName }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
