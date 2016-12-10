@@ -121,7 +121,7 @@ class VideoRepository extends EntityRepository
      * @param int $limit
      * @return Paginator
      */
-    public function paginate($dql, $page = 1, $limit = 6)
+    public function paginate($dql, $page = 1, $limit = 6): Paginator
     {
         $paginator = new Paginator($dql);
 

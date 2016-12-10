@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventRepository extends EntityRepository
 {
-    public function findEvent($date)
+    public function findEvent($date): array
     {
         return $this->createQueryBuilder('event')
             ->where('event.date =:date')
@@ -19,7 +19,7 @@ class EventRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findNextEvent()
+    public function findNextEvent(): array
     {
         $Date = new \DateTime();
         $currentDate = $Date->format('Y-m-d');

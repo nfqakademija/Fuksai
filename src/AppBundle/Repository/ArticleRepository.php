@@ -13,11 +13,12 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
     /**
+     * Gets articles ordered by publish date.
+     *
      * @return array
      */
-    public function findAllByDate()
+    public function findAllByDate(): array
     {
-        // get articles ordered by publish date
         return $this->findBy([], ['publishDate' => 'DESC']);
     }
 }

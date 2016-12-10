@@ -55,7 +55,7 @@ class Asteroid
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -79,7 +79,7 @@ class Asteroid
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -103,7 +103,7 @@ class Asteroid
      *
      * @return int
      */
-    public function getDiameter()
+    public function getDiameter(): int
     {
         return $this->diameter;
     }
@@ -127,7 +127,7 @@ class Asteroid
      *
      * @return int
      */
-    public function getVelocity()
+    public function getVelocity(): int
     {
         return $this->velocity;
     }
@@ -151,7 +151,7 @@ class Asteroid
      *
      * @return int
      */
-    public function getMissDistance()
+    public function getMissDistance(): int
     {
         return $this->missDistance;
     }
