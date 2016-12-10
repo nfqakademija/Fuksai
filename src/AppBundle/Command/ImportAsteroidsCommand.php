@@ -9,7 +9,7 @@ use AppBundle\Repository\AsteroidRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/*
+/**
  * Class ImportAsteroidsCommand
  * @package AppBundle\Command
  */

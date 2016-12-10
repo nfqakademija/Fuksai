@@ -2,6 +2,10 @@
     background-image: url('../img/headers/header.jpg');
 }
 
+.homepage-background {
+    background-image: url('../img/headers/header.jpg');
+}
+
 .btn-space {
     margin-bottom: -50px;
 }
@@ -70,16 +74,22 @@ h3 {
     text-align: center;
 }
 .whats-new {
+    padding:10px;
     height: 50%;
+}
+
+.closestEvent {
+    color: white;
 }
 .event-title {
     font-size: 15px;
     font-weight: 800!important;
     font-falimy: sans-serif;
     text-transform: uppercase;
-    color: rgba(47, 46, 46, 1);
+    color: white;
     margin: 10px;
 }
+
 .event p {
     font-style: italic;
     font-family: sans-serif;
@@ -89,9 +99,7 @@ h3 {
     font-family: serif;
     padding:10px;
 }
-.whats-new {
-    padding:10px;
-}
+
 .button a {
     border: solid transparent 0px;
     color: #F3F3F3;
