@@ -124,6 +124,14 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.news-planets a:hover {
+.list-group .active {
     color: #000000;
 }
+.list-group .active:hover {
+    color: #000000;
+}
+body {
+    background-color: #8c8c8c;
+}
+
+
