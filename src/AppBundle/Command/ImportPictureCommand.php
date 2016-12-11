@@ -17,7 +17,7 @@ class ImportPictureCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:import:astronomy-picture-of-the-day')
+            ->setName('app:import:apod')
             ->setDescription('Import astronomy picture of the day.')
             ->setHelp('This command finds and imports astronomy picture of the day in the website.');
     }

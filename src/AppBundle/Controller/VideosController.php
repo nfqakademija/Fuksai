@@ -51,7 +51,8 @@ class VideosController extends Controller
     public function planetsAction($planetName, $currentPage)
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em
+        $page = "Planet videos";
+        $filters = $em
             ->getRepository('AppBundle:Planet')
             ->findAll();
         $channels = $em
@@ -69,9 +70,10 @@ class VideosController extends Controller
             'maxPages' => $maxPages,
             'videos' => $iterator,
             'currentPage' => $currentPage,
-            'planetsList' => $planets,
+            'filters' => $filters,
             'channels' => $channels,
-            'currentPlanet' => $planetName
+            'currentPlanet' => $planetName,
+            'page' => $page
         ]);
     }
 
@@ -84,7 +86,8 @@ class VideosController extends Controller
     public function channelAction($channelName, $currentPage)
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em
+        $page = "channel videos";
+        $filters = $em
             ->getRepository('AppBundle:Planet')
             ->findAll();
         $channels = $em
@@ -102,9 +105,10 @@ class VideosController extends Controller
             'maxPages' => $maxPages,
             'videos' => $iterator,
             'currentPage' => $currentPage,
-            'planetsList' => $planets,
+            'filters' => $filters,
             'channels' => $channels,
-            'currentChannel' => $channelName
+            'currentChannel' => $channelName,
+            'page' => $page
         ]);
     }
 }
