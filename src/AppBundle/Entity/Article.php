@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * Article
@@ -58,7 +57,7 @@ class Article
     private $urlToImage;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
@@ -201,9 +200,9 @@ class Article
     }
 
     /**
-     * @param DateTime $publishDate
+     * @param \DateTime $publishDate
      */
-    public function setPublishDate(DateTime $publishDate)
+    public function setPublishDate(\DateTime $publishDate)
     {
         $this->publishDate = $publishDate;
     }
@@ -217,9 +216,9 @@ class Article
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getPublishDate(): DateTime
+    public function getPublishDate(): \DateTime
     {
         return $this->publishDate;
     }
