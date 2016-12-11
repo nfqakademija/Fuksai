@@ -56,7 +56,7 @@ class Picture
      */
     public function getDateInString()
     {
-        return (date('Y-m-d', $this->date));
+        return (date('Y-m-d', $this->date->getTimestamp()));
     }
 
     /**
