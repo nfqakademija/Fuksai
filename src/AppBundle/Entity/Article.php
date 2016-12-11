@@ -212,7 +212,7 @@ class Article
      */
     public function getPublishDateString(): string
     {
-        return (date('Y-m-d', $this->publishDate->setTimestamp()));
+        return (date('Y-m-d', $this->publishDate->getTimestamp()));
     }
 
     /**
