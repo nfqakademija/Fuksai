@@ -24,11 +24,6 @@ class RiseSetCalculator
     );
 
     /**
-     * @var PlanetSchedule[]
-     */
-    private $scheduleList;
-
-    /**
      * @var EntityManager
      */
     private $em;

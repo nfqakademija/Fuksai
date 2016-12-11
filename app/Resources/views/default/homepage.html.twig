@@ -128,6 +128,7 @@
             <div class="col-md-6">
                 <div class="col-md-12 whats-new event">
                     <h4 class="event-title">
+                        {% if closestEvent is not null %}
                         <i class="fa fa-star" aria-hidden="true"></i>
                         Closest astronomical event:
                         <p>{{ closestEvent.title }}</p>
@@ -136,6 +137,11 @@
                         <p>{{ closestEvent.date }}</p>
                         <p>{{ closestEvent.description }}</p>
                     </div>
+                    {% else %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                        Closest astronomical event
+                    <h4>There isn't any know astronomical event at this time...</h4>
+                    {% endif %}
                 </div>
                 <div class="col-md-12 whats-new live container">
                     <div class="video col-md-12">
