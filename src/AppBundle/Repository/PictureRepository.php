@@ -13,11 +13,12 @@ use Doctrine\ORM\EntityRepository;
 class PictureRepository extends EntityRepository
 {
     /**
+     * Gets astronomy pictures ordered by date.
+     *
      * @return array
      */
-    public function findAllByDate()
+    public function findAllByDate(): array
     {
-        // get astronomy pictures ordered by date
         return $this->findBy([], ['date' => 'DESC']);
     }
 }

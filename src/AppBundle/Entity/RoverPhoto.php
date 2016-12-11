@@ -79,7 +79,7 @@ class RoverPhoto
      *
      * @return string
      */
-    public function getImgSrc()
+    public function getImgSrc(): string
     {
         return $this->imgSrc;
     }
@@ -103,7 +103,7 @@ class RoverPhoto
      *
      * @return string
      */
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
@@ -127,7 +127,7 @@ class RoverPhoto
      *
      * @return string
      */
-    public function getRover()
+    public function getRover(): string
     {
         return $this->rover;
     }
@@ -151,7 +151,7 @@ class RoverPhoto
      *
      * @return string
      */
-    public function getCamera()
+    public function getCamera(): string
     {
         return $this->camera;
     }

@@ -27,14 +27,17 @@ class RiseSetCalculator
      * @var PlanetSchedule[]
      */
     private $scheduleList;
+
     /**
      * @var EntityManager
      */
     private $em;
+
     /**
      * @var string
      */
     private $googleApiKey;
+
     /**
      * RiseSetCalculator constructor.
      * @param EntityManager $em
@@ -50,7 +53,7 @@ class RiseSetCalculator
      * @param $city
      * @return PlanetSchedule[]
      */
-    public function getRiseSet($city)
+    public function getRiseSet($city): array
     {
         $wholeSchedule = array();
 
@@ -161,9 +164,9 @@ class RiseSetCalculator
 
     /**
      * @param $coordinate
-     * @return mixed
+     * @return array
      */
-    private function floatToDeg($coordinate)
+    private function floatToDeg($coordinate): array
     {
         $result = array();
 
@@ -177,7 +180,7 @@ class RiseSetCalculator
      * @param $coordinate
      * @return string
      */
-    private function degToFloat($coordinate)
+    private function degToFloat($coordinate): string
     {
         $min = $coordinate['min']/300*5;
         return rtrim($coordinate['deg'], ".0") + round($min, 2);
@@ -187,7 +190,7 @@ class RiseSetCalculator
      * @param $value
      * @return int
      */
-    private function getSign($value)
+    private function getSign($value): int
     {
         if ($value < 0) {
             return -1;
@@ -211,7 +214,7 @@ class RiseSetCalculator
      * @param $url
      * @return string
      */
-    private function getPlainData($url)
+    private function getPlainData($url): string
     {
         $data = file_get_contents($url);
 

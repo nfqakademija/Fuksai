@@ -61,7 +61,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    private function getEntityManager()
+    private function getEntityManager(): EntityManager
     {
         return $this
             ->getContainer()
