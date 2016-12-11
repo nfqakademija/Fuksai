@@ -21,7 +21,7 @@ class DefaultController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $news = $em->getRepository('AppBundle:Article')->findAll();
         $event = $em->getRepository('AppBundle:Event')->findNextEvent();
-        if(!isset($event[0])){
+        if (!isset($event[0])) {
             $event = null;
         }
         return $this->render('default/homepage.html.twig', [
