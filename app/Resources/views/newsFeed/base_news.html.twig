@@ -82,11 +82,13 @@
                             <hr class="small">
                             <div class=" news-planets">
                                 <ul class="nav navbar-nav">
+                                    {% if filters is defined %}
                                     {% for filter in filters %}
                                         <li>
                                             <a href="{{ path('planet_articles', {planet: filter.name, number:1}) }}">{{ filter.name }}</a>
                                         </li>
                                     {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
