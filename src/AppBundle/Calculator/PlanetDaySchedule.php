@@ -62,6 +62,4 @@ class PlanetDaySchedule
     {
         $this->fall = $fall;
     }
-
-
 }

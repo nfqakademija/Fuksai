@@ -153,7 +153,7 @@ class ImportVideosCommand extends ContainerAwareCommand
         try {
             $json = file_get_contents($url);
             $data = json_decode($json, true);
-        } catch(Exception $exception) {
+        } catch (Exception $exception) {
             throw new NoApiResponseException('Youtube did not respond');
         }
         return $data;
