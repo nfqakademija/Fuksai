@@ -3,6 +3,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\ISS;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -75,7 +76,7 @@ class ImportISSPositionCommand extends ContainerAwareCommand
 
     /**
      * @param $request
-     * @return mixed
+     * @return array
      */
     public function getData($request)
     {
@@ -86,7 +87,7 @@ class ImportISSPositionCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return mixed
+     * @return EntityManager
      */
     private function getEntityManager()
     {
