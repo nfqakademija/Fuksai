@@ -21,13 +21,16 @@ class DefaultController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $news = $em->getRepository('AppBundle:Article')->findAll();
         $event = $em->getRepository('AppBundle:Event')->findNextEvent();
+        $email = $this->getParameter('mailer_user') . '@' . $this->getParameter('mailer_transport') . '.com';
+
         if (!isset($event[0])) {
             $event = null;
         }
         return $this->render('default/homepage.html.twig', [
             'planets' => $planets,
             'news' => $news,
-            'closestEvent' => $event[0]
+            'closestEvent' => $event[0],
+            'email' => $email
         ]);
     }
 }
