@@ -45,7 +45,7 @@ class Subscriber
     /**
      * @return string
      */
-    public function getKeyName(): int
+    public function getKeyName(): string
     {
         return $this->keyName;
     }
@@ -72,8 +72,6 @@ class Subscriber
      * Set email
      *
      * @param string $email
-     *
-     * @return Subscriber
      */
     public function setEmail($email)
     {

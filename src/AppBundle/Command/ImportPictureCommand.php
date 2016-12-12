@@ -2,8 +2,10 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use AppBundle\Entity\Picture;
@@ -25,15 +27,21 @@ class ImportPictureCommand extends ContainerAwareCommand
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return void
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $newAstronomyPictureData = $this->getAstronomyPictureAlongWithInformation();
 
-        $this->createNewAstronomyPictureOfTheDay($newAstronomyPictureData);
-
+        try {
+            $this->createNewAstronomyPictureOfTheDay($newAstronomyPictureData);
+        } catch (NoApiResponseException $npe) {
+            $output->writeln($npe->getMessage());
+            return 1;
+        }
         $output->writeln('The astronomy picture of the day was inserted!');
+
+        return 0;
     }
 
     /**
@@ -64,8 +72,12 @@ class ImportPictureCommand extends ContainerAwareCommand
      */
     private function getDataFromRequest(string $request): array
     {
-        $json = file_get_contents($request);
-        $data = json_decode($json, true);
+        try {
+            $json = file_get_contents($request);
+            $data = json_decode($json, true);
+        } catch (Exception $exception) {
+            throw new NoApiResponseException('NASA Api did not respond');
+        }
 
         return $data;
     }
