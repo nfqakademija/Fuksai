@@ -4,7 +4,10 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\Planet;
 use AppBundle\Entity\Video;
+use AppBundle\ExceptionLib\NoAPIParameterException;
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -37,7 +40,15 @@ class ImportVideosCommand extends ContainerAwareCommand
 
         foreach ($channels as $channelName => $channelurl) {
             //Returns videos
-            $videos = $this->getVideo($planetNames, $channelurl);
+            try {
+                $videos = $this->getVideo($planetNames, $channelurl);
+            } catch (NoApiResponseException $exception) {
+                $output->writeln($exception->getMessage());
+                return 1;
+            } catch (NoAPIParameterException $exception) {
+                $output->writeln($exception->getMessage());
+                return 1;
+            }
             foreach ($videos as $video) {
                 //Checks if videos already exists in database
                 $data = $this->checkExists($video['name'], $video['path']);
@@ -101,26 +112,31 @@ class ImportVideosCommand extends ContainerAwareCommand
         $apiKey = $this->getContainer()->getParameter('youtube_api_key');
         //Gets videos id
         $url = $this->getPaths($channelURL, $apiKey, $planetName);
-        foreach ($planetName as $key => $name) {
-            //checks if key exists, if in found data there are videos
-            if (isset($url[$key])) {
-                $items = $url[$key]['items'];
-                foreach ($items as $video) {
-                    //Creates array for each found video
-                    $videoId = $video['id']['videoId'];
-                    $videoImage = $video['snippet']['thumbnails']['medium']['url'];
-                    $videoTitle = $video['snippet']['title'];
-                    $videoDescription = $video['snippet']['description'];
-                    $videosPath = array(
-                        'name' => $name,
-                        'path' => "https://www.youtube.com/embed/" . $videoId,
-                        'image' => $videoImage,
-                        'title' => $videoTitle,
-                        'description' => $videoDescription
-                    );
-                    $master[] = $videosPath;
+
+        try {
+            foreach ($planetName as $key => $name) {
+                //checks if key exists, if in found data there are videos
+                if (isset($url[$key])) {
+                    $items = $url[$key]['items'];
+                    foreach ($items as $video) {
+                        //Creates array for each found video
+                        $videoId = $video['id']['videoId'];
+                        $videoImage = $video['snippet']['thumbnails']['medium']['url'];
+                        $videoTitle = $video['snippet']['title'];
+                        $videoDescription = $video['snippet']['description'];
+                        $videosPath = array(
+                            'name' => $name,
+                            'path' => "https://www.youtube.com/embed/" . $videoId,
+                            'image' => $videoImage,
+                            'title' => $videoTitle,
+                            'description' => $videoDescription
+                        );
+                        $master[] = $videosPath;
+                    }
                 }
             }
+        } catch (Exception $exception) {
+            throw new NoAPIParameterException('Some parameters are missing');
         }
 
         return $master;
@@ -134,8 +150,12 @@ class ImportVideosCommand extends ContainerAwareCommand
      */
     private function getData(string $url)
     {
-        $json = file_get_contents($url);
-        $data = json_decode($json, true);
+        try {
+            $json = file_get_contents($url);
+            $data = json_decode($json, true);
+        } catch(Exception $exception) {
+            throw new NoApiResponseException('Youtube did not respond');
+        }
         return $data;
     }
 
