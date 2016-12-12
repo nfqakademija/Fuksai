@@ -1,27 +1,19 @@
 {% extends 'services/base_service.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-{% endblock %}
 
 {% block body %}
 
     <div class="container feature-page">
 
         <div class="row">
+            <div class="col-md-12">
 
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
 
                 <!-- Blog Post -->
 
-                <h3>Space Station right now is:</h3>
+                <h3>Current space station position:</h3>
                 <div id="map"></div>
                 <script>
                     function initMap() {
@@ -39,28 +31,14 @@
                 <script async defer
                         src="{{  apiCall }}">
                 </script>
-
+                <div class="col-md-6">
+                    <h3>Also you can watch live space station translation:</h3>
                 <iframe width="745" height="420" src="https://www.youtube.com/embed/ddFvjfvPnqk" frameborder="0" allowfullscreen></iframe>
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
                 </div>
-
-                <hr>
-
-
             </div>
 
         </div>
+            </div>
         <!-- /.row -->
         <!-- Footer -->
         <footer>

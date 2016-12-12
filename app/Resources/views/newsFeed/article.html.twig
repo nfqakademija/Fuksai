@@ -3,6 +3,7 @@
 {% block body %}
     <!-- Main Content -->
     <div class="container">
+            <a class="back-button" href="{{ path('news_list', {number: 1}) }}">&larr;Back to articles</a>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <!-- Display article-->
@@ -15,9 +16,10 @@
                     <p class="post-meta" style=' text-align: center;'>Posted by {{ article.author }} on {{ article.getPublishDateString }}</p>
                     <!-- Preview Image -->
                     <img  style='height: 100%; width: 100%; object-fit: contain' class="img-responsive" src="{{ article.urlToImage }}" alt="">
+                    </br>
 
                     <!-- Post Content -->
-                    <p>{{ article.description|nl2br|nl2br }}</p>
+                    <p><span class="paragraph-tab">{{ article.description|nl2br|nl2br }} </span></p>
 
                     <p> <i> This article originally appeared on</i>
                         <a href={{ article.url }}>
