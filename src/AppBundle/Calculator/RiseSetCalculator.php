@@ -1,15 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: shalifar
+ * Date: 16.11.20
+ * Time: 18.31
+ */
 
 namespace AppBundle\Calculator;
 
 use AppBundle\Entity\PlanetSchedule;
+use AppBundle\ExceptionLib\NoAPIParameterException;
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 
-/**
- * Class RiseSetCalculator
- * @package AppBundle\Calculator
- */
 class RiseSetCalculator
 {
     private $planetMap = array(
@@ -24,15 +30,17 @@ class RiseSetCalculator
     );
 
     /**
+     * @var PlanetSchedule[]
+     */
+    private $scheduleList;
+    /**
      * @var EntityManager
      */
     private $em;
-
     /**
      * @var string
      */
     private $googleApiKey;
-
     /**
      * RiseSetCalculator constructor.
      * @param EntityManager $em
@@ -48,7 +56,7 @@ class RiseSetCalculator
      * @param $city
      * @return PlanetSchedule[]
      */
-    public function getRiseSet($city): array
+    public function getRiseSet($city)
     {
         $wholeSchedule = array();
 
@@ -64,8 +72,12 @@ class RiseSetCalculator
             $object = $this->planetMap[$i];
 
             $data = $this->getData('https://maps.googleapis.com/maps/api/geocode/json?address=' . $city);
-            $lat = $data['results'][0]['geometry']['location']['lat'];
-            $lng = $data['results'][0]['geometry']['location']['lng'];
+            try {
+                $lat = $data['results'][0]['geometry']['location']['lat'];
+                $lng = $data['results'][0]['geometry']['location']['lng'];
+            } catch (Exception $e) {
+                throw new NoAPIParameterException('Parameter not found');
+            }
 
             $data = $this->getData('https://maps.googleapis.com/maps/api/timezone/json?location=' .
                 $lat . ',' .
@@ -74,17 +86,17 @@ class RiseSetCalculator
                 $this->googleApiKey);
             $timezone = $data['rawOffset'] / 3600;
 
-            $tz_sign = $this->getSign($timezone);
+            $tz_sign = Converter::getSign($timezone);
             $timezone = abs($timezone);
 
-            $lat_sign = $this->getSign($lat);
+            $lat_sign = Converter::getSign($lat);
             $lat = abs($lat);
 
-            $lng_sign = $this->getSign($lng);
+            $lng_sign = Converter::getSign($lng);
             $lng = abs($lng);
 
-            $latitude = $this->floatToDeg($lat);
-            $longitude = $this->floatToDeg($lng);
+            $latitude = Converter::floatToDeg($lat);
+            $longitude = Converter::floatToDeg($lng);
 
             $date_args = explode("-", $today);
 
@@ -96,12 +108,12 @@ class RiseSetCalculator
                 '&body=' . $i .
                 '&place=mercury' .
                 '&lon_sign=' . $lng_sign .
-                '&lon_deg=' . $longitude['deg'] .
-                '&lon_min=' . $longitude['min'] .
+                '&lon_deg=' . $longitude->getDegrees() .
+                '&lon_min=' . $longitude->getMinutes() .
                 '&lon_sec=1' .
                 '&lat_sign=' . $lat_sign .
-                '&lat_deg=' . $latitude['deg'] .
-                '&lat_min=' . $latitude['min'] .
+                '&lat_deg=' . $latitude->getDegrees() .
+                '&lat_min=' . $latitude->getMinutes() .
                 '&lat_sec=1' .
                 '&height=1' .
                 '&tz=' . $timezone .
@@ -112,8 +124,8 @@ class RiseSetCalculator
             $planetSchedule = new PlanetSchedule();
             $planetSchedule->setObject($object);
             $planetSchedule->setCity($city);
-            $planetSchedule->setLongitude($this->degToFloat($longitude));
-            $planetSchedule->setLatitude($this->degToFloat($latitude));
+            $planetSchedule->setLongitude(Converter::degToFloat($longitude));
+            $planetSchedule->setLatitude(Converter::degToFloat($latitude));
             $planetSchedule->setTimezone($timezone);
             $planetSchedule->setDate($today);
             $planetSchedule->setRise($schedule['rise']);
@@ -158,50 +170,17 @@ class RiseSetCalculator
     }
 
     /**
-     * @param $coordinate
-     * @return array
-     */
-    private function floatToDeg($coordinate): array
-    {
-        $result = array();
-
-        $result['min'] = rtrim(round(($coordinate - floor($coordinate))/5*3, 2)*100, ".0");
-        $result['deg'] = rtrim(floor($coordinate), ".0");
-
-        return $result;
-    }
-
-    /**
-     * @param $coordinate
-     * @return string
-     */
-    private function degToFloat($coordinate): string
-    {
-        $min = $coordinate['min']/300*5;
-        return rtrim($coordinate['deg'], ".0") + round($min, 2);
-    }
-
-    /**
-     * @param $value
-     * @return int
-     */
-    private function getSign($value): int
-    {
-        if ($value < 0) {
-            return -1;
-        }
-        return 1;
-    }
-
-    /**
      * @param $url
      * @return mixed
      */
     private function getData($url)
     {
-        $json = file_get_contents($url);
-        $data = json_decode($json, true);
-
+        try {
+            $json = file_get_contents($url);
+            $data = json_decode($json, true);
+        } catch (ContextErrorException $e) {
+            throw new NoApiResponseException('No response from the google API');
+        }
         return $data;
     }
 
@@ -209,10 +188,13 @@ class RiseSetCalculator
      * @param $url
      * @return string
      */
-    private function getPlainData($url): string
+    private function getPlainData($url)
     {
-        $data = file_get_contents($url);
-
+        try {
+            $data = file_get_contents($url);
+        } catch (ContextErrorException $e) {
+            throw new NoApiResponseException('No response from the data provider');
+        }
         return $data;
     }
 }

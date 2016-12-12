@@ -1,17 +1,22 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: shalifar
+ * Date: 16.11.18
+ * Time: 20.42
+ */
 
 namespace AppBundle\Command;
 
 use AppBundle\Entity\PlanetSchedule;
+use AppBundle\ExceptionLib\NoAPIParameterException;
+use AppBundle\ExceptionLib\NoApiResponseException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class PlanetPositionCommand
- * @package AppBundle\Command
- */
 class PlanetPositionCommand extends ContainerAwareCommand
 {
     public function configure()
@@ -24,10 +29,25 @@ class PlanetPositionCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $calculator = $this->getContainer()->get('app.calculator.rise_set_calculator');
-        $schedule = $calculator->getRiseSet('vilnius');
+
+        try {
+            $schedule = $calculator->getRiseSet('vilnius');
+        } catch (NoApiResponseException $e) {
+            $output->writeln($e->getMessage());
+            return 1;
+        } catch (NoAPIParameterException $e) {
+            $output->writeln($e->getMessage());
+            return 1;
+        }
         $em = $this->getEntityManager();
 
-        if (!is_null($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
+        $todaySchedule = $em->getRepository('AppBundle:PlanetSchedule')->findBy(['date' => date('Y-m-d')]);
+        if (!empty($todaySchedule)) {
+            $output->writeln('Schedule for today already exists');
+            return 0;
+        }
+
+        if (!empty($em->getRepository('AppBundle:PlanetSchedule')->findAll())) {
             $schedules = $em->getRepository('AppBundle:PlanetSchedule')->findAll();
 
             foreach ($schedules as $planet) {
@@ -44,12 +64,13 @@ class PlanetPositionCommand extends ContainerAwareCommand
         }
         $em->flush();
         $output->writeln("Data flushed");
+        return 0;
     }
 
     /**
      * @return EntityManager
      */
-    private function getEntityManager(): EntityManager
+    private function getEntityManager()
     {
         return $this
             ->getContainer()
