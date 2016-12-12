@@ -14,7 +14,8 @@ class ISSController extends Controller
     public function showISS()
     {
         $em = $this->getDoctrine()->getManager();
-        $coordinates = $em->getRepository('AppBundle:ISS')->find(1);
+        $coordinateList = $em->getRepository('AppBundle:ISS')->findAll();
+        $coordinates = $coordinateList[0];
         $apiKey = $this->getParameter('google_timezone_api_key');
 
         return $this->render('services/space_station.html.twig', [
