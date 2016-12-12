@@ -10,7 +10,7 @@
                     <a href="{{ path('astronomy_pictures') }}">&larr;More Pictures</a>
                 </li>
             </ul>
-            <div class="col-lg-12">
+            <div class="col-md-12">
                 <!-- Title -->
                 <h2 id="picture">{{ pictures[picture].title }}</h2>
 
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Blog Post Content Column -->
-            <div class="col-lg-6">
+            <div class="col-md-6">
 
                 <!-- Preview Image -->
                 <div class='item' ><a href="{{ pictures[picture].url }}" data-lightbox='all_gallery'>
@@ -39,15 +39,14 @@
         </div>
         <!-- /.row -->
         <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy;Sky Above Us</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p style="float: right;">Copyright &copy;Sky Above Us</p>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

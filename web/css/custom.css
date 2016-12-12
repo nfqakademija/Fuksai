@@ -178,6 +178,20 @@ body img:hover {
     color: #F3F3F3;
     background-color: #00A5E3;
 }
+
+.all-apod-button {
+    border-radius:7%;
+    border: 5px solid #00A5E3;
+    padding: 20px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.all-apod {
+    text-align: center;
+    font-size: 50px;
+}
+
 #map {
     height: 400px;
     width: 100%;
