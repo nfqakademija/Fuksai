@@ -10,7 +10,7 @@ namespace AppBundle\ExceptionLib;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class NoAPIParameterException Extends Exception
+class NoAPIParameterException extends Exception
 {
 
 }

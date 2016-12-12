@@ -8,7 +8,6 @@
 
 namespace AppBundle\Calculator;
 
-
 class Converter
 {
     /**
