@@ -55,7 +55,7 @@ class ISS
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -79,7 +79,7 @@ class ISS
      *
      * @return float
      */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
@@ -103,7 +103,7 @@ class ISS
      *
      * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
@@ -127,7 +127,7 @@ class ISS
      *
      * @return string
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -151,7 +151,7 @@ class ISS
      *
      * @return string
      */
-    public function getMapUrl()
+    public function getMapUrl(): string
     {
         return $this->mapUrl;
     }

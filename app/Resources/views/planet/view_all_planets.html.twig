@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'planet/base_planet.html.twig' %}
 {% block body %}
     <div class="container" id="planet-list" xmlns="http://www.w3.org/1999/html">
     {% for planet in planets %}
@@ -7,7 +7,7 @@
             <h2>{{ planet.name }}</h2>
             <div class="col-md-4">
             <p>Planet News: </br>
-                <a href="{{ path('planet_articles', {'planet': planet.name}) }}" >News</a>
+                <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}" >News</a>
             </p>
         </div>
         <div class="col-md-4 list-space">

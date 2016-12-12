@@ -1,4 +1,8 @@
-.header #main {
+.header #welcome {
+    background-image: url('../img/headers/header.jpg');
+}
+
+.homepage-background {
     background-image: url('../img/headers/header.jpg');
 }
 
@@ -30,9 +34,6 @@ h3 {
 ;
 }
 
-.feature-page {
-    margin-top: 100px;
-}
 .sideSearch {
     margin-top: 80px;
 }
@@ -62,6 +63,103 @@ h3 {
     float: left;
     height: 70px;
     width: auto;
-    padding: 10px 5px;
+    margin-left: -15px;
 }
+.logo:hover {
+    cursor: pointer;
+}
+#article {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.event {
+    margin-bottom: 0px;
+    text-align: center;
+}
+.whats-new {
+    padding:10px;
+    height: 50%;
+}
+
+.closestEvent {
+    color: white;
+}
+.video-wrap h4 {
+    font-weight: 800;
+}
+.event-title {
+    font-size: 15px;
+    font-weight: 800!important;
+    font-falimy: sans-serif;
+    text-transform: uppercase;
+    color: white;
+    margin: 10px;
+}
+
+.event p {
+    font-style: italic;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+.video-text {
+    font-family: serif;
+    padding:10px;
+}
+
+.button a {
+    border: solid transparent 0px;
+    color: #F3F3F3;
+}
+.button {
+    border-radius: 0;
+    background: rgba(28, 28, 28, 1);
+    text-align: center;
+    padding: 10px 20px;
+}
+.button a:hover {
+    text-decoration: none;
+    color: #66afe9;
+}
+.home-news h3 {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.news-planets {
+    padding-top: 30px;
+}
+.news-planets a {
+    color: #777;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.list-group .active {
+    color: #000000;
+}
+.list-group .active:hover {
+    color: #000000;
+}
+
+header.intro-header.news {
+    background-image:url(../img/headers/news-header.jpg);
+}
+header.intro-header.event {
+    background-image:url(../img/headers/event-header.jpg);
+}
+header.intro-header.iss {
+    background-image:url(../img/headers/iss-header.jpg);
+}
+header.intro-header.videos {
+    background-image:url(../img/headers/video-header.jpg);
+}
+header.intro-header.potd {
+    background-image:url(../img/headers/potd-header.jpg);
+}
+header.intro-header.planet {
+    background-image:url(../img/headers/planet-header.jpg);
+}
+
+
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.11.18
- * Time: 20.42
- */
 
 namespace AppBundle\Command;
 
@@ -14,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class PlanetPositionCommand
+ * @package AppBundle\Command
+ */
 class PlanetPositionCommand extends ContainerAwareCommand
 {
     public function configure()
@@ -63,7 +61,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    private function getEntityManager()
+    private function getEntityManager(): EntityManager
     {
         return $this
             ->getContainer()

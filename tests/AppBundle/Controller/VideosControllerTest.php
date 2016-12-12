@@ -125,7 +125,7 @@ class VideosControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Crawler for first page of channel CrashCourse videos
-        $crawler = $client->request('GET', 'videos/channel/CrashCourse/1');
+        $crawler = $client->request('GET', '/videos/channel/CrashCourse/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one div tag with the class "youtube-player" on the page
@@ -135,7 +135,7 @@ class VideosControllerTest extends WebTestCase
         );
 
         // Crawler for first page of channel SciShow videos
-        $crawler = $client->request('GET', 'videos/channel/SciShow/1');
+        $crawler = $client->request('GET', '/videos/channel/SciShow/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one div tag with the class "youtube-player" on the page
@@ -145,7 +145,7 @@ class VideosControllerTest extends WebTestCase
         );
 
         // Crawler for first page of channel NasaTelevision videos
-        $crawler = $client->request('GET', 'videos/channel/NasaTelevision/1');
+        $crawler = $client->request('GET', '/videos/channel/NasaTelevision/1');
         // Assert that the response is successful
         $this->assertTrue($client->getResponse()->isSuccessful());
         // Assert that there is at least one div tag with the class "youtube-player" on the page

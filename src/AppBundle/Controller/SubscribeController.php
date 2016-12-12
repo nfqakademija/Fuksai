@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.2
- * Time: 21.45
- */
 
 namespace AppBundle\Controller;
 
@@ -21,7 +15,7 @@ class SubscribeController extends Controller
     /**
      * @Route("/subscribe", name="show_subscribe_form")
      *
-     * @param Request
+     * @param $request
      * @return \Symfony\Component\HttpFoundation\Request
      */
     public function showForm(Request $request)

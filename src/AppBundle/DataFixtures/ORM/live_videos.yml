@@ -1,0 +1,21 @@
+video1:
+    path: https://www.youtube.com/embed/qzMQza8xZCc
+    keyName: ISS
+    channelName: Live
+    image: http://www.parmalee.com/wp-content/uploads/2014/10/youtube-live-logo.png
+    title: NASA live stream - Earth From Space LIVE Feed | Incredible ISS live stream of Earth from space
+    description: "Live video of Earth from space - as seen from the Nasa ISS live stream aboard the International Space Station. The International Space Station - ISS - circles the earth at 240 miles above the planet. The station is crewed by NASA astronauts as well as Russian Cosmonauts and a mixture of Japanese, Canadian and European astronauts as well."
+video2:
+    path: https://www.youtube.com/embed/ddFvjfvPnqk
+    keyName: ISS
+    channelName: Live
+    image: http://www.parmalee.com/wp-content/uploads/2014/10/youtube-live-logo.png
+    title: ISS live stream - Earth From Space Live From The ISS : Orbit the Earth with the NASA live feed
+    description: "Nasa ISS live feed of earth from space - live views from the International Space Station as it circles the planet. Video from the ISS live stream and HDEV cameras aboard the station. A real astronaut view of Earth!"
+video3:
+    path: https://www.youtube.com/embed/Jiq7EbzUMrw
+    keyName: Loops
+    channelName: Live
+    image: http://www.parmalee.com/wp-content/uploads/2014/10/youtube-live-logo.png
+    title: Video Replay: Stunning "loops of fire" on Sun - Incredible Time Lapse Videos Showing The Sun
+    description: "Featuring stunning pre-recorded video we taken a close up look of the suns surface , witnessing its power and awesome force."

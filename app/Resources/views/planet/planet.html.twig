@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'planet/base_planet.html.twig' %}
 
 {% block body %}
     <div class="container feature-page">
@@ -22,7 +22,7 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="{{ planet.image }}" alt="">
+                <img class="img-responsive" src="{{ asset( planet.image ) }}" alt="">
 
                 <hr>
 
@@ -32,7 +32,7 @@
 
                 <hr>
 
-                <!-- If one or more planet articles exist then display related articles -->
+                <!-- If first planet article exist then start displaying related articles -->
                 {% if (planetArticles[0] is defined) %}
 
                     <div class="container" >
@@ -42,67 +42,114 @@
                             <div class="well">
                                 <div id="planetArticle" class="carousel slide">
 
-                                    <!-- Carousel items -->
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <div class="row">
+                                    {# if 5 planet article exist then display carousel-inner class otherwise display only 4 articles #}
+                                        {% if planetArticles[4] is defined %}
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <div class="row">
+                                                    {% for i in 0..3 %}
+                                                        {% if (planetArticles[i] is defined) %}
+                                                            <div class="col-sm-3">
+                                                                <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                    <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                    <!-- Title -->
+                                                                    <h5>{{ planetArticles[i].title }}</h5>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <!--/row-->
+                                            </div>
+                                            <!--/item-->
+                                            <div class="item">
+                                                <div class="row">
+                                                    {% for i in 4..7 %}
+                                                        {% if (planetArticles[i] is defined) %}
+                                                            <div class="col-sm-3">
+                                                                <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                    <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                    <!-- Title -->
+                                                                    <h5>{{ planetArticles[i].title }}</h5>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <!--/row-->
+                                            </div>
+                                            <!--/item-->
+                                            <div class="item">
+                                                <div class="row">
+                                                    {% for i in 8..11 %}
+                                                        {% if (planetArticles[i] is defined) %}
+                                                            <div class="col-sm-3">
+                                                                <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                                    <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                                    <!-- Title -->
+                                                                    <h5>{{ planetArticles[i].title }}</h5>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <!--/row-->
+                                            </div>
+                                            <!--/item-->
+                                        </div>
+
+                                        <!--/carousel-inner-->
+                                        <a class="left carousel-control" href="#planetArticle" data-slide="prev">
+                                            <span class="icon-prev"></span>
+                                        </a>
+                                        <a class="right carousel-control" href="#planetArticle" data-slide="next">
+                                            <span class="icon-next"></span>
+                                        </a>
+                                    {% else %}
+                                        <div class="row">
+                                            {% if planetArticles[3] is defined %}
                                                 {% for i in 0..3 %}
-                                                    {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3">
-                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
-                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
-                                                                <!-- Title -->
-                                                                <h5>{{ planetArticles[i].title }}</h5>
-                                                            </a>
-                                                        </div>
-                                                    {% endif %}
+                                                    <div class="col-sm-3">
+                                                        <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                            <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                            <!-- Title -->
+                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        </a>
+                                                    </div>
                                                 {% endfor %}
-                                            </div>
-                                            <!--/row-->
-                                        </div>
-                                        <!--/item-->
-                                        <div class="item">
-                                            <div class="row">
-                                                {% for i in 4..7 %}
-                                                    {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3">
-                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
-                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
-                                                                <!-- Title -->
-                                                                <h5>{{ planetArticles[i].title }}</h5>
-                                                            </a>
-                                                        </div>
-                                                    {% endif %}
+                                            {% elseif planetArticles[2] is defined%}
+                                                {% for i in 0..2 %}
+                                                    <div class="col-sm-4">
+                                                        <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                            <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                            <!-- Title -->
+                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        </a>
+                                                    </div>
                                                 {% endfor %}
-                                            </div>
-                                            <!--/row-->
-                                        </div>
-                                        <!--/item-->
-                                        <div class="item">
-                                            <div class="row">
-                                                {% for i in 8..11 %}
-                                                    {% if (planetArticles[i] is defined) %}
-                                                        <div class="col-sm-3">
-                                                            <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
-                                                                <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
-                                                                <!-- Title -->
-                                                                <h5>{{ planetArticles[i].title }}</h5>
-                                                            </a>
-                                                        </div>
-                                                    {% endif %}
+                                            {% elseif planetArticles[1] is defined%}
+                                                {% for i in 0..1 %}
+                                                    <div class="col-sm-6">
+                                                        <a href="{{ path('show_article', {'id': planetArticles[i].id}) }}" class="thumbnail">
+                                                            <img src="{{ planetArticles[i].urlToImage }}" alt="Image" class="img-responsive">
+                                                            <!-- Title -->
+                                                            <h5>{{ planetArticles[i].title }}</h5>
+                                                        </a>
+                                                    </div>
                                                 {% endfor %}
-                                            </div>
-                                            <!--/row-->
+                                            {% elseif planetArticles[0] is defined%}
+                                                <div class="col-sm-12">
+                                                    <a href="{{ path('show_article', {'id': planetArticles[0].id}) }}" class="thumbnail">
+                                                        <img src="{{ planetArticles[0].urlToImage }}" alt="Image" class="img-responsive">
+                                                        <!-- Title -->
+                                                        <h5>{{ planetArticles[0].title }}</h5>
+                                                    </a>
+                                                </div>
+                                            {% endif %}
                                         </div>
-                                        <!--/item-->
-                                    </div>
-                                    <!--/carousel-inner-->
-                                    <a class="left carousel-control" href="#planetArticle" data-slide="prev">
-                                        <span class="icon-prev"></span>
-                                    </a>
-                                    <a class="right carousel-control" href="#planetArticle" data-slide="next">
-                                        <span class="icon-next"></span>
-                                    </a>
+                                        <!--/row-->
+                                    {% endif %}
                                 </div>
                                 <!--/sliderRelatedArticles-->
                             </div>
@@ -112,7 +159,7 @@
 
                     <!-- More related planet articles -->
                     {% if (planetArticles[12] is defined) %}
-                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet}) }}">
+                        <a href="{{ path('planet_articles', {'planet': planetArticles[0].planet, 'number': 1}) }}">
                             <h3 align="center">More Related Articles</h3>
                         </a>
                     {% endif %}
@@ -123,20 +170,6 @@
 
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well sideSearch">
-                    <h4>Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
 
                 <!-- Blog Categories Well -->
                 <div class="well">

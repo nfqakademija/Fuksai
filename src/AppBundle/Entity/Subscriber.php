@@ -45,7 +45,7 @@ class Subscriber
     /**
      * @return string
      */
-    public function getKeyName()
+    public function getKeyName(): int
     {
         return $this->keyName;
     }
@@ -63,7 +63,7 @@ class Subscriber
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -87,7 +87,7 @@ class Subscriber
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }

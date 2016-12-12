@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'videos/base_videos.html.twig' %}
 {% block body %}
     <!-- Page Content -->
     <div class="container">
@@ -16,58 +16,19 @@
 
         <div class="container feature-page">
             <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             {% for video in videos %}
-                <div class="col-md-6 portfolio-item" style="min-height: 350px;">
-                    <div class="youtube-player" data-id="{{ video.path }}"></div>
-                <h5>
-                    {{ video.title }}
-                </h5>
-                <p> {{ video.description }} </p>
+                <div class="col-md-4 portfolio-item video-wrap" style="min-height: 400px;">
+                    <div style="width:240px; heigth:auto; margin: 27px 0px;" class="youtube-player">
+                        <img style="width:320px; height: 155px;" data-id={{ video.path }}  class="youtube-image" src="{{ video.image | raw }}" />
+                    </div>
+                    <h4>
+                        {{ video.title }}
+                    </h4>
+                    <p> {{ video.description }} </p>
                 </div>
             {% endfor %}
         </div>
-                <div class="col-md-4">
-                    <div class="well videoSideSearch">
-                        <h4>Search</h4>
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                        </div>
-                        <!-- /.input-group -->
-                    </div>
-                    <div class="well">
-                        <h4>Find video by channel</h4>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled">
-                                    {% for channel in channels %}
-                                    <li><a href="{{ path('viewing_all_channel_videos', {currentPage: 1, channelName: channel.channelName}) }}" class="portfolio-box">{{ channel.channelName }}</a>
-                                        {% endfor %}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="well">
-                        <h4>Find video by planet</h4>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled">
-                                    {% for planetlist in planetsList %}
-                                    <li><a href="{{ path('view_videos_by_name', {planetName: planetlist.name, currentPage:1}) }}" class="portfolio-box">{{ planetlist.name }}</a>
-                                        {% endfor %}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
         <div class="row text-center">
             <div class="col-lg-12">
         <ul class="pagination">

@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Faker\Provider\cs_CZ\DateTime;
 
 /**
  * Picture
@@ -23,7 +22,7 @@ class Picture
     private $id;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
@@ -61,9 +60,9 @@ class Picture
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getDate(): DateTime
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
@@ -80,9 +79,9 @@ class Picture
     }
 
     /**
-     * @param DateTime $date
+     * @param \DateTime $date
      */
-    public function setDate(DateTime $date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
