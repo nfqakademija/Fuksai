@@ -19,7 +19,6 @@ class NewsController extends Controller
     public function articleAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $filters = $em->getRepository('AppBundle:Planet')->findAll();
         $article = $em->getRepository('AppBundle:Article')->findOneBy(['id' => $id]);
         $page = 'news';
 
@@ -29,7 +28,6 @@ class NewsController extends Controller
 
         return $this->render('newsFeed/article.html.twig', [
             'article' => $article,
-            'filters' => $filters,
             'page' => $page
 
         ]);

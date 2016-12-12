@@ -9,4 +9,5 @@
 ./bin/console app:import:asteroids &&
 ./bin/console app:import:mars-photos &&
 ./bin/console app:import:planet-position &&
-./bin/console app:import:astronomy-picture-of-the-day
+./bin/console app:import:apod &&
+./bin/console app:import:notifications

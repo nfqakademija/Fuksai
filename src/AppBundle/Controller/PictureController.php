@@ -17,13 +17,11 @@ class PictureController extends Controller
         $em = $this->getDoctrine()->getManager();
         $pictures = $em->getRepository('AppBundle:Picture')->findAllByDate();
         $page = 'astronomy picture of the day';
-        $filters = [];
 
         return $this->render('picture/astronomy_picture.html.twig', [
             'pictures' => $pictures,
             'picture' => $picture,
-            'page' => $page,
-            'filters' => $filters
+            'page' => $page
         ]);
     }
 
