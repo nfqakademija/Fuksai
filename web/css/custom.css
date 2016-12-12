@@ -65,6 +65,9 @@ h3 {
     width: auto;
     margin-left: -15px;
 }
+.logo img {
+    cursor: pointer;
+}
 #article {
     padding-left: 0px;
     padding-right: 0px;
