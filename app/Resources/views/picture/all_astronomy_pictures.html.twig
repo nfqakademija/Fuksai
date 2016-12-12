@@ -11,12 +11,11 @@
                 <ul type="square">
 
                 {% for picture in pictures %}
-                <div class="container apod">
+                <div id="apod" class="container">
                     <div class="row">
                         <section class="col-md-12">
                             <div class="container-inner">
                                 <div class="picture-header col-md-2">
-                                    2016.11.13
                                     </div>
                                 <a href="#">
                                 <div class="image-container col-md-10">
@@ -29,7 +28,7 @@
                                     <div class="col-md-8 picture-image ">
                                         <img class="img-responsive" src="{{ picture.url }}">
                                     </div>
-                                </div>
+                                        </div>
                                     </a>
                         </section>
                     </div>
