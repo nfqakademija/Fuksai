@@ -56,7 +56,6 @@ class PlanetsController extends Controller
         $planets = $em->getRepository('AppBundle:Planet')->findAll();
         $filters = [];
         $page = 'planets';
-
         return $this->render(':planet:view_all_planets.html.twig', [
            'planets' => $planets,
             'filters' => $filters,
