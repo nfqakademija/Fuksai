@@ -56,7 +56,7 @@ class ImportMarsPhotosCommand extends ContainerAwareCommand
 
     /**
      * @param $request
-     * @return mixed
+     * @return array
      */
     public function getData($request)
     {

@@ -39,9 +39,9 @@ SkyAboveUs is a web project developed for people who are interested in astronomy
 
 ## <a name="commands"></a>Commands should be scheduled
 
-* 'app:import:iss' should be executed once a minute
-* 'app:import:videos' should be executed at least once a day
-* 'app:import:news' should be executed once an hour
-* 'app:planet-position' should be executed every day at 12:01 AM
-* 'app:send:notifications' should be executed twice a day
-* 'app:import:apod' should be executed once a day
+* `app:import:iss` should be executed once a minute
+* `app:import:videos` should be executed at least once a day
+* `app:import:news` should be executed once an hour
+* `app:planet-position` should be executed once an hour
+* `app:send:notifications` should be executed twice a day
+* `app:import:apod` should be executed once a day

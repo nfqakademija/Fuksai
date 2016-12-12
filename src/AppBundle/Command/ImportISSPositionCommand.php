@@ -3,6 +3,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\ISS;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -41,9 +42,10 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         );
 
         $em = $this->getEntityManager();
-        if (!empty($em->getRepository('AppBundle:ISS')->find(1))) {
-            $iss = $em->getRepository('AppBundle:ISS')->find(1);
+        if (!empty($em->getRepository('AppBundle:ISS')->findAll())) {
+            $issList = $em->getRepository('AppBundle:ISS')->findAll;
 
+            $iss = $issList[0];
             $iss->setLatitude($lat);
             $iss->setLongitude($long);
             $iss->setMapUrl('https://www.google.com/maps/@' . $lat . ',' . $long . ',10z');
@@ -74,7 +76,7 @@ class ImportISSPositionCommand extends ContainerAwareCommand
 
     /**
      * @param $request
-     * @return mixed
+     * @return array
      */
     public function getData($request)
     {
@@ -85,7 +87,7 @@ class ImportISSPositionCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return mixed
+     * @return EntityManager
      */
     private function getEntityManager()
     {

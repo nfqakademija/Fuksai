@@ -35,7 +35,7 @@ class Subscriber
     private $email;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="key_name", type="string", unique=true)
      */
@@ -45,7 +45,7 @@ class Subscriber
     /**
      * @return string
      */
-    public function getKeyName(): int
+    public function getKeyName(): string
     {
         return $this->keyName;
     }
@@ -72,8 +72,6 @@ class Subscriber
      * Set email
      *
      * @param string $email
-     *
-     * @return Subscriber
      */
     public function setEmail($email)
     {
@@ -87,7 +85,7 @@ class Subscriber
      *
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }

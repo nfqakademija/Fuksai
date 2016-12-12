@@ -29,6 +29,7 @@ class UnsubscribeController extends Controller
 
         return $this->render('subscribe/subscribe_info.html.twig', [
             'status' => 'Email '.$userToRemove->getEmail().' has been removed from the subscriber list!',
+            'page' => '',
         ]);
     }
 }

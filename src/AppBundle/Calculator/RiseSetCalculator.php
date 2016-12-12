@@ -128,8 +128,8 @@ class RiseSetCalculator
             $planetSchedule->setLatitude(Converter::degToFloat($latitude));
             $planetSchedule->setTimezone($timezone);
             $planetSchedule->setDate($today);
-            $planetSchedule->setRise($schedule['rise']);
-            $planetSchedule->setFall($schedule['fall']);
+            $planetSchedule->setRise($schedule->getRise());
+            $planetSchedule->setFall($schedule->getFall());
             $wholeSchedule[] = $planetSchedule;
         }
 
@@ -139,7 +139,7 @@ class RiseSetCalculator
     /**
      * @param $response
      * @param $planetID
-     * @return mixed
+     * @return PlanetDaySchedule
      */
     private function parseResponse($response, $planetID)
     {
@@ -163,15 +163,15 @@ class RiseSetCalculator
                 break;
         }
 
-        $result['rise'] = substr($response, $substring1, 5);
-        $result['fall'] = substr($response, $substring2, 5);
+        $rise = substr($response, $substring1, 5);
+        $set = substr($response, $substring2, 5);
 
-        return $result;
+        return new PlanetDaySchedule($rise, $set);
     }
 
     /**
      * @param $url
-     * @return mixed
+     * @return array
      */
     private function getData($url)
     {
