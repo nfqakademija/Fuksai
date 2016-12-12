@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class PlanetScheduleRepository extends EntityRepository
 {
+    public function findObject($planetName)
+    {
+        return $this->createQueryBuilder('planet')
+            ->where('planet.object = :planet')
+            ->setParameter('planet', $planetName)
+            ->getQuery()
+            ->execute();
+    }
 }

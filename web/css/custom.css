@@ -202,3 +202,12 @@ body img:hover {
 #open:hover {
     opacity: .7;
 }
+.planet-list a {
+    text-decoration: none;
+    color: #5e5e5e;
+    font-weight: 500;
+    font-size: 14px;
+}
+.planet-list a:hover {
+    text-decoration: none;
+}
