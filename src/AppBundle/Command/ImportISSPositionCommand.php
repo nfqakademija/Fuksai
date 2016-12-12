@@ -41,7 +41,7 @@ class ImportISSPositionCommand extends ContainerAwareCommand
         );
 
         $em = $this->getEntityManager();
-        if (!is_null($em->getRepository('AppBundle:ISS')->find(1))) {
+        if (!empty($em->getRepository('AppBundle:ISS')->find(1))) {
             $iss = $em->getRepository('AppBundle:ISS')->find(1);
 
             $iss->setLatitude($lat);
