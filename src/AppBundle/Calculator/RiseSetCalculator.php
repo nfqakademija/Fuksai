@@ -3,6 +3,7 @@
 namespace AppBundle\Calculator;
 
 use AppBundle\Entity\PlanetSchedule;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
@@ -38,9 +39,15 @@ class RiseSetCalculator
      * @param EntityManager $em
      * @param string $googleApiKey
      */
-    public function __construct(EntityManager $em, $googleApiKey)
+
+    /**
+     * RiseSetCalculator constructor.
+     * @param ManagerRegistry $registry
+     * @param $googleApiKey
+     */
+    public function __construct(ManagerRegistry $registry, $googleApiKey)
     {
-        $this->em = $em;
+        $this->em = $registry->getManager();
         $this->googleApiKey = $googleApiKey;
     }
 
