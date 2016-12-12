@@ -130,7 +130,7 @@ class ImportVideosCommand extends ContainerAwareCommand
      * Returns JSON data.
      *
      * @param $url
-     * @return mixed
+     * @return array
      */
     private function getData(string $url)
     {

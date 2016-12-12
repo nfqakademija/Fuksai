@@ -26,6 +26,9 @@ class PlanetPositionCommand extends ContainerAwareCommand
             ->setDescription('Gets planet rise and set times');
     }
 
+    /**
+     * @return int
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $calculator = $this->getContainer()->get('app.calculator.rise_set_calculator');

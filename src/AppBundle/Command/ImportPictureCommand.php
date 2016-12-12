@@ -105,7 +105,7 @@ class ImportPictureCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return mixed
+     * @return EntityManager
      */
     private function getEntityManager()
     {

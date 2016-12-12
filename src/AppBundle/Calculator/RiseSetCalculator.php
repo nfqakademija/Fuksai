@@ -171,7 +171,7 @@ class RiseSetCalculator
 
     /**
      * @param $url
-     * @return mixed
+     * @return array
      */
     private function getData($url)
     {
