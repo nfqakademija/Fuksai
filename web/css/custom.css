@@ -65,7 +65,7 @@ h3 {
     width: auto;
     margin-left: -15px;
 }
-.logo img {
+.logo:hover {
     cursor: pointer;
 }
 #article {
@@ -83,6 +83,9 @@ h3 {
 
 .closestEvent {
     color: white;
+}
+.video-wrap h4 {
+    font-weight: 800;
 }
 .event-title {
     font-size: 15px;
