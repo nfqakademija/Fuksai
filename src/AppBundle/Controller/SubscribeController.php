@@ -50,6 +50,7 @@ class SubscribeController extends Controller
 
         return $this->render('subscribe/subscribe_form.html.twig', [
             'form' => $form->createView(),
+            'page' => 'Subscribe',
         ]);
     }
 }

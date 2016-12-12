@@ -16,14 +16,13 @@ class ISSController extends Controller
         $em = $this->getDoctrine()->getManager();
         $coordinates = $em->getRepository('AppBundle:ISS')->find(1);
         $apiKey = $this->getParameter('google_timezone_api_key');
-        $page = 'iss';
 
         return $this->render('services/space_station.html.twig', [
             'apiCall' => 'https://maps.googleapis.com/maps/api/js?key='.$apiKey.'&callback=initMap',
             'lat' => $coordinates->getLatitude(),
             'long' => $coordinates->getLongitude(),
             'country' => $coordinates->getCountry(),
-            'page' => $page
+            'page' => 'Space Station'
         ]);
     }
 }
