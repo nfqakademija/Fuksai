@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.7
- * Time: 18.00
- */
 
 namespace AppBundle\Command;
 
@@ -35,7 +29,6 @@ class SendNotificationsCommand extends ContainerAwareCommand
         $em = $this->getEntityManager();
 
         $today = new \DateTime(date('Y-m-d', strtotime('today')));
-        //$today = new \DateTime(date('Y-m-d', strtotime('30 November 2016')));
 
         $publishedToday = $em->getRepository('AppBundle:Article')->findBy(['publishDate' => $today]);
         if (!empty($publishedToday)) {
@@ -94,6 +87,10 @@ class SendNotificationsCommand extends ContainerAwareCommand
         return $message;
     }
 
+    /**
+     * @param $articles
+     * @return array
+     */
     private function getTitles($articles)
     {
         $titleList = array();
