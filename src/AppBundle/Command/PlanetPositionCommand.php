@@ -43,6 +43,7 @@ class PlanetPositionCommand extends ContainerAwareCommand
 
         $todaySchedule = $em->getRepository('AppBundle:PlanetSchedule')->findBy(['date' => date('Y-m-d')]);
         if (!empty($todaySchedule)) {
+            $output->writeln('Schedule for today already exists');
             return 0;
         }
 
