@@ -66,7 +66,7 @@ class NewsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $filters = $em->getRepository('AppBundle:Planet')->findAll();
         $planetArticles = $em->getRepository('AppBundle:Article')->findBy(['planet' => $planet]);
-        $page = 'news';
+        $page = $planet . ' news';
 
         return $this->render('newsFeed/planet_articles.html.twig', [
             'planetArticles' => $planetArticles,
