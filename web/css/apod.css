@@ -1,0 +1,52 @@
+/* text */
+#apod {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 80px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+#picture {
+    text-align: center;
+    font-weight: bold;
+}
+
+#link-pictures {
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#picture-date {
+    font-weight: bold;
+}
+.picture-text {
+    background-color: #333;
+    padding-left:0px;
+    padding-right: 0px;
+    height: 100%;
+}
+.picture-image {
+    padding-left:0px!important;
+    padding-right: 0px!important;
+}
+.container.apod {
+    padding: 0px;
+    border-top: 1px solid #bdbdbd;
+}
+.image-container {
+    color: #F3F3F3;
+}
+.image-container:hover {
+    opacity:0.9;
+}
+.image-container p {
+    color: #bdbdbd;
+    display: block;
+    font-size: 14px;
+}
+.picture-image img:hover {
+    cursor: pointer;
+}

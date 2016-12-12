@@ -55,7 +55,7 @@ class Video
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, name="description")
+     * @ORM\Column(type="text", name="description")
      */
     private $description;
 

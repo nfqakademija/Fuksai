@@ -95,3 +95,33 @@ AppBundle\Entity\Event:
            date: "2016-12-11"
            title: Mercury at Greatest Eastern Elongation
            keyName: Mercury Elongation 20.8° E
+      Event17:
+           type: Observarion:meteor
+           description: "The Geminids is the king of the meteor showers. It is considered by many to be the best shower in the heavens, producing up to 120 multicolored meteors per hour at its peak. It is produced by debris left behind by an asteroid known as 3200 Phaethon, which was discovered in 1982. The shower runs annually from December 7-17. It peaks this year on the night of the 13th and morning of the 14th. The nearly full moon will block out many of the fainter meteors this year, but the Geminids are so bright and numerous that it could still be a good show. Best viewing will be from a dark location after midnight. Meteors will radiate from the constellation Gemini, but can appear anywhere in the sky."
+           date: "2016-12-13"
+           title: Geminids Meteor Shower
+           keyName: Meteor Shower
+      Evenet18:
+           type: Observation:moone
+           description: "The Moon will be located on the opposite side of the Earth as the Sun and its face will be will be fully illuminated. This phase occurs at 00:06 UTC. This full moon was known by early Native American tribes as the Full Cold Moon because this is the time of year when the cold winter air settles in and the nights become long and dark. This moon has also been known as the Full Long Nights Moon and the Moon Before Yule. This is also the last of three supermoons for 2016. The Moon will be at its closest approach to the Earth and may look slightly larger and brighter than usual."
+           date: "2016-12-14"
+           title: Full Moon, Supermoon
+           keyName: Supermoon
+      Evenet19:
+            type: Observation:solstice
+            description: "The December solstice occurs at 10:44 UTC. The South Pole of the earth will be tilted toward the Sun, which will have reached its southernmost position in the sky and will be directly over the Tropic of Capricorn at 23.44 degrees south latitude. This is the first day of winter (winter solstice) in the Northern Hemisphere and the first day of summer (summer solstice) in the Southern Hemisphere."
+            date: "2016-12-21"
+            title: December Solstice
+            keyName: Solstice
+      Evenet20:
+            type: Observation:meteor
+            description: "The Ursids is a minor meteor shower producing about 5-10 meteors per hour. It is produced by dust grains left behind by comet Tuttle, which was first discovered in 1790. The shower runs annually from December 17-25. It peaks this year on the the night of the 21st and morning of the 22nd. The second quarter moon will block many of the fainter meteors. But if you are patient, you might still be able to catch a few of the brighter ones. Best viewing will be just after midnight from a dark location far away from city lights. Meteors will radiate from the constellation Ursa Minor, but can appear anywhere in the sky."
+            date: "2016-12-22"
+            title: Ursids Meteor Shower
+            keyName: Meteor Shower
+      Evenet21:
+            type: Observation:moon
+            description: "The Moon will located on the same side of the Earth as the Sun and will not be visible in the night sky. This phase occurs at 06:53 UTC. This is the best time of the month to observe faint objects such as galaxies and star clusters because there is no moonlight to interfere."
+            date: "2016-12-29"
+            title: New Moon
+            keyName: New Moon

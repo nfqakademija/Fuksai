@@ -1,109 +1,74 @@
-/* news in homepage */
-header.carousel {
-    height: 50%;
+/* all news pages */
+.page-title {
+    font-size: 60px;
 }
 
-header.carousel .item,
-header.carousel .item.active,
-header.carousel .carousel-inner {
-    height: 100%;
+.planets-categories {
+    margin-top: 325px;
+    margin-left: 325px;
 }
 
-header.carousel .fill {
+.features-categories {
+    float: right;
+}
+
+/*new carousel*/
+
+#myCarousel .carousel-caption {
+    left:0;
+    right:0;
+    bottom:0;
+    text-align:left;
+    padding:10px;
+    background:rgba(0,0,0,0.6);
+    text-shadow:none;
+}
+
+#myCarousel .list-group {
+    position:absolute;
+    top:0;
+    right:0;
+}
+#myCarousel .list-group li {
+    text-align: center;
+    vertical-align: center;
+}
+#myCarousel .list-group-item {
+    border-radius:0px;
+    cursor:pointer;
+}
+#myCarousel .list-group .active {
+    background-color:#eee;
+}
+
+@media (min-width: 992px) {
+    #myCarousel {padding-right:33.3333%;}
+    #myCarousel .carousel-controls {display:none;}
+}
+@media (max-width: 991px) {
+    .carousel-caption p,
+    #myCarousel .list-group {display:none;}
+}
+
+/* home news */
+#home-news {
+    color: white;
+}
+
+.home-news {
+    padding-right: 0px;
+    padding-left: 0px;
+    background: linear-gradient(black, white);
+}
+.list-group-item {
+    padding: 5px 5px;
+}
+.item {
+    height: 345px;
+}
+.list-group {
+    height: 345px;
+}
+.item img {
     width: 100%;
-    height: 100%;
-    position: center;
-    background-attachment: fixed;
-    background-size: cover;
-}
-
-.carousel-caption {
-    height: 400px;
-}
-
-.carousel-caption h2 {
-    font-family: 'Bevan', cursive;
-    text-shadow: 4px 4px 4px #000;
-    font-size: 50px;
-
-    background-color: black;
-    color: #fff;
-    padding: 0.5rem;
-
-    /* Needs prefixing */
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-}
-
-.carousel-control .icon-prev,
-.carousel-control .icon-next {
-    font-size: 100px;
-}
-
-.carousel-indicators {
-    font-size: 200px;
-}
-
-/* Responsive Styles */
-
-@media(max-width:991px) {
-    .customer-img,
-    .img-related {
-        margin-bottom: 30px;
-    }
-
-    .carousel-caption h2 {
-        font-size: 50px;
-    }
-}
-
-@media(max-width:767px) {
-    .img-portfolio {
-        margin-bottom: 15px;
-    }
-
-    header.carousel .carousel {
-        height: 70%;
-    }
-}
-
-@media(max-width:767px) {
-    .img-portfolio {
-        margin-bottom: 15px;
-    }
-
-    header.carousel .carousel {
-        height: 70%;
-    }
-}
-
-/* planet related articles */
-#planetArticle .carousel-control {
-    padding-top:10%;
-    width:5%;
-}
-
-#planetArticle .carousel-control .icon-prev,
-.carousel-control .icon-next {
-    font-size: 50px;
-}
-
-#planetArticle .carousel-indicators {
-    font-size: 100px;
-    top: 200px;
-}
-
-/* articles in news page */
-#article-title {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    color: #000 ;
-}
-
-#article-header {
-    background: #f5f5f5;
-}
-
-#article-header h1 {
-    color: #000;
-    margin: auto;
 }

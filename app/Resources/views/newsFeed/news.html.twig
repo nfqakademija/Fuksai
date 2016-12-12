@@ -1,85 +1,64 @@
-{% extends 'base.html.twig' %}
+{% extends 'newsFeed/base_news.html.twig' %}
 
 {% block body %}
 
-    <div class="container feature-page">
-
+    <!-- Main Content -->
+    <div class="container">
         <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Display articles from 0..9, 10..19, 20..29 and so on -->
+                {% for i in ((pageNumber-1)*10)..(pageNumber*10-1) %}
+                    {% if (articles[i] is defined) %}
+                        <div class="post-preview col-md-12">
+                            <!-- Title -->
+                            <a id="article-title" href="{{ path('show_article', {'id': articles[i].id}) }}">
+                                <h2 class="post-title">
+                                    {{ articles[i].title }}
+                                </h2>
+                            </a>
+                            <!-- Author and Publish Date -->
+                            <p class="post-meta" style=' text-align: center;'>Posted by {{ articles[i].author }} on {{ articles[i].getPublishDateString }}</p>
+                            <!-- Preview Image -->
+                            <a class="col-md-6" href="{{ path('show_article', {'id': articles[i].id}) }}">
+                                <img class="img-responsive" src="{{ articles[i].urlToImage }}" alt="">
+                            </a>
+                            <p class="col-md-6">
+                                {{ articles[i].description|slice(0, 300) }}...
+                            </p>
+                        </div>
 
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-
-                <header id="article-header" class="page-header">
-                    <h1 class="page-title">News</h1>
-                </header>
-
-                {% for article in articles %}
-
-                    <!-- Title -->
-                    <a id="article-title" href="{{ path('show_article', {'id': article.id}) }}">
-                        <h1 id="article-title">{{ article.title }}</h1>
-                    </a>
-
-                    <!-- Author and Publish Date -->
-                    <h6> Author: {{ article.author }} | Published: {{ article.getPublishDateInString }} </h6>
-
-                    <!-- Preview Image -->
-                    <a href="{{ path('show_article', {'id': article.id}) }}">
-                        <img class="img-responsive" src="{{ article.urlToImage }}" alt="">
-                    </a>
-
-                    <hr>
-
+                        <hr>
+                    {% endif %}
                 {% endfor %}
 
+                <!-- Pager -->
+                <ul class="pager">
+                    {# if news page number is not 1 then display button to newer articles #}
+                    {% if pageNumber != 1  %}
+                        <li class="previous">
+                            <a href="{{ path('news_list', {number: pageNumber-1}) }}">&larr; Newer Articles</a>
+                        </li>
+                    {% endif %}
+                    {# if there are more articles comparing current page then display button to older articles #}
+                    {% if articles[pageNumber*10] is defined  %}
+                        <li class="next">
+                            <a href="{{ path('news_list', {number: pageNumber+1}) }}">Older Articles &rarr;</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well sideSearch">
-                    <h4>Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                {% for planetlist in planetsList %}
-                                <li><a href="{{ path('show_planet', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
-                                    {% endfor %}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-            </div>
-
         </div>
-        <!-- /.row -->
-        <!-- Footer -->
-        <footer>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy;SkyAboveUs</p>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p class="copyright text-muted">Copyright &copy;SkyAboveUs</p>
                 </div>
             </div>
-            <!-- /.row -->
-        </footer>
+        </div>
+    </footer>
 
-    </div>
 {% endblock %}

@@ -15,6 +15,10 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
+    router.request_context.host: example.org
+    router.request_context.scheme: http
+    router.request_context.base_url: my/path
+
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     youtube_api_key: test_key
@@ -24,5 +28,6 @@ parameters:
         NasaTelevision: test_key
     youtube_api_key: test_key
     nasa_api_key: test_key
+    nasa_api_key_for_astronomy_picture: test_key
     googlemaps_api_key: test_key
     google_timezone_api_key: test_key

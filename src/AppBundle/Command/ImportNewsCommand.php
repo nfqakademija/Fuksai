@@ -4,13 +4,8 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\Planet;
 use AppBundle\Entity\Article;
-use AppBundle\Entity\PlanetArticle;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use AppBundle\Repository\PlanetRepository;
-use AppBundle\Repository\ArticleRepository;
-use AppBundle\Repository\PlanetArticleRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -25,7 +20,7 @@ class ImportNewsCommand extends ContainerAwareCommand
         $this
             ->setName('app:import:news')
             ->setDescription('Import astronomy news.')
-            ->setHelp('This command finds and imports astronomy news in the website.');
+            ->setHelp('This command finds astronomy news and imports them to the website.');
     }
 
     /**
@@ -47,7 +42,7 @@ class ImportNewsCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    private function getPlanetsNames()
+    private function getPlanetsNames(): array
     {
         $planets = $this->getContainer()
             ->get('doctrine')
@@ -69,13 +64,17 @@ class ImportNewsCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    private function getArticles()
+    private function getArticles(): array
     {
-        $links = $this->getArticlesLinks();
-        $images = $this->getArticlesImages();
+        // source of astronomy website news page
+        $source = $this->getSourceOfWebsite('https://astronomynow.com/category/news/');
+
+        $links = $this->getArticlesLinks($source);
+        $images = $this->getArticlesImages($source);
 
         $articles = [];
 
+        // article's image index
         $i = 0;
 
         foreach ($links as $link) {
@@ -86,14 +85,12 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param string $source
      * @return \Symfony\Component\DomCrawler\Link[]
      */
-    private function getArticlesLinks()
+    private function getArticlesLinks(string $source)
     {
-        // string url converted to html
-        $html = file_get_contents('https://astronomynow.com/category/news/');
-
-        $crawler = new Crawler($html, 'https');
+        $crawler = new Crawler($source, 'https');
 
         // array of the links to the astronomy articles
         $links = $crawler->filter('article > div > header > h3 > a')->links();
@@ -102,14 +99,12 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Symfony\Component\DomCrawler\Link
+     * @param string $source
+     * @return array
      */
-    private function getArticlesImages()
+    private function getArticlesImages(string $source)
     {
-        // string url converted to html
-        $html = file_get_contents('https://astronomynow.com/category/news/');
-
-        $crawler = new Crawler($html, 'https');
+        $crawler = new Crawler($source, 'https');
 
         // array of the astronomy articles images
         $images = $crawler->filter('div.mh-loop-thumb > a > img')->each(function (Crawler $node) {
@@ -124,14 +119,13 @@ class ImportNewsCommand extends ContainerAwareCommand
      * @param string $image
      * @return array
      */
-    private function getArticle(string $link, string $image)
+    private function getArticle(string $link, string $image): array
     {
-        // string url converted to html
-        $html = file_get_contents($link);
+        $source = $this->getSourceOfWebsite($link);
 
         $article = [];
 
-        $crawler = new Crawler($html, 'https');
+        $crawler = new Crawler($source, 'https');
 
         $article['url'] = $link;
         $article['urlToImage'] = $image;
@@ -144,16 +138,26 @@ class ImportNewsCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param string $url
+     * @return string
+     */
+    private function getSourceOfWebsite(string $url): string
+    {
+        return file_get_contents($url);
+    }
+
+    /**
      * @param Crawler $crawler
      * @return string
      */
-    private function getDescriptionWithoutImageCaptions(Crawler $crawler)
+    private function getDescriptionWithoutImageCaptions(Crawler $crawler): string
     {
         $articleDescription = $crawler->filter('div.entry-content')->text();
 
         $imageCaptions = $crawler->filter('figcaption')->each(function (Crawler $node) {
             return $node->text();
         });
+
         // remove image captions from the article description
         foreach ($imageCaptions as $imageCaption) {
             $articleDescription = str_replace($imageCaption, "", $articleDescription);
@@ -181,7 +185,7 @@ class ImportNewsCommand extends ContainerAwareCommand
      * @param array $planetsNames
      * @return Article
      */
-    private function createArticle(array $article, array $planetsNames)
+    private function createArticle(array $article, array $planetsNames): Article
     {
         $newArticle = new Article();
 
@@ -190,18 +194,32 @@ class ImportNewsCommand extends ContainerAwareCommand
         $newArticle->setDescription($article['description']);
         $newArticle->setUrl($article['url']);
         $newArticle->setUrlToImage($article['urlToImage']);
-        $newArticle->setPublishStringDate($article['publishDate']);
+        $newArticle->setPublishDateString($article['publishDate']);
 
-        // go through all planet names and check if found planet name in title or description
-        // then set found planet name to new article
+        $planetName = $this->checkPlanetsNamesInArticle($article, $planetsNames);
+        if (!empty($planetName)) {
+            $newArticle->setPlanet($planetName);
+        }
+
+        return $newArticle;
+    }
+
+    /**
+     * @param array $article
+     * @param array $planetsNames
+     * @return string
+     */
+    private function checkPlanetsNamesInArticle(array $article, array $planetsNames): string
+    {
+        // if found planet name in title or description then return planet name, otherwise empty string
         foreach ($planetsNames as $planetName) {
             if (preg_match('/\b'.$planetName.'\b/i', $article[''.
                 'title']) || preg_match('/\b'. $planetName .
                     '\b/i', $article['description'])) {
-                $newArticle->setPlanet($planetName);
+                return $planetName;
             }
         }
-        return $newArticle;
+        return '';
     }
 
     /**
@@ -209,16 +227,27 @@ class ImportNewsCommand extends ContainerAwareCommand
      */
     private function insertNewArticleToDB(Article $newArticle)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getEntityManager();
         $em->persist($newArticle);
         $em->flush();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getEntityManager()
+    {
+        return $this
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
     }
 
     /**
      * @param array $newArticle
      * @return bool
      */
-    private function checkArticleExistence(array $newArticle)
+    private function checkArticleExistence(array $newArticle): bool
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
