@@ -160,6 +160,8 @@ header.intro-header.potd {
 header.intro-header.planet {
     background-image:url(../img/headers/planet-header.jpg);
 }
-
+body img:hover {
+    cursor: pointer;
+}
 
 
