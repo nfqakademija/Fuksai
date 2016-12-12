@@ -35,7 +35,7 @@ class Subscriber
     private $email;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="key_name", type="string", unique=true)
      */
