@@ -47,18 +47,6 @@ class PlanetPositionCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $url
-     * @return mixed
-     */
-    private function getData($url)
-    {
-        $json = file_get_contents($url);
-        $data = json_decode($json, true);
-
-        return $data;
-    }
-
-    /**
      * @return EntityManager
      */
     private function getEntityManager(): EntityManager
