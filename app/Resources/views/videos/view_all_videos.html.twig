@@ -18,13 +18,13 @@
             <div class="row">
         <div class="col-lg-12">
             {% for video in videos %}
-                <div class="col-md-4 portfolio-item" style="min-height: 400px;">
+                <div class="col-md-4 portfolio-item video-wrap" style="min-height: 400px;">
                     <div style="width:240px; heigth:auto; margin: 27px 0px;" class="youtube-player">
                         <img style="width:320px; height: 155px;" data-id={{ video.path }}  class="youtube-image" src="{{ video.image | raw }}" />
                     </div>
-                    <h5>
+                    <h4>
                         {{ video.title }}
-                    </h5>
+                    </h4>
                     <p> {{ video.description }} </p>
                 </div>
             {% endfor %}

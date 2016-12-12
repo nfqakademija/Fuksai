@@ -10,17 +10,32 @@
 
                 <ul type="square">
 
-                {% for picture in pictures %}
-
-                    <li>
-                        <h4 id="picture-date">{{ picture.getDateInString }}:</h4>
-
-                        <a href="{{ path('astronomy_picture', {picture: loop.index0}) }}">
-                            <h2>{{ picture.title }}</h2>
-                        </a>
-                    </li>
-                    <br>
-                {% endfor %}
+                    {% for picture in pictures %}
+                        <div class="container apod">
+                            <div class="row">
+                                <section class="col-md-12">
+                                    <div class="container-inner">
+                                        <div class="picture-header col-md-2">
+                                            <p class="picture-date">{{ picture.getDateInString }}</p>
+                                        </div>
+                                        <a href="{{ path('astronomy_picture', {picture: loop.index0}) }}">
+                                            <div class="image-container col-md-10">
+                                                <div class="col-md-4 picture-text">
+                                                    <h2><i class="fa fa-camera" aria-hidden="true"></i>
+                                                        {{ picture.title }}
+                                                    </h2>
+                                                    <p>{{ picture.explanation | slice(0, 200) }}... </p>
+                                                </div>
+                                                <div class="col-md-8 picture-image ">
+                                                    <img class="img-responsive" src="{{ picture.url }}">
+                                                </div>
+                                        </div>
+                                            </a>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    {% endfor %}
 
                 </ul>
 
@@ -44,3 +59,4 @@
 
     </div>
 {% endblock %}
+
