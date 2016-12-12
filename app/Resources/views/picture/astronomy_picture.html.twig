@@ -6,29 +6,38 @@
 
         <div class="row">
 
-            <!-- Blog Post Content Column -->
             <div class="col-lg-12">
-
                 <!-- Title -->
                 <h2 id="picture">{{ pictures[picture].title }}</h2>
 
                 <!-- Date -->
                 <h4 id="picture">{{ pictures[picture].getDateInString }}</h4>
+            </div>
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-6">
 
                 <!-- Preview Image -->
                 <img class="img-responsive" src="{{ pictures[picture].url }}" alt="">
 
                 <br>
-                <!-- Post Content -->
-                <p>{{ pictures[picture].explanation }}</p>
-
-                <br>
-
-                <!-- All astronomy pictures of the day -->
-                <a id="link-pictures" href="{{ path('astronomy_pictures') }}">More astronomy pictures</a>
 
                 <hr>
 
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Post Content -->
+                <p>{{ pictures[picture].explanation }}</p>
+            </div>
+
+            <div class="col-lg-12">
+                <!-- All astronomy pictures of the day -->
+                <a id="link-pictures" href="{{ path('astronomy_pictures') }}">
+                    <h1 style="align:center;">
+                        More astronomy pictures
+                    </h1>
+                </a>
             </div>
 
         </div>
@@ -45,3 +54,4 @@
 
     </div>
 {% endblock %}
+
