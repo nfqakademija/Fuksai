@@ -163,5 +163,22 @@ header.intro-header.planet {
 body img:hover {
     cursor: pointer;
 }
-
-
+.paragraph-tab {
+    margin-left: 50px;
+}
+.back-button {
+    border-radius:7%;
+    border: 1px solid #00A5E3;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-button:hover {
+    text-decoration: none;
+    color: #F3F3F3;
+    background-color: #00A5E3;
+}
+#map {
+    height: 400px;
+    width: 100%;
+}
