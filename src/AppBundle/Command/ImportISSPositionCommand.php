@@ -55,10 +55,15 @@ class ImportISSPositionCommand extends ContainerAwareCommand
             }
         } else {
             $iss = new ISS();
-            $iss->setLatitude(1);
-            $iss->setLongitude(1);
-            $iss->setCountry('Some country');
-            $iss->setMapUrl('aaa');
+            $iss->setLatitude($lat);
+            $iss->setLongitude($long);
+            $iss->setMapUrl('https://www.google.com/maps/@' . $lat . ',' . $long . ',10z');
+
+            if (isset($position['results'][0])) {
+                $iss->setCountry($position['results'][0]['address_components'][0]['long_name']);
+            } else {
+                $iss->setCountry('No country');
+            }
             $em->persist($iss);
         }
 
