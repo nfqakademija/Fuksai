@@ -3,7 +3,14 @@
 {% block body %}
     <!-- Main Content -->
     <div class="container">
-            <a class="back-button" href="{{ path('news_list', {number: 1}) }}">&larr;Back to articles</a>
+        <a href="#start" id="open" class="open btn">
+            <img src="{{ asset('img/web-img/arrow_up.png') }}">
+        </a>
+        <ul class="pager">
+        <li class="previous">
+            <a href="{{ path('news_list', {number: 1}) }}">&larr;Back to articles</a>
+        </li>
+            </ul>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <!-- Display article-->
