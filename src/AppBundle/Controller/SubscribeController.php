@@ -36,19 +36,13 @@ class SubscribeController extends Controller
 
             //email check
             $user = $em->getRepository('AppBundle:Subscriber')->findOneBy(['email' => $subscriber->getEmail()]);
-            if (!is_null($user)) {
+            if (!empty($user)) {
                 return $this->render('error/error.html.twig', [
                     'errorMsg' => 'Such e-mail already subscribed!',
                 ]);
             }
 
-            //keyName check
-            do {
-                $subscriber->setKeyName(rand(1000, 9999));
-                $user = $em->getRepository('AppBundle:Subscriber')->findOneBy([
-                    'keyName' => $subscriber->getKeyName()
-                ]);
-            } while (!is_null($user));
+            $subscriber->setKeyName(md5(uniqid($subscriber->getEmail(), true)));
 
             $em->persist($subscriber);
             $em->flush();
