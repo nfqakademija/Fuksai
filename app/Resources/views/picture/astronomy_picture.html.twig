@@ -5,8 +5,12 @@
     <div class="container feature-page">
 
         <div class="row">
-
-            <div class="col-lg-12">
+            <ul class="pager">
+                <li class="previous">
+                    <a href="{{ path('astronomy_pictures') }}">&larr;More Pictures</a>
+                </li>
+            </ul>
+            <div class="col-md-12">
                 <!-- Title -->
                 <h2 id="picture">{{ pictures[picture].title }}</h2>
 
@@ -15,11 +19,12 @@
             </div>
 
             <!-- Blog Post Content Column -->
-            <div class="col-lg-6">
+            <div class="col-md-6">
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="{{ pictures[picture].url }}" alt="">
-
+                <div class='item' ><a href="{{ pictures[picture].url }}" data-lightbox='all_gallery'>
+                        <img src="{{ pictures[picture].url }}" alt='' >
+                    </a></div>
                 <br>
 
                 <hr>
@@ -31,28 +36,17 @@
                 <p>{{ pictures[picture].explanation }}</p>
             </div>
 
-            <div class="col-lg-12">
-                <!-- All astronomy pictures of the day -->
-                <div class="all-apod">
-                    <a class="all-apod-button" href="{{ path('astronomy_pictures') }}">
-                        All astronomy pictures
-                    </a>
-                </div>
-            </div>
-
         </div>
         <!-- /.row -->
         <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <p class="copyright text-muted">&copy; 2016 SkyAboveUs.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p style="float: right;">Copyright &copy;Sky Above Us</p>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

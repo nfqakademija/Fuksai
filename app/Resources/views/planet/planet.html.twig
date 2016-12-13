@@ -175,7 +175,7 @@
                 <div class="well">
                     <h4>Categories</h4>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 planet-list">
                             <ul class="list-unstyled">
                                 {% for planetlist in planetsList %}
                                 <li><a href="{{ path('show_planet', {'planetName': planetlist.name}) }}" class="portfolio-box">{{ planetlist.name }}</a>
@@ -198,6 +198,16 @@
                     </ul>
                     </p>
                 </div>
+                {% if schedule[0] is defined %}
+                <div class="well">
+                    <p>Solar System object appearance in the sky:</p>
+                    <ul>
+                        By Vilnius time:
+                        <li> Rising:{{ schedule[0].rise }}</li>
+                        <li> Setting:{{ schedule[0].fall }}</li>
+                    </ul>
+                </div>
+                {% endif %}
 
                 {% if video is not null %}
                     <div class="well">
