@@ -32,7 +32,7 @@ class PlanetsController extends Controller
             ->getRepository('AppBundle:Video')
             ->findOneBy(['keyName' => $planetName]);
         $filters = [];
-        $page = $planetName.'planet';
+        $page = $planetName.' planet';
         $schedule = $em->getRepository('AppBundle:PlanetSchedule')->findObject($planetName);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
