@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.11.20
- * Time: 18.31
- */
 
 namespace AppBundle\Calculator;
 
@@ -16,6 +10,10 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 
+/**
+ * Class RiseSetCalculator
+ * @package AppBundle\Calculator
+ */
 class RiseSetCalculator
 {
     private $planetMap = array(
@@ -33,30 +31,33 @@ class RiseSetCalculator
      * @var PlanetSchedule[]
      */
     private $scheduleList;
+
     /**
      * @var EntityManager
      */
     private $em;
+
     /**
      * @var string
      */
     private $googleApiKey;
+
     /**
      * RiseSetCalculator constructor.
      * @param EntityManager $em
      * @param string $googleApiKey
      */
-    public function __construct(EntityManager $em, $googleApiKey)
+    public function __construct(EntityManager $em, string $googleApiKey)
     {
         $this->em = $em;
         $this->googleApiKey = $googleApiKey;
     }
 
     /**
-     * @param $city
-     * @return PlanetSchedule[]
+     * @param string $city
+     * @return array
      */
-    public function getRiseSet($city)
+    public function getRiseSet(string $city): array
     {
         $wholeSchedule = array();
 
@@ -84,6 +85,7 @@ class RiseSetCalculator
                 $lng . '&timestamp=' .
                 time() . '&key=' .
                 $this->googleApiKey);
+
             $timezone = $data['rawOffset'] / 3600;
 
             $tz_sign = Converter::getSign($timezone);
@@ -137,11 +139,11 @@ class RiseSetCalculator
     }
 
     /**
-     * @param $response
-     * @param $planetID
+     * @param string $response
+     * @param int $planetID
      * @return PlanetDaySchedule
      */
-    private function parseResponse($response, $planetID)
+    private function parseResponse(string $response, int $planetID): PlanetDaySchedule
     {
         $result = array();
         $substring1 = null;
@@ -170,10 +172,10 @@ class RiseSetCalculator
     }
 
     /**
-     * @param $url
-     * @return array
+     * @param string $url
+     * @return mixed
      */
-    private function getData($url)
+    private function getData(string $url)
     {
         try {
             $json = file_get_contents($url);
@@ -185,10 +187,10 @@ class RiseSetCalculator
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return string
      */
-    private function getPlainData($url)
+    private function getPlainData(string $url): string
     {
         try {
             $data = file_get_contents($url);

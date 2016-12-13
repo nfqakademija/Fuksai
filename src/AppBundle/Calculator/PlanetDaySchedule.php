@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.12
- * Time: 20.26
- */
 
 namespace AppBundle\Calculator;
 
+/**
+ * Class PlanetDaySchedule
+ * @package AppBundle\Calculator
+ */
 class PlanetDaySchedule
 {
     /**
@@ -25,7 +23,7 @@ class PlanetDaySchedule
      * @param string $rise
      * @param string $fall
      */
-    public function __construct($rise, $fall)
+    public function __construct(string $rise, string $fall)
     {
         $this->rise = $rise;
         $this->fall = $fall;
@@ -34,7 +32,7 @@ class PlanetDaySchedule
     /**
      * @return string
      */
-    public function getRise()
+    public function getRise(): string
     {
         return $this->rise;
     }
@@ -42,7 +40,7 @@ class PlanetDaySchedule
     /**
      * @param string $rise
      */
-    public function setRise($rise)
+    public function setRise(string $rise)
     {
         $this->rise = $rise;
     }
@@ -50,7 +48,7 @@ class PlanetDaySchedule
     /**
      * @return string
      */
-    public function getFall()
+    public function getFall(): string
     {
         return $this->fall;
     }
@@ -58,7 +56,7 @@ class PlanetDaySchedule
     /**
      * @param string $fall
      */
-    public function setFall($fall)
+    public function setFall(string $fall)
     {
         $this->fall = $fall;
     }
