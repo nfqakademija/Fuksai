@@ -30,17 +30,15 @@ class RiseSetCalculator
     );
 
     /**
-     * @var PlanetSchedule[]
-     */
-    private $scheduleList;
-    /**
      * @var EntityManager
      */
     private $em;
+
     /**
      * @var string
      */
     private $googleApiKey;
+
     /**
      * RiseSetCalculator constructor.
      * @param EntityManager $em
@@ -143,7 +141,6 @@ class RiseSetCalculator
      */
     private function parseResponse($response, $planetID)
     {
-        $result = array();
         $substring1 = null;
         $substring2 = null;
 
