@@ -37,8 +37,9 @@ class SubscribeController extends Controller
             //email check
             $user = $em->getRepository('AppBundle:Subscriber')->findOneBy(['email' => $subscriber->getEmail()]);
             if (!empty($user)) {
-                return $this->render('error/error.html.twig', [
-                    'errorMsg' => 'Such e-mail already subscribed!',
+                return $this->render('subscribe/subscribe_info.html.twig', [
+                    'status' => 'Such e-mail already subscribed!',
+                    'page' => 'Subscribe',
                 ]);
             }
 
@@ -46,6 +47,11 @@ class SubscribeController extends Controller
 
             $em->persist($subscriber);
             $em->flush();
+
+            return $this->render('subscribe/subscribe_info.html.twig', [
+                'status' => 'Thank you! Now you will get notifications of the new articles daily.',
+                'page' => 'Subscribe',
+            ]);
         }
 
         return $this->render('subscribe/subscribe_form.html.twig', [
