@@ -26,13 +26,7 @@ class RiseSetCalculator
         7 => 'Uranus',
         8 => 'Neptune',
     );
-
-    /**
-     * @var PlanetSchedule[]
-     */
-    private $scheduleList;
-
-    /**
+  
      * @var EntityManager
      */
     private $em;
@@ -145,7 +139,6 @@ class RiseSetCalculator
      */
     private function parseResponse(string $response, int $planetID): PlanetDaySchedule
     {
-        $result = array();
         $substring1 = null;
         $substring2 = null;
 
