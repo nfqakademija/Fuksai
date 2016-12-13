@@ -18,6 +18,10 @@
 
 .cityname {
     margin: 5px;
-    font-size: 16pt;
+    font-size: 25px;
     text-align: center;
+}
+
+.solar-system-objects {
+    margin-left: 300px;
 }

@@ -10,6 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class SubscribeController
+ * @package AppBundle\Controller
+ */
 class SubscribeController extends Controller
 {
     /**

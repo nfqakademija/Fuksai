@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.7
- * Time: 19.40
- */
 
 namespace AppBundle\Controller;
 
@@ -12,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class UnsubscribeController
+ * @package AppBundle\Controller
+ */
 class UnsubscribeController extends Controller
 {
     /**

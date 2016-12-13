@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.2
- * Time: 06.25
- */
 
 namespace AppBundle\Calculator;
 
+/**
+ * Class Coordinate
+ * @package AppBundle\Calculator
+ */
 class Coordinate
 {
     /**
@@ -25,7 +23,7 @@ class Coordinate
      * @param int $degrees
      * @param int $minutes
      */
-    public function __construct($degrees, $minutes)
+    public function __construct(int $degrees, int $minutes)
     {
         $this->degrees = $degrees;
         $this->minutes = $minutes;
@@ -42,7 +40,7 @@ class Coordinate
     /**
      * @param int $degrees
      */
-    public function setDegrees($degrees)
+    public function setDegrees(int $degrees)
     {
         $this->degrees = $degrees;
     }
@@ -58,7 +56,7 @@ class Coordinate
     /**
      * @param int $minutes
      */
-    public function setMinutes($minutes)
+    public function setMinutes(int $minutes)
     {
         $this->minutes = $minutes;
     }

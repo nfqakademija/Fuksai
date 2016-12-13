@@ -4,21 +4,28 @@
     {% for planet in planets %}
         <div class="row well">
         <div class="col-md-12">
-            <h2>{{ planet.name }}</h2>
-            <p style="font-style: italic;" class="col-md-12">There are three ways to learn about this planet!</p>
+            <h1 style="text-align: center; font-size: 60px;">{{ planet.name }}</h1>
+            <h4 style="margin-bottom: 50px; text-align: center; font-style: italic;" class="col-md-12">There are three ways to learn about this planet!</h4>
             <div class="col-md-4 list-space">
             <p>You can read new articles about it! </br>
-                <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}" >Articles</a>
+                <a href="{{ path('planet_articles', {'planet': planet.name, 'number': 1}) }}" >
+                    <p style="text-align: center;">Articles</p>
+                </a>
             </p>
         </div>
         <div class="col-md-4 list-space">
             <p>You can watch videos about this planet!</br>
-                <a href="{{ path('view_videos_by_name', {planetName: planet.name, currentPage: 1})}}">Videos</a>
+                <a href="{{ path('view_videos_by_name', {planetName: planet.name, currentPage: 1})}}">
+                    <p style="text-align: center;">Videos</p>
+                </a>
             </p>
         </div>
         <div class="col-md-4 list-space">
             <p>You can read basic information about this planet!
-                <a href="{{ path('show_planet', {planetName: planet.name}) }}">Basic knowledge</a></p>
+                <a href="{{ path('show_planet', {planetName: planet.name}) }}">
+                    <p style="text-align: center;">Basic knowledge</p>
+                </a>
+            </p>
         </div>
             </div>
             </div>

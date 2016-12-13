@@ -10,6 +10,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+/**
+ * Class SendNotificationsCommand
+ * @package AppBundle\Command
+ */
 class SendNotificationsCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -19,6 +23,11 @@ class SendNotificationsCommand extends ContainerAwareCommand
             ->setDescription('Command sends notifications to all subscribed users');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $context = $this->getContainer()->get('router')->getContext();
@@ -48,10 +57,11 @@ class SendNotificationsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $user
+     * @param Subscriber $user
+     * @param array $titleList
      * @return \Swift_Mime_MimePart
      */
-    private function createMessage(Subscriber $user, $titleList)
+    private function createMessage(Subscriber $user, array $titleList)
     {
         $baseUrl = $this
             ->getContainer()
@@ -88,10 +98,10 @@ class SendNotificationsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $articles
+     * @param array $articles
      * @return array
      */
-    private function getTitles($articles)
+    private function getTitles(array $articles): array
     {
         $titleList = array();
         foreach ($articles as $article) {
@@ -104,7 +114,7 @@ class SendNotificationsCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    private function getEntityManager()
+    private function getEntityManager(): EntityManager
     {
         return $this
             ->getContainer()
