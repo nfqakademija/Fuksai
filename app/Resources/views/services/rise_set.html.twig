@@ -1,5 +1,13 @@
 {% extends 'services/base_service.html.twig' %}
 
+{% block head %}
+{{ parent() }}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/night-sky.css') }}" rel="stylesheet">
+{% endblock %}
+{% endblock %}
+
 {% block body %}
 
 <div class="container feature-page">
@@ -12,8 +20,14 @@
             <!-- Blog Post -->
 
             <h3>Solar System object appearance in the sky:</h3>
-
-<table>
+<div>
+    <div class="cityname">Vilnius</div>
+<table class="schedule_table" align="center">
+    <tr>
+        <th>Planet</th>
+        <th>Rise</th>
+        <th>Set</th>
+    </tr>
 {% for planet in planets %}
     <tr>
         <td>{{ planet.getObject() }}</td>
@@ -22,56 +36,8 @@
     </tr>
 {% endfor %}
 </table>
-
-     <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
-                <hr>
-
-
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well sideSearch">
-                    <h4>Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-            </div>
+</div>
+        </div>
 
         </div>
         <!-- /.row -->
