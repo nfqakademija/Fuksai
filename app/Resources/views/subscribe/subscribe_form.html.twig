@@ -1,5 +1,13 @@
 {% extends 'services/base_service.html.twig' %}
 
+{% block head %}
+    {{ parent() }}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link href="{{ asset('css/subscribe.css') }}" rel="stylesheet">
+    {% endblock %}
+{% endblock %}
+
 {% block body %}
 
     <div class="container feature-page">
