@@ -32,7 +32,8 @@ class PlanetsController extends Controller
             ->getRepository('AppBundle:Video')
             ->findOneBy(['keyName' => $planetName]);
         $filters = [];
-        $page = 'planet';
+        $page = $planetName.'planet';
+        $schedule = $em->getRepository('AppBundle:PlanetSchedule')->findObject($planetName);
         if (!$planet) {
             throw $this->createNotFoundException('Ups! No planet found!');
         }
@@ -42,7 +43,8 @@ class PlanetsController extends Controller
             'video' => $video,
             'planetArticles' => $planetsArticles,
             'filters' => $filters,
-            'page' => $page
+            'page' => $page,
+            'schedule' => $schedule
         ]);
     }
 

@@ -196,3 +196,32 @@ body img:hover {
     height: 400px;
     width: 100%;
 }
+#open img {
+    height: 70px;
+    width: auto;
+}
+#open {
+    padding: 15px;
+    height: 40px;
+    width: auto;
+    float: right;
+    right: 120px;
+    bottom: 120px;
+    position: fixed;
+}
+#open {
+    opacity: .2;
+}
+
+#open:hover {
+    opacity: .7;
+}
+.planet-list a {
+    text-decoration: none;
+    color: #5e5e5e;
+    font-weight: 500;
+    font-size: 14px;
+}
+.planet-list a:hover {
+    text-decoration: none;
+}
