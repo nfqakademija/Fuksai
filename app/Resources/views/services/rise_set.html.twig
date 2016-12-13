@@ -14,35 +14,43 @@
 
     <div class="row">
 
-        <!-- Blog Post Content Column -->
-        <div class="col-lg-8">
+        <div class="solar-system-objects">
 
-            <!-- Blog Post -->
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
 
-            <h3>Solar System object appearance in the sky:</h3>
-<div>
-    <div class="cityname">Vilnius</div>
-    {% if planets is empty %}
-        {{ 'Data is not available right now. Try again later. Sorry for the inconvenience.' }}
-    {% endif %}
-<table class="schedule_table" align="center">
-    <tr>
-        <th>Planet</th>
-        <th>Rise</th>
-        <th>Set</th>
-    </tr>
-{% for planet in planets %}
-    <tr>
-        <td>{{ planet.getObject() }}</td>
-        <td>{{ planet.getRise() }}</td>
-        <td>{{ planet.getFall() }}</td>
-    </tr>
-{% endfor %}
-</table>
-</div>
+                <!-- Blog Post -->
+
+                <h3 style="text-align: center;">
+                    Solar System objects appearance in the sky:
+                </h3>
+
+                <div>
+                    <div class="cityname">Vilnius</div>
+                    {% if planets is empty %}
+                        {{ 'Data is not available right now. Try again later. Sorry for the inconvenience.' }}
+                    {% endif %}
+                    <table class="schedule_table" align="center">
+                        <tr>
+                            <th>Planet</th>
+                            <th>Rise</th>
+                            <th>Set</th>
+                        </tr>
+                        {% for planet in planets %}
+                            <tr>
+                                <td>{{ planet.getObject() }}</td>
+                                <td>{{ planet.getRise() }}</td>
+                                <td>{{ planet.getFall() }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
         </div>
 
-        </div>
+
+    </div>
         <!-- /.row -->
         <!-- Footer -->
         <footer>
