@@ -1,1 +1,33 @@
-{{ status }}
+{% extends 'services/base_service.html.twig' %}
+
+{% block body %}
+
+    <div class="container feature-page">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+                <div id="subscribe_form" align="center">
+                    <!-- Blog Post -->
+
+                    {{ status }}
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p class="copyright text-muted">&copy; 2016 SkyAboveUs.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+{% endblock %}

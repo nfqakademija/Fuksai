@@ -1,0 +1,23 @@
+.schedule_table {
+    empty-cells: hide;
+}
+
+.schedule_table td, tr, th {
+    border: solid 1px black;
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    text-align: center;
+    font-size: 20pt;
+}
+
+.schedule_table th {
+    background-color: dimgray;
+    color: white;
+}
+
+.cityname {
+    margin: 5px;
+    font-size: 16pt;
+    text-align: center;
+}

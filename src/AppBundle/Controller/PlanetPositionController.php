@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class PlanetPositionController extends Controller
 {
     /**
-     * @Route("/riseset", name="rise_set")
+     * @Route("/night_sky", name="night_sky")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showRiseSet()
