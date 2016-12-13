@@ -1,30 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.12.2
- * Time: 06.23
- */
 
 namespace AppBundle\Calculator;
 
+/**
+ * Class Converter
+ * @package AppBundle\Calculator
+ */
 class Converter
 {
     /**
      * @param Coordinate $coordinate
      * @return string
      */
-    public static function degToFloat(Coordinate $coordinate)
+    public static function degToFloat(Coordinate $coordinate): string
     {
         $min = $coordinate->getMinutes()/300*5;
         return rtrim($coordinate->getDegrees(), ".0") + round($min, 2);
     }
 
     /**
-     * @param $number
+     * @param float $number
      * @return Coordinate
      */
-    public static function floatToDeg($number)
+    public static function floatToDeg(float $number): Coordinate
     {
         $degCoordinate = new Coordinate(
             rtrim(floor($number), ".0"),
@@ -34,10 +32,10 @@ class Converter
     }
 
     /**
-     * @param $value
+     * @param float $value
      * @return int
      */
-    public static function getSign($value)
+    public static function getSign(float $value): int
     {
         if ($value < 0) {
             return -1;

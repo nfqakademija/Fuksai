@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: shalifar
- * Date: 16.11.18
- * Time: 20.42
- */
 
 namespace AppBundle\Command;
 
@@ -17,6 +11,10 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class PlanetPositionCommand
+ * @package AppBundle\Command
+ */
 class PlanetPositionCommand extends ContainerAwareCommand
 {
     public function configure()
@@ -27,6 +25,8 @@ class PlanetPositionCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
      * @return int
      */
     public function execute(InputInterface $input, OutputInterface $output)
