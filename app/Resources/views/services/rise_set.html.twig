@@ -22,6 +22,9 @@
             <h3>Solar System object appearance in the sky:</h3>
 <div>
     <div class="cityname">Vilnius</div>
+    {% if planets is empty %}
+        {{ 'Data is not available right now. Try again later. Sorry for the inconvenience.' }}
+    {% endif %}
 <table class="schedule_table" align="center">
     <tr>
         <th>Planet</th>
